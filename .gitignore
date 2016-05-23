@@ -1,0 +1,100 @@
+# Magento
+/app/etc/local.xml
+/app/etc/cache.xml
+# Laboratory | Research
+/app/code/local/Evozon/Lab/*
+/app/etc/modules/Evozon_Lab.xml
+/scheduler/lab.php
+/downloader
+/var
+/media
+/sitemap
+.htaccess
+
+# Linux
+!.gitignore
+*~
+
+# OSx
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# CVS
+/CVS/*
+*/CVS/*
+.cvsignore
+*/.cvsignore
+
+# SVN
+.svn/
+
+# Eclipse
+.project
+.metadata
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+.externalToolBuilders/
+*.launch
+.cproject
+.buildpath
+
+# Netbeans
+nbproject/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# SublimeText project files
+*.sublime-workspace
+
+# IntelliJ/PhPStorm
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Vim
+.*.s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+
+# Textmate
+*.tmproj
+*.tmproject
+tmtags
+sitemap.xml
+
+# Composer
+vendor/
+
+# Vagrant
+.vagrant/
+cookbooks/
+tmp/
+*.lock
+scheduler/sync-repository/
+/scheduler/bom_offset.file
