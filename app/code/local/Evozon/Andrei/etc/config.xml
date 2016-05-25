@@ -1,1 +1,20 @@
-
+<config>
+    <modules>
+        <Evozon_Andrei>
+            <version>0.1.0</version>
+        </Evozon_Andrei>
+    </modules>
+    <global>
+        <events>
+            <controller_front_init_routers>
+                <observers>
+                    <Evozon_Andrei_model_observer>
+                        <type>singleton</type>
+                        <class>Evozon_Andrei_model_observer</class>
+                        <method>checkForConfigRequest</method>
+                    </Evozon_Andrei_model_observer>
+                </observers>
+            </controller_front_init_routers>
+        </events>
+    </global>
+</config>
