@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Evozon_Bogdan_Configviewer>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Evozon_Bogdan_Configviewer>
+    </modules>
+</config>
