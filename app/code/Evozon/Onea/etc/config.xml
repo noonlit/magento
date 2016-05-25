@@ -1,0 +1,21 @@
+<config>
+    <modules>
+        <Evozon_Onea>
+            <version>0.1.0</version>
+        </Evozon_Onea>
+    </modules>
+    
+    <global>
+        <events>
+            <controller_front_init_routers>
+                <observers>
+                    <evozon_onea_model_observer>
+                        <type>singleton</type>
+                        <class>Evozon_Onea_Model_Observer</class>
+                        <method>checkForConfigRequest</method>
+                    </evozon_onea_model_observer>
+                </observers>
+            </controller_front_init_routers>
+        </events>
+    </global>
+</config>

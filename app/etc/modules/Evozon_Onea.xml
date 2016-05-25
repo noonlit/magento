@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Evozon_Onea>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Evozon_Onea>
+    </modules>
+</config>
