@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config>
+    <modules>
+        <Evozon_Marius>
+            <version>0.1.0</version>
+        </Evozon_Marius>
+    </modules>
+</config>
