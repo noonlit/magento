@@ -4,4 +4,8 @@ class Evozon_Helloworld_IndexController extends Mage_Core_Controller_Front_Actio
     public function indexAction() {
         echo 'Hello World';
     }
+    
+    public function goodbyeAction() {
+    echo 'Goodbye World!';
+}
 }
