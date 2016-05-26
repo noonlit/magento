@@ -1,9 +1,0 @@
-<config>
-    <modules>
-        <Evozon_Configviewer>
-            <active>true</active>
-            <codePool>local</codePool>
-        </Evozon_Configviewer>    
-    </modules>
-</config>
-
