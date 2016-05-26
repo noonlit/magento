@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Evozon_Delia_Configviewer>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Evozon_Delia_Configviewer>
+    </modules>
+</config>
