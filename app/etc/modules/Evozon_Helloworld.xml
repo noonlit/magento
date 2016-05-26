@@ -1,0 +1,9 @@
+<config>
+    <modules>
+        <Evozon_Helloworld>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Evozon_Helloworld>    
+    </modules>
+</config>
+
