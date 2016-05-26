@@ -48,7 +48,8 @@
         </a>
 
         <?php // In order for the language switcher to display next to logo on smaller viewports, it will be moved here.
-              // See app.js for details ?>
+        // See app.js for details 
+        ?>
         <div class="store-language-container"></div>
 
         <!-- Skip Links -->
@@ -73,7 +74,7 @@
                 <!-- Cart -->
 
                 <div class="header-minicart">
-                    <?php echo $this->getChildHtml('minicart_head'); ?>
+<?php echo $this->getChildHtml('minicart_head'); ?>
                 </div>
             </div>
 
@@ -83,6 +84,7 @@
         <!-- Navigation -->
 
         <div id="header-nav" class="skip-content">
+            <!-- <?php echo $this->getLayout()->createBlock('paul/mycustomblock')->setTemplate('paul/mycustomblock.phtml')->toHtml(); ?> -->
             <?php echo $this->getChildHtml('topMenu') ?>
         </div>
 

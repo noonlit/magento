@@ -61,7 +61,7 @@ Default layout, loads most of the pages
         </reference>
         <reference name="footer_links">
             <action method="addLink" translate="label title" module="catalog" ifconfig="catalog/seo/site_map"><label>Site Map</label><url helper="catalog/map/getCategoryUrl" /><title>Site Map</title></action>
-        </reference>
+        </reference>       
         <block type="catalog/product_price_template" name="catalog_product_price_template" />
     </default>
 
@@ -120,6 +120,8 @@ Category layered navigation layout
             </block>
         </reference>
         <reference name="content">
+            <block type="paul/mycustomblock" name="mycustomblock" template="paul/mycustomblock.phtml" />
+            
             <block type="catalog/category_view" name="category.products" template="catalog/category/view.phtml">
                 <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml">
                     <block type="core/text_list" name="product_list.name.after" as="name.after" />

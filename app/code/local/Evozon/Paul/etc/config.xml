@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Evozon_Paul>
+            <version>0.1.0</version>
+        </Evozon_Paul>
+    </modules>
+
+    <frontend>
+        <routers>
+            <paul>
+                <use>standard</use>
+                <args>
+                    <module>Evozon_Paul</module>
+                    <frontName>paul</frontName>
+                </args>
+            </paul>
+        </routers>
+    </frontend>
+    
+    <global>
+        <blocks>
+            <paul>
+                <class>Evozon_Paul_Block</class>
+            </paul>
+        </blocks>
+    </global>
+    
+</config>
