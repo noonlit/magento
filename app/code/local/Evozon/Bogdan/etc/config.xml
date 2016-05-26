@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <evozon_bogdan>
+            <version>0.1.0</version>
+        </evozon_bogdan>
+    </modules>
+    <global>
+<!--        <models>
+            <catalog>
+                <rewrite>
+                    <category>Evozon_Bogdan_Block</category>
+                </rewrite>
+            </catalog>
+        </models>-->
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <evozon_bogdan>
+                    <!-- Our layout file name-->
+                    <file>evozon/bloculmeu.xml</file> 
+                </evozon_bogdan>
+            </updates>
+        </layout>
+    </frontend>
+</config>
