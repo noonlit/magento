@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config>	
+	<modules>
+	<Evozon_Catalog>
+		<version>0.1.0</version>
+	</Evozon_Catalog>
+        </modules>
+        <global>
+            <blocks>
+                <evozon_catalog>
+                    <class>Evozon_Catalog_Block</class>
+                </evozon_catalog>
+            </blocks>
+        </global>	
+</config>
+
