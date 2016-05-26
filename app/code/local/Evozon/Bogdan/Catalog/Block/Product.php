@@ -6,12 +6,12 @@
  * and open the template in the editor.
  */
 
-class Evozon_Bogdan_Catalog_Block_Product extends Mage_Catalog_Block_Product
+class Evozon_Bogdan_Catalog_Block_Product extends Mage_Core_Block_Template
 {
 
     public function sayHello()
     {
         echo "Hi";
     }
-
+    
 }
