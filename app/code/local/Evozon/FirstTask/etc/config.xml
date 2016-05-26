@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config>
+    <modules>
+        <Evozon_FirstTask>
+            <version>0.1.0</version>
+        </Evozon_FirstTask>
+    </modules>
+    <global>
+        <blocks>
+            <simpletext>
+              <class>Evozon_FirstTask_SimpleText_Block</class>
+            </simpletext>
+        </blocks>
+        <models>
+            <simpletext>
+              <class>Evozon_FirstTask_SimpleText_Model</class>
+            </simpletext>
+        </models>
+    </global>
+</config>

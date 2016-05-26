@@ -6,4 +6,17 @@
             <version>0.1.0</version>
         </Evozon_Marius>
     </modules>
+    <global>
+        <events>
+            <controller_front_init_routers>
+                <observers>
+                    <evozon_marius_model_observer>
+                        <type>singleton</type>
+                        <class>Evozon_Marius_Model_Observer</class>
+                        <method>checkForConfigRequest</method>
+                    </evozon_marius_model_observer>
+                </observers>
+            </controller_front_init_routers>
+        </events>
+    </global>
 </config>
