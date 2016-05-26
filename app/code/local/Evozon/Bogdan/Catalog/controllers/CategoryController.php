@@ -8,11 +8,15 @@
 
 /**
  * Description of CategoryController
- *
+ * http://devdocs.magento.com/guides/m1x/magefordev/mage-for-dev-1.html
  * @author bogdanhaidu
  */
-class Evozon_Bogdan_Catalog_CategoryController
+class Evozon_Bogdan_Catalog_CategoryController extends Mage_Core_Controller_Front_Action
 {
 
-    //put your code here
+    public function viewAction()
+    {
+        //main entry point
+    }
+
 }
