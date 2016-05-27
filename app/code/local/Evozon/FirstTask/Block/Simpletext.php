@@ -5,11 +5,11 @@
  *
  * @author mariusadam
  */
-class Evozon_Catalog_Block_Simpletext extends Mage_Core_Block_Abstract
+class Evozon_FirstTask_Block_Simpletext extends Mage_Core_Block_Template
 {
 
     public function getSimpleText()
-    {die("aici");
+    {
         return "This is the wanted sample text";
     }
 

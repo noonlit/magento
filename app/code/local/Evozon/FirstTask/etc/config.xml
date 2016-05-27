@@ -8,14 +8,18 @@
     </modules>
     <global>
         <blocks>
-            <simpletext>
-              <class>Evozon_FirstTask_SimpleText_Block</class>
-            </simpletext>
+            <evozon_firsttask>
+              <class>Evozon_FirstTask_Block</class>
+            </evozon_firsttask>
         </blocks>
-        <models>
-            <simpletext>
-              <class>Evozon_FirstTask_SimpleText_Model</class>
-            </simpletext>
-        </models>
     </global>
+    <frontend>
+        <layout>
+            <updates>
+                <evozon_catalog>
+                    <file>simpletext.xml</file>
+                </evozon_catalog>                
+            </updates>                
+        </layout>
+    </frontend>
 </config>
