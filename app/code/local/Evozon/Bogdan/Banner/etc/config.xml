@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <config>
     <modules>
-        <evozon_bogdan_banner>
+        <evozon_bogdan>
             <version>0.1.0</version>
-        </evozon_bogdan_banner>
+        </evozon_bogdan>
     </modules>
     <global>
 <!--        <models>
