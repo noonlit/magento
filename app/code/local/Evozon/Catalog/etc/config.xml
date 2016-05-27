@@ -15,7 +15,9 @@
     <frontend>
         <layout>
             <updates>
-                <file>catalog.xml</file>
+                <evozon_catalog>
+                    <file>banner.xml</file>
+                </evozon_catalog>                
             </updates>                
         </layout>
     </frontend>
