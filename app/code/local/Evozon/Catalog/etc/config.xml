@@ -17,7 +17,7 @@
         </blocks>
     </global>
 
-    <frontend>
+    <!-- <frontend>
         <layout>
             <updates>
                 <evozon_andra>
@@ -25,6 +25,6 @@
                 </evozon_andra>
             </updates>
         </layout>
-    </frontend>
+    </frontend> -->
 	
 </config>
