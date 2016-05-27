@@ -1,6 +1,6 @@
 <?php
 
-class Evozon_Catalog_Block_Text extends Mage_Catalog_Block_Category_View
+class Evozon_Catalog_Block_Categoryblock extends Mage_Core_Block_Template
 {
 
     public function showText()

@@ -1,25 +1,22 @@
+<?xml version="1.0"?>
 <config>	
     <modules>
         <Evozon_Catalog>
             <version>0.1.0</version>
         </Evozon_Catalog>
     </modules>
-    
     <global>
         <blocks>
-            <catalog>
-                <rewrite>
-                    <category_view>Evozon_Catalog_Block_Text</category_view>
-                </rewrite>
-            </catalog>
+            <evozon_catalog>
+                <class>Evozon_Catalog_Block</class>
+            </evozon_catalog>
         </blocks>
     </global>
-    
     <frontend>
         <layout>
             <updates>
                 <evozon_catalog>
-                    <file>text.xml</file>
+                    <file>categoryblock.xml</file>
                 </evozon_catalog>                
             </updates>                
         </layout>
