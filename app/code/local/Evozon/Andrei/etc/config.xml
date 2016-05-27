@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Evozon_Andrei>
+            <version>0.1.0</version>
+        </Evozon_Andrei>
+    </modules>
+
+    <frontend>
+        <routers>
+            <andrei>
+                <use>standard</use>
+                <args>
+                    <module>Evozon_Andrei</module>
+                    <frontName>andrei</frontName>
+                </args>
+            </andrei>
+        </routers>
+    </frontend>
+    
+    <global>
+        <blocks>
+            <andrei>
+                <class>Evozon_Andrei_Block</class>
+            </andrei>
+        </blocks>
+    </global>
+    
+</config>
