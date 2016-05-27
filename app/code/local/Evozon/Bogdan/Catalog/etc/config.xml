@@ -1,23 +1,23 @@
 <?xml version="1.0"?>
 <config>	
     <modules>
-        <Evozon_Catalog>
+        <Evozon_Bogdan_Catalog>
             <version>0.1.0</version>
-        </Evozon_Catalog>
+        </Evozon_Bogdan_Catalog>
     </modules>
     <global>
         <blocks>
-            <evozon_catalog>
-                <class>Evozon_Catalog_Block</class>
-            </evozon_catalog>
+            <evozon_bogdan_catalog>
+                <class>Evozon_Bogdan_Catalog_Block</class>
+            </evozon_bogdan_catalog>
         </blocks>
     </global>
     <frontend>
         <layout>
             <updates>
-                <evozon_catalog>
+                <evozon_bogdan>
                     <file>banner.xml</file>
-                </evozon_catalog>                
+                </evozon_bogdan>                
             </updates>                
         </layout>
     </frontend>
