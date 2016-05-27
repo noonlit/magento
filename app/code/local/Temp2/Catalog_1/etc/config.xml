@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <evozon_bogdan_catalog>
+            <version>0.1.0</version>
+        </evozon_bogdan_catalog>
+    </modules>
+    <global>
+        <blocks>
+            <evozon_bogdan_catalog>
+                <class>Evozon_Bogdan_Banner</class>
+            </evozon_bogdan_catalog>
+        </blocks>
+        <blocks>
+            <catalog>
+                <banner>Evozon_Bogdan_Block_Banner_View</banner>
+                <rewrite>
+                    <product_view>Evozon_Bogdan_Block_Banner_View</product_view>   
+                </rewrite>
+            </catalog>
+        </blocks>
+        <blocks>
+            <catalog>
+                <view>Evozon_Bogdan_Block_Banner_View</view>
+            </catalog>
+        </blocks>
+        <models>
+<!--                        <catalog>
+                <rewrite>
+                    <category>Evozon_Bogdan_Model_Banner</category>
+                </rewrite>
+            </catalog>-->
+        </models>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <evozon_bogdan>
+                    <!-- Our layout file name-->
+                    <file>evozon/bloculmeu.xml</file> 
+                </evozon_bogdan>
+            </updates>
+        </layout>
+    </frontend>
+</config>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <catalog_category_default>
+       
+        <remove name="product_list"/>        
+   
+    </catalog_category_default>
+    <catalog_category_layered>
+   
+        <remove name="product_list"/>
+        <reference name="category.products">
+            <block type="evozon_bogdan_catalog/product_banner" name="evozon_banner" template="catalog/category/banner.phtml" />
+
+            <action method="setTemplate">
+                <template>catalog/category/banner.phtml</template>
+            </action>
+        </reference>
+    </catalog_category_layered>
+</layout>

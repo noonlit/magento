@@ -6,12 +6,14 @@
  * and open the template in the editor.
  */
 
-class Evozon_Bogdan_Catalog_Block_Product extends Mage_Catalog_Block_Banner
-{
 
-    public function sayHello()
+class Evozon_Bogdan_Catalog_Block_Product_List extends Mage_Catalog_Block_Product_List
+{
+    //HERE YOU OVERIDE
+    
+    public function showPromotion()
     {
         echo "Hi";
     }
-    
+
 }

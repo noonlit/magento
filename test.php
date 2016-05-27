@@ -10,7 +10,11 @@ require_once 'app/Mage.php';
 
 Mage::app();
 
-$product = new Evozon_Bogdan_Catalog_Model_Product ();
-//$product = Mage::getModel("catalog/category")->load(3);
-var_dump($product);
+$object = Mage::app()->getLayout()->createBlock('catalog/product_list');
+
+//var_dump($object);
+$object->sayHello();
+//$product = new Evozon_Bogdan_Catalog_Model_Product ();
+$product = Mage::getModel("catalog/category");
+//var_dump($product);
 $product->sayHello();

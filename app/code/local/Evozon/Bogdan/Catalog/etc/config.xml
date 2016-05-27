@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config>
+
+    <global>
+        <blocks>
+            <evozon_bogdan_catalog>
+                <product_banner>Evozon_Bogdan_Catalog_Block_Product_Banner</product_banner>
+            </evozon_bogdan_catalog>
+        </blocks>
+
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <evozon_bogdan>
+                    <!-- Our layout file name-->
+                    <file>banner.xml</file> 
+                </evozon_bogdan>
+            </updates>
+        </layout>
+    </frontend>
+</config>

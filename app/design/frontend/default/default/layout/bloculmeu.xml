@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<layout version="0.1.0">
-    <evozon_bogdan_index_index>
-        <reference name="content">
-            <block type="evozon_bogdan/catalog" name="evozon_bogdan" template="evozon_bogdan/block.phtml" />
-        </reference>
-    </evozon_bogdan_index_index>
-</layout>

@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-class Evozon_Bogdan_Catalog_Block_Product extends Mage_Catalog_Block_Banner
+class Evozon_Bogdan_Catalog_Block_Banner_View extends Mage_Core_Block_Template
 {
 
     public function sayHello()

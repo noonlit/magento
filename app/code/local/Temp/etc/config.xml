@@ -6,22 +6,23 @@
         </evozon_bogdan>
     </modules>
     <global>
-<!--        <models>
+        <blocks>
             <catalog>
                 <rewrite>
                     <category>Evozon_Bogdan_Block</category>
                 </rewrite>
             </catalog>
-        </models>-->
+        </blocks>
+
     </global>
     <frontend>
-        <layout>
+        <!--        <layout>
             <updates>
                 <evozon_bogdan>
-                    <!-- Our layout file name-->
+                     Our layout file name
                     <file>evozon/bloculmeu.xml</file> 
                 </evozon_bogdan>
             </updates>
-        </layout>
+        </layout>-->
     </frontend>
 </config>

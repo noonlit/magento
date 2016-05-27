@@ -4,5 +4,14 @@
             <active>true</active>
             <codePool>local</codePool>
         </evozon_bogdan>
+        <evozon_bogdan_banner>
+            <active>true</active>
+            <codePool>local</codePool>
+        </evozon_bogdan_banner>
+        <evozon_bogdan_catalog>
+            <active>true</active>
+            <codePool>local</codePool>
+        </evozon_bogdan_catalog>
     </modules>
+
 </config>
