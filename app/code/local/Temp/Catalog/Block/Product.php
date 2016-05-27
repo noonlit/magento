@@ -9,7 +9,7 @@
 class Evozon_Bogdan_Catalog_Block_Product extends Mage_Catalog_Block_Banner
 {
 
-    public function sayHello()
+    public function showMyText()
     {
         echo "Hi";
     }

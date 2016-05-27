@@ -1,10 +1,14 @@
 <?xml version="1.0"?>
 <config>
-
+    <modules>
+        <evozon_bogdan_catalog>
+            <version>0.0.1</version>
+        </evozon_bogdan_catalog>
+    </modules>
     <global>
         <blocks>
             <evozon_bogdan_catalog>
-                <product_banner>Evozon_Bogdan_Catalog_Block_Product_Banner</product_banner>
+                <class>Evozon_Bogdan_Catalog_Block</class>
             </evozon_bogdan_catalog>
         </blocks>
 
