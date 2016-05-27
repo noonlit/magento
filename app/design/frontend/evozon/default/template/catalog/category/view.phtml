@@ -52,7 +52,7 @@
 <?php if($_imgUrl): ?>
     <?php echo $_imgHtml ?>
 <?php endif; ?>
-<?php echo $this->getChildHtml("evozon_georgiana_plain_text");?>
+<?php echo $this->getChildHtml("evozon_georgiana_text");?>
 <?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
     <div class="category-description std">
         <?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?>
