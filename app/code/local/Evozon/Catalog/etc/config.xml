@@ -13,6 +13,16 @@
                 <class>Evozon_Catalog_Block</class>
             </evozon_catalog>
         </blocks>
+        
+        <models>
+            <evozon_catalog>
+                <class>Evozon_Catalog_Model</class>
+            </evozon_catalog>
+            
+            <evozon_catalog_resource>
+                <class>Evozon_Catalog_Model_Resource</class>
+            </evozon_catalog_resource>
+        </models>
     </global>
     
     <frontend>
