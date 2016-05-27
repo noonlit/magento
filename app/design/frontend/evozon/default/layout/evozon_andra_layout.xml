@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<layout>
+    <catalog_category_default>
+        <reference name="content">
+            <block type="core/template" name="evozon_andra" template="fancy.phtml"/>
+        </reference>
+    </catalog_category_default>
+</layout>

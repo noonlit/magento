@@ -2,9 +2,9 @@
 
 <config>
     <modules>
-        <Evozon_Andra>
+        <Evozon_Catalog>
             <active>true</active>
             <codePool>local</codePool>
-        </Evozon_Andra>
+        </Evozon_Catalog>
     </modules>
 </config>
