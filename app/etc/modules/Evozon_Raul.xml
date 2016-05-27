@@ -1,9 +1,10 @@
 <config>
     <modules>
-        <Evozon_Configviewer>
+        <Evozon_Raul>
             <active>true</active>
             <codePool>local</codePool>
-        </Evozon_Configviewer>    
+        </Evozon_Raul>    
     </modules>
 </config>
+
 

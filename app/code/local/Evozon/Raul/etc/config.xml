@@ -1,23 +1,23 @@
 <?xml version="1.0"?>
 <config>	
     <modules>
-        <Evozon_Catalog>
+        <Evozon_Raul>
             <version>0.1.0</version>
-        </Evozon_Catalog>
+        </Evozon_Raul>
     </modules>
     <global>
         <blocks>
-            <evozon_catalog>
-                <class>Evozon_Catalog_Block</class>
-            </evozon_catalog>
+            <evozon_raul>
+                <class>Evozon_Raul_Block</class>
+            </evozon_raul>
         </blocks>
     </global>
     <frontend>
         <layout>
             <updates>
-                <evozon_catalog>
+                <evozon_raul>
                     <file>banner.xml</file>
-                </evozon_catalog>                
+                </evozon_raul>                
             </updates>                
         </layout>
     </frontend>
