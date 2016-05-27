@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <evozon_bogdan_banner>
+            <active>true</active>
+            <codePool>local</codePool>
+        </evozon_bogdan_banner>
+    </modules>
+</config>

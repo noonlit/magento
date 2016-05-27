@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <catalog_category_default>
+        <reference name="category.products">
+            <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml"/>
+        </reference>
+        <!--        <remove name="category.products" />-->
+    </catalog_category_default>
+    <catalog_category_layered>
+        <reference name="category.products">
+            <block type="catalog/product_list" name="product_list" template="catalog/product/list.phtml"/>
+        </reference>
+        <!--        <remove name="category.products" />-->
+    </catalog_category_layered>
+</layout>

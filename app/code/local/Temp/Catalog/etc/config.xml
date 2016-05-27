@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config>
+    <global>
+
+        <blocks>
+            <evozon_bogdan_catalog>
+                <class>Evozon_Bogdan_Block</class>
+            </evozon_bogdan_catalog>
+        </blocks>
+
+    </global>
+    
+</config>
