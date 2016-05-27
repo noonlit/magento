@@ -7,11 +7,9 @@
     
     <global>
         <blocks>
-            <catalog>
-                <rewrite>
-                    <category_view>Evozon_Catalog_Block_Text</category_view>
-                </rewrite>
-            </catalog>
+            <evozon_catalog>
+                <class>Evozon_Catalog_Block</class>
+            </evozon_catalog>
         </blocks>
     </global>
     
