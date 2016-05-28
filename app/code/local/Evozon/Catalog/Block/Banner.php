@@ -3,6 +3,9 @@
 class Evozon_Catalog_Block_Banner extends Mage_Core_Block_Template
 {
 
-
+    public function showBanners()
+    {
+        return Mage::getModel('evozon_catalog/banner')->getBanners();
+    }
 }
 

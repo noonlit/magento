@@ -52,6 +52,7 @@
 <?php if($_imgUrl): ?>
     <?php echo $_imgHtml ?>
 <?php endif; ?>
+<?php echo $this->getChildHtml("evozon_banner");?>
 <?php echo $this->getChildHtml("evozon_text_plain_text");?>
 <?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
     <div class="category-description std">
