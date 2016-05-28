@@ -27,3 +27,4 @@ if ($installer->getConnection()->isTableExists($tableName) != true) {
 }
 
 $installer->endSetup();
+
