@@ -1,1 +1,8 @@
- <?php echo $this->showBanners(); ?>
+<?php
+
+$banners = $this->getBannersForCategory();
+
+foreach ($banners as $banner) {
+    echo '<div>' . $banner->getText() . '</div>'; 
+}
+?>
