@@ -3,7 +3,7 @@
 <config>	
     <modules>
         <Evozon_Catalog>
-            <version>0.1.0</version>
+            <version>0.1.1</version>
         </Evozon_Catalog>
     </modules>
     
@@ -26,6 +26,9 @@
                     <banner>
                         <table>evozon_banners</table>
                     </banner>
+                    <link>
+                        <table>evozon_banners_to_categories</table>
+                    </link>
                 </entities>
             </evozon_catalog_resource>  
         </models>

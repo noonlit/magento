@@ -1,7 +1,5 @@
 <?php
 
-Mage::log('is this thing on?');
-
 $date = new DateTime();
 
 $banners = array(
