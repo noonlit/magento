@@ -11,6 +11,14 @@
                 <class>Evozon_Catalog_Block</class>
             </evozon_catalog>
         </blocks>
+        <resources>
+            <evozon_catalog_setup>
+                <setup>
+                    <module>Evozon_Catalog</module>
+                    <class>Evozon_Catalog_Model_Resource_Setup</class>
+                </setup>
+            </evozon_catalog_setup>
+        </resources>
     </global>
     <frontend>
         <layout>
