@@ -39,4 +39,13 @@ class Evozon_Weblog_IndexController extends Mage_Core_Controller_Front_Action
         echo 'post removed';
     }
 
+    public function showAllBlogPostsAction()
+    {
+        $posts = Mage::getModel('weblog/blogpost')->getCollection();
+        foreach ($posts as $blogpost) {
+            echo '<h3>' . $blogpost->getTitle() . '</h3>';
+            echo nl2br($blogpost->getPost());
+        }
+    }
+
 }
