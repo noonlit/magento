@@ -1,0 +1,36 @@
+<config>
+    <modules>
+        <Evozon_Weblog>
+            <version>0.1.0</version>
+        </Evozon_Weblog>    
+    </modules>   
+    <frontend>
+        <routers>
+            <weblog>
+                <use>standard</use>
+                <args>
+                    <module>Evozon_Weblog</module>
+                    <frontName>weblog</frontName>
+                </args>
+            </weblog>
+        </routers>
+    </frontend>
+    <global>
+        <models>
+            <weblog>
+                <class>Evozon_Weblog_Model</class>
+                <resourceModel>weblog_resource</resourceModel>
+            </weblog>
+            <weblog_resource>
+                <class>Evozon_Weblog_Model_Resource</class>
+                <entities>
+                    <blogpost>
+                        <table>blog_posts</table>
+                    </blogpost>
+                </entities>
+            </weblog_resource>
+        </models>
+    </global>
+</config>
+
+

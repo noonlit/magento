@@ -1,0 +1,10 @@
+<config>
+    <modules>
+        <Evozon_Weblog>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Evozon_Weblog>    
+    </modules>
+</config>
+
+
