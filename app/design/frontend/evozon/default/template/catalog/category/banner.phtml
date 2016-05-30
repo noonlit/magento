@@ -1,0 +1,7 @@
+<?php
+
+$banners = $this->fetchBanners();
+
+foreach ($banners as $banner) {
+    echo '<h3>' . $banner->getText() . '</h3>'; 
+}
