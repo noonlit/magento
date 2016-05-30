@@ -11,6 +11,23 @@
                 <class>Evozon_Catalog_Block</class>
             </evozon_catalog>
         </blocks>
+         <models>
+            <evozon_catalog>
+                <class>Evozon_Catalog_Model</class>
+                <resourceModel>evozon_catalog_resource</resourceModel>
+            </evozon_catalog>
+            <evozon_catalog_resource>
+                <class>Evozon_Catalog_Model_Resource</class>
+                <entities>
+                    <banner>
+                        <table>evozon_banner</table>
+                    </banner>
+                    <categorybanner>
+                        <table>evozon_category_banner</table>
+                    </categorybanner>
+                </entities>
+            </evozon_catalog_resource>
+        </models>
         <resources>
             <evozon_catalog_setup>
                 <setup>
