@@ -54,6 +54,7 @@
     <?php echo $_imgHtml ?>
 <?php endif; ?>
 <?php echo $this->getChildHtml("evozon_simple_text");?>
+<?php echo $this->getChildHtml('evozon_banner'); ?>
 <?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
     <div class="category-description std">
         <?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?>

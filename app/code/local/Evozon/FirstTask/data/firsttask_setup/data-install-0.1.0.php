@@ -1,0 +1,20 @@
+<?php
+
+$date = new DateTime();
+$banners = array(
+    array(
+        'created_at' => $date->getTimestamp(),
+        'updated_at' => $date->getTimestamp(),
+        'text' => 'This is banner 1'
+    ),
+    array(
+        'created_at' => $date->getTimestamp(),
+        'updated_at' => $date->getTimestamp(),
+        'text' => 'This is banner 2'
+    ),
+);
+foreach ($banners as $banner) {
+    Mage::getModel('evozon_firsttask/banner')
+            ->setData($banner)
+            ->save();
+}

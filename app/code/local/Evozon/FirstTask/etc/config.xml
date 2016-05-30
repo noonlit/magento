@@ -3,7 +3,7 @@
 <config>
     <modules>
         <Evozon_FirstTask>
-            <version>0.1.0</version>
+            <version>0.1.1</version>
         </Evozon_FirstTask>
     </modules>
     <global>
@@ -12,13 +12,57 @@
               <class>Evozon_FirstTask_Block</class>
             </evozon_firsttask>
         </blocks>
+        
+        <models>
+            <evozon_firsttask>
+                <class>Evozon_FirstTask_Model</class>
+                <resourceModel>evozon_firsttask_resource</resourceModel>
+            </evozon_firsttask>
+            
+            <evozon_firsttask_resource>
+                <class>Evozon_FirstTask_Model_Resource</class>
+                <entities>
+                    <banner>
+                        <table>evozon_banners</table>
+                    </banner>
+                    <link>
+                        <table>evozon_banners_to_categories</table>
+                    </link>
+                </entities>
+            </evozon_firsttask_resource>
+        </models>
+        
+        <resources>
+            <firsttask_setup>
+                <setup>
+                    <module>Evozon_FirstTask</module>
+                    <class>Evozon_FirstTask_Model_Resource_Setup</class>
+                    <connection>
+                        <use>core_setup</use>
+                    </connection>
+                </setup>
+                
+                <evozon_firsttask_write>
+                    <connection>
+                        <use>core_write</use>
+                    </connection>
+                </evozon_firsttask_write>
+                
+                <evozon_firsttask_read>
+                    <connection>
+                        <use>core_read</use>
+                    </connection>
+                </evozon_firsttask_read>
+            </firsttask_setup>
+        </resources>
+        
     </global>
     <frontend>
         <layout>
             <updates>
-                <evozon_catalog>
-                    <file>simpletext.xml</file>
-                </evozon_catalog>                
+                <evozon_firsttask>
+                    <file>firsttask.xml</file>
+                </evozon_firsttask>                
             </updates>                
         </layout>
     </frontend>

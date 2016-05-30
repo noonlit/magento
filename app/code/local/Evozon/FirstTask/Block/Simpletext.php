@@ -13,4 +13,8 @@ class Evozon_FirstTask_Block_Simpletext extends Mage_Core_Block_Template
         return "This is the wanted sample text";
     }
 
+    public function getBannersForCategory()
+    {
+        return Mage::getModel('evozon_firsttask/banner')->getBannersForCategory();
+    }
 }

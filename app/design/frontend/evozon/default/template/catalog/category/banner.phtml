@@ -1,0 +1,11 @@
+<?php
+$banners = $this->getBannersForCategory();
+?>
+
+<div id="banners">
+    <h1>Banners from banner block</h1>
+    <?php foreach ($banners as $banner) : ?>
+        <div><?php echo $banner->getText() ?></div>
+    <?php endforeach; ?>
+</div>
+
