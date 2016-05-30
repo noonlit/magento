@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+
+<config>	
+    <modules>
+        <Evozon_Catalog>
+            <version>0.1.1</version>
+        </Evozon_Catalog>
+    </modules>
+    
+    <global>
+        <blocks>
+            <evozon_catalog>
+                <class>Evozon_Catalog_Block</class>
+            </evozon_catalog>
+        </blocks>
+        
+        <models>
+            <evozon_catalog>
+                <class>Evozon_Catalog_Model</class>
+                <resourceModel>evozon_catalog_resource</resourceModel>
+            </evozon_catalog>
+            
+            <evozon_catalog_resource>
+                <class>Evozon_Catalog_Model_Resource</class>
+                <entities>
+                    <banner>
+                        <table>evozon_banners</table>
+                    </banner>
+                    <link>
+                        <table>evozon_banners_to_categories</table>
+                    </link>
+                </entities>
+            </evozon_catalog_resource>  
+        </models>
+        
+        <resources>
+            <evozon_catalog_setup>
+                <setup>
+                    <module>Evozon_Catalog</module>
+                    <class>Evozon_Catalog_Model_Resource_Setup</class>
+                    <connection>
+                        <use>core_setup</use>
+                    </connection>
+                </setup>
+                
+                <evozon_catalog_write>
+                    <connection>
+                        <use>core_write</use>
+                    </connection>
+                </evozon_catalog_write>
+                
+                <evozon_catalog_read>
+                    <connection>
+                        <use>core_read</use>
+                    </connection>
+                </evozon_catalog_read>
+            </evozon_catalog_setup> 
+        </resources>
+    </global>
+    
+    <frontend>
+        <layout>
+            <updates>
+                <evozon_catalog>
+                    <file>text.xml</file>
+                </evozon_catalog>                
+            </updates>                
+        </layout>
+    </frontend>	
+</config>
