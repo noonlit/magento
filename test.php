@@ -11,7 +11,7 @@ require_once 'app/Mage.php';
 Mage::app();
 
 
-$products = Mage::getModel("evozon_bogdan_catalog/bannertable")->getCollection();
+$products = Mage::getModel("evozon_bogdan_catalog/bannercategoryconnection")->getCollection();
 var_dump($products);
 
 foreach ($products as $product) {

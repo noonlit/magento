@@ -55,17 +55,17 @@ $foreignKeys = array(
  */
 $connection = $installer->getConnection();
 foreach ($frequencies as $frequency) {
-    $tableName = $installer->getTable('sales/bestsellers_aggregated_' . $frequency);
+    $bannersTable = $installer->getTable('sales/bestsellers_aggregated_' . $frequency);
 
     foreach ($foreignKeys as $fkInfo) {
         $connection->addConstraint(
             sprintf($fkInfo['name'], strtoupper($frequency)),
-            $tableName,
+            $bannersTable,
             $fkInfo['column'],
             $installer->getTable($fkInfo['refTable']),
             $fkInfo['refColumn']
         );
     }
 
-    $connection->delete($tableName, 'product_id IS NULL');
+    $connection->delete($bannersTable, 'product_id IS NULL');
 }

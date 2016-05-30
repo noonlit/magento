@@ -115,10 +115,10 @@ $installer->getConnection()->createTable($table);
  * MySQL table differs by having unique keys on (customer/visitor, product) columns and is created
  * in separate install.
  */
-$tableName = $installer->getTable('reports/compared_product_index');
-if (!$installer->tableExists($tableName)) {
+$bannersTable = $installer->getTable('reports/compared_product_index');
+if (!$installer->tableExists($bannersTable)) {
     $table = $installer->getConnection()
-        ->newTable($tableName)
+        ->newTable($bannersTable)
         ->addColumn('index_id', Varien_Db_Ddl_Table::TYPE_BIGINT, null, array(
             'identity'  => true,
             'unsigned'  => true,
@@ -170,10 +170,10 @@ if (!$installer->tableExists($tableName)) {
  * MySQL table differs by having unique keys on (customer/visitor, product) columns and is created
  * in separate install.
  */
-$tableName = $installer->getTable('reports/viewed_product_index');
-if (!$installer->tableExists($tableName)) {
+$bannersTable = $installer->getTable('reports/viewed_product_index');
+if (!$installer->tableExists($bannersTable)) {
     $table = $installer->getConnection()
-        ->newTable($tableName)
+        ->newTable($bannersTable)
         ->addColumn('index_id', Varien_Db_Ddl_Table::TYPE_BIGINT, null, array(
             'identity'  => true,
             'unsigned'  => true,

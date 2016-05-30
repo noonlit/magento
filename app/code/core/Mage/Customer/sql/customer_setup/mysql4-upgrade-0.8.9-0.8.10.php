@@ -37,10 +37,10 @@ $tables = array($this->getTable('customer/entity'),
 
 foreach ($tables as $table) {
     foreach ($types as $type) {
-        $tableName = $table . '_' . $type;
+        $bannersTable = $table . '_' . $type;
 
         $select = $installer->getConnection()->select()
-            ->from($tableName, array(
+            ->from($bannersTable, array(
                 'entity_id'         => 'entity_id',
                 'attribute_id'      => 'attribute_id',
                 'rows_count'        => 'COUNT(*)'))
@@ -49,7 +49,7 @@ foreach ($tables as $table) {
         $query = $installer->getConnection()->query($select);
 
         while ($row = $query->fetch()) {
-            $sql = 'DELETE FROM `' . $tableName . '`'
+            $sql = 'DELETE FROM `' . $bannersTable . '`'
                 . ' WHERE entity_id=? AND attribute_id=?'
                 . ' LIMIT ' . ($row['rows_count'] - 1);
             $installer->getConnection()->query($sql, array(
@@ -58,6 +58,6 @@ foreach ($tables as $table) {
             ));
         }
 
-        $installer->getConnection()->addKey($tableName, 'IDX_ATTRIBUTE_VALUE', array('entity_id', 'attribute_id'), 'unique');
+        $installer->getConnection()->addKey($bannersTable, 'IDX_ATTRIBUTE_VALUE', array('entity_id', 'attribute_id'), 'unique');
     }
 }

@@ -30,10 +30,10 @@ $installer = $this;
 //$installer->getConnection()->addKey($installer->getTable('sales/order_item'), 'IDX_PRODUCT_ID', 'product_id');
 
 foreach (array('daily', 'monthly', 'yearly') as $frequency) {
-    $tableName = $installer->getTable('sales/bestsellers_aggregated_' . $frequency);
+    $bannersTable = $installer->getTable('sales/bestsellers_aggregated_' . $frequency);
 
     $installer->run("
-    CREATE TABLE `{$tableName}` (
+    CREATE TABLE `{$bannersTable}` (
       `id` int(11) unsigned NOT NULL auto_increment,
       `period` date NOT NULL DEFAULT '0000-00-00',
       `store_id` smallint(5) unsigned NULL DEFAULT NULL,
@@ -51,7 +51,7 @@ foreach (array('daily', 'monthly', 'yearly') as $frequency) {
 
     $installer->getConnection()->addConstraint(
         'PRODUCT_ORDERED_AGGREGATED_' . strtoupper($frequency) . '_STORE_ID',
-        $tableName,
+        $bannersTable,
         'store_id',
         $installer->getTable('core/store'),
         'store_id',
@@ -60,7 +60,7 @@ foreach (array('daily', 'monthly', 'yearly') as $frequency) {
 
     $installer->getConnection()->addConstraint(
         'PRODUCT_ORDERED_AGGREGATED_' . strtoupper($frequency) . '_PRODUCT_ID',
-        $tableName,
+        $bannersTable,
         'product_id',
         $installer->getTable('catalog/product'),
         'entity_id',

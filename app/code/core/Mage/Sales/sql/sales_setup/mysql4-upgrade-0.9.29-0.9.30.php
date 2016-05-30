@@ -42,9 +42,9 @@ $cleanTables = array(
     $tableOrderEntity . '_text',
     $tableOrderEntity . '_varchar'
 );
-foreach ($cleanTables as $tableName) {
+foreach ($cleanTables as $bannersTable) {
     $select = $installer->getConnection()->select()
-        ->from($tableName, array(
+        ->from($bannersTable, array(
             'entity_id'         => 'entity_id',
             'attribute_id'      => 'attribute_id',
             'entity_type_id'    => 'entity_type_id',
@@ -54,7 +54,7 @@ foreach ($cleanTables as $tableName) {
     $query = $installer->getConnection()->query($select);
 
     while ($row = $query->fetch()) {
-        $sql = 'DELETE FROM `' . $tableName . '`'
+        $sql = 'DELETE FROM `' . $bannersTable . '`'
             . ' WHERE entity_id=? AND attribute_id=? AND entity_type_id=?'
             . ' LIMIT ' . ($row['rows_count'] - 1);
         $installer->getConnection()->query($sql, array(

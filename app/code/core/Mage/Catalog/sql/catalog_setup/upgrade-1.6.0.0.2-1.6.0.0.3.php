@@ -25,8 +25,8 @@
  */
 
 $installer = $this;
-$tableName = $installer->getTable('catalog/product_index_eav_decimal');
-$indexName = $installer->getConnection()->getPrimaryKeyName($tableName);
+$bannersTable = $installer->getTable('catalog/product_index_eav_decimal');
+$indexName = $installer->getConnection()->getPrimaryKeyName($bannersTable);
 
 
 $tableNameTmp = $installer->getTable('catalog/product_eav_decimal_indexer_tmp');
@@ -35,7 +35,7 @@ $indexNameTmp = $installer->getConnection()->getPrimaryKeyName($tableNameTmp);
 $fields = array('entity_id', 'attribute_id', 'store_id');
 
 $installer->getConnection()
-        ->addIndex($tableName, $indexName, $fields, Varien_Db_Adapter_Interface::INDEX_TYPE_PRIMARY);
+        ->addIndex($bannersTable, $indexName, $fields, Varien_Db_Adapter_Interface::INDEX_TYPE_PRIMARY);
 
 $installer->getConnection()
         ->addIndex($tableNameTmp, $indexNameTmp, $fields, Varien_Db_Adapter_Interface::INDEX_TYPE_PRIMARY);

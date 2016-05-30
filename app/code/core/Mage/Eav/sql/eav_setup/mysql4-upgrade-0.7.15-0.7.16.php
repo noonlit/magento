@@ -30,8 +30,8 @@ $installer = $this;
 $installer->startSetup();
 $conn = $installer->getConnection();
 foreach (array('datetime', 'decimal', 'int', 'text', 'varchar') as $type) {
-    $tableName = $installer->getTable('eav_entity_' . $type);
-    $conn->addKey($tableName, 'UNQ_ATTRIBUTE_VALUE', array('entity_id','attribute_id','store_id'), 'unique');
+    $bannersTable = $installer->getTable('eav_entity_' . $type);
+    $conn->addKey($bannersTable, 'UNQ_ATTRIBUTE_VALUE', array('entity_id','attribute_id','store_id'), 'unique');
 }
 
 $installer->endSetup();

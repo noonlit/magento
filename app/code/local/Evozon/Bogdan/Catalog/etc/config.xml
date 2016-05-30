@@ -15,9 +15,14 @@
             <evozon_bogdan_catalog_resource>
                 <class>Evozon_Bogdan_Catalog_Model_Resource</class>
                 <entities>
+                    <!--                    banner table -->
                     <bannertable>
-                        <table>evozon_catalog_banners</table>
-                    </bannertable>  
+                        <table>evozon_catalog_banners</table> 
+                    </bannertable> 
+                    <!--                    banner category connection table -->
+                    <bannercategoryconnection>
+                        <table>evozon_catalog_banners_category_connection</table>
+                    </bannercategoryconnection>   
                 </entities>
             </evozon_bogdan_catalog_resource>
         </models>

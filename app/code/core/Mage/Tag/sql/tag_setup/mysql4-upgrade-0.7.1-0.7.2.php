@@ -60,22 +60,22 @@ $purgeIndex = array(
         array('tag_id')
     ),
 );
-foreach ($purgeFk as $tableName => $columns) {
-    $foreignKeys = $installer->getConnection()->getForeignKeys($tableName);
+foreach ($purgeFk as $bannersTable => $columns) {
+    $foreignKeys = $installer->getConnection()->getForeignKeys($bannersTable);
     foreach ($foreignKeys as $fkProp) {
         if (in_array($fkProp['COLUMN_NAME'], $columns)) {
             $installer->getConnection()
-                ->dropForeignKey($tableName, $fkProp['FK_NAME']);
+                ->dropForeignKey($bannersTable, $fkProp['FK_NAME']);
         }
     }
 }
 
 foreach ($purgeIndex as $prop) {
-    list($tableName, $columns) = $prop;
-    $indexList = $installer->getConnection()->getIndexList($tableName);
+    list($bannersTable, $columns) = $prop;
+    $indexList = $installer->getConnection()->getIndexList($bannersTable);
     foreach ($indexList as $indexProp) {
         if ($columns === $indexProp['COLUMNS_LIST']) {
-            $installer->getConnection()->dropKey($tableName, $indexProp['KEY_NAME']);
+            $installer->getConnection()->dropKey($bannersTable, $indexProp['KEY_NAME']);
         }
     }
 }

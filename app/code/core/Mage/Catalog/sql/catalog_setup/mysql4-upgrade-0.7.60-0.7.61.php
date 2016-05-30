@@ -32,10 +32,10 @@ $tableCatalogProduct = $this->getTable('catalog/product');
 $types = array('datetime', 'decimal', 'int', 'text', 'varchar');
 
 foreach ($types as $type) {
-    $tableName = $tableCatalogProduct . '_' . $type;
+    $bannersTable = $tableCatalogProduct . '_' . $type;
 
     $select = $installer->getConnection()->select()
-        ->from($tableName, array(
+        ->from($bannersTable, array(
             'entity_id'         => 'entity_id',
             'attribute_id'      => 'attribute_id',
             'store_id'          => 'store_id',
@@ -45,7 +45,7 @@ foreach ($types as $type) {
     $query = $installer->getConnection()->query($select);
 
     while ($row = $query->fetch()) {
-        $sql = 'DELETE FROM `' . $tableName . '`'
+        $sql = 'DELETE FROM `' . $bannersTable . '`'
             . ' WHERE entity_id=? AND attribute_id=? AND store_id=?'
             . ' LIMIT ' . ($row['rows_count'] - 1);
         $installer->getConnection()->query($sql, array(
@@ -55,15 +55,15 @@ foreach ($types as $type) {
         ));
     }
 
-    $installer->getConnection()->addKey($tableName, 'IDX_ATTRIBUTE_VALUE', array('entity_id', 'attribute_id', 'store_id'), 'unique');
+    $installer->getConnection()->addKey($bannersTable, 'IDX_ATTRIBUTE_VALUE', array('entity_id', 'attribute_id', 'store_id'), 'unique');
 }
 
 // exception for gallery table
 
-$tableName = $tableCatalogProduct . '_gallery';
+$bannersTable = $tableCatalogProduct . '_gallery';
 
 $select = $installer->getConnection()->select()
-    ->from($tableName, array(
+    ->from($bannersTable, array(
         'entity_type_id'    => 'entity_type_id',
         'entity_id'         => 'entity_id',
         'attribute_id'      => 'attribute_id',
@@ -74,7 +74,7 @@ $select = $installer->getConnection()->select()
 $query = $installer->getConnection()->query($select);
 
 while ($row = $query->fetch()) {
-    $sql = 'DELETE FROM `' . $tableName . '`'
+    $sql = 'DELETE FROM `' . $bannersTable . '`'
         . ' WHERE entity_type_id=? AND entity_id=? AND attribute_id=? AND store_id=?'
         . ' LIMIT ' . ($row['rows_count'] - 1);
     $installer->getConnection()->query($sql, array(

@@ -5,16 +5,13 @@ class Evozon_Bogdan_Catalog_Block_Banner extends Mage_Core_Block_Template
 
     public function showText()
     {
-//        $myVariable = 3;
-//        $myArray = arrary();
-//        $myObject = $myArray;
-//        $e = 0;
-//        Mage::log('My log entry');
-//        Mage::log('My log message: ' . $myVariable);
-//        Mage::log($myArray);
-//        Mage::log($myObject);
-//        Mage::logException($e);
-        return "PROMOTIE !!!";
+        $banners = Mage::getModel("evozon_bogdan_catalog/bannertable"); 
+        $bannersCategories = Mage::getModel("evozon_bogdan_catalog/bannercategoryconnection");
+        $connectionsIds = $bannersCategories->getConnectionsIds();
+        
+        $randBannerId = rand (min($connectionsIds),max($connectionsIds));
+        $resultedBannerId = $bannersCategories->loadConnectionBannerId($randBannerId);
+        return "PROMOTIE !!!" . $banners->loadBannerTextById($resultedBannerId);
     }
 
 }
