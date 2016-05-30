@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config>	
+    <modules>
+        <Evozon_Delia>
+            <version>0.1.0</version>
+        </Evozon_Delia>
+    </modules>
+    <global>
+        <blocks>
+            <evozon_delia>
+                <class>Evozon_Delia_Block</class>
+            </evozon_delia>
+        </blocks>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <evozon_delia>
+                    <file>banner.xml</file>
+                </evozon_delia>                
+            </updates>                
+        </layout>
+    </frontend>
+	
+</config>

@@ -1,8 +1,8 @@
 <config>
     <modules>
-        <Evozon_Delia_Configviewer>
+        <Evozon_Delia>
             <version>0.1.0</version>
-        </Evozon_Delia_Configviewer>
+        </Evozon_Delia>
     </modules>
      <global>
         <events>
@@ -10,8 +10,8 @@
                 <observers>
                     <Evozon_Delia_configviewer_model_observer>
                         <type>singleton</type>
-                        <class>Evozon_Delia_Configviewer_Model_Observer</class>
-                        <method>checkForConfigRequest</method>
+                        <class>Evozon_Delia_Category_Block_Banner</class>
+<!--                        <method>checkForConfigRequest</method>-->
                     </Evozon_Delia_configviewer_model_observer>
                 </observers>
             </controller_front_init_routers>
