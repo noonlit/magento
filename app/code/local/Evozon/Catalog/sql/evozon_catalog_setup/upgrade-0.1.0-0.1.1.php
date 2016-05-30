@@ -5,7 +5,6 @@ $installer->startSetup();
 
 $tableName = $installer->getTable('evozon_catalog/link');
 
-// check if the table already exists
 if ($installer->getConnection()->isTableExists($tableName) != true) {
 
     $table = $installer->getConnection()
@@ -15,7 +14,7 @@ if ($installer->getConnection()->isTableExists($tableName) != true) {
                 'unsigned' => true,
                 'nullable' => false,
                 'primary' => true,
-            ), 'ID') // only because the resource _init wants a primary id, can we circumvent this?
+            ), 'ID') 
             ->addColumn('category_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null,
             array(
                 'unsigned' => true,

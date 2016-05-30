@@ -5,7 +5,6 @@ $installer->startSetup();
 
 $tableName = $installer->getTable('evozon_catalog/banner');
 
-// check if the table already exists - do we need to at this point?
 if ($installer->getConnection()->isTableExists($tableName) != true) {
 
     $table = $installer->getConnection()
