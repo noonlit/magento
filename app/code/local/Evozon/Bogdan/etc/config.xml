@@ -1,21 +1,44 @@
 <?xml version="1.0"?>
 <config>
     <modules>
-        <evozon_bogdan_banner>
+        <Evozon_Bogdan>
             <version>0.1.0</version>
-        </evozon_bogdan_banner>
+        </Evozon_Bogdan>
     </modules>
     <global>
-<!--        <models>
-            <catalog>
-                <rewrite>
-                    <category>Evozon_Bogdan_Block</category>
-                </rewrite>
-            </catalog>
-        </models>-->
+        <models>
+            <evozon_bogdan_catalog>
+                <class>Evozon_Bogdan_Catalog_Model</class>
+                <resourceModel>evozon_bogdan_catalog_resource</resourceModel>
+            </evozon_bogdan_catalog>
+            <evozon_bogdan_catalog_resource>
+                <class>Evozon_Bogdan_Catalog_Model_Resource</class>
+                <entities>
+                    <bannertable>
+                        <table>evozon_catalog_banner</table>
+                    </bannertable>  
+                </entities>
+            </evozon_bogdan_catalog_resource>
+        </models>
+        <resources>
+            <evozon_bogdan_setup>
+                <setup>
+                    <module>Evozon_Bogdan</module>
+                    <class>Mage_Core_Model_Resource_Setup</class>
+                </setup>   
+            </evozon_bogdan_setup>
+        </resources>
+        <resources>
+            <evozon_bogdan_setup>
+                <setup>
+                    <module>Evozon_Bogdan</module>
+                    <class>Mage_Core_Model_Resource_Setup</class>
+                </setup>   
+            </evozon_bogdan_setup>
+        </resources>
     </global>
     <frontend>
-<!--        <layout>
+        <!--        <layout>
             <updates>
                 <evozon_bogdan>
                      Our layout file name

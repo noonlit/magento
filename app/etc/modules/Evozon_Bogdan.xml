@@ -1,8 +1,9 @@
+<?xml version="1.0"?>
 <config>
     <modules>
-        <evozon_bogdan_banner>
+        <Evozon_Bogdan>
             <active>true</active>
             <codePool>local</codePool>
-        </evozon_bogdan_banner>
+        </Evozon_Bogdan>    
     </modules>
 </config>

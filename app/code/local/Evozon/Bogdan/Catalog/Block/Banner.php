@@ -9,11 +9,11 @@ class Evozon_Bogdan_Catalog_Block_Banner extends Mage_Core_Block_Template
 //        $myArray = arrary();
 //        $myObject = $myArray;
 //        $e = 0;
-        Mage::log('My log entry');
-        Mage::log('My log message: ' . $myVariable);
-        Mage::log($myArray);
-        Mage::log($myObject);
-        Mage::logException($e);
+//        Mage::log('My log entry');
+//        Mage::log('My log message: ' . $myVariable);
+//        Mage::log($myArray);
+//        Mage::log($myObject);
+//        Mage::logException($e);
         return "PROMOTIE !!!";
     }
 

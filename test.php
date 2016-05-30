@@ -10,8 +10,9 @@ require_once 'app/Mage.php';
 
 Mage::app();
 
-$products = Mage::getModel("catalog/product")->getCollection(10)->addAttributeToSelect('name');
-//var_dump($product);
+
+$products = Mage::getModel("evozon_bogdan_catalog/bannertable")->getCollection();
+var_dump($products);
 
 foreach ($products as $product) {
     //var_dump($product) . "<br>";
