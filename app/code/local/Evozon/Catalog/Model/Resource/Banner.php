@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * Banner resource
+ * 
+ * @category   Evozon
+ * @package    Evozon_Catalog
+ * @author     Sergiu <sergiu.rus@evozon.com>
+ */
 class Evozon_Catalog_Model_Resource_Banner extends Mage_Core_Model_Resource_Db_Abstract
 {
 
@@ -10,3 +16,4 @@ class Evozon_Catalog_Model_Resource_Banner extends Mage_Core_Model_Resource_Db_A
     }
 
 }
+    
