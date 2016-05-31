@@ -19,16 +19,16 @@ $installer->startSetup();
  * text type text
  */
 
-$bannersTable = $installer->getTable('evozon_bogdan_catalog/bannertable');
+$bannersTable = $installer->getTable('evozon_bogdan_catalog/banner');
 
 if ($installer->getConnection()->isTableExists($bannersTable) == true) {
     $installer->getConnection()
-            ->dropTable($installer->getTable('evozon_bogdan_catalog/bannertable'));
+            ->dropTable($installer->getTable('evozon_bogdan_catalog/banner'));
 }
 
 if ($installer->getConnection()->isTableExists($bannersTable) != true) {
     $table = $installer->getConnection()
-            ->newTable($installer->getTable('evozon_bogdan_catalog/bannertable'))
+            ->newTable($installer->getTable('evozon_bogdan_catalog/banner'))
             ->addColumn('banner_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
                 'auto_increment' => true,
                 'unsigned' => true,

@@ -28,7 +28,7 @@ $bannersData = array(
     ),
 );
 
-$installer->getConnection()->insertMultiple($installer->getTable('evozon_bogdan_catalog/bannertable'), $bannersData);
+$installer->getConnection()->insertMultiple($installer->getTable('evozon_bogdan_catalog/banner'), $bannersData);
 
 $category = Mage::getModel("catalog/category");
 
