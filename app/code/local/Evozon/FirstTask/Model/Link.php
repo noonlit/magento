@@ -3,7 +3,7 @@
 /**
  * Description of Link
  *
- * @author marius
+ * @author Marius Adam <marius.adam@evozon.com>
  */
 class Evozon_FirstTask_Model_Link extends Mage_Core_Model_Abstract
 {
