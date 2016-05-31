@@ -1,12 +1,16 @@
 <layout version="0.1.0">
     <catalog_category_layered>  
         <reference name="category.products">
+             <block type="evozon_georgiana/banner" name="evozon_banner" template="catalog/category/banner.phtml"/>
+
             <block type="evozon_georgiana/georgiana" name="evozon_georgiana_text" template="catalog/category/georgiana.phtml"/>
         </reference>      
     </catalog_category_layered>
     
     <catalog_category_default>  
         <reference name="category.products">
+            <block type="evozon_georgiana/banner" name="evozon_banner" template="catalog/category/banner.phtml"/>
+
             <block type="evozon_georgiana/georgiana" name="evozon_georgiana_text" template="catalog/category/georgiana.phtml"/>
         </reference>      
     </catalog_category_default>
