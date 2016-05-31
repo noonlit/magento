@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Populate tables with data
+ * Populate tables with data version 0.1.1
  * 
  * @category Evozon
  * @package Evozon_Bogdan_Catalog
@@ -14,12 +14,17 @@ $bannersData = array(
     array(
         'created_at' => NOW(),
         'updated_at' => NOW(),
-        'text' => 'This is banner 1'
+        'text' => 'Look TV'
     ),
     array(
         'created_at' => NOW(),
         'updated_at' => NOW(),
-        'text' => 'This is banner 2'
+        'text' => 'Animal Planet'
+    ),
+    array(
+        'created_at' => NOW(),
+        'updated_at' => NOW(),
+        'text' => 'Discovery'
     ),
 );
 
@@ -29,12 +34,24 @@ $category = Mage::getModel("catalog/category");
 
 $connectionsData = array(
     array(
-        'category_id' => $category->load(1)->getId(),
-        'banner_id' => 1
+        'category_id' => $category->load(4)->getId(),
+        'banner_id' => 3
     ),
     array(
-        'category_id' => $category->load(2)->getId(),
-        'banner_id' => 2
+        'category_id' => $category->load(5)->getId(),
+        'banner_id' => 3
+    ),
+    array(
+        'category_id' => $category->load(5)->getId(),
+        'banner_id' => 4
+    ),
+    array(
+        'category_id' => $category->load(5)->getId(),
+        'banner_id' => 5
+    ),
+    array(
+        'category_id' => $category->load(6)->getId(),
+        'banner_id' => 5
     ),
 );
 

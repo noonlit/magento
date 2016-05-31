@@ -12,13 +12,17 @@ Mage::app();
 
 
 $products = Mage::getModel("evozon_bogdan_catalog/bannercategoryconnection")->getCollection();
-var_dump($products);
+//var_dump($products);
 
 foreach ($products as $product) {
     //var_dump($product) . "<br>";
     //die();
     //echo $product->getData('created_at')."<br>";
 }
+
+$category = Mage::getModel("catalog/category");
+
+var_dump($category->load(6)->getName());
 
 //$myVariable = 3;
 //$myArray = arrary();

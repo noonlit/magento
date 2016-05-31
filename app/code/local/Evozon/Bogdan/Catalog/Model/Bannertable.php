@@ -28,4 +28,17 @@ class Evozon_Bogdan_Catalog_Model_BannerTable extends Mage_Core_Model_Abstract
         return $this->load($id)->getText();
     }
 
+    public function getBannersForCategory()
+    {
+        $collections = $this->getCollection();
+        $currentCategoryId = Mage::registry('current_category')->getId();
+        $collections->addFieldToFilter('category_id', $currentCategoryId)
+                ->join(array('bannercategoryconnection' => 'bannercategoryconnection'),
+                        'main_table.banner_id = evozon_catalog_banners_category_connection.banner_id')
+                ->getSelect()
+                ->order(new Zend_Db_Expr('RAND()'));
+        
+        return $collections;
+    }
+
 }
