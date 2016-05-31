@@ -76,7 +76,7 @@ if ($installer->getConnection()->isTableExists($connectionTable) != true) {
         'nullable' => false,
             ), 'Banner Id');
     $installer->getConnection()->createTable($table);
-    //TODO FOREIGN KEYS
+
 }
 
 $installer->endSetup();
