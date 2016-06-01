@@ -18,6 +18,8 @@ $installer->startSetup();
  * banner_id type int
  */
 
+//TODO check index before
+
 $connectionTable = $installer->getTable('evozon_bogdan_catalog/bannercategoryconnection');
 $indexName = $installer->getIdxName('evozon_bogdan_catalog/bannercategoryconnection', array('category_id')
 );
