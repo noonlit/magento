@@ -6,8 +6,8 @@ try {
     $rand = rand(1, 9999);
     $product
             ->setTypeId('simple')
-            ->setAttributeSetId(4) // default attribute set
-            ->setSku('example_sku' . $rand) // generate a random SKU
+            ->setAttributeSetId(4) 
+            ->setSku('firstSku') 
             ->setWebsiteIDs(array(1))
     ;
 
@@ -18,20 +18,20 @@ try {
     ;
 
     $product->setStockData(array(
-        'use_config_manage_stock' => 0, // use global config?
-        'manage_stock' => 1, // should we manage stock or not?
+        'use_config_manage_stock' => 0, 
+        'manage_stock' => 1, 
         'is_in_stock' => 1,
         'qty' => 5,
     ));
 
     $product
-            ->setName('Test Product #' . $rand) // add string attribute
-            ->setShortDescription('Description') // add text attribute
-            // set up prices
-            ->setPrice(24.50)
-            ->setSpecialPrice(19.99)
-            ->setTaxClassId(2)    // Taxable Goods by default
-            ->setWeight(87)
+            ->setName('My first product') 
+            ->setShortDescription('the best') // add text attribute
+
+            ->setPrice(80.0)
+            ->setSpecialPrice(79.0)
+            ->setTaxClassId(2)   
+            ->setWeight(40)
     ;
 
  
