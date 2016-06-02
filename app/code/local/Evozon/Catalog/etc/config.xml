@@ -1,8 +1,7 @@
-<?xml version="1.0"?>
 <config>	
     <modules>
         <Evozon_Catalog>
-            <version>0.1.0</version>
+            <version>0.2.0</version>
         </Evozon_Catalog>
     </modules>
     <global>
