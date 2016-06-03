@@ -9,8 +9,8 @@ class Evozon_Catalog_Model_Banner extends Mage_Core_Model_Abstract
     protected function _construct()
     {
         //sets the resource model class instance used for this model
-        $this->_init('evozon_catalog/banner');
-    }
+        $this->_init('evozon_catalog/banner'); 
+   }
 
     /**
      * 

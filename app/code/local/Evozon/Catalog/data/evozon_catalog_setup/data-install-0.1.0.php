@@ -1,5 +1,6 @@
 <?php
 $date = new DateTime();
+return;//to do verification;
 $banners = array(
     array(
         'created_at' => $date->getTimestamp(),
