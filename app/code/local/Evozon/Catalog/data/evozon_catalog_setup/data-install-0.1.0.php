@@ -1,5 +1,7 @@
 <?php
 
+Mage::log('Started data-install-0.1.0', null, 'scripts.log');
+
 $date = new DateTime();
 
 $banners = array(
@@ -15,8 +17,14 @@ $banners = array(
     ),
 );
 
+$model = Mage::getModel('evozon_catalog/banner');
+
 foreach ($banners as $banner) {
-    Mage::getModel('evozon_catalog/banner')
-            ->setData($banner)
-            ->save();
+    $collection = $model->getCollection()->addFieldToFilter('text', $banner['text']);
+    if ($collection->getSize() == 0) {
+        $model->setData($banner)->save();
+        Mage::log('Added banner');
+    }
 }
+
+Mage::log('Ended data-install-0.1.0', null, 'scripts.log');
