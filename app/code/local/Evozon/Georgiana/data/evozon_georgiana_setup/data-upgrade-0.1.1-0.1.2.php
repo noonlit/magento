@@ -37,8 +37,8 @@ try {
  
     $product->setColor(24);
 
-    mage::log($product);
-    $product->save();
+
+    //$product->save();
 } catch (Exception $ex) {
     
     mage::log($ex->getMessage());

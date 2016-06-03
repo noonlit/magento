@@ -12,6 +12,6 @@ $bannersToCtg = array(
 );
 foreach ($bannersToCtg as $link) {
     Mage::getModel('evozon_georgiana/link')
-            ->setData($link)
-            ->save();
+            ->setData($link);
+            //->save();
 }
