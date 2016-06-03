@@ -1,5 +1,4 @@
 <?php
-return;//to do verification;
 $bannersToCtg = array(
     array(
         'category_id' => 13,

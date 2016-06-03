@@ -1,5 +1,6 @@
 <?php
 
+
 $installer = $this;
 $installer->startSetup();
 $tableName = $installer->getTable('evozon_catalog/banner');
