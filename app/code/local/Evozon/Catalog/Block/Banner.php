@@ -17,14 +17,6 @@ class Evozon_Catalog_Block_Banner extends Mage_Core_Block_Template
      */
     public function getBannersForCategory()
     {
-        $model = Mage::getModel('evozon_catalog/banner');
-        //$attr = $productModel->getResource()->getAttribute('color');
-        //Mage::log($attr->getOptionId());
-        
-        $product = $model->getCollection()->addFieldToFilter('text', 'This is banner 1');
-        Mage::log($product->getSize());
-        
-        
         return Mage::getModel('evozon_catalog/banner')->getBannersForCategory();
     }
 
