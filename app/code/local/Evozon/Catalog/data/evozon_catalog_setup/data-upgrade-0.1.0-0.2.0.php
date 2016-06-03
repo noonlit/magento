@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * add a new simple product
+ */
+
 Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
 $product = Mage::getModel('catalog/product');
 if (!$product->getIdBySku('ilincadecor13')) {
@@ -18,8 +22,6 @@ if (!$product->getIdBySku('ilincadecor13')) {
             ->setWeight(50)
             ->setStatus(Mage_Catalog_Model_Product_Status::STATUS_ENABLED)
             ->setColor(24)
-            //->setMediaGallery(array('images' => array(), 'values' => array()))
-            //->setImageToMediaGallery(Mage::getBaseDir('media') . DS . 'evozon/catalog/product/ilinca-decor-13.png', array('image', 'thumbnail', 'small_image'), false)
             ->setMetaTitle('ilinca-decor home decor')
             ->setMetaKeywords('')
             ->setMetaDescription('ilinca-decor meta description')
@@ -54,6 +56,8 @@ if (!$product->getIdBySku('ilincadecor13')) {
             echo "Product does not have an image or the path is incorrect. Path was: {$filePath}<br/>";
         }
     }
+    
+    $product->setIsMassupdate(true)->setExcludeUrlRewrite(true);
 
     $product->save();
 }
