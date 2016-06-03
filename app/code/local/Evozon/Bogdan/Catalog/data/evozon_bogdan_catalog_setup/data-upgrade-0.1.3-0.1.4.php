@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Add a configurable product
+ */
+
 $simple_product = Mage::getModel('catalog/product');
 
 $simple_product->setSku('simplu12');
@@ -27,17 +31,6 @@ $simple_product->setStockData(array(
 $simple_product->setColor(getOptionId('color', 'Red'));
 
 $simple_product->save();
-
-function getOptionId($attribute_code, $label)
-{
-    $attribute = Mage::getModel('eav/config')->getAttribute('catalog_product', $attribute_code);
-    foreach ($attribute->getSource()->getAllOptions(true) as $option) {
-        //echo $option['value'] . ' ' . $option['label'] . "<br>";
-        if ($option['label'] == $label) {
-            return $option['value'];
-        }
-    }
-}
 
 $configurable_product = Mage::getModel('catalog/product');
 $configurable_product->setSku('test-configurable3');
@@ -82,6 +75,15 @@ $configurable_product->setCanSaveConfigurableAttributes(true);
 $configurable_product->save();
 
 //echo "configurable product id: ".$configurable_product->getId()."\n";
-
+function getOptionId($attribute_code, $label)
+{
+    $attribute = Mage::getModel('eav/config')->getAttribute('catalog_product', $attribute_code);
+    foreach ($attribute->getSource()->getAllOptions(true) as $option) {
+        //echo $option['value'] . ' ' . $option['label'] . "<br>";
+        if ($option['label'] == $label) {
+            return $option['value'];
+        }
+    }
+}
 
 
