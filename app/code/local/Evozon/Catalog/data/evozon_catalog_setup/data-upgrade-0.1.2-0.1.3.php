@@ -87,24 +87,24 @@ if (!$productGreen->getIdBySku('sku91-hulk-green')) {
 // configurable product
 
 $configProduct = Mage::getModel('catalog/product');
-if (!$product->getIdBySku('sku91-extremely-trendy-tops')) {
+if (!$product->getIdBySku('sku91-extremely-trendy-top')) {
     try {
         $configProduct
                 ->setWebsiteIds(array(1))
                 ->setAttributeSetId(13) // clothing
                 ->setTypeId('configurable')
-                ->setSku('sku91-extremely-trendy-tops')
+                ->setSku('sku91-extremely-trendy-top')
                 ->setCreatedAt($date->getTimestamp())
                 ->setUpdatedAt($date->getTimestamp())
-                ->setName('Configurable trendy tops')
+                ->setName('Configurable trendy top')
                 ->setStatus(Mage_Catalog_Model_Product_Status::STATUS_ENABLED)
                 ->setTaxClassId(0) // tax class (0 - none, 1 - default, 2 - taxable, 4 - shipping)
                 ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH)
                 ->setCountryOfManufacture('RO')
                 ->setCost(100) // the cost is what the merchant pays
                 ->setPrice(200) // the price is what the customer pays
-                ->setDescription('This is the long description of the trendy tops')
-                ->setShortDescription('This is the short description of the trendy tops')
+                ->setDescription('This is the long description of the trendy top')
+                ->setShortDescription('This is the short description of the trendy top')
                 ->setStockData(array(
                     'use_config_manage_stock' => 0,
                     'manage_stock' => 1,
