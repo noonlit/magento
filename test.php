@@ -1,76 +1,60 @@
 <?php
 
-//FIND ATTRIBUTES NAMES
-
 require_once 'app/Mage.php';
 
 Mage::app();
 
-$product = Mage::getModel('catalog/product');
-$product->load(447);
-//$product->load(997);
+$product = Mage::getModel('catalog/product')->load(924);
+$product->setName('Rochie Verde S');
+$product->setColor(getOptionId('color', 'Green'));
+$product->setSize(getOptionId('size', 'S'));
+$product->setGender(getOptionId('gender', 'Female'));
+$product->setOccasion(getOptionId('occasion', 'Career'));
 
-$optionRawData = array();
-$optionCollection = array(
-    array('id' => '23',
-        'position' => '1',
-        'title' => 'optiunea1'
-    ),
-    array('id' => '24',
-        'position' => '2',
-        'title' => 'optiunea2',
-        ));
+var_dump($product->getColor());
 
+$product->save();
 
-$optionCollection = $product->getTypeInstance(true)->getOptionsCollection($product);
-$selectionCollection = $product->getTypeInstance(true)
-        ->getSelectionsCollection($product->getTypeInstance(true)
-        ->getOptionsIds($product), $product
+$productConf = Mage::getModel('catalog/product')->load(930);
+
+$productConf->setName('Rochie configurabila');
+
+$sizeAttributeId = Mage::getModel('eav/entity_attribute')->getIdByCode('catalog_product', 'color');
+$productConf->getTypeInstance()->setUsedProductAttributeIds(array($sizeAttributeId));
+$configurableAttributesData = $productConf->getTypeInstance()->getConfigurableAttributesAsArray();
+
+$configurableProductsData = array();
+
+$simpleProductsData = array(
+    'label' => $product->getAttributeText('color'),
+    'attribute_id' => $colorAttributeId,
+    'value_index' => (int) $product->getColor(),
+    'is_percent' => 0,
+    'pricing_value' => $product->getPrice(),
 );
 
-$optionCollection->appendSelections($selectionCollection);
+$configurableProductsData[919] = $simpleProductsData;
+$configurableProductsData[929] = $simpleProductsData;
+$configurableProductsData[916] = $simpleProductsData;
+$configurableProductsData[924] = $simpleProductsData;
 
-//$bundled_items = array();
-//foreach ($selectionCollection as $selection) {
-//    $bundled_items[] = $selection->getSKu();
-//}
-//var_dump($bundled_items);
+//$configurableAttributesData[0]['values'][] = $simpleProductsData;
+
+$productConf->setConfigurableProductsData($configurableProductsData);
+//$productConf->setConfigurableAttributesData($configurableAttributesData);
+$productConf->setCanSaveConfigurableAttributes(true);
+
+$productConf->save();
 
 
-//$bundled_items = array();
-foreach ($optionCollection as $option) {
-    var_dump($option->getOptionId());
-}
-//var_dump($bundled_items);
 
-$optionRawData = array();
-$selectionRawData = array();
-
-$i = 0;
-foreach ($optionCollection as $option) {
-    $optionRawData[$i] = array(
-        'option_id' => $option->getOptionId(), //my addition. important otherwise, options going to be duplicated
-        'required' => $option->getData('required'),
-        'position' => $option->getData('position'),
-        'type' => $option->getData('type'),
-        'title' => $option->getData('title') ? $option->getData('title') : $option->getData('default_title'),
-        'delete' => ''
-    );
-    foreach ($option->getSelections() as $selection) {
-        $selectionRawData[$i][] = array(
-            'product_id' => $selection->getProductId(),
-            'position' => $selection->getPosition(),
-            'is_default' => $selection->getIsDefault(),
-            'selection_price_type' => $selection->getSelectionPriceType(),
-            'selection_price_value' => $selection->getSelectionPriceValue(),
-            'selection_qty' => $selection->getSelectionQty(),
-            'selection_can_change_qty' => $selection->getSelectionCanChangeQty(),
-            'delete' => ''
-        );
+function getOptionId($attribute_name, $value)
+{
+    $attribute = Mage::getModel('eav/config')->getAttribute('catalog_product', $attribute_name);
+    foreach ($attribute->getSource()->getAllOptions(true) as $option) {
+        //echo $option['value'] . ' ' . $option['label'] . "<br>";
+        if ($option['label'] == $value) {
+            return $option['value'];
+        }
     }
-    $i++;
 }
-
-var_dump($optionRawData);
-var_dump($selectionRawData);
-
