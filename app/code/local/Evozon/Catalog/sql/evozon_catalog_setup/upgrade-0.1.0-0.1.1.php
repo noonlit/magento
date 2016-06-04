@@ -1,6 +1,6 @@
 <?php
 
-Mage::log('Started install-0.1.1', null, 'scripts.log');
+Mage::log('Started upgrade-0.1.1', null, 'scripts.log');
 
 $installer = $this;
 $installer->startSetup();
@@ -39,4 +39,4 @@ if ($installer->getConnection()->isTableExists($tableName) != true) {
 
 $installer->endSetup();
 
-Mage::log('Ended install-0.1.1', null, 'scripts.log');
+Mage::log('Ended upgrade-0.1.1', null, 'scripts.log');

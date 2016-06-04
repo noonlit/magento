@@ -1,6 +1,6 @@
 <?php
 
-Mage::log('Started data-install-0.1.1', null, 'scripts.log');
+Mage::log('Started data-upgrade-0.1.1', null, 'scripts.log');
 
 $bannersToCtg = array(
     array(
@@ -26,4 +26,4 @@ foreach ($bannersToCtg as $link) {
     }
 }
 
-Mage::log('Ended data-install-0.1.1', null, 'scripts.log');
+Mage::log('Ended data-upgrade-0.1.1', null, 'scripts.log');
