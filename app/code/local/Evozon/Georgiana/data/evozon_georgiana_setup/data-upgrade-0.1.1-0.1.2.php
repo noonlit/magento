@@ -35,7 +35,7 @@ try {
     ;
 
  
-    $product->setColor(24);
+    //$product->setColor(24);
 
 
     //$product->save();
