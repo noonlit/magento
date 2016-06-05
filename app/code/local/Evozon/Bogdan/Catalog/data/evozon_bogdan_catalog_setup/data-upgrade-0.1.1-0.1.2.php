@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Add a simple product data version 0.1.2
+ * 
+ * @category Evozon
+ * @package Evozon_Bogdan_Catalog
+ * @copyright (c) year, Haidu Bogdan
+ * @author Haidu Bogdan <branch bogdan of noonlit/magento> git
+ */
+
 //Magento settings to allow saving
 Mage::app()->setUpdateMode(false);
 Mage::app()->setCurrentStore(0); //this redirects to the admin page
@@ -18,7 +27,6 @@ if ($test_product->getIdBySku($sku))
 } else
 {
     $product->setSku($sku);
-    echo "seettt";
 }
 
 $categoriesHelper = Mage::helper('evozon_bogdan_catalog/categories');
@@ -59,7 +67,6 @@ $stockData['manage_stock'] = 1;
 $stockData['use_config_manage_stock'] = 0;
 $product->setStockData($stockData);
 
-//$product->save();
-// Save the grouped product.
+//try settings
 $product->save();
 
