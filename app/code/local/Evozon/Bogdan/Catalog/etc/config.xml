@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Evozon_Bogdan_Catalog>
-            <version>0.1.6</version> 
+            <version>0.1.2</version> 
         </Evozon_Bogdan_Catalog>
         
     </modules>
@@ -26,6 +26,14 @@
                 </entities>
             </evozon_bogdan_catalog_resource>
         </models>
+        <!--        <evozon_bogdan_catalog>
+            <helper>catalog/attributes</helper>
+        </evozon_bogdan_catalog>-->
+        <helpers>
+            <evozon_bogdan_catalog>
+                <class>evozon_bogdan_catalog_helper</class>
+            </evozon_bogdan_catalog> 
+        </helpers>
         <resources>
             <evozon_bogdan_catalog_setup>
                 <setup>

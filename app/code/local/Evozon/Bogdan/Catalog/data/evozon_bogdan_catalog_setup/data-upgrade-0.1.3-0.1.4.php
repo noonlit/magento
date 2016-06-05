@@ -6,7 +6,7 @@
 
 $simple_product = Mage::getModel('catalog/product');
 
-$simple_product->setSku('simplu12');
+$simple_product->setSku('simplu6');
 $simple_product->setName('rochie cu optiuni');
 $simple_product->setAttributeSetId(13);
 //$simple_product->setSize_general(193); // value id of S size
@@ -33,7 +33,7 @@ $simple_product->setColor(getOptionId('color', 'Red'));
 $simple_product->save();
 
 $configurable_product = Mage::getModel('catalog/product');
-$configurable_product->setSku('test-configurable3');
+$configurable_product->setSku('test-configurable4');
 $configurable_product->setName('test name configurable');
 $configurable_product->setAttributeSetId(13);
 $configurable_product->setStatus(1);
