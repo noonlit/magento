@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Add a simple product and a configurable data version 0.1.4
+ * Add a simple product data version 0.1.4
  * 
  * @category Evozon
  * @package Evozon_Bogdan_Catalog
@@ -13,130 +13,163 @@ $helper = Mage::helper('evozon_bogdan_catalog/attributes');
 //find clothing attribute_set_id
 $attributeSetId = $helper->getAttributeSetId('Clothing');
 
-$sku = "roc13";
-$test_product = Mage::getModel('catalog/product');
-$product = Mage::getModel('catalog/product');
-
-if ($test_product->getIdBySku($sku))
-{
-    //Magento settings to allow saving
-    Mage::app()->setUpdateMode(false);
-    Mage::app()->setCurrentStore(0); //this redirects to the admin page
-    $product->load($test_product->getIdBySku($sku));
-} else
-{
-    $product->setSku($sku);
-}
-
 $categoriesHelper = Mage::helper('evozon_bogdan_catalog/categories');
 //finding the subcategory and category ids for women with 'clothing' eav_attribute_set
 $categoriesIds = $categoriesHelper->getCategoriestId('Women', 'Clothing');
 
-//check for duplicate
-$product->setName("Rochie Black S");
-$product->setDescription("A fost o rochie neagra.");
-$product->setShortDescription("este o rochie neagra.");
-$product->setTypeId('simple');
-$product->setAttributeSetId($attributeSetId[0]); // need to look this up
-$product->setCategoryIds($categoriesIds); // need to look these up
-$product->setWeight(1.0);
-$product->setTaxClassId(2); // taxable goods
-$product->setVisibility(4); // catalog, search
-$product->setStatus(1); // enabled
-//assign the product a color
-$product->setColor($helper->getProductAttributeId('color', 'Black'));
-
-//assign the product a type ??apparel_type
-$product->setApparelType($helper->getProductAttributeId('apparel_type', 'Skirts'));
-
-//assign the product a size
-$product->setSize($helper->getProductAttributeId('size', 'S'));
-
-//assign the product a gender
-$product->setGender($helper->getProductAttributeId('gender', 'Female'));
-
-$product->setPrice(600);
-// assign product to the default website
-$product->setWebsiteIds(array(1));
-
-$stockData = $product->getStockData();
-$stockData['qty'] = 10;
-$stockData['is_in_stock'] = 1;
-$stockData['manage_stock'] = 1;
-$stockData['use_config_manage_stock'] = 0;
-$product->setStockData($stockData);
-
-//try settings
-$product->save();
-
-
-$configurable_product = Mage::getModel('catalog/product');
-$test_conf_product = Mage::getModel('catalog/product');
-
-$simpleProductsIds = array(
-    $test_conf_product->getIdBySku('roc10'),
-    $test_conf_product->getIdBySku('roc11'),
-    $test_conf_product->getIdBySku('roc12'),
+$productData = array(
+    array(
+        'sku' => 'roc11',
+        'name' => 'Rochie Blue S',
+        'price' => 100,
+        'attributes' => array(
+            'color' => 'Blue',
+            'size' => 'S',
+            'fit' => 'Slim',
+            'length' => 'Long',
+            'apparel_type' => 'Outerwear')
+    ),
+    array(
+        'sku' => 'roc12',
+        'name' => 'Rochie Blue S',
+        'price' => 200,
+        'attributes' => array(
+            'color' => 'Blue',
+            'size' => 'S',
+            'fit' => 'Regular',
+            'length' => 'Short',
+            'apparel_type' => 'Knits')
+    ),
+    array(
+        'sku' => 'roc13',
+        'name' => 'Rochie Black S',
+        'price' => 100,
+        'attributes' => array(
+            'color' => 'Black',
+            'size' => 'S',
+            'fit' => 'Regular',
+            'length' => 'Long',
+            'apparel_type' => 'Knits')
+    ),
+    array(
+        'sku' => 'roc14',
+        'name' => 'Rochie Green M',
+        'price' => 100,
+        'attributes' => array(
+            'color' => 'Green',
+            'size' => 'M',
+            'fit' => 'Slim',
+            'length' => 'Long',
+            'apparel_type' => 'Skirts')
+    ),
+    array(
+        'sku' => 'roc15',
+        'name' => 'Rochie Red L',
+        'price' => 200,
+        'attributes' => array(
+            'color' => 'Red',
+            'size' => 'L',
+            'fit' => 'Jeans',
+            'length' => 'Knee Length',
+            'apparel_type' => 'Skirts')
+    ),
+    array(
+        'sku' => 'roc16',
+        'name' => 'Rochie Red L',
+        'price' => 250,
+        'attributes' => array(
+            'color' => 'Green',
+            'size' => 'L',
+            'fit' => 'Skinny',
+            'length' => 'Short',
+            'apparel_type' => 'Dresses')
+    ),
 );
 
-$confSku = "roc-config1";
+//Saving a product
+foreach ($productData as $data) {
 
-if ($test_conf_product->getIdBySku($confSku))
-{
-    //Magento settings to allow saving
-    Mage::app()->setUpdateMode(false);
-    Mage::app()->setCurrentStore(0); //this redirects to the admin page
-    $configurable_product->load($test_conf_product->getIdBySku($confSku));
-} else
-{
-
-    $configurable_product->setSku($confSku);
-    $configurable_product->setName('Rochie configurabila');
-
-    $configurable_product->setAttributeSetId($attributeSetId[0]); // need to look this up
-    $configurable_product->setCategoryIds($categoriesIds); // need to look these up
-    $configurable_product->setStatus(1);
-    $configurable_product->setTypeId('configurable');
-    $configurable_product->setPrice(800);
-    $configurable_product->setWebsiteIds(array(1));
-
-    $configurable_product->setStockData(array(
-        'use_config_manage_stock' => 0, //'Use config settings' checkbox
-        'manage_stock' => 1, //manage stock
-        'is_in_stock' => 1, //Stock Availability
-            )
-    );
-    
+    saveProduct($data, $helper, $attributeSetId, $categoriesIds);
 }
 
-$colorAttributeId = Mage::getModel('eav/entity_attribute')->getIdByCode('catalog_product', 'color');
-$apparelTypeAttributeId = Mage::getModel('eav/entity_attribute')->getIdByCode('catalog_product', 'apparel_type');
-$sizeAttributeId = Mage::getModel('eav/entity_attribute')->getIdByCode('catalog_product', 'size');
-$configurable_product->getTypeInstance()->setUsedProductAttributeIds(array($colorAttributeId,$apparelTypeAttributeId,$sizeAttributeId));
-$configurableAttributesData = $configurable_product->getTypeInstance()->getConfigurableAttributesAsArray();
+//Functions
 
-$configurableProductsData = array();
-$simpleProduct = Mage::getModel('catalog/product');
+function saveProduct($data, $helper, $attributeSetId, $categoriesIds)
+{
+    $sku = $data['sku'];
+    $test_product = Mage::getModel('catalog/product');
+    $product = Mage::getModel('catalog/product');
 
-$simpleProduct->load($test_product->getIdBySku('roc12'));
-$simpleProductsData [] = array(
-    'label' => $simpleProduct->getAttributeText('color'),
-    'attribute_id' => $colorAttributeId,
-    'value_index' => (int) $simpleProduct->getColor(),
-    'is_percent' => 0,
-    'pricing_value' => $simpleProduct->getPrice(),
-);
+    if ($test_product->getIdBySku($sku)) {
+        //Magento settings to allow saving
+        Mage::app()->setUpdateMode(false);
+        Mage::app()->setCurrentStore(0); //this redirects to the admin page
+        $product->load($test_product->getIdBySku($sku));
+    } else {
+        $product->setSku($sku);
+    }
 
-$configurableProductsData[$test_product->getIdBySku('roc11')] = $simpleProductsData;
-$configurableProductsData[$test_product->getIdBySku('roc12')] = $simpleProductsData;
-$configurableProductsData[$test_product->getIdBySku('roc13')] = $simpleProductsData;
+    $product->setAttributeSetId($attributeSetId[0]); // need to look this up
+    $product->setCategoryIds($categoriesIds); // need to look these up
+// assign product to the default website
+    $product->setWebsiteIds(array(1));
+    $product->setVisibility(4); // catalog, search
+    $product->setStatus(1); // enabled
+
+    setBasicData($product, $data);
+
+    setAttributes($product, $helper, $data);
+
+    setStockData($product);
+
+    //TODO try settings
+    $product->save();
+}
+
+function setBasicData($product, $data)
+{
 
 
-$configurableAttributesData[0]['values'][] = $simpleProductsData;
-$configurable_product->setConfigurableProductsData($configurableProductsData);
-$configurable_product->setConfigurableAttributesData($configurableAttributesData);
+    $product->setName($data['name']);
+    $product->setDescription("A fost o rochie editata.");
+    $product->setShortDescription("este o rochie.");
+    $product->setTypeId('simple');
+    $product->setWeight(1.0);
+    $product->setTaxClassId(2); // taxable goods
+    $product->setPrice($data['price']);
+    return $product;
+}
 
+function setAttributes($product, $helper, $data)
+{
+    //assign the product a color
+    $product->setColor($helper->getProductAttributeId('color', $data['attributes']['color']));
 
-$configurable_product->setCanSaveConfigurableAttributes(true);
+//assign the product a type ??apparel_type
+    $product->setApparelType($helper->getProductAttributeId('apparel_type', $data['attributes']['apparel_type']));
 
-$configurable_product->save();
+//assign the product a size
+    $product->setSize($helper->getProductAttributeId('size', $data['attributes']['size']));
+
+    //assign the product a fit
+    $product->setFit($helper->getProductAttributeId('fit', $data['attributes']['fit']));
+
+    //assign the product a fit
+    $product->setLength($helper->getProductAttributeId('length', $data['attributes']['length']));
+
+//assign the product a gender
+    $product->setGender($helper->getProductAttributeId('gender', 'Female'));
+    return $product;
+}
+
+function setStockData($product)
+{
+    $stockData = $product->getStockData();
+    $stockData['qty'] = 10;
+    $stockData['is_in_stock'] = 1;
+    $stockData['manage_stock'] = 1;
+    $stockData['use_config_manage_stock'] = 0;
+    $product->setStockData($stockData);
+
+    return $product;
+}

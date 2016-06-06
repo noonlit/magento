@@ -1,128 +1,125 @@
 <?php
 
-$bundleProduct = Mage::getModel('catalog/product');
-$bundleProduct
-        ->setStoreId(Mage_Core_Model_App::ADMIN_STORE_ID) //you can set data in store scope
-        ->setWebsiteIds(array(1)) //website ID the product is assigned to, as an array
-        ->setAttributeSetId(14) //ID of a attribute set named 'default'
-        ->setTypeId('bundle') //product type
-        ->setCreatedAt(strtotime('now')) //product creation time
-//    ->setUpdatedAt(strtotime('now')) //product update time
-        ->setSkuType(0) //SKU type (0 - dynamic, 1 - fixed)
-        ->setSku('bundlexx1') //SKU
-        ->setName('test bundle product96') //product name
-        ->setWeightType(0) //weight type (0 - dynamic, 1 - fixed)
-//        ->setWeight(4.0000)
-        ->setShipmentType(0) //shipment type (0 - together, 1 - separately)
-        ->setStatus(1) //product status (1 - enabled, 2 - disabled)
-        ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH) //catalog and search visibility
-        ->setManufacturer(28) //manufacturer id
-        ->setColor(24)
-        //->setNewsFromDate('06/26/2014') //product set as new from
-        // ->setNewsToDate('06/30/2014') //product set as new to
-        ->setCountryOfManufacture('AF') //country of manufacture (2-letter country code)
-        ->setPriceType(0) //price type (0 - dynamic, 1 - fixed)
-        ->setPriceView(0) //price view (0 - price range, 1 - as low as)
-        ->setSpecialPrice(00.44) //special price in form 11.22
-        //->setSpecialFromDate('06/1/2014') //special price from (MM-DD-YYYY)
-        //->setSpecialToDate('06/30/2014') //special price to (MM-DD-YYYY)
-        /* only available if price type is 'fixed' */
-//        ->setPrice(11.22) //price, works only if price type is fixed
-//        ->setCost(22.33) //price in form 11.22
-//        ->setMsrpEnabled(1) //enable MAP
-//        ->setMsrpDisplayActualPriceType(1) //display actual price (1 - on gesture, 2 - in cart, 3 - before order confirmation, 4 - use config)
-//        ->setMsrp(99.99) //Manufacturer's Suggested Retail Price
-//        ->setTaxClassId(4) //tax class (0 - none, 1 - default, 2 - taxable, 4 - shipping)
-        /* only available if price type is 'fixed' */
-        ->setMetaTitle('test meta title 2')
-        ->setMetaKeyword('test meta keyword 2')
-        ->setMetaDescription('test meta description 2')
-        ->setDescription('This is a long description')
-        ->setShortDescription('This is a short description')
-        ->setMediaGallery(array('images' => array(), 'values' => array())) //media gallery initialization
-        ->setStockData(array(
-            'use_config_manage_stock' => 1, //'Use config settings' checkbox
-            'manage_stock' => 1, //manage stock
-            'is_in_stock' => 1, //Stock Availability
-                )
-        )
-        ->setCategoryIds(array(4, 10)); //assign product to categories
+/**
+ * Add a simple product and a configurable data version 0.1.6
+ * 
+ * @category Evozon
+ * @package Evozon_Bogdan_Catalog
+ * @copyright (c) year, Haidu Bogdan
+ * @author Haidu Bogdan <branch bogdan of noonlit/magento> git
+ */
+//calling the attributes helper to get the attributeSetId
+$helper = Mage::helper('evozon_bogdan_catalog/attributes');
+//find clothing attribute_set_id
+$attributeSetId = $helper->getAttributeSetId('Clothing');
 
-$bundleOptions = array(
-    '0' => array(//option id (0, 1, 2, etc)
-        'title' => 'item01', //option title
-        'option_id' => '',
-        'delete' => '',
-        'type' => 'select', //option type
-        'required' => '1', //is option required
-        'position' => '1' //option position
-    ),
-    '1' => array(
-        'title' => 'item02',
-        'option_id' => '',
-        'delete' => '',
-        'type' => 'multi',
-        'required' => '1',
-        'position' => '1'
-    )
+$categoriesHelper = Mage::helper('evozon_bogdan_catalog/categories');
+//finding the subcategory and category ids for women with 'clothing' eav_attribute_set
+$categoriesIds = $categoriesHelper->getCategoriestId('Women', 'Clothing');
+
+$configurable_product = Mage::getModel('catalog/product');
+
+//choosing which products will make the part of the configurable product
+$simpleProducts = array(
+    'roc11',
+    'roc12',
+    'roc13',
+    'roc14',
+    'roc15',
+    'roc16',
 );
 
-$bundleSelections = array(
-    '0' => array(//option ID
-        '0' => array(//selection ID of the option (first product under this option (option ID) would have ID of 0, second an ID of 1, etc)
-            'product_id' => '995', //if of a product in selection
-            'delete' => '',
-            'selection_price_value' => '10',
-            'selection_price_type' => 0,
-            'selection_qty' => 1,
-            'selection_can_change_qty' => 0,
-            'position' => 0,
-            'is_default' => 1
-        ),
-        '1' => array(
-            'product_id' => '996',
-            'delete' => '',
-            'selection_price_value' => '10',
-            'selection_price_type' => 0,
-            'selection_qty' => 1,
-            'selection_can_change_qty' => 0,
-            'position' => 0,
-            'is_default' => 1
-        )
-    ),
-    '1' => array(//option ID
-        '0' => array(
-            'product_id' => '955',
-            'delete' => '',
-            'selection_price_value' => '10',
-            'selection_price_type' => 0,
-            'selection_qty' => 1,
-            'selection_can_change_qty' => 0,
-            'position' => 0,
-            'is_default' => 1
-        ),
-        '1' => array(
-            'product_id' => '956',
-            'delete' => '',
-            'selection_price_value' => '10',
-            'selection_price_type' => 0,
-            'selection_qty' => 1,
-            'selection_can_change_qty' => 0,
-            'position' => 0,
-            'is_default' => 1
-        )
-    )
+//attributes Ids
+$configurableProductAttributesIds = array(
+    $helper->getAttributeId('color'),
+    $helper->getAttributeId('apparel_type'),
+    $helper->getAttributeId('size'),
+    $helper->getAttributeId('fit'),
+    $helper->getAttributeId('length'),
 );
-//flags for saving custom options/selections
-$bundleProduct->setCanSaveCustomOptions(true);
-$bundleProduct->setCanSaveBundleSelections(true);
-$bundleProduct->setAffectBundleProductSelections(true);
 
-//registering a product because of Mage_Bundle_Model_Selection::_beforeSave
-Mage::register('product', $bundleProduct);
+//sku set to save or update
+$confSku = "roc-config2";
+// testing if the product with the specified sku exists
+$test_conf_product = Mage::getModel('catalog/product');
 
-//setting the bundle options and selection data
-$bundleProduct->setBundleOptionsData($bundleOptions);
-$bundleProduct->setBundleSelectionsData($bundleSelections);
+if ($test_conf_product->getIdBySku($confSku)) { //SKU EXISTS
+    //Magento settings to allow saving
+    Mage::app()->setUpdateMode(false);
+    Mage::app()->setCurrentStore(0); //this redirects to the admin page
+    //
+    //for the rest of the operations we will load the existing configurable product
+    $configurable_product->load($test_conf_product->getIdBySku($confSku));
+    //$configurable_product->load(1008);
 
-$bundleProduct->save();
+    $configurable_product->setAttributeSetId($attributeSetId[0]); // need to look this up
+    $configurable_product->setCategoryIds($categoriesIds); // need to look these up
+    //setting basic Data
+    setBasicData($configurable_product);
+   
+    $configurableAttributesData = $configurable_product->getTypeInstance()->getConfigurableAttributesAsArray($configurable_product);
+
+    $configurable_product->setCanSaveConfigurableAttributes(true);
+    $configurable_product->setCanSaveConfigurableAttributes($configurableAttributesData);
+
+    $simpleProductsData = array();
+} else { //NEW PRODUCT
+    $configurable_product->setSku($confSku);
+    //setting the attributes Ids of the configurable product
+    $configurable_product->setAttributeSetId($attributeSetId[0]); // need to look this up
+    $configurable_product->setCategoryIds($categoriesIds); // need to look these up
+    setBasicData($configurable_product); 
+
+    //before you should have the type of the product set ('configurable')
+    //setting the attributesIds
+    $configurable_product->getTypeInstance()->setUsedProductAttributeIds($configurableProductAttributesIds);
+    //configurableAttributeData creation which will be used for storing attributes values
+    $configurableAttributesData = $configurable_product->getTypeInstance()->getConfigurableAttributesAsArray();
+    $configurable_product->setCanSaveConfigurableAttributes(true);
+    $configurable_product->setCanSaveConfigurableAttributes($configurableAttributesData);
+}
+
+$configurableProductsData = array();
+$simpleProduct = Mage::getModel('catalog/product');
+$test_product = Mage::getModel('catalog/product');
+
+foreach ($simpleProducts as $sku) {
+    $simpleProduct->load($test_product->getIdBySku($sku));
+    $simpleProductsData = array(
+        'label' => $simpleProduct->getAttributeText('color'),
+        'attribute_id' => $helper->getProductAttributeId('color', $simpleProduct->getAttributeText('color')),
+        'value_index' => $simpleProduct->getColor(),
+        'is_percent' => 0,
+        'pricing_value' => '80', //in this version we set a equal price value for all colors
+    );
+
+    $configurableProductsData[$test_product->getIdBySku($sku)] = $simpleProductsData;
+    $configurableAttributesData[0]['values'][] = $simpleProductsData;
+    $configurable_product->setConfigurableAttributesData($configurableAttributesData);
+}
+
+$configurable_product->setConfigurableProductsData($configurableProductsData);
+
+$configurable_product->save();
+
+//FUNCTIONS
+
+function setBasicData($configurable_product)
+{
+    $configurable_product->setName('Rochii configurabile');
+    $configurable_product->setDescription("A fost o rochie configurabila.");
+    $configurable_product->setShortDescription("este o rochie.");
+    $configurable_product->setStatus(1);
+    $configurable_product->setTaxClassId(2);
+    $configurable_product->setVisibility(4); // catalog, search
+    $configurable_product->setTypeId('configurable');
+//$configurable_product->setPrice(800);
+    $configurable_product->setWebsiteIds(array(1));
+
+    $configurable_product->setStockData(array(
+        'use_config_manage_stock' => 0, //'Use config settings' checkbox
+        'manage_stock' => 1, //manage stock
+        'is_in_stock' => 1, //Stock Availability
+            )
+    );
+}

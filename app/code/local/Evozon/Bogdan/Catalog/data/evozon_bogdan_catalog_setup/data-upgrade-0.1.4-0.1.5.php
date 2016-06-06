@@ -1,99 +1,129 @@
 <?php
 
 /**
- * ADDING GROUPED PRODUCTS
+ * Add a simple product and a configurable data version 0.1.5
+ * 
+ * @category Evozon
+ * @package Evozon_Bogdan_Catalog
+ * @copyright (c) year, Haidu Bogdan
+ * @author Haidu Bogdan <branch bogdan of noonlit/magento> git
  */
-$groupedProduct = array(
-    "furculita" => array("name" => "Furculita",
-        "sku" => "furc1",
-        "description" => "Este din argint adus din Spania",
-        "short_description" => "furculita clasica"),
-    "lingura" => array("name" => "Lingura",
-        "sku" => "ling1",
-        "description" => "Este din argint adus din Spania",
-        "short_description" => "lingura clasica"),
-    "cutit" => array("name" => "Cutit",
-        "sku" => "cutit1",
-        "description" => "Este din argint adus din Spania",
-        "short_description" => "cutit clasic"),
+//calling the attributes helper to get the attributeSetId
+$helper = Mage::helper('evozon_bogdan_catalog/attributes');
+//find clothing attribute_set_id
+$attributeSetId = $helper->getAttributeSetId('Clothing');
+
+$categoriesHelper = Mage::helper('evozon_bogdan_catalog/categories');
+//finding the subcategory and category ids for women with 'clothing' eav_attribute_set
+$categoriesIds = $categoriesHelper->getCategoriestId('Women', 'Clothing');
+
+$configurable_product = Mage::getModel('catalog/product');
+
+//choosing which products will make the part of the configurable product
+$simpleProducts = array(
+    'roc11',
+    'roc12',
+    'roc13',
+    'roc14',
+    'roc15',
+    'roc16',
 );
 
-$simpleProductId = array();
+//attributes Ids
+$configurableProductAttributesIds = array(
+    $helper->getAttributeId('color'),
+    $helper->getAttributeId('apparel_type'),
+    $helper->getAttributeId('size'),
+    $helper->getAttributeId('fit'),
+    $helper->getAttributeId('length'),
+);
 
-foreach ($groupedProduct as $productElement => $productValues) {
+//sku set to save or update
+$confSku = "roc-config1";
+// testing if the product with the specified sku exists
+$test_conf_product = Mage::getModel('catalog/product');
 
-    if (is_array($productValues)) {
-        $product = Mage::getModel('catalog/product');
-        $product->setSku($productValues['sku']); //check for the sku to avoid duplicates
-        $product->setName($productValues['name']);
-        $product->setDescription($productValues['description']);
-        $product->setShortDescription($productValues['short_description']);
-        $product->setPrice(999);
-        $product->setTypeId('simple');
-        $product->setAttributeSetId(11); // need to look this up
-        $product->setCategoryIds(array(6, 19)); // need to look these up
-        $product->setWeight(1.0);
-        $product->setTaxClassId(2); // taxable goods
-        $product->setVisibility(4); // catalog, search
-        $product->setStatus(1); // enabled
-        // assign product to the default website
-        $product->setWebsiteIds(array(Mage::app()->getStore(true)->getWebsite()->getId()));
+if ($test_conf_product->getIdBySku($confSku)) { //SKU EXISTS
+    //Magento settings to allow saving
+    Mage::app()->setUpdateMode(false);
+    Mage::app()->setCurrentStore(0); //this redirects to the admin page
+    //
+    //for the rest of the operations we will load the existing configurable product
+    $configurable_product->load($test_conf_product->getIdBySku($confSku));
+    $simpleProductsData = array();
+    
+} else { //NEW PRODUCT
+    
+    $configurable_product->setSku($confSku);
+    //setting the attributes Ids of the configurable product
+    $configurable_product->getTypeInstance()->setUsedProductAttributeIds($configurableProductAttributesIds);
+    
+    $configurableAttributesData = $configurable_product->getTypeInstance()->getConfigurableAttributesAsArray();
 
-        $stockData = $product->getStockData();
-        $stockData['qty'] = 5;
-        $stockData['is_in_stock'] = 1;
-        $stockData['manage_stock'] = 1;
-        $stockData['use_config_manage_stock'] = 0;
-        $product->setStockData($stockData);
+    $configurableAttributesData[0]['values'][] = $simpleProductsData; //LOOK FOR SIMPLE PRODUCTS DATA
 
-        $product->save();
-        $simpleProductId[] = $product->getId();
-    }
+    $configurable_product->setConfigurableAttributesData($configurableAttributesData);
+    $configurable_product->setCanSaveConfigurableAttributes(true);
 }
 
-$sku = 'tacamuri1-grouped';
-$title = 'Tacamuri';
-$description = 'Set grupat de tacamuri';
+$configurable_product->setAttributeSetId($attributeSetId[0]); // need to look this up
+$configurable_product->setCategoryIds($categoriesIds); // need to look these up
+//setting basic Data
+setBasicData($configurable_product);
 
-$product = Mage::getModel('catalog/product');
 
-$product->setSku($sku . '-grouped');
-$product->setAttributeSetId(11); // put your attribute set id here.
-$product->setTypeId('grouped');
-$product->setName($title);
-$product->setCategoryIds(array(6, 19)); // put your category ids here
-$product->setWebsiteIds(array(Mage::app()->getStore(true)->getWebsite()->getId()));
-$product->setDescription($description);
-$product->setShortDescription($description);
-$product->setPrice(1000);
-$product->setWeight(200);
-$product->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH);
-$product->setStatus(1);
-$product->setTaxClassId(0);
-$product->setStockData(array(
-    'is_in_stock' => 1,
-    'manage_stock' => 0,
-    'use_config_manage_stock' => 1
-));
+$configurableProductsData = array();
+$simpleProduct = Mage::getModel('catalog/product');
+$test_product = Mage::getModel('catalog/product');
 
-try {
-// Save the grouped product.
-    $product->save();
-    $group_product_id = $product->getId();
+foreach ($simpleProducts as $sku) {
+    $simpleProduct->load($test_product->getIdBySku($sku));
+    $simpleProductsData = array(
+        'label' => $simpleProduct->getAttributeText('color'),
+        'attribute_id' => $helper->getProductAttributeId('color', $simpleProduct->getAttributeText('color')),
+        'value_index' => (int) $simpleProduct->getColor(),
+        'is_percent' => 0,
+        'pricing_value' => '50',
+    );
 
-// You need to create an array which contains the associate product ids.
-//    $simpleProductId[0] = 1483;
-//    $simpleProductId[1] = 1484;
-//    $simpleProductId[2] = 1485;
-//    $simpleProductId[3] = 1486;
-//    $simpleProductId[4] = 1487;
+    $configurableProductsData[$test_product->getIdBySku($sku)] = $simpleProductsData;
+}
 
-    $products_links = Mage::getModel('catalog/product_link_api');
 
-// Map each associate product with the grouped product.
-    foreach ($simpleProductId as $id) {
-        $products_links->assign("grouped", $group_product_id, $id);
-    }
-} catch (Exception $ex) {
-    echo $ex->getMessage();
+$configurable_product->setConfigurableProductsData($configurableProductsData);
+
+$configurableAttributesData = $configurable_product->getTypeInstance()->getConfigurableAttributes();
+
+foreach ($configurableAttributesData as $confData) {
+    $confData->setPricingValue('20')->save();
+    //var_dump($confData->getPricingValue());
+}
+
+$configurable_product->setCanSaveConfigurableAttributes(true);
+
+//TO DO try
+$configurable_product->save();
+
+
+
+//FUNCTIONS
+
+function setBasicData($configurable_product)
+{
+    $configurable_product->setName('Rochii configurabile');
+    $configurable_product->setDescription("A fost o rochie configurabila.");
+    $configurable_product->setShortDescription("este o rochie.");
+    $configurable_product->setStatus(1);
+    $configurable_product->setTaxClassId(2);
+    $configurable_product->setVisibility(4); // catalog, search
+    $configurable_product->setTypeId('configurable');
+//$configurable_product->setPrice(800);
+    $configurable_product->setWebsiteIds(array(1));
+
+    $configurable_product->setStockData(array(
+        'use_config_manage_stock' => 0, //'Use config settings' checkbox
+        'manage_stock' => 1, //manage stock
+        'is_in_stock' => 1, //Stock Availability
+            )
+    );
 }
