@@ -62,13 +62,13 @@ foreach ($configuration['color'] as $color) {
                             ))
                             ->setCategoryIds(array(4, 13));
 
-                    $image = 'ilinca-dress' . '-' . $color . 'png';
+                    $image = 'ilinca-dress' . '-' . $color . '.png';
                     $mediaArray = array(
                         'thumbnail' => $image,
                         'small_image' => $image,
                         'image' => $image
                     );
-                    $importDir = Mage::getBaseDir('media') . DS . 'evozon/catalog/product/ilinca-dress';
+                    $importDir = Mage::getBaseDir('media') . DS . 'evozon/catalog/product/ilinca-dress/';
 
                     foreach ($mediaArray as $imageType => $fileName) {
                         $filePath = $importDir . $fileName;
@@ -94,6 +94,7 @@ if (!$configurableProduct->getIdBySku('ilincadress13')) {
             ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH)
             ->setSku('ilincadress13')
             ->setName('ilinca dress')
+            ->setPrice('150')            
             ->setCreatedAt(strtotime('now'))
             ->setDescription('Ilinca Dress long description')
             ->setShortDescription('Ilinca Dress short description')
@@ -124,27 +125,27 @@ if (!$configurableProduct->getIdBySku('ilincadress13')) {
                 'label' => $simpleProduct->getAttributeText('color'),
                 'attribute_id' => $colorAttributeId,
                 'value_index' => (int) $simpleProduct->getColor(),
-                'is_percent' => '0',
+                'is_percent' => 0,
                 'pricing_value' => $simpleProduct->getPrice()
             ),
             1 => array(
                 'label' => $simpleProduct->getAttributeText('size'),
                 'attribute_id' => $sizeAttributeId,
                 'value_index' => (int) $simpleProduct->getSize(),
-                'is_percent' => '0',
+                'is_percent' => 0,
                 'pricing_value' => $simpleProduct->getPrice()
             ),
             2 => array(
                 'label' => $simpleProduct->getAttributeText('length'),
                 'attribute_id' => $lengthAttributeId,
                 'value_index' => (int) $simpleProduct->getLength(),
-                'is_percent' => '0',
+                'is_percent' => 0,
                 'pricing_value' => $simpleProduct->getPrice()
             )
         );
     }
 
-    $configurableProduct->setConfigurableProductsData($configurableProductsData);
+    $configurableProduct->setConfigurableProductsData($configurableProductsData);    
     $configurableProduct->save();
 }
 
