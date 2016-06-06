@@ -147,7 +147,8 @@ if (!$cfgProductModel->getIdBySku('sku-trendy-top')) {
 
         foreach ($simpleProductsCfg as $productCfg) {
             $productId = $model->getIdBySku($productCfg['sku']);
-
+            $price = $model->load($productId)->getPrice();
+            
             foreach ($productCfg as $key => $value) {
                 if ($key == 'color' || $key == 'size' || $key == 'gender' || $key == 'occasion') {
                     $attributeLabel = $model->getResource()->getAttribute($key)->getSource()->getOptionText($value);
@@ -158,7 +159,7 @@ if (!$cfgProductModel->getIdBySku('sku-trendy-top')) {
                         'attribute_id' => $attributeId,
                         'value_index' => $value,
                         'is_percent' => '0',
-                        'pricing_value' => $model->getPrice()
+                        'pricing_value' => $price
                     );
                 }
             }
