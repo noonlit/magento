@@ -21,7 +21,6 @@ class Evozon_Catalog_Model_Banner extends Mage_Core_Model_Abstract
         $collection = $this->getCollection();
         //each page has an unique id by which we print the banners
         $currentCategoryId = Mage::registry('current_category')->getId();
-
         $collection->addFieldToFilter('category_id', $currentCategoryId)
                 ->join(array('mediator' => 'mediator'), 'main_table.banner_id = mediator.banner_id')
                 ->getSelect()

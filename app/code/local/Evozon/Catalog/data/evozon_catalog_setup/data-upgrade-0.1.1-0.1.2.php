@@ -1,6 +1,8 @@
 <?php
 
 //add simple productscript
+Mage::log("data-upgrade-0.1.1-0.1.2 started", null, "dataScripts.log");
+Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
 $simpleProduct = Mage::getModel('catalog/product');
 if (!$simpleProduct->getIdBySku('simple-prod#1')) {
     $simpleProduct->setSku('simple-prod#1')
@@ -30,7 +32,6 @@ if (!$simpleProduct->getIdBySku('simple-prod#1')) {
             ->setCategoryIds(array(13)); //add on DRESSES & SKIRTS category
 
     $images = array(
-//    'thumbnail' => 'simple-prod#1-small.jpg',
         'small_image' => 'simple-prod#1-small.jpg',
         'image' => 'simple-prod#1-image.jpg',
     );
@@ -48,9 +49,11 @@ if (!$simpleProduct->getIdBySku('simple-prod#1')) {
         } else {
             Mage::log("Image does not exist in `{$path}`");
         }
-    }$simpleProduct->save();
+    }
+    $simpleProduct->save();
+    Mage::log("Simple product 1 added!", null,  'dataScripts.log');
 
 }
 else {
-    Mage::log("Simple product 1 already exists!", null,  'nigga.log');
+    Mage::log("Simple product 1 already exists!", null,  'dataScripts.log');
 }

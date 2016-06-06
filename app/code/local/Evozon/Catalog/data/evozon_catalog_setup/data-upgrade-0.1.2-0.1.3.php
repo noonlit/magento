@@ -1,116 +1,165 @@
 <?php
 
-//add configurable product script
-//add simple product 1 for the configurable product
-$simpleProduct1 = Mage::getModel('catalog/product');
-if (!$simpleProduct1->getIdBySku('simple-prod#2')) {
-    $simpleProduct1->setSku('simple-prod#2')
-            ->setTypeId('simple')
-            ->setWebsiteIds(array(1))
-            ->setAttributeSetId(4)
-            ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE)
-            ->setStatus(Mage_Catalog_Model_Product_Status::STATUS_ENABLED)
-            ->setName('Simple object #2')
-            ->setCreatedAt(strtotime('now'))
-            ->setDescription('product 1 for configurable product')
-            ->setShortDescription('1 4 conf prod')
-            ->setPrice('5.99')
-            ->setTaxClassId(2)
-            ->setWeight(10)
-            ->setColor(10)
-            ->setMetaTitle('Simple object 4 conf')
-            ->setMetaKeywords('simple object 4 conf')
-            ->setMetaDescription('simple object 4 conf')
-            ->setStockData(array(
-                'use_config_manage_stock' => 0,
-                'manage_stock' => 1,
-                'min_sale_qty' => 1,
-                'max_sale_qty' => 10,
-                'is_in_stock' => 1,
-                'qty' => 40))
-            ->setCategoryIds(array(13)); //add on DRESSES & SKIRTS category
-    $simpleProduct1->save();
-} else {
-    Mage::log("Simple product 1 for configurable product already exists!", null, 'nigga.log');
-}
-
-//add simple product 2 for the configurable product
-$simpleProduct2 = Mage::getModel('catalog/product');
-if (!$simpleProduct1->getIdBySku('simple-prod#3')) {
-    $simpleProduct2->setSku('simple-prod#3')
-            ->setTypeId('simple')
-            ->setWebsiteIds(array(1))
-            ->setAttributeSetId(4)
-            ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE)
-            ->setStatus(Mage_Catalog_Model_Product_Status::STATUS_ENABLED)
-            ->setName('Simple object #3')
-            ->setCreatedAt(strtotime('now'))
-            ->setDescription('product 2 for configurable product')
-            ->setShortDescription('2 4 conf prod')
-            ->setPrice('9.99')
-            ->setTaxClassId(2)
-            ->setWeight(10)
-            ->setColor(10)
-            ->setMetaTitle('Simple object 4 conf')
-            ->setMetaKeywords('simple object 4 conf')
-            ->setMetaDescription('simple object 4 conf')
-            ->setStockData(array(
-                'use_config_manage_stock' => 0,
-                'manage_stock' => 1,
-                'min_sale_qty' => 1,
-                'max_sale_qty' => 10,
-                'is_in_stock' => 1,
-                'qty' => 40))
-            ->setCategoryIds(array(13)); //add on DRESSES & SKIRTS category
-    $simpleProduct2->save();
-} else {
-    Mage::log("Simple product 2 for configurable product already exists!", null, 'nigga.log');
-}
-
+Mage::log("data-upgrade-0.1.2-0.1.3 started", null, "dataScripts.log");
 $date = new DateTime();
-$confProduct = Mage::getModel('catalog/product');
-if (!$confProduct->getIdBySku('conf-prod#1')) {
-    $confProduct->setSku('conf-prod#1')
-            ->setTypeId('configurable')
-            ->setWebsiteIds(array(1))
-            ->setAttributeSetId(13)
-            ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH)
-            ->setStatus(Mage_Catalog_Model_Product_Status::STATUS_ENABLED)
-            ->setName('Configurable product #1')
-            ->setCreatedAt(strtotime('now'))
-            ->setDescription('Long description')
-            ->setShortDescription('Short desc')
-            ->setPrice('59.99')
-            ->setTaxClassId(4)
-            ->setWeight(3)
-            ->setColor(10)
-            ->setStockData(array(
-                'use_config_manage_stock' => 0,
-                'manage_stock' => 1,
-                'min_sale_qty' => 1,
-                'max_sale_qty' => 5,
-                'is_in_stock' => 1))
-            ->setCategoryIds(array(13)); //add on DRESSES & SKIRTS category
-    
-    $confProduct->getTypeInstance()->setUsedProductAttributeIds(array(92));
-    $configurableAttributesData = $confProduct->getTypeInstance()->getConfigurableAttributesAsArray();
+Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
+$cfgProductModel = Mage::getModel('catalog/product');
 
-    $confProduct->setCanSaveConfigurableAttributes(true);
-    $confProduct->setConfigurableAttributesData($configurableAttributesData);
+if (!$cfgProductModel->getIdBySku('configurable-shirt')) {
+    $model = Mage::getModel('catalog/product');
+    $options = array();
 
-    $configurableProductsData = array();
-    $simpleProductId = Mage::getModel("catalog/product")->getIdBySku('simple-prod#2');
-    $configurableProductsData[$simpleProductId] = array(
-        '0' => array(
-            'label' => 'Green',
-            'attribute_id' => '92',
-            'value_index' => '24',
-            'is_percent' => '0',
-            'pricing_value' => '50'
-        )
-    );
-    $confProduct->setConfigurableProductsData($configurableProductsData);
-    $confProduct->save();
-} else {
-    Mage::log("Configurable product already exists!", null, 'nigga.log');
+    $options['color']['pink'] = $model->getResource()->getAttribute('color')->getSource()->getOptionId('Pink');
+    $options['color']['taupe'] = $model->getResource()->getAttribute('color')->getSource()->getOptionId('Taupe');
+    $options['color']['khaki'] = $model->getResource()->getAttribute('color')->getSource()->getOptionId('Khaki');
+    $options['color']['purple'] = $model->getResource()->getAttribute('color')->getSource()->getOptionId('Purple');
+    $options['color']['oatmeal'] = $model->getResource()->getAttribute('color')->getSource()->getOptionId('Oatmeal');
+
+    $options['size']['s'] = $model->getResource()->getAttribute('size')->getSource()->getOptionId('S');
+    $options['size']['m'] = $model->getResource()->getAttribute('size')->getSource()->getOptionId('M');
+    $options['size']['l'] = $model->getResource()->getAttribute('size')->getSource()->getOptionId('L');
+
+    $options['gender']['female'] = $model->getResource()->getAttribute('gender')->getSource()->getOptionId('Female');
+    $options['gender']['male'] = $model->getResource()->getAttribute('gender')->getSource()->getOptionId('Male');
+
+    $options['occasion']['casual'] = $model->getResource()->getAttribute('occasion')->getSource()->getOptionId('Casual');
+    $options['occasion']['evening'] = $model->getResource()->getAttribute('occasion')->getSource()->getOptionId('Evening');
+    $options['occasion']['career'] = $model->getResource()->getAttribute('occasion')->getSource()->getOptionId('Career');
+
+    //simulate backtracking, make every combination between attributes
+    $simpleProductsCfg = array();
+    foreach ($options['color'] as $colorKey => $color) {
+        $simpleProduct = array();
+        $simpleProduct['short_description'] = "This is the short description.";
+        $simpleProduct['description'] = "This is the long description.";
+        $simpleProduct['color'] = $color;
+
+        foreach ($options['size'] as $sizeKey => $size) {
+            $simpleProduct['size'] = $size;
+
+            foreach ($options['gender'] as $genderKey => $gender) {
+                $simpleProduct['gender'] = $gender;
+
+                foreach ($options['occasion'] as $occasionKey => $occasion) {
+                    $simpleProduct['occasion'] = $occasion;
+
+                    //set unique attributes
+                    $simpleProduct['sku'] = "shirt-{$colorKey}-{$sizeKey}-{$genderKey}-{$occasionKey}";
+                    $simpleProduct['name'] = "{$colorKey}-{$sizeKey}-{$genderKey}-{$occasionKey}";
+
+                    //store new simple product
+                    $simpleProductsCfg[] = $simpleProduct;
+                }
+            }
+        }
+    }
+
+    //save all combinations of simple products
+    foreach ($simpleProductsCfg as $productCfg) {
+        $productModel = Mage::getModel('catalog/product');
+
+        if (!$productModel->getIdBySku($productCfg['sku'])) {
+            try {
+                $productModel
+                        ->setStoreId(1)
+                        ->setWebsiteIds(array(1))
+                        ->setAttributeSetId(13)
+                        ->setTypeId('simple')
+                        ->setCreatedAt($date->getTimestamp())
+                        ->setUpdatedAt($date->getTimestamp())
+                        ->setWeight(1)
+                        ->setStatus(Mage_Catalog_Model_Product_Status::STATUS_ENABLED)
+                        ->setTaxClassId(0)
+                        ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE)
+                        ->setCost(50)
+                        ->setPrice(100)
+                        ->setStockData(array(
+                            'use_config_manage_stock' => 0,
+                            'manage_stock' => 1,
+                            'min_sale_qty' => 1,
+                            'max_sale_qty' => 2,
+                            'is_in_stock' => 1,
+                            'qty' => 100
+                        ))
+                        ->setCategoryIds(array(15))
+                        ->setSku($productCfg['sku'])
+                        ->setColor($productCfg['color'])
+                        ->setSize($productCfg['size'])
+                        ->setGender($productCfg['gender'])
+                        ->setOccasion($productCfg['occasion'])
+                        ->setName($productCfg['name'])
+                        ->setDescription($productCfg['description'])
+                        ->setShortDescription($productCfg['short_description']);
+                $productModel->save();
+                Mage::log("{$productCfg['sku']} added!", null, 'dataScripts.log');
+            } catch (Exception $e) {
+                Mage::log($e->getMessage(), null, 'dataScripts.log');
+            }
+        }
+    }
+
+    //save configurable product
+    try {
+        $cfgProductModel
+                ->setWebsiteIds(array(1))
+                ->setAttributeSetId(13) // clothing
+                ->setTypeId('configurable')
+                ->setSku('configurable-shirt')
+                ->setCreatedAt($date->getTimestamp())
+                ->setUpdatedAt($date->getTimestamp())
+                ->setName('Configurable shirt')
+                ->setStatus(Mage_Catalog_Model_Product_Status::STATUS_ENABLED)
+                ->setTaxClassId(0)
+                ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH)
+                ->setCountryOfManufacture('RO')
+                ->setCost(100)
+                ->setPrice(200)
+                ->setDescription('This is the long description.')
+                ->setShortDescription('This is the short description.')
+                ->setStockData(array(
+                    'use_config_manage_stock' => 0,
+                    'manage_stock' => 1,
+                    'min_sale_qty' => 1,
+                    'max_sale_qty' => 2,
+                    'is_in_stock' => 1,
+                    'qty' => 100
+                ))
+                ->setCategoryIds(array(15));
+
+        $colorId = $model->getResource()->getAttribute('color')->getAttributeId();
+        $sizeId = $model->getResource()->getAttribute('size')->getAttributeId();
+        $genderId = $model->getResource()->getAttribute('gender')->getAttributeId();
+        $occasionId = $model->getResource()->getAttribute('occasion')->getAttributeId();
+        $cfgProductModel->getTypeInstance()->setUsedProductAttributeIds(array($colorId, $sizeId, $genderId, $occasionId));
+        $cfgAttributesData = $cfgProductModel->getTypeInstance()->getConfigurableAttributesAsArray();
+        $cfgProductModel->setCanSaveConfigurableAttributes(true);
+        $cfgProductModel->setConfigurableAttributesData($cfgAttributesData);
+
+        $cfgProductsData = array();
+        foreach ($simpleProductsCfg as $productCfg) {
+            $productId = $model->getIdBySku($productCfg['sku']);
+            $price = $model->load($productId)->getPrice();
+
+            foreach ($productCfg as $key => $value) {
+                if ($key == 'color' || $key == 'size' || $key == 'gender' || $key == 'occasion') {
+                    $attributeLabel = $model->getResource()->getAttribute($key)->getSource()->getOptionText($value);
+                    $attributeId = $model->getResource()->getAttribute($key)->getId();
+                    $cfgProductsData[$productId][] = array(
+                        'label' => $attributeLabel,
+                        'attribute_id' => $attributeId,
+                        'value_index' => $value,
+                        'is_percent' => '0',
+                        'pricing_value' => $price
+                    );
+                }
+            }
+        }
+
+        $cfgProductModel->setConfigurableProductsData($cfgProductsData);
+        $cfgProductModel->save();
+
+        Mage::log('Configurable product added!', null, 'dataScripts.log');
+    } catch (Exception $e) {
+        Mage::log($e->getMessage(), null, "dataScripts.log");
+    }
 }

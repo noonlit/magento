@@ -1,9 +1,11 @@
 <?php
+
+Mage::log("upgrade-0.1.0 started", null, "sqlScripts.log");
 $installer = $this;
 $installer->startSetup();
 $tableName = $installer->getTable('evozon_catalog/mediator');
 
-if ($installer->getConnection()->isTableExists($tableName) != true) {
+if (!$installer->getConnection()->isTableExists($tableName)) {
     $table = $installer->getConnection()
             ->newTable($installer->getTable('evozon_catalog/mediator'))
             ->addColumn('id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
