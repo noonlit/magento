@@ -99,8 +99,9 @@ if (!$configurableProduct->getIdBySku('ilincadress13')) {
             ->setShortDescription('Ilinca Dress short description')
             ->setStatus(Mage_Catalog_Model_Product_Status::STATUS_ENABLED)
             ->setStockData(array(
-                'use_config_manage_stock' => 1,
-                'manage_stock' => 1
+                'use_config_manage_stock' => 0,
+                'manage_stock' => 1,
+                'is_in_stock' => 1
             ))
             ->setCategoryIds(array(4, 13));
 
