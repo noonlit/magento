@@ -70,36 +70,6 @@ $product->setStockData($stockData);
 $product->save();
 
 
-//$simple_product = Mage::getModel('catalog/product');
-//
-//$simple_product->setSku('simplu6');
-//$simple_product->setName('rochie cu optiuni');
-//$simple_product->setAttributeSetId(13);
-////$simple_product->setSize_general(193); // value id of S size
-//$simple_product->setDescription("A fost o rochie.");
-//$simple_product->setShortDescription("este o rochie.");
-//$simple_product->setStatus(1);
-//$simple_product->setHasOptions(1);
-//$simple_product->setTypeId('simple');
-//$simple_product->setPrice(10);
-//$simple_product->setWebsiteIds(array(1));
-//$simple_product->setCategoryIds(array(5, 12, 17));
-//$simple_product->setStockData(array(
-//    'use_config_manage_stock' => 0, //'Use config settings' checkbox
-//    'manage_stock' => 1, //manage stock
-//    'min_sale_qty' => 1, //Minimum Qty Allowed in Shopping Cart
-//    'max_sale_qty' => 2, //Maximum Qty Allowed in Shopping Cart
-//    'is_in_stock' => 1, //Stock Availability
-//    'qty' => 50 //qty
-//        )
-//);
-//
-//$simple_product->setColor(getOptionId('color', 'Red'));
-//
-//$simple_product->save();
-
-
-
 $configurable_product = Mage::getModel('catalog/product');
 $test_conf_product = Mage::getModel('catalog/product');
 
@@ -136,22 +106,14 @@ if ($test_conf_product->getIdBySku($confSku))
         'is_in_stock' => 1, //Stock Availability
             )
     );
-    $colorAttributeId = Mage::getModel('eav/entity_attribute')->getIdByCode('catalog_product', 'color');
-    $apparelTypeAttributeId = Mage::getModel('eav/entity_attribute')->getIdByCode('catalog_product', 'apparel_type');
-    $sizeAttributeId = Mage::getModel('eav/entity_attribute')->getIdByCode('catalog_product', 'size');
-
-    $configurable_product->getTypeInstance()->setUsedProductAttributeIds(array($colorAttributeId, $apparelTypeAttributeId, $sizeAttributeId));
-    $configurableAttributesData = $configurable_product->getTypeInstance()->getConfigurableAttributesAsArray();
-
-    $configurableAttributesData[0]['values'][] = $simpleProductsData;
-    $configurable_product->setConfigurableProductsData($configurableProductsData);
-    $configurable_product->setConfigurableAttributesData($configurableAttributesData);
+    
 }
 
 $colorAttributeId = Mage::getModel('eav/entity_attribute')->getIdByCode('catalog_product', 'color');
 $apparelTypeAttributeId = Mage::getModel('eav/entity_attribute')->getIdByCode('catalog_product', 'apparel_type');
 $sizeAttributeId = Mage::getModel('eav/entity_attribute')->getIdByCode('catalog_product', 'size');
-
+$configurable_product->getTypeInstance()->setUsedProductAttributeIds(array($colorAttributeId,$apparelTypeAttributeId,$sizeAttributeId));
+$configurableAttributesData = $configurable_product->getTypeInstance()->getConfigurableAttributesAsArray();
 
 $configurableProductsData = array();
 $simpleProduct = Mage::getModel('catalog/product');
@@ -170,24 +132,9 @@ $configurableProductsData[$test_product->getIdBySku('roc12')] = $simpleProductsD
 $configurableProductsData[$test_product->getIdBySku('roc13')] = $simpleProductsData;
 
 
-//    $simpleProductsData [] = array(
-//        'label' => $simpleProduct->getAttributeText('apparel_type'),
-//        'attribute_id' => $apparelTypeAttributeId,
-//        'value_index' => (int) $simpleProduct->getApparelType(),
-//        'is_percent' => 0,
-//        'pricing_value' => $simpleProduct->getPrice(),
-//    );
-//    $simpleProductsData [] = array(
-//        'label' => $simpleProduct->getAttributeText('size'),
-//        'attribute_id' => $sizeAttributeId,
-//        'value_index' => (int) $simpleProduct->getSize(),
-//        'is_percent' => 0,
-//        'pricing_value' => $simpleProduct->getPrice(),
-//    );
-
-//$configurableAttributesData[0]['values'][] = $simpleProductsData;
+$configurableAttributesData[0]['values'][] = $simpleProductsData;
 $configurable_product->setConfigurableProductsData($configurableProductsData);
-//$configurable_product->setConfigurableAttributesData($configurableAttributesData);
+$configurable_product->setConfigurableAttributesData($configurableAttributesData);
 
 
 $configurable_product->setCanSaveConfigurableAttributes(true);

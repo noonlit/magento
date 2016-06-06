@@ -58,7 +58,7 @@ $product->setGender($helper->getProductAttributeId('gender', 'Female'));
 
 $product->setPrice(999);
 // assign product to the default website
-$product->setWebsiteIds(array(Mage::app()->getStore(true)->getWebsite()->getId()));
+$product->setWebsiteIds(array(1));
 
 $stockData = $product->getStockData();
 $stockData['qty'] = 10;
