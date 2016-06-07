@@ -8,7 +8,6 @@
  * @copyright (c) year, Haidu Bogdan
  * @author Haidu Bogdan <branch bogdan of noonlit/magento> git
  */
-
 //calling the attributes helper to get the attributeSetId
 $helper = Mage::helper('evozon_bogdan_catalog/attributes');
 //find clothing attribute_set_id
@@ -44,7 +43,8 @@ $confSku = "roc-config2";
 // testing if the product with the specified sku exists
 $test_conf_product = Mage::getModel('catalog/product');
 
-if ($test_conf_product->getIdBySku($confSku)) { //SKU EXISTS
+if ($test_conf_product->getIdBySku($confSku))
+{ //SKU EXISTS
     //Magento settings to allow saving
     Mage::app()->setUpdateMode(false);
     Mage::app()->setCurrentStore(0); //this redirects to the admin page
@@ -57,19 +57,20 @@ if ($test_conf_product->getIdBySku($confSku)) { //SKU EXISTS
     $configurable_product->setCategoryIds($categoriesIds); // need to look these up
     //setting basic Data
     setBasicData3($configurable_product);
-   
+
     $configurableAttributesData = $configurable_product->getTypeInstance()->getConfigurableAttributesAsArray($configurable_product);
 
     $configurable_product->setCanSaveConfigurableAttributes(true);
     $configurable_product->setCanSaveConfigurableAttributes($configurableAttributesData);
 
     $simpleProductsData = array();
-} else { //NEW PRODUCT
+} else
+{ //NEW PRODUCT
     $configurable_product->setSku($confSku);
     //setting the attributes Ids of the configurable product
     $configurable_product->setAttributeSetId($attributeSetId[0]); // need to look this up
     $configurable_product->setCategoryIds($categoriesIds); // need to look these up
-    setBasicData($configurable_product); 
+    setBasicData3($configurable_product);
 
     //before you should have the type of the product set ('configurable')
     //setting the attributesIds
@@ -84,19 +85,23 @@ $configurableProductsData = array();
 $simpleProduct = Mage::getModel('catalog/product');
 $test_product = Mage::getModel('catalog/product');
 
-foreach ($simpleProducts as $sku) {
-    $simpleProduct->load($test_product->getIdBySku($sku));
-    $simpleProductsData = array(
-        'label' => $simpleProduct->getAttributeText('color'),
-        'attribute_id' => $helper->getProductAttributeId('color', $simpleProduct->getAttributeText('color')),
-        'value_index' => $simpleProduct->getColor(),
-        'is_percent' => 0,
-        'pricing_value' => '80', //in this version we set a equal price value for all colors
-    );
+foreach ($simpleProducts as $sku)
+{
+    if ($test_product->getIdBySku($sku) != 0)
+    {
+        $simpleProduct->load($test_product->getIdBySku($sku));
+        $simpleProductsData = array(
+            'label' => $simpleProduct->getAttributeText('color'),
+            'attribute_id' => $helper->getProductAttributeId('color', $simpleProduct->getAttributeText('color')),
+            'value_index' => $simpleProduct->getColor(),
+            'is_percent' => 0,
+            'pricing_value' => '80', //in this version we set a equal price value for all colors
+        );
 
-    $configurableProductsData[$test_product->getIdBySku($sku)] = $simpleProductsData;
-    $configurableAttributesData[0]['values'][] = $simpleProductsData;
-    $configurable_product->setConfigurableAttributesData($configurableAttributesData);
+        $configurableProductsData[$test_product->getIdBySku($sku)] = $simpleProductsData;
+        $configurableAttributesData[0]['values'][] = $simpleProductsData;
+        $configurable_product->setConfigurableAttributesData($configurableAttributesData);
+    }
 }
 
 $configurable_product->setConfigurableProductsData($configurableProductsData);

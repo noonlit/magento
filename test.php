@@ -19,10 +19,10 @@ $sku = "roc10";
 
 if ($product->getIdBySku($sku))
 {
-    $product->load($product->getIdBySku($sku));
+    //$product->load($product->getIdBySku($sku));
 } else
 {
-    $product->setSku($sku);
+    //$product->setSku($sku);
 }
 
 //var_dump($product);
@@ -37,6 +37,24 @@ foreach ($attribute->getSource()->getAllOptions(true) as $option)
 {
     echo $option['value'] . ' ' . $option['label'] . "<br>";
 }
+
+$product2 = Mage::getModel('catalog/product');
+$product2->load(448);
+
+var_dump($product2->getTypeInstance());
+
+echo "breackpoint<br>";
+
+$product->load($product->getIdBySku("downd-03"));
+var_dump($product->getTypeInstance());
+$product->setHasOptions("1");
+$product->setRequiredOptions("1");
+//$product->setAttributeSetId("10")->save();
+$product->setData('links_title',"Ready For Download2")->save();
+$product->setData('links_purchased_separately',0);
+$product->setData('links_exist',1);
+//var_dump($product->getTypeInstance()->getLinks());
+$product->save();
 
 //
 //

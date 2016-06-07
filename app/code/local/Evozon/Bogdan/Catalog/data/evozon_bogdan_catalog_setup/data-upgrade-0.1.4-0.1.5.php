@@ -52,7 +52,7 @@ if ($test_conf_product->getIdBySku($confSku)) { //SKU EXISTS
     //for the rest of the operations we will load the existing configurable product
     $configurable_product->load($test_conf_product->getIdBySku($confSku));
     $simpleProductsData = array();
-    
+
 } else { //NEW PRODUCT
     
     $configurable_product->setSku($confSku);
@@ -60,7 +60,7 @@ if ($test_conf_product->getIdBySku($confSku)) { //SKU EXISTS
     $configurable_product->getTypeInstance()->setUsedProductAttributeIds($configurableProductAttributesIds);
     
     $configurableAttributesData = $configurable_product->getTypeInstance()->getConfigurableAttributesAsArray();
-
+    
     $configurableAttributesData[0]['values'][] = $simpleProductsData; //LOOK FOR SIMPLE PRODUCTS DATA
 
     $configurable_product->setConfigurableAttributesData($configurableAttributesData);
@@ -90,17 +90,20 @@ foreach ($simpleProducts as $sku) {
     $configurableProductsData[$test_product->getIdBySku($sku)] = $simpleProductsData;
 }
 
-
-$configurable_product->setConfigurableProductsData($configurableProductsData);
+//$configurable_product->setConfigurableProductsData($configurableProductsData);
 
 $configurableAttributesData = $configurable_product->getTypeInstance()->getConfigurableAttributes();
 
-foreach ($configurableAttributesData as $confData) {
-    $confData->setPricingValue('20')->save();
-    //var_dump($confData->getPricingValue());
-}
 
-$configurable_product->setCanSaveConfigurableAttributes(true);
+//foreach ($configurableAttributesData as $confData) {
+
+    //$confData->setProductSuperAttributeId(209+$c)->save();
+    //var_dump($confData);
+    //$confData->setPricingValue('20')->save();
+    //var_dump($confData->getPricingValue());
+//}
+
+//$configurable_product->setCanSaveConfigurableAttributes(true);
 
 //TO DO try
 $configurable_product->save();

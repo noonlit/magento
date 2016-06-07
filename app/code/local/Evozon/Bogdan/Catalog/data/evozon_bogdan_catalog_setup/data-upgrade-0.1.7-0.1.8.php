@@ -145,7 +145,8 @@ $bundleProduct->setAffectBundleProductSelections(true);
 if (!$test_product->getIdBySku($sku)) {
     Mage::register('product', $bundleProduct);
     $bundleProduct->setBundleOptionsData($bundleOptions);
-    $bundleProduct->setBundleSelectionsData($bundleSelections);
+    //ADDING BUNDLE SELECTIONS
+    //$bundleProduct->setBundleSelectionsData($bundleSelections);
 }
 //setting the bundle options and selection data
 
