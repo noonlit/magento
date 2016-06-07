@@ -13,7 +13,7 @@ $helper = Mage::helper('evozon_bogdan_catalog/attributes');
 //find clothing attribute_set_id
 $attributeSetId = $helper->getAttributeSetId('Default');
 
-$sku = "cusatura-02";
+$sku = "downd-03";
 $test_product = Mage::getModel('catalog/product');
 $product = Mage::getModel('catalog/product');
 
@@ -56,9 +56,11 @@ $stockData['use_config_manage_stock'] = 0;
 $product->setStockData($stockData);
 
 $linkModel = Mage::getModel('downloadable/link');
+//try settings
+$product->save();
 
-
-$linkModel ->setProductId($product->getId())
+$linkModel 
+        ->setProductId($product->getId())
         ->setStoreId('0')
         ->setNumberOfDownloads('0')
         ->setLinkUrl('null')
@@ -69,10 +71,8 @@ $linkModel ->setProductId($product->getId())
         ->setDefaultTitle('Ready For Download2')
         ->setLinkTitle("Ready For Download2")
         ->setLinkFile('/h/b/hbm-a_tale_of_two_cities.pdf')
-        ->setProduct($product)
         ->save()
         ;
 
 
-//try settings
-$product->save();
+

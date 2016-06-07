@@ -15,9 +15,9 @@ Mage::app()->setCurrentStore(0); //this redirects to the admin page
 //calling the attributes helper to get the attributeSetId
 $helper = Mage::helper('evozon_bogdan_catalog/attributes');
 //find clothing attribute_set_id
-$attributeSetId = $helper->getAttributeSetId('Clothing');
+$attributeSetId = $helper->getAttributeSetId('Accessories');
 
-$sku = "roc11";
+$sku = "och01";
 $test_product = Mage::getModel('catalog/product');
 $product = Mage::getModel('catalog/product');
 
@@ -31,30 +31,27 @@ if ($test_product->getIdBySku($sku))
 
 $categoriesHelper = Mage::helper('evozon_bogdan_catalog/categories');
 //finding the subcategory and category ids for women with 'clothing' eav_attribute_set
-$categoriesIds = $categoriesHelper->getCategoriestId('Women', 'Clothing');
+$categoriesIds = $categoriesHelper->getCategoriestId('Accessories', 'Eyewear');
 
 //check for duplicate
-$product->setName("Rochie Red S");
-$product->setDescription("A fost o rochie editata.");
-$product->setShortDescription("este o rochie.");
+$product->setName("Ochelari smecheri");
+$product->setDescription("Ochleari din rama de adamantium.");
+$product->setShortDescription("ochelari smecheri");
 $product->setTypeId('simple');
 $product->setAttributeSetId($attributeSetId[0]); // need to look this up
 $product->setCategoryIds($categoriesIds); // need to look these up
 $product->setWeight(1.0);
 $product->setTaxClassId(2); // taxable goods
-$product->setVisibility(4); // catalog, search
-$product->setStatus(1); // enabled
+$product->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH); // catalog, search
+$product->setStatus(Mage_Catalog_Model_Product_Status::STATUS_ENABLED); // enabled
 //assign the product a color
 $product->setColor($helper->getProductAttributeId('color', 'Red'));
 
-//assign the product a type ??apparel_type
-$product->setApparelType($helper->getProductAttributeId('apparel_type', 'Skirts'));
-
-//assign the product a size
-$product->setSize($helper->getProductAttributeId('size', 'S'));
-
 //assign the product a gender
 $product->setGender($helper->getProductAttributeId('gender', 'Female'));
+
+//assign the product a gender
+$product->setMaterial($helper->getProductAttributeId('material', 'Metal'));
 
 $product->setPrice(999);
 // assign product to the default website
