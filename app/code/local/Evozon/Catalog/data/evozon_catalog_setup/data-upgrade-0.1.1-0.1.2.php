@@ -1,7 +1,7 @@
 <?php
 $product = Mage::getModel('catalog/product');
 $product
-->setSku('alalalal')
+->setSku('OneaRaula')
 ->setTypeId('simple')
 ->setWebsiteIds(array(1))
 ->setAttributeSetId(4)
@@ -27,5 +27,4 @@ $product
  'qty' => 50))
 ->setCategoryIds(array(13))
 ; //add on DRESSES & SKIRTS category
-
 $product->save();
