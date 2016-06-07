@@ -9,6 +9,7 @@
  *      - display: 12', 15', 17'
  */
 Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
+$storeId = Mage::app()->getStore('default')->getId();
 
 // add products to associate to bundle product
 $productOptions = array(
@@ -32,7 +33,7 @@ foreach ($productOptions['processor'] as $processor) {
     $price = $processorPrice[$processor];
     if (!$processorSimpleProduct->getIdBySku($sku)) {
         $processorSimpleProduct
-                ->setWebsiteIds(array(1))
+                ->setWebsiteIds(array(Mage::app()->getStore($storeId)->getWebsiteId()))
                 ->setAttributeSetId(14)
                 ->setTypeId('simple')
                 ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE)
@@ -75,7 +76,7 @@ foreach ($productOptions['memory'] as $memory) {
     $price = $memoryPrice[$memory];
     if (!$memorySimpleProduct->getIdBySku($sku)) {
         $memorySimpleProduct
-                ->setWebsiteIds(array(1))
+                ->setWebsiteIds(array(Mage::app()->getStore($storeId)->getWebsiteId()))
                 ->setAttributeSetId(14)
                 ->setTypeId('simple')
                 ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE)
@@ -118,7 +119,7 @@ foreach ($productOptions['hdd'] as $hdd) {
     $price = $hddPrice[$hdd];
     if (!$hddSimpleProduct->getIdBySku($sku)) {
         $hddSimpleProduct
-                ->setWebsiteIds(array(1))
+                ->setWebsiteIds(array(Mage::app()->getStore($storeId)->getWebsiteId()))
                 ->setAttributeSetId(14)
                 ->setTypeId('simple')
                 ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE)
@@ -161,7 +162,7 @@ foreach ($productOptions['display'] as $display) {
     $price = $displayPrice[$display];
     if (!$displaySimpleProduct->getIdBySku($sku)) {
         $displaySimpleProduct
-                ->setWebsiteIds(array(1))
+                ->setWebsiteIds(array(Mage::app()->getStore($storeId)->getWebsiteId()))
                 ->setAttributeSetId(14)
                 ->setTypeId('simple')
                 ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE)
@@ -196,7 +197,7 @@ $bundleProduct = Mage::getModel('catalog/product');
 $sku = 'ilinca-laptop-000';
 if (!$bundleProduct->getIdBySku($sku)) {
     $bundleProduct
-            ->setWebsiteIds(array(1))
+            ->setWebsiteIds(array(Mage::app()->getStore($storeId)->getWebsiteId()))
             ->setAttributeSetId(14)
             ->setTypeId('bundle')
             ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH)

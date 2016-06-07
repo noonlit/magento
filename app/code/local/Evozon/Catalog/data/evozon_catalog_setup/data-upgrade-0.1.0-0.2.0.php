@@ -5,10 +5,12 @@
  */
 
 Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
+$storeId = Mage::app()->getStore('default')->getId();
+
 $product = Mage::getModel('catalog/product');
 if (!$product->getIdBySku('ilincadecor13')) {
     $product
-            ->setWebsiteIds(array(1))
+            ->setWebsiteIds(array(Mage::app()->getStore($storeId)->getWebsiteId()))
             ->setAttributeSetId(4)
             ->setTypeId('simple')
             ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH)

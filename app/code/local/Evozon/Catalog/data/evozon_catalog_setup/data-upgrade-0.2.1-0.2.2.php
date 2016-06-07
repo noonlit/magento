@@ -4,6 +4,7 @@
  * add a grouped product
  */
 Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
+$storeId = Mage::app()->getStore('default')->getId();
 
 // add simple products
 $simpleProduct1 = Mage::getModel('catalog/product');
@@ -11,7 +12,7 @@ $simpleProduct2 = Mage::getModel('catalog/product');
 
 if (!$simpleProduct1->getIdBySku('ilincajewel1')) {
     $simpleProduct1
-            ->setWebsiteIds(array(1))
+            ->setWebsiteIds(array(Mage::app()->getStore($storeId)->getWebsiteId()))
             ->setAttributeSetId(19)
             ->setTypeId('simple')
             ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH)
@@ -57,7 +58,7 @@ if (!$simpleProduct1->getIdBySku('ilincajewel1')) {
 
 if (!$simpleProduct2->getIdBySku('ilincajewel2')) {
     $simpleProduct2
-            ->setWebsiteIds(array(1))
+            ->setWebsiteIds(array(Mage::app()->getStore($storeId)->getWebsiteId()))
             ->setAttributeSetId(19)
             ->setTypeId('simple')
             ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH)
@@ -107,7 +108,7 @@ $simpleProducts = array($simpleProduct1, $simpleProduct2);
 $groupedProduct = Mage::getModel('catalog/product');
 if (!$groupedProduct->getIdBySku('ilinca_jewel_group_1')) {
     $groupedProduct
-            ->setWebsiteIds(array(1))
+            ->setWebsiteIds(array(Mage::app()->getStore($storeId)->getWebsiteId()))
             ->setAttributeSetId(19)
             ->setTypeId('grouped')
             ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH)

@@ -8,6 +8,7 @@
  *      lentgth: knee length, long, short
  */
 Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
+$storeId = Mage::app()->getStore('default')->getId();
 
 // add simple products
 $configuration = array(
@@ -33,7 +34,7 @@ foreach ($configuration['color'] as $color) {
 
                 if (!$simpleProduct->getIdBySku($sku)) {
                     $simpleProduct
-                            ->setWebsiteIds(array(1))
+                            ->setWebsiteIds(array(Mage::app()->getStore($storeId)->getWebsiteId()))
                             ->setAttributeSetId(13)
                             ->setTypeId('simple')
                             ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_NOT_VISIBLE)
@@ -88,7 +89,7 @@ foreach ($configuration['color'] as $color) {
 $configurableProduct = Mage::getModel('catalog/product');
 if (!$configurableProduct->getIdBySku('ilincadress13')) {
     $configurableProduct
-            ->setWebsiteIds(array(1))
+            ->setWebsiteIds(array(Mage::app()->getStore($storeId)->getWebsiteId()))
             ->setAttributeSetId(13)
             ->setTypeId('configurable')
             ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH)
