@@ -1,15 +1,38 @@
 <?php
 
+//RECREATE CODE AND SIMPLE PRODUCTS SAMPLE
+
+/**
+ * Add a bundled product version 0.1.8
+ * 
+ * @category Evozon
+ * @package Evozon_Bogdan_Catalog
+ * @copyright (c) year, Haidu Bogdan
+ * @author Haidu Bogdan <branch bogdan of noonlit/magento> git
+ */
+
+
 $bundleProduct = Mage::getModel('catalog/product');
-$bundleProduct
-        ->setStoreId(Mage_Core_Model_App::ADMIN_STORE_ID) //you can set data in store scope
+$test_product = Mage::getModel('catalog/product');
+
+$sku = 'bundlexx1';
+
+if ($test_product->getIdBySku($sku)) {
+    //Magento settings to allow saving
+    Mage::app()->setUpdateMode(false);
+    Mage::app()->setCurrentStore(0); //this redirects to the admin page
+    $bundleProduct->load($test_product->getIdBySku($sku));
+} else {
+    $bundleProduct->setSku($sku);
+}
+
+$bundleProduct->setStoreId(Mage_Core_Model_App::ADMIN_STORE_ID) //you can set data in store scope
         ->setWebsiteIds(array(1)) //website ID the product is assigned to, as an array
         ->setAttributeSetId(14) //ID of a attribute set named 'default'
         ->setTypeId('bundle') //product type
         ->setCreatedAt(strtotime('now')) //product creation time
 //    ->setUpdatedAt(strtotime('now')) //product update time
         ->setSkuType(0) //SKU type (0 - dynamic, 1 - fixed)
-        ->setSku('bundlexx1') //SKU
         ->setName('test bundle product96') //product name
         ->setWeightType(0) //weight type (0 - dynamic, 1 - fixed)
 //        ->setWeight(4.0000)
@@ -70,7 +93,7 @@ $bundleOptions = array(
 $bundleSelections = array(
     '0' => array(//option ID
         '0' => array(//selection ID of the option (first product under this option (option ID) would have ID of 0, second an ID of 1, etc)
-            'product_id' => '995', //if of a product in selection
+            'product_id' => '955', //if of a product in selection
             'delete' => '',
             'selection_price_value' => '10',
             'selection_price_type' => 0,
@@ -80,7 +103,7 @@ $bundleSelections = array(
             'is_default' => 1
         ),
         '1' => array(
-            'product_id' => '996',
+            'product_id' => '956',
             'delete' => '',
             'selection_price_value' => '10',
             'selection_price_type' => 0,
@@ -119,10 +142,12 @@ $bundleProduct->setCanSaveBundleSelections(true);
 $bundleProduct->setAffectBundleProductSelections(true);
 
 //registering a product because of Mage_Bundle_Model_Selection::_beforeSave
-Mage::register('product', $bundleProduct);
-
+if (!$test_product->getIdBySku($sku)) {
+    Mage::register('product', $bundleProduct);
+    $bundleProduct->setBundleOptionsData($bundleOptions);
+    $bundleProduct->setBundleSelectionsData($bundleSelections);
+}
 //setting the bundle options and selection data
-$bundleProduct->setBundleOptionsData($bundleOptions);
-$bundleProduct->setBundleSelectionsData($bundleSelections);
+
 
 $bundleProduct->save();

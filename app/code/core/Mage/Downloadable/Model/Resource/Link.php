@@ -51,7 +51,7 @@ class Mage_Downloadable_Model_Resource_Link extends Mage_Core_Model_Resource_Db_
      */
     public function saveItemTitleAndPrice($linkObject)
     {
-
+        
         $writeAdapter   = $this->_getWriteAdapter();
         $linkTitleTable = $this->getTable('downloadable/link_title');
         $linkPriceTable = $this->getTable('downloadable/link_price');
@@ -80,7 +80,9 @@ class Mage_Downloadable_Model_Resource_Link extends Mage_Core_Model_Resource_Db_
                     $where);
             }
         } else {
+            
             if (!$linkObject->getUseDefaultTitle()) {
+                var_dump($linkObject->getTitle());
                 $writeAdapter->insert(
                     $linkTitleTable,
                     array(
@@ -89,8 +91,9 @@ class Mage_Downloadable_Model_Resource_Link extends Mage_Core_Model_Resource_Db_
                         'title'     => $linkObject->getTitle(),
                     ));
             }
+            
         }
-
+        
         $select = $writeAdapter->select()
             ->from($linkPriceTable)
             ->where('link_id=:link_id AND website_id=:website_id');
@@ -124,6 +127,7 @@ class Mage_Downloadable_Model_Resource_Link extends Mage_Core_Model_Resource_Db_
                 } else {
                     $_isNew = false;
                 }
+                
                 if ($linkObject->getWebsiteId() == 0 && $_isNew && !Mage::helper('catalog')->isPriceGlobal()) {
                     $websiteIds = $linkObject->getProductWebsiteIds();
                     foreach ($websiteIds as $websiteId) {
@@ -144,6 +148,7 @@ class Mage_Downloadable_Model_Resource_Link extends Mage_Core_Model_Resource_Db_
                         );
                     }
                 }
+                
                 $writeAdapter->insertMultiple($linkPriceTable, $dataToInsert);
             }
         }

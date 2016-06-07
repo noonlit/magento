@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Evozon_Bogdan_Catalog>
-            <version>0.1.6</version> 
+            <version>0.2.0</version> 
         </Evozon_Bogdan_Catalog>
         
     </modules>

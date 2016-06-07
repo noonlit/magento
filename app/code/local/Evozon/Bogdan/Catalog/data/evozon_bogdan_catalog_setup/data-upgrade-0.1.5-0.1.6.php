@@ -1,13 +1,14 @@
 <?php
 
 /**
- * Add a simple product and a configurable data version 0.1.6
+ * Add a configurable product version 0.1.6
  * 
  * @category Evozon
  * @package Evozon_Bogdan_Catalog
  * @copyright (c) year, Haidu Bogdan
  * @author Haidu Bogdan <branch bogdan of noonlit/magento> git
  */
+
 //calling the attributes helper to get the attributeSetId
 $helper = Mage::helper('evozon_bogdan_catalog/attributes');
 //find clothing attribute_set_id
@@ -55,7 +56,7 @@ if ($test_conf_product->getIdBySku($confSku)) { //SKU EXISTS
     $configurable_product->setAttributeSetId($attributeSetId[0]); // need to look this up
     $configurable_product->setCategoryIds($categoriesIds); // need to look these up
     //setting basic Data
-    setBasicData($configurable_product);
+    setBasicData3($configurable_product);
    
     $configurableAttributesData = $configurable_product->getTypeInstance()->getConfigurableAttributesAsArray($configurable_product);
 
@@ -104,7 +105,7 @@ $configurable_product->save();
 
 //FUNCTIONS
 
-function setBasicData($configurable_product)
+function setBasicData3($configurable_product)
 {
     $configurable_product->setName('Rochii configurabile');
     $configurable_product->setDescription("A fost o rochie configurabila.");

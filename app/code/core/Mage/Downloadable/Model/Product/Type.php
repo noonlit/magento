@@ -157,7 +157,7 @@ class Mage_Downloadable_Model_Product_Type extends Mage_Catalog_Model_Product_Ty
 
         $product = $this->getProduct($product);
         /* @var Mage_Catalog_Model_Product $product */
-
+  
         if ($data = $product->getDownloadableData()) {
             if (isset($data['sample'])) {
                 $_deleteItems = array();

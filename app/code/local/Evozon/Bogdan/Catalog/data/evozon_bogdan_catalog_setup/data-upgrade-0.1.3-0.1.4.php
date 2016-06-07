@@ -1,13 +1,14 @@
 <?php
 
 /**
- * Add a simple product data version 0.1.4
+ * Add simple products data version 0.1.4
  * 
  * @category Evozon
  * @package Evozon_Bogdan_Catalog
  * @copyright (c) year, Haidu Bogdan
  * @author Haidu Bogdan <branch bogdan of noonlit/magento> git
  */
+
 //calling the attributes helper to get the attributeSetId
 $helper = Mage::helper('evozon_bogdan_catalog/attributes');
 //find clothing attribute_set_id
@@ -20,7 +21,7 @@ $categoriesIds = $categoriesHelper->getCategoriestId('Women', 'Clothing');
 $productData = array(
     array(
         'sku' => 'roc11',
-        'name' => 'Rochie Blue S',
+        'name' => 'Rochie Blue S Slim',
         'price' => 100,
         'attributes' => array(
             'color' => 'Blue',
@@ -31,7 +32,7 @@ $productData = array(
     ),
     array(
         'sku' => 'roc12',
-        'name' => 'Rochie Blue S',
+        'name' => 'Rochie Blue S Regular',
         'price' => 200,
         'attributes' => array(
             'color' => 'Blue',
@@ -113,7 +114,7 @@ function saveProduct($data, $helper, $attributeSetId, $categoriesIds)
     $product->setCategoryIds($categoriesIds); // need to look these up
 // assign product to the default website
     $product->setWebsiteIds(array(1));
-    $product->setVisibility(4); // catalog, search
+    $product->setVisibility(3); // search
     $product->setStatus(1); // enabled
 
     setBasicData($product, $data);
@@ -128,8 +129,6 @@ function saveProduct($data, $helper, $attributeSetId, $categoriesIds)
 
 function setBasicData($product, $data)
 {
-
-
     $product->setName($data['name']);
     $product->setDescription("A fost o rochie editata.");
     $product->setShortDescription("este o rochie.");
