@@ -1,11 +1,11 @@
 <?php
 $bannersToCtg = array(
     array(
-        'category_id' => 4,
+        'category_id' => 5,
         'banner_id' => 1
     ),
     array(
-        'category_id' => 4,
+        'category_id' => 5,
         'banner_id' => 2
     ),
 );
