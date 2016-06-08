@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Add a simple product data version 0.1.3
+ * Add simple products for a future bundle product data version 0.1.3
  * 
  * @category Evozon
  * @package Evozon_Bogdan_Catalog
@@ -10,62 +10,141 @@
  */
 //calling the attributes helper to get the attributeSetId
 $helper = Mage::helper('evozon_bogdan_catalog/attributes');
-//find clothing attribute_set_id
-$attributeSetId = $helper->getAttributeSetId('Clothing');
+$attributeSetId = $helper->getAttributeSetId('Electronics');
 
-$sku = "roc12";
-$test_product = Mage::getModel('catalog/product');
-$product = Mage::getModel('catalog/product');
-
-if ($test_product->getIdBySku($sku))
-{
-    //Magento settings to allow saving
-    Mage::app()->setUpdateMode(false);
-    Mage::app()->setCurrentStore(0); //this redirects to the admin page
-    $product->load($test_product->getIdBySku($sku));
-} else
-{
-    $product->setSku($sku);
-}
-
-$categoriesHelper = Mage::helper('evozon_bogdan_catalog/categories');
 //finding the subcategory and category ids for women with 'clothing' eav_attribute_set
-$categoriesIds = $categoriesHelper->getCategoriestId('Women', 'Clothing');
+$categoriesHelper = Mage::helper('evozon_bogdan_catalog/categories');
+$categoriesIds = $categoriesHelper->getCategoriestId('Home & Decor', 'Electronics');
 
-//check for duplicate
-$product->setName("Rochie Green S");
-$product->setDescription("A fost o rochie editata.");
-$product->setShortDescription("este o rochie.");
-$product->setTypeId('simple');
-$product->setAttributeSetId($attributeSetId[0]); // need to look this up
-$product->setCategoryIds($categoriesIds); // need to look these up
-$product->setWeight(1.0);
-$product->setTaxClassId(2); // taxable goods
-$product->setVisibility(4); // catalog, search
-$product->setStatus(1); // enabled
+//setting the products data
+$productsData = array(
+    array(
+        'sku' => "laptop-01",
+        'name' => "Super Laptop",
+        'description' => "The best laptop there is",
+        'short_description' => "super laptop",
+        'price' => '1000',
+        'qty' => 3,
+        'image' => 'laptop-01.jpg',
+    ),
+    array(
+        'sku' => "comp-mouse-01",
+        'name' => "Standard Mouse",
+        'description' => "Basic USB Cable Mouse",
+        'short_description' => "USB mouse",
+        'price' => '100',
+        'qty' => 10,
+        'image' => 'comp-mouse-01.png',
+    ),
+    array(
+        'sku' => "comp-mouse-02",
+        'name' => "Gaming Mouse",
+        'description' => "Gaming Wireless Mouse",
+        'short_description' => "wireless mouse",
+        'price' => '200',
+        'qty' => 5,
+        'image' => 'comp-mouse-02.png',
+    ),
+        )
+;
+
+
+//ADDING THE SIMPLE PRODUCTS
+foreach ($productsData as $productData) {
+
+//setting the image name
+    $image = $productData['image'];
+    $mediaArray = array(
+        'thumbnail' => $image,
+        'small_image' => $image,
+        'image' => $image
+    );
+
+//setting the image path
+    $importDir = Mage::getBaseDir('skin') . DS . 'frontend' .
+            DS . 'evozon_bogdan' . DS . 'evozon-theme' . DS .
+            'images' . DS . 'media' . DS . 'catalog' . DS . 'product' . DS . 'laptop' . DS;
+
+    $test_product = Mage::getModel('catalog/product');
+    $product = Mage::getModel('catalog/product');
+
+//check for duplicate sku
+    if ($test_product->getIdBySku($productData['sku'])) { //IF SKU EXISTS
+        //Magento settings to allow saving
+        Mage::app()->setUpdateMode(false);
+        Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID); //this redirects to the admin page
+        $product->load($test_product->getIdBySku($productData['sku']));
+    } else { //IF SKU IS NEW
+        $product->setSku($productData['sku']);
+    }
+
+//assign basic settings
+    $product
+            ->setName($productData['name'])
+            ->setDescription($productData['description'])
+            ->setShortDescription($productData['short_description'])
+            ->setTypeId('simple')
+            ->setAttributeSetId($attributeSetId[0])
+            ->setCategoryIds($categoriesIds)
+            ->setTaxClassId(2) // taxable goods
+            ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH) // catalog, search
+            ->setStatus(Mage_Catalog_Model_Product_Status::STATUS_ENABLED) // enabled
+            ->setCountryOfManufacture('RO')
+            ->setWeight(1.0)
+    ;
 //assign the product a color
-$product->setColor($helper->getProductAttributeId('color', 'Green'));
+    $product->setColor($helper->getProductAttributeId('color', 'Grey'));
 
-//assign the product a type ??apparel_type
-$product->setApparelType($helper->getProductAttributeId('apparel_type', 'Skirts'));
+    if ($productData['sku'] == 'laptop-01') {
+//assign the product laptop type ADDED IN THE INSTALL SCRIPT
+        $product->setLaptopType($helper->getProductAttributeId('laptop_type', 'Gaming'));
 
-//assign the product a size
-$product->setSize($helper->getProductAttributeId('size', 'S'));
+//assign the product laptop screen size ADDED IN THE INSTALL SCRIPT
+        $product->setScreenSize($helper->getProductAttributeId('screen_size', '17 inches'));
+    }
 
-//assign the product a gender
-$product->setGender($helper->getProductAttributeId('gender', 'Female'));
+    if ($productData['sku'] == 'comp-mouse-01') {
+//assign the product mouse type ADDED IN THE INSTALL SCRIPT
+        $product->setMouseType($helper->getProductAttributeId('mouse_type', 'Standard'));
 
-$product->setPrice(999);
+//assign the product mouse connection type ADDED IN THE INSTALL SCRIPT
+        $product->setConnectionType($helper->getProductAttributeId('connection_type', 'Cable'));
+    }
+
+    if ($productData['sku'] == 'comp-mouse-02') {
+//assign the product laptop type ADDED IN THE INSTALL SCRIPT
+        $product->setMouseType($helper->getProductAttributeId('mouse_type', 'Gaming'));
+
+//assign the product laptop screen size ADDED IN THE INSTALL SCRIPT
+        $product->setConnectionType($helper->getProductAttributeId('connection_type', 'Wireless'));
+    }
+
+
+    $product->setPrice($productData['price']);
 // assign product to the default website
-$product->setWebsiteIds(array(1));
+    $product->setWebsiteIds(array(1));
 
-$stockData = $product->getStockData();
-$stockData['qty'] = 10;
-$stockData['is_in_stock'] = 1;
-$stockData['manage_stock'] = 1;
-$stockData['use_config_manage_stock'] = 0;
-$product->setStockData($stockData);
+//add image to product
+    foreach ($mediaArray as $imageType => $fileName) {
+        $filePath = $importDir . $fileName;
+        if (file_exists($filePath)) {
+            $product->addImageToMediaGallery($filePath, $imageType, false);
+        }
+    }
 
-//try settings
-$product->save();
+//stock values
+    $stockData = $product->getStockData();
+    $stockData['qty'] = $productData['qty'];
+    $stockData['is_in_stock'] = 1;
+    $stockData['manage_stock'] = 1;
+    $stockData['use_config_manage_stock'] = 0;
+    $product->setStockData($stockData);
 
+//final save
+    try {
+        $product->save();
+        Mage::log('Saved new product', null, 'scripts.log');
+    } catch (Exception $e) {
+        Mage::log($e->getMessage(), null, 'scripts.log');
+    }
+}

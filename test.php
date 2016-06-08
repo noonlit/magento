@@ -5,11 +5,25 @@ echo "<head>
   </head>  
 ";
 
-
-
 require_once 'app/Mage.php';
 
 Mage::app();
+
+$product = Mage::getModel('catalog/product');
+$product->load($product->getIdBySku("roc11"));
+var_dump($product->getTypeInstance());
+
+die();
+
+Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
+// Load attribute model and load attribute by attribute code
+$model = Mage::getModel('catalog/resource_eav_attribute')->load(195);
+// Get existing options
+$options = $model->getSource()->getAllOptions(false);
+
+var_dump($options);
+
+
 
 $attributeHelper = Mage::helper('evozon_bogdan_catalog/attributes');
 $attributeId = $attributeHelper->getAttributeSetId('Clothing');
@@ -17,11 +31,9 @@ $attributeId = $attributeHelper->getAttributeSetId('Clothing');
 $product = Mage::getModel('catalog/product');
 $sku = "roc10";
 
-if ($product->getIdBySku($sku))
-{
+if ($product->getIdBySku($sku)) {
     //$product->load($product->getIdBySku($sku));
-} else
-{
+} else {
     //$product->setSku($sku);
 }
 
@@ -33,8 +45,7 @@ $categoriesIds = $categoriesHelper->getCategoriestId('Women', 'Clothing');
 
 $attribute = Mage::getModel('eav/config')->getAttribute('catalog_product', 'apparel_type');
 
-foreach ($attribute->getSource()->getAllOptions(true) as $option)
-{
+foreach ($attribute->getSource()->getAllOptions(true) as $option) {
     echo $option['value'] . ' ' . $option['label'] . "<br>";
 }
 
@@ -50,9 +61,9 @@ var_dump($product->getTypeInstance());
 $product->setHasOptions("1");
 $product->setRequiredOptions("1");
 //$product->setAttributeSetId("10")->save();
-$product->setData('links_title',"Ready For Download2")->save();
-$product->setData('links_purchased_separately',0);
-$product->setData('links_exist',1);
+$product->setData('links_title', "Ready For Download2")->save();
+$product->setData('links_purchased_separately', 0);
+$product->setData('links_exist', 1);
 //var_dump($product->getTypeInstance()->getLinks());
 $product->save();
 
@@ -190,11 +201,9 @@ $product->save();
 function getOptionId($attribute_name, $value)
 {
     $attribute = Mage::getModel('eav/config')->getAttribute('catalog_product', $attribute_name);
-    foreach ($attribute->getSource()->getAllOptions(true) as $option)
-    {
+    foreach ($attribute->getSource()->getAllOptions(true) as $option) {
         //echo $option['value'] . ' ' . $option['label'] . "<br>";
-        if ($option['label'] == $value)
-        {
+        if ($option['label'] == $value) {
             return $option['value'];
         }
     }

@@ -82,7 +82,7 @@ class Mage_Downloadable_Model_Resource_Link extends Mage_Core_Model_Resource_Db_
         } else {
             
             if (!$linkObject->getUseDefaultTitle()) {
-                var_dump($linkObject->getTitle());
+                //var_dump($linkObject->getTitle());
                 $writeAdapter->insert(
                     $linkTitleTable,
                     array(
