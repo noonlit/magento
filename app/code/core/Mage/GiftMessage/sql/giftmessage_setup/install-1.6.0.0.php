@@ -67,19 +67,19 @@ $entities = array(
     'order',
     'order_item'
 );
-$options = array(
+$properties = array(
     'type'     => Varien_Db_Ddl_Table::TYPE_INTEGER,
     'visible'  => false,
     'required' => false
 );
 foreach ($entities as $entity) {
-    $installer->addAttribute($entity, 'gift_message_id', $options);
+    $installer->addAttribute($entity, 'gift_message_id', $properties);
 }
 
 /**
  * Add 'gift_message_available' attributes for entities
  */
-$installer->addAttribute('order_item', 'gift_message_available', $options);
+$installer->addAttribute('order_item', 'gift_message_available', $properties);
 Mage::getResourceModel('catalog/setup', 'catalog_setup')->addAttribute(
     Mage_Catalog_Model_Product::ENTITY, 'gift_message_available',
     array(

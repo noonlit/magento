@@ -6,7 +6,7 @@ try {
     $rand = rand(1, 9999);
     $product
             ->setTypeId('simple')
-            ->setAttributeSetId(4) 
+            ->setAttributeSetId(13) 
             ->setSku('firstSku') 
             ->setWebsiteIDs(array(1))
     ;
@@ -35,7 +35,7 @@ try {
     ;
 
  
-    //$product->setColor(24);
+   // $product->setColor(24);
 
 
     //$product->save();

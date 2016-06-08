@@ -15,6 +15,6 @@ $banners = array(
 );
 foreach ($banners as $banner) {
     Mage::getModel('evozon_georgiana/banner')
-            ->setData($banner)
-            ->save();
+            ->setData($banner);
+            //->save();
 }

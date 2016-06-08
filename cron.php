@@ -50,11 +50,11 @@ $isShellDisabled = (stripos(PHP_OS, 'win') === false) ? $isShellDisabled : true;
 
 try {
     if (stripos(PHP_OS, 'win') === false) {
-        $options = getopt('m::');
-        if (isset($options['m'])) {
-            if ($options['m'] == 'always') {
+        $properties = getopt('m::');
+        if (isset($properties['m'])) {
+            if ($properties['m'] == 'always') {
                 $cronMode = 'always';
-            } elseif ($options['m'] == 'default') {
+            } elseif ($properties['m'] == 'default') {
                 $cronMode = 'default';
             } else {
                 Mage::throwException('Unrecognized cron mode was defined');
