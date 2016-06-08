@@ -26,10 +26,10 @@
 
 require_once 'processor.php';
 
-$processor = new Error_Processor();
+$resolution = new Error_Processor();
 
 if (isset($reportData) && is_array($reportData)) {
-    $processor->saveReport($reportData);
+    $resolution->saveReport($reportData);
 }
 
-$processor->processReport();
+$resolution->processReport();

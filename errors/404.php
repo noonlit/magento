@@ -26,5 +26,5 @@
 
 require_once 'processor.php';
 
-$processor = new Error_Processor();
-$processor->process404();
+$resolution = new Error_Processor();
+$resolution->process404();
