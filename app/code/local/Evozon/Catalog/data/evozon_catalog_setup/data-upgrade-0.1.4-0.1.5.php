@@ -38,6 +38,7 @@ foreach ($simpleProductsCfg as $productCfg) {
         try {
             $productModel
                     ->setWebsiteIds(array(1))
+                    ->setStoreId(1)
                     ->setAttributeSetId(19)
                     ->setTypeId('simple')
                     ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH)
@@ -77,6 +78,7 @@ if (!$groupedProductModel->getIdBySku($sku)) {
     try {
         $groupedProductModel
                 ->setWebsiteIds(array(1))
+                ->setStoreId(1)
                 ->setAttributeSetId(19)
                 ->setTypeId('grouped')
                 ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH)
