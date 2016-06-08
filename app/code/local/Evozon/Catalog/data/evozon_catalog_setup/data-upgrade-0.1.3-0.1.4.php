@@ -1,6 +1,6 @@
 <?php
 
-//add bundle product
+//add bundle product script
 $date = new DateTime();
 Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
 
@@ -24,7 +24,7 @@ foreach ($options['cover'] as $cover) {
         $model
                 ->setStoreId(1)
                 ->setWebsiteIds(array(1))
-                ->setAttributeSetId(16) // home and decor 
+                ->setAttributeSetId(16)
                 ->setTypeId('simple')
                 ->setCreatedAt($date->getTimestamp())
                 ->setUpdatedAt($date->getTimestamp())              
@@ -65,7 +65,7 @@ foreach ($options['difficulty'] as $difficulty) {
         $model
                 ->setStoreId(1)
                 ->setWebsiteIds(array(1))
-                ->setAttributeSetId(16) // home and decor 
+                ->setAttributeSetId(16)
                 ->setTypeId('simple')
                 ->setCreatedAt($date->getTimestamp())
                 ->setUpdatedAt($date->getTimestamp())              

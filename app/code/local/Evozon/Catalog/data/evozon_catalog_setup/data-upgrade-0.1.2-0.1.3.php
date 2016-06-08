@@ -1,5 +1,6 @@
 <?php
 
+//add configurable product script
 Mage::log("data-upgrade-0.1.2-0.1.3 started", null, "dataScripts.log");
 $date = new DateTime();
 Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);

@@ -1,6 +1,6 @@
 <?php
 
-//add simple productscript
+//add simple product script
 Mage::log("data-upgrade-0.1.1-0.1.2 started", null, "dataScripts.log");
 Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
 $simpleProduct = Mage::getModel('catalog/product');
@@ -29,7 +29,7 @@ if (!$simpleProduct->getIdBySku('simple-prod#1')) {
                 'max_sale_qty' => 10,
                 'is_in_stock' => 1,
                 'qty' => 50))
-            ->setCategoryIds(array(13)); //add on DRESSES & SKIRTS category
+            ->setCategoryIds(array(13));
 
     $images = array(
         'small_image' => 'simple-prod#1-small.jpg',
