@@ -3,7 +3,6 @@
 /**
  * add a new simple product
  */
-
 Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
 $storeId = Mage::app()->getStore('default')->getId();
 
@@ -23,7 +22,6 @@ if (!$product->getIdBySku('ilincadecor13')) {
             ->setTaxClassId(2)
             ->setWeight(50)
             ->setStatus(Mage_Catalog_Model_Product_Status::STATUS_ENABLED)
-            ->setColor(24)
             ->setMetaTitle('ilinca-decor home decor')
             ->setMetaKeywords('')
             ->setMetaDescription('ilinca-decor meta description')
@@ -49,16 +47,10 @@ if (!$product->getIdBySku('ilincadecor13')) {
     foreach ($mediaArray as $imageType => $fileName) {
         $filePath = $importDir . $fileName;
         if (file_exists($filePath)) {
-            try {
-                $product->addImageToMediaGallery($filePath, $imageType, false);
-            } catch (Exception $e) {
-                echo $e->getMessage();
-            }
-        } else {
-            echo "Product does not have an image or the path is incorrect. Path was: {$filePath}<br/>";
+            $product->addImageToMediaGallery($filePath, $imageType, false);
         }
     }
-    
+
     $product->setIsMassupdate(true)->setExcludeUrlRewrite(true);
 
     $product->save();
