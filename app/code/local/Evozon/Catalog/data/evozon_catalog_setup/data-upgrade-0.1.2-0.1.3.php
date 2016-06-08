@@ -72,7 +72,7 @@ if (!$cfgProductModel->getIdBySku('Ionicaa')) {
                             'is_in_stock' => 1,
                             'qty' => 100
                         ))
-                        ->setCategoryIds(array(4))
+                        ->setCategoryIds(array(4,13))
                         ->setSku($productCfg['sku'])
                         ->setColor($productCfg['color'])
                         ->setSize($productCfg['size'])
@@ -114,7 +114,7 @@ if (!$cfgProductModel->getIdBySku('Ionicaa')) {
                     'is_in_stock' => 1,
                     'qty' => 100
                 ))
-                ->setCategoryIds(array(4));
+                ->setCategoryIds(array(4,13));
         $colorId = $model->getResource()->getAttribute('color')->getAttributeId();
         $sizeId = $model->getResource()->getAttribute('size')->getAttributeId();
         $genderId = $model->getResource()->getAttribute('gender')->getAttributeId();
