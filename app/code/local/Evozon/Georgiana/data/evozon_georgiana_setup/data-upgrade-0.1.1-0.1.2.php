@@ -35,10 +35,10 @@ try {
     ;
 
  
-   // $product->setColor(24);
+    $product->setColor(24);
 
 
-    //$product->save();
+    $product->save();
 } catch (Exception $ex) {
     
     mage::log($ex->getMessage());
