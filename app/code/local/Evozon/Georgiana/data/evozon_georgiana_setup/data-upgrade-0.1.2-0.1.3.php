@@ -11,16 +11,15 @@ $model = Mage::getModel('catalog/product');
 $options = array();
 
 
-$options['color']['red'] = $model->getResource()->getAttribute('color')->getSource()->getOptionId('Red');
-$options['color']['purple'] = $model->getResource()->getAttribute('color')->getSource()->getOptionId('Purple');
+$options['color']['green'] = $model->getResource()->getAttribute('color')->getSource()->getOptionId('Green');
+$options['color']['blue'] = $model->getResource()->getAttribute('color')->getSource()->getOptionId('Blue');
 $options['color']['black'] = $model->getResource()->getAttribute('color')->getSource()->getOptionId('Black');
-$options['color']['indigo'] = $model->getResource()->getAttribute('color')->getSource()->getOptionId('Indigo');
-$options['color']['ivory'] = $model->getResource()->getAttribute('color')->getSource()->getOptionId('Ivory');
 
 
-$options['size']['xs'] = $model->getResource()->getAttribute('size')->getSource()->getOptionId('XS');
+
 $options['size']['s'] = $model->getResource()->getAttribute('size')->getSource()->getOptionId('S');
 $options['size']['m'] = $model->getResource()->getAttribute('size')->getSource()->getOptionId('M');
+$options['size']['l'] = $model->getResource()->getAttribute('size')->getSource()->getOptionId('L');
 
 
 $options['gender']['female'] = $model->getResource()->getAttribute('gender')->getSource()->getOptionId('Female');
@@ -112,13 +111,13 @@ if (!$cfgProductModel->getIdBySku('ConfigSku')) {
                 ->setSku('ConfigSku')
                 ->setCreatedAt($date->getTimestamp())
                 ->setUpdatedAt($date->getTimestamp())
-                ->setName('My config Procut')
+                ->setName('My config Product')
                 ->setStatus(Mage_Catalog_Model_Product_Status::STATUS_ENABLED)
-                ->setTaxClassId(0) // tax class (0 - none, 1 - default, 2 - taxable, 4 - shipping)
+                ->setTaxClassId(0) 
                 ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH)
                 ->setCountryOfManufacture('RO')
-                ->setCost(100) // the cost is what the merchant pays
-                ->setPrice(200) // the price is what the customer pays
+                ->setCost(80) 
+                ->setPrice(480) 
                 ->setDescription('This is the best description')
                 ->setShortDescription('wow')
                 ->setStockData(array(
