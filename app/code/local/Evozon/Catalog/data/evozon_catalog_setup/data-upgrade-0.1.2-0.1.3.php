@@ -3,6 +3,7 @@ Mage::log("data-upgrade-0.1.2-0.1.3 started", null, "dataScripts.log");
 $date = new DateTime();
 Mage::app()->setCurrentStore(Mage_Core_Model_App::ADMIN_STORE_ID);
 //Mage::registry('current_category')->getId();
+
 $cfgProductModel = Mage::getModel('catalog/product');
 if (!$cfgProductModel->getIdBySku('Ionicaa')) {
     $model = Mage::getModel('catalog/product');
@@ -102,7 +103,7 @@ if (!$cfgProductModel->getIdBySku('Ionicaa')) {
                 ->setVisibility(Mage_Catalog_Model_Product_Visibility::VISIBILITY_BOTH)
                 ->setCountryOfManufacture('RO')
                 ->setCost(100)
-                ->setPrice(200)
+                ->setPrice(120)
                 ->setDescription('This is the long description.')
                 ->setShortDescription('Fistica')
                 ->setStockData(array(
