@@ -9,6 +9,16 @@ require_once 'app/Mage.php';
 
 Mage::app();
 
+
+$attributes = Mage::getModel('customer/attribute')->getCollection();
+//var_dump($customer);
+foreach ($attributes as $attribute) {
+    var_dump($attribute);
+}
+
+
+die();
+
 $product = Mage::getModel('catalog/product');
 $product->load($product->getIdBySku("roc11"));
 var_dump($product->getTypeInstance());

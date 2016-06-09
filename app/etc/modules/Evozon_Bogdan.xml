@@ -5,5 +5,9 @@
             <active>true</active>
             <codePool>local</codePool>
         </Evozon_Bogdan>    
+        <Evozon_Bogdan_Customer>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Evozon_Bogdan_Customer>    
     </modules>
 </config>

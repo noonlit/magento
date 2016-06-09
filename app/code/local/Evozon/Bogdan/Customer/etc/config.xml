@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Evozon_Bogdan_Customer>
+            <version>0.1.1</version> 
+        </Evozon_Bogdan_Customer>
+        
+    </modules>
+    <global>
+        <models>
+            
+        </models>
+       
+        <resources>
+            <evozon_bogdan_customer_setup>
+                <setup>
+                    <module>Evozon_Bogdan_Customer</module>
+                    <class>Mage_Core_Model_Resource_Setup</class>
+                    <connection>
+                        <use>core_setup</use>
+                    </connection>
+                </setup>
+            </evozon_bogdan_customer_setup> 
+            <evozon_bogdan_customer_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </evozon_bogdan_customer_write>
+            <evozon_bogdan_customer_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </evozon_bogdan_customer_read>
+        </resources>
+        <fieldsets>
+            <customer_account>
+                <cnp>
+                    <create>1</create>
+                    <update>1</update>
+                    <name>1</name>
+                </cnp>
+            </customer_account>
+
+<!--            <checkout_onepage_quote>
+                <customer_cnp>
+                    <to_customer>school</to_customer>
+                </customer_cnp>
+            </checkout_onepage_quote>
+            <customer_account>
+                <cnp>
+                    <to_quote>customer_cnp</to_quote>
+                </cnp>
+            </customer_account>     -->
+
+        </fieldsets>
+
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <!--                unique tag name required-->
+                <evozon_bogdan_customer>
+                    <file>editedform.xml</file>
+                </evozon_bogdan_customer>                
+            </updates>                
+        </layout>
+    </frontend>
+	
+</config>
+

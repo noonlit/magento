@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<layout version="0.1.1">
+    <customer_account_edit translate="label">
+        <reference name="customer_edit">
+            <!--            <remove name="customer_edit"/>
+            <block type="customer/form_edit" name="customer_edit2" template="customer/form/edit_edited.phtml"/>-->
+            <action method="setTemplate">
+                <template>customer/form/edit_edited.phtml</template>
+            </action>
+        </reference>
+    </customer_account_edit>
+   
+    <customer_account_create translate="label">  
+       
+        <reference name="content">
+            <!--            JUST A TEMPORARY REMOVE-->
+            <remove name="customer_form_register"/>
+            <block type="customer/form_register" name="customer_form_register2" template="customer/form/edited_register.phtml">
+                <block type="page/html_wrapper" name="customer.form.register.fields.before2" as="form_fields_before" translate="label">
+                    <label>Form Fields Before</label>
+                </block>
+            </block>
+        </reference>     
+    </customer_account_create>
+<!--    IS THIS REQUIRED?-->
+    <checkout_onepage_index>
+        <reference name="checkout.onepage.billing">
+            <action method="setTemplate">
+                <template>checkout/onepage/billing_edited.phtml</template>
+            </action>
+        </reference>
+    </checkout_onepage_index>
+
+</layout>
