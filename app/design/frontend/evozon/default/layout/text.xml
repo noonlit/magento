@@ -9,6 +9,14 @@
         </reference>
     </customer_account_edit>
     
+    <checkout_onepage_index>
+        <reference name="checkout.onepage.billing">
+            <action method="setTemplate">
+                <template>checkout/onepage/billing.phtml</template>
+            </action>
+        </reference>
+    </checkout_onepage_index>
+    
     <customer_account_create>
         <reference name="customer_form_register">
             <action method="setTemplate">
