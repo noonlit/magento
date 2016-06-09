@@ -4,10 +4,8 @@ Mage::log('Started install-0.1.0', null, 'scripts-customer.log');
 
 $installer = $this;
 $installer->startSetup();
-// $installer->removeAttribute('customer', 'CNP');
 
-// $installer->addAttribute(
-$installer->updateAttribute(
+$installer->addAttribute(
     'customer',
     'CNP',
     array(
