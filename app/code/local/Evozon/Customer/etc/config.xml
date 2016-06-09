@@ -1,0 +1,32 @@
+<config>
+    <modules>
+        <Evozon_Customer>
+            <version>0.1.0</version>
+        </Evozon_Customer>
+    </modules>
+    <global>
+
+        <resources>
+            <evozon_customer_setup>
+                <setup>
+                    <module>Evozon_Customer</module>
+                    <class>Mage_Customer_Model_Entity_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </evozon_customer_setup>
+            <evozon_customer_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </evozon_customer_write>
+            <evozon_customer_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </evozon_customer_read>
+        </resources>
+    </global>
+
+</config>

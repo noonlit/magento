@@ -1,0 +1,9 @@
+<config>
+    <modules>
+        <Evozon_Customer>
+            <active>true</active>
+            <codePool>local</codePool>
+            <version>0.1.0</version>
+        </Evozon_Customer>
+    </modules>
+</config>
