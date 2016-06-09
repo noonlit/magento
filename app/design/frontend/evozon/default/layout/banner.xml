@@ -10,4 +10,29 @@
             <block type="evozon_catalog/banner" name="evozon_banner_plain_text" template="catalog/category/banner.phtml"/>
         </reference>   
     </catalog_category_default>
+        
+    <customer_account_edit>
+        <reference name="customer_edit">
+            <action method="setTemplate">
+                <template>customer/form/edit.phtml</template>
+            </action>
+        </reference>
+    </customer_account_edit>
+    
+    <customer_account_create>
+        <reference name="customer_form_register">
+            <action method="setTemplate">
+                <template>customer/form/register.phtml</template>
+            </action>
+        </reference>
+    </customer_account_create>
+    
+    <checkout_onepage_index>
+        <reference name="checkout.onepage.billing">
+            <action method="setTemplate">
+                <template>checkout/onepage/billing.phtml</template>
+            </action>
+        </reference>
+    </checkout_onepage_index>
+    
 </layout>
