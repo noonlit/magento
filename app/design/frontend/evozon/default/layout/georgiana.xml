@@ -1,7 +1,7 @@
 <layout version="0.1.0">
     <catalog_category_layered>  
         <reference name="category.products">
-             <block type="evozon_georgiana/banner" name="evozon_banner" template="catalog/category/banner.phtml"/>
+            <block type="evozon_georgiana/banner" name="evozon_banner" template="catalog/category/banner.phtml"/>
 
             <block type="evozon_georgiana/georgiana" name="evozon_georgiana_text" template="catalog/category/georgiana.phtml"/>
         </reference>      
@@ -14,5 +14,29 @@
             <block type="evozon_georgiana/georgiana" name="evozon_georgiana_text" template="catalog/category/georgiana.phtml"/>
         </reference>      
     </catalog_category_default>
+    
+    <customer_account_edit>
+        <reference name="customer_edit">
+            <action method="setTemplate">
+                <template>customer/form/edit.phtml</template>
+            </action>
+        </reference>
+    </customer_account_edit>
 
+    
+    <customer_account_create>
+        <reference name="customer_form_register">
+            <action method="setTemplate">
+                <template>customer/form/register.phtml</template>
+            </action>
+        </reference>
+    </customer_account_create>
+    
+    <checkout_onepage_index>
+        <reference name="checkout.onepage.billing">
+            <action method="setTemplate">
+                <template>checkout/onepage/billing.phtml</template>
+            </action>
+        </reference>
+    </checkout_onepage_index>
 </layout>

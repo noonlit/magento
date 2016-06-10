@@ -10,10 +10,10 @@ $entityTypeId     = $setup->getEntityTypeId('customer');
 $attributeSetId   = $setup->getDefaultAttributeSetId($entityTypeId);
 $attributeGroupId = $setup->getDefaultAttributeGroupId($entityTypeId, $attributeSetId);
 
-$installer->addAttribute("customer", "customattribute",  array(
+$installer->addAttribute("customer", "cnp",  array(
     "type"     => "varchar",
     "backend"  => "",
-    "label"    => "My attribute",
+    "label"    => "CNP",
     "input"    => "text",
     "source"   => "",
     "visible"  => true,
@@ -25,24 +25,24 @@ $installer->addAttribute("customer", "customattribute",  array(
 
         ));
 
-        $attribute   = Mage::getSingleton("eav/config")->getAttribute("customer", "customattribute");
+        $attribute   = Mage::getSingleton("eav/config")->getAttribute("customer", "cnp");
 
 
 $setup->addAttributeToGroup(
     $entityTypeId,
     $attributeSetId,
     $attributeGroupId,
-    'customattribute',
+    'cnp',
     '999'  //sort_order
 );
 
 $used_in_forms=array();
 
 $used_in_forms[]="adminhtml_customer";
-//$used_in_forms[]="checkout_register";
-//$used_in_forms[]="customer_account_create";
-//$used_in_forms[]="customer_account_edit";
-//$used_in_forms[]="adminhtml_checkout";
+$used_in_forms[]="checkout_register";
+$used_in_forms[]="customer_account_create";
+$used_in_forms[]="customer_account_edit";
+$used_in_forms[]="adminhtml_checkout";
         $attribute->setData("used_in_forms", $used_in_forms)
                 ->setData("is_used_for_customer_segment", true)
                 ->setData("is_system", 0)
