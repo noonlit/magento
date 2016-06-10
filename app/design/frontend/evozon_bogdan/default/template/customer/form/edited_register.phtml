@@ -34,7 +34,7 @@
 ?>
 <div class="account-create">
     <div class="page-title">
-        <h1><?php echo $this->__('Create an Account33') ?></h1>
+        <h1><?php echo $this->__('Create an Account15') ?></h1>
     </div>
     <?php
 //    $customer = Mage::getModel('customer/form_register');
@@ -54,9 +54,9 @@
                     <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getFormData())->setForceUseCustomerAttributes(true)->toHtml() ?>
                 </li>
                 <li>
-                    <label for="cnp" class="required"><em>*</em><?php echo $this->__('CNP') ?></label>
+                    <label for="cnp"><?php echo $this->__('CNP') ?></label>
                     <div class="input-box">
-                        <input type="text" name="cnp" id="cnp" value="<?php echo $this->escapeHtml($this->getFormData()->getCNP()) ?>" title="<?php echo Mage::helper('core')->quoteEscape($this->__('cnp')) ?>" class="input-text required-entry" />
+                        <input type="text" name="cnp" id="cnp" value="<?php echo $this->escapeHtml($this->getFormData()->getCnp()) ?>" title="<?php echo $this->__('CNP') ?>" class="input-text" />
                     </div>
                 </li>
                 <li>
