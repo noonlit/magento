@@ -14,7 +14,7 @@ $installer->addAttribute(
         'label'                => 'CNP',
         'input'                => 'text',
         'source'               => '',
-        'required'             => 1,
+        'required'             => 0,
         'position'             => 999,
         'visible_on_front'     => 1,
         'user_defined'         => 1,
@@ -26,6 +26,7 @@ Mage::getSingleton('eav/config')
     ->getAttribute('customer', 'CNP')
     ->setData('used_in_forms', array(
         'adminhtml_customer',
+        'adminhtml_checkout',
         'checkout_register',
         'customer_account_create',
         'customer_account_edit'))

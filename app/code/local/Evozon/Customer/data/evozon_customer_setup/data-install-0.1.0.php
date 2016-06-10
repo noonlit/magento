@@ -11,7 +11,7 @@ $attrData = array(
     'attribute_id' => $id,
     'website_id' => 1,
     'is_visible' => 1,
-    'is_required' => 1,
+    'is_required' => 0,
     'default_value' => null,
     'multiline_count' => null
 );
