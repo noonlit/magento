@@ -10,7 +10,11 @@
         <models>
             
         </models>
-       
+        <blocks>
+            <evozon_bogdan_customer>
+                <class>Evozon_Bogdan_Customer_Block</class>
+            </evozon_bogdan_customer>
+        </blocks>
         <resources>
             <evozon_bogdan_customer_setup>
                 <setup>
@@ -41,7 +45,7 @@
                 </cnp>
             </customer_account>
 
-<!--            <checkout_onepage_quote>
+            <!--            <checkout_onepage_quote>
                 <customer_cnp>
                     <to_customer>school</to_customer>
                 </customer_cnp>

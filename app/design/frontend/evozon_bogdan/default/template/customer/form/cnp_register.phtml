@@ -1,0 +1,28 @@
+
+<?php //if I can change the domElement then I can add the new li element    ?>
+<?php
+
+//loading the block for the register form 
+$htmlForm = $this->getLayout()->createBlock('customer/form_register')->setTemplate('persistent/customer/form/register.phtml')->toHTml()
+?> 
+
+<?php
+//loading the block for the new cnp input
+$htmlInput = $this->getLayout()->createBlock('evozon_bogdan_customer/form_newregister')->setTemplate('customer/form/cnp_input.phtml')->toHTml()
+?> 
+<?php //var_dump($htmlForm);   ?>
+<?php
+
+//convert the html form into an html dom object
+$html = new DOMDocument();
+$html->loadHtml($htmlForm);
+//load the ul element
+$ul = $html->getElementsByTagName('ul')->item(0);
+//load the li element
+$li = $html->getElementsByTagName('li');
+//create a new li element with the cnp html input 
+$element = $html->createCDATASection($htmlInput);
+//add the new li element before li - item(1)
+$ul->insertBefore($element, $li->item(1));
+// output the result
+echo $html->saveHTML();
