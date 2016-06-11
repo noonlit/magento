@@ -11,6 +11,39 @@
                 <class>Evozon_Delia_Block</class>
             </evozon_delia>
         </blocks>
+        <models>
+            <evozon_delia>
+                <class>Evozon_Delia_Model</class>
+                <resourceModel>evozon_delia_resource</resourceModel>
+            </evozon_delia>
+            <evozon_delia_resource>
+                <class>Evozon_Delia_Model_Resource</class>
+                <entities>
+                    <delia>
+                        <table>evozon_delia_banners</table>
+                    </delia>
+                </entities>
+            </evozon_delia_resource>
+        </models>
+        
+        <resources>
+            <evozon_delia_setup>
+                <setup>
+                    <module>Evozon_Delia</module>
+                    <class>Evozon_Delia_Model_Resource_Setup</class>
+                </setup>
+            </evozon_delia_setup>
+            <evozon_delia_write>
+                <connection>
+                    <use>default_write</use>
+                </connection>
+            </evozon_delia_write>
+            <evozon_delia_read>
+                <connection>
+                    <use>default_read</use>
+                </connection>
+            </evozon_delia_read>
+        </resources>
     </global>
     <frontend>
         <layout>
