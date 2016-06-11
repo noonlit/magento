@@ -1,8 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <config>
     <modules>
-        <Evozon_Delia_Configviewer>
+        <Evozon_Delia>
             <active>true</active>
             <codePool>local</codePool>
-        </Evozon_Delia_Configviewer>
+        </Evozon_Delia>
     </modules>
 </config>
