@@ -1,13 +1,11 @@
 <?php $questions = $this->fetchQuestions();
 ?>
 <div class="reviews-container">
-    <?php foreach ($questions as $question) {
-        ?><div class="row-question"><h2>
-                <?php $questionID = $question->getData('question_id');
-                echo $question->getText();
-                $answer = $this->fetchAnswer($questionID);
-                Mage::log($answer,null,'myLog.log');
-                ?>
-            </h2></div>
-<?php } ?>
+    <?php foreach ($questions as $question): ?>
+        <div class="row-question">
+            <p><?= $question->getData('email');?></p>
+            <p><?= $question->getData('text');?></p>
+            <p><?= $question->getData('answer');?></p>
+        </div>
+    <?php endforeach; ?>
 </div>
