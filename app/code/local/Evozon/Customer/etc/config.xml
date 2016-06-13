@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+<config>
+
+    <modules>
+        <Evozon_Customer>
+            <version>0.1.0</version>
+        </Evozon_Customer>
+    </modules>
+
+    <global>
+        <resources>
+            <evozon_customer_setup>
+                <setup>
+                    <module>Evozon_Customer</module>
+                    <class>Evozon_Customer_Model_Resource_Setup</class>
+                    <connection>
+                        <use>core_setup</use>
+                    </connection>
+                </setup>
+            </evozon_customer_setup>
+
+            <evozon_customer_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </evozon_customer_read>
+
+            <evozon_customer_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </evozon_customer_write>
+
+        </resources>
+    </global>
+
+    <fornted>
+        <layout>
+            <updates>
+                <evozon_customer>
+                    <file>evozon_customer.xml</file>
+                </evozon_customer>
+            </updates>
+        </layout>
+    </fornted>
+</config>
