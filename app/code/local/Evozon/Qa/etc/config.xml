@@ -24,9 +24,9 @@
                     <question>
                         <table>evozon_questions</table>
                     </question>
-<!--                    <mediator>
+                    <answer>
                         <table>evozon_answers</table>
-                    </mediator>-->
+                    </answer>
                 </entities>
             </evozon_qa_resource>
         </models>
