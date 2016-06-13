@@ -6,7 +6,7 @@ class Evozon_Qa_Model_Resource_Question_Collection extends Mage_Core_Model_Resou
     protected function _construct()
     {
         //sets the model class for the collection items
-        $this->_init('evozon_catalog/qa');
+        $this->_init('evozon_qa/question');
     }
 
 }
