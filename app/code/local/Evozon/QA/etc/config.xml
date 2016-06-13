@@ -4,4 +4,21 @@
             <version>0.1.0</version>
         </Evozon_QA>
     </modules>
+    <global>
+        <blocks>
+            <evozon_qa>
+                <class>Evozon_QA_Block</class>
+            </evozon_qa>
+        </blocks>         
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <evozon_qa>
+                    <file>form.xml</file>
+                </evozon_qa>                
+            </updates>                
+        </layout>
+    </frontend>	
 </config>
+
