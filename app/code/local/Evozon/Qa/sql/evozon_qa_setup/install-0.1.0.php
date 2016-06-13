@@ -4,7 +4,7 @@
  */
 
 /**
- * Create table 'evozon_qa/questions'
+ * Create table 'evozon_qa/question'
  */
 
 Mage::log('Started install-0.1.0', null, 'scripts.log');

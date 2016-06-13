@@ -12,11 +12,8 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
     public function fetchQuestions()
     {
         $collection = $this->getCollection();
-        $currentCategoryId = Mage::registry('current_category')->getId();
-//        $collection->addFieldToFilter('category_id', $currentCategoryId)
-//                ->join(array('mediator' => 'mediator'), 'main_table.banner_id = mediator.banner_id')
-//                ->getSelect();
-        Mage::log($collection, null, "myLog.log");
+        $currentProductId = Mage::registry('current_product')->getId();
+        $collection->addFieldToFilter('product_id', $currentProductId);
         return $collection;
     }
 
