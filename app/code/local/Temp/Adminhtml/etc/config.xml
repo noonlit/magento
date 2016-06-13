@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Evozon_Qa_Adminhtml>
+            <version>0.1.0</version> 
+        </Evozon_Qa_Adminhtml>
+    </modules>
+    <global>
+        <helpers>
+            <evozon_qa_adminhtml>
+                <class>Evozon_Qa_Adminhtml_Helper</class>
+            </evozon_qa_adminhtml>
+        </helpers>
+    </global> 
+</config>

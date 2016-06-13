@@ -1,0 +1,25 @@
+<config>	
+    <modules>
+        <Evozon_Qa>
+            <version>0.1.0</version>
+        </Evozon_Qa>
+    </modules>
+    <global>
+        <helpers>
+            <evozon_qa_adminhtml>
+                <class>Evozon_Qa_Adminhtml_Helper</class>
+            </evozon_qa_adminhtml>
+        </helpers>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <custom_menu after="Mage_Adminhtml">Evozon_Qa_Adminhtml</custom_menu>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+</config>

@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<layout>
+    <adminhtml_menu_index>
+        <reference name="content">
+            <block type="menu/adminhtml_menu" name="menu_grid_container" />
+        </reference>
+    </adminhtml_menu_index>
+
+    <adminhtml_menu_edit>
+        <reference name="head">
+<!--            <action method="addJs"><file>custom-menu/admin.js</file></action>-->
+        </reference>
+        <reference name="content">
+            <block type="menu/adminhtml_menu_edit" name="menu_edit_container" />
+        </reference>
+    </adminhtml_menu_edit>
+
+    <adminhtml_menu_grid>
+        <remove name="root" />
+        <block type="menu/adminhtml_menu_grid" name="menu_grid" output="toHtml" />
+    </adminhtml_menu_grid>
+</layout>

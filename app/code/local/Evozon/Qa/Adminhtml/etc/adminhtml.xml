@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <custom_tab module="evozon_qa_adminhtml" translate="title">
+            <title>Q A Management</title>
+            <sort_order>100</sort_order>
+            <children>
+                <qa_adminhtml>
+                    <title>Q A Panel</title>
+                    <sort_order>1</sort_order>
+                    <action>adminhtml/qa/</action>
+                </qa_adminhtml>
+                <list module="evozon_qa_adminhtml" translate="title">
+                    <title>List Action</title>
+                    <sort_order>2</sort_order>
+                    <action>adminhtml/qa/list</action>
+                </list>
+            </children>
+        </custom_tab>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>                
+                    <evozon_qa translate="title" module="evozon_qa_adminhtml">
+                        <title>QA Item</title>
+                        <sort_order>1</sort_order>
+                        <children>
+                            <example>
+                                <title>Qa Element</title>
+                            </example>
+                        </children>
+                    </evozon_qa>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
