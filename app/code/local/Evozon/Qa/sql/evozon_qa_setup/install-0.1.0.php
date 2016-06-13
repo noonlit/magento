@@ -27,6 +27,14 @@ if ($installer->getConnection()->isTableExists($tableName) != true) {
             ->addColumn('status', Varien_Db_Ddl_Table::TYPE_TEXT, 50, array(
                 'nullable' => false
             ), 'Question status')
+           ->addColumn('product_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
+                'unsigned' => true,
+                'nullable' => false,
+                    ), 'Product Id')
+            ->addColumn('customer_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
+                'unsigned' => true,
+                'nullable' => false,
+                    ), 'Customer Id')
             ->addForeignKey(
                 $installer->getFkName(
                     'evozon_qa/question', 'product_id', 'catalog/product', 'entity_id'
