@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config>
     <menu>
-        <custom_tab module="evozon_qa_adminhtml" translate="title">
+        <qa module="evozon_qa_adminhtml" translate="title">
             <title>Q A Management</title>
             <sort_order>100</sort_order>
             <children>
@@ -16,7 +16,7 @@
                     <action>adminhtml/qa/list</action>
                 </list>
             </children>
-        </custom_tab>
+        </qa>
     </menu>
     <acl>
         <resources>
