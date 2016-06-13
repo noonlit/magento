@@ -1,15 +1,21 @@
 <config>	
     <modules>
-        <Evozon_Qa>
+        <Evozon_Qa_Adminhtml>
             <version>0.1.0</version>
-        </Evozon_Qa>
+        </Evozon_Qa_Adminhtml>
     </modules>
     <global>
+        <blocks>
+            <evozon_qa_adminhtml>
+                <class>Evozon_Qa_Adminhtml_Block</class>
+            </evozon_qa_adminhtml>
+        </blocks>
         <helpers>
             <evozon_qa_adminhtml>
                 <class>Evozon_Qa_Adminhtml_Helper</class>
             </evozon_qa_adminhtml>
         </helpers>
+        
     </global>
     <admin>
         <routers>
