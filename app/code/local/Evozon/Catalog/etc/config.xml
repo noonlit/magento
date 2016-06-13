@@ -3,10 +3,11 @@
 <config>	
     <modules>
         <Evozon_Catalog>
-            <version>0.1.7</version>
+            <version>0.1.2</version>
         </Evozon_Catalog>
     </modules>
     
+
     <global>
         <blocks>
             <evozon_catalog>
@@ -14,6 +15,8 @@
             </evozon_catalog>
         </blocks>
         
+            
+
         <models>
             <evozon_catalog>
                 <class>Evozon_Catalog_Model</class>
