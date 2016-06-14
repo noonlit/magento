@@ -1,6 +1,6 @@
 <?php
 
-class Evozon_Qa_Block_Adminhtml_Menu_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
+class Evozon_Qa_Adminhtml_Block_Menu_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
 {
 
     public function __construct()
@@ -8,8 +8,8 @@ class Evozon_Qa_Block_Adminhtml_Menu_Edit extends Mage_Adminhtml_Block_Widget_Fo
         parent::__construct();
 
         $this->_objectId = 'id';
-        $this->_blockGroup = 'awesome';
-        $this->_controller = 'adminhtml_example';
+        $this->_blockGroup = 'evozon_qa_adminhtml';
+        $this->_controller = 'menu';
         $this->_mode = 'edit';
 
         $this->_addButton('save_and_continue', array(
@@ -17,7 +17,7 @@ class Evozon_Qa_Block_Adminhtml_Menu_Edit extends Mage_Adminhtml_Block_Widget_Fo
             'onclick' => 'saveAndContinueEdit()',
             'class' => 'save',
                 ), -100);
-        $this->_updateButton('save', 'label', Mage::helper('awesome')->__('Save Example'));
+        $this->_updateButton('save', 'label', Mage::helper('evozon_qa_adminhtml')->__('Save Example'));
 
         $this->_formScripts[] = "
             function toggleEditor() {
@@ -37,9 +37,9 @@ class Evozon_Qa_Block_Adminhtml_Menu_Edit extends Mage_Adminhtml_Block_Widget_Fo
     public function getHeaderText()
     {
         if (Mage::registry('example_data') && Mage::registry('example_data')->getId()) {
-            return Mage::helper('awesome')->__('Edit Example "%s"', $this->htmlEscape(Mage::registry('example_data')->getName()));
+            return Mage::helper('evozon_qa_adminhtml')->__('Edit Example "%s"', $this->htmlEscape(Mage::registry('example_data')->getName()));
         } else {
-            return Mage::helper('awesome')->__('New Example');
+            return Mage::helper('evozon_qa_adminhtml')->__('New Example');
         }
     }
 
