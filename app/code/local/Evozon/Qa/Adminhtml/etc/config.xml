@@ -28,4 +28,22 @@
             </adminhtml>
         </routers>
     </admin>
+    <frontend>
+        <layout>
+            <updates>
+                <qa_menu>
+                    <file>menu.xml</file>
+                </qa_menu>
+            </updates>
+        </layout>
+    </frontend>
+    <adminhtml>
+        <layout>
+            <updates>
+                <qa_menu2>
+                    <file>qa_menu.xml</file>
+                </qa_menu2>
+            </updates>
+        </layout>
+    </adminhtml>
 </config>

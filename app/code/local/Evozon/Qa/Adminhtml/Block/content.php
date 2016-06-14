@@ -1,6 +1,6 @@
 <?php
 
-class Evozon_Qa_Adminhtml_Block_Conent extends Mage_Adminhtml_Block_Widget_Grid_Container
+class Evozon_Qa_Adminhtml_Block_Content extends Mage_Adminhtml_Block_Template
 {
     /**
      * Init grid container
