@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<layout>
+    <adminhtml_qa_index>
+        <reference name="content">
+            <block type="evozon_qa_adminhtml/menu" name="menu_grid_container" />
+        </reference>
+    </adminhtml_qa_index>
+
+    <adminhtml_qa_edit>
+        <reference name="head">
+            <action method="addJs"><file>custom-menu/admin.js</file></action>
+        </reference>
+        <reference name="content">
+            <block type="evozon_qa_adminhtml/menu_edit" name="menu_edit_container" />
+        </reference>
+    </adminhtml_qa_edit>
+
+    <adminhtml_qa_grid>
+        <remove name="root" />
+        <block type="evozon_qa_adminhtml/menu_grid" name="menu_grid" output="toHtml" />
+    </adminhtml_qa_grid>
+</layout>
