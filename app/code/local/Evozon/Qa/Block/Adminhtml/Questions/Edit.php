@@ -8,7 +8,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Edit extends Mage_Adminhtml_Block_Widg
         parent::__construct();
 
         $this->_objectId = 'id';
-        $this->_blockGroup = 'evozon_qa_adminhtml';
+        $this->_blockGroup = 'evozon_qa_adminhtml'; //block_adminhtml tag
         $this->_controller = 'questions';
         $this->_mode = 'edit';
 
@@ -17,7 +17,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Edit extends Mage_Adminhtml_Block_Widg
             'onclick' => 'saveAndContinueEdit()',
             'class' => 'save',
                 ), -100);
-        $this->_updateButton('save', 'label', Mage::helper('evozon_qa')->__('Save Example'));
+        $this->_updateButton('save', 'label', Mage::helper('evozon_qa')->__('Save Question'));
 
         $this->_formScripts[] = "
             function toggleEditor() {
@@ -33,13 +33,13 @@ class Evozon_Qa_Block_Adminhtml_Questions_Edit extends Mage_Adminhtml_Block_Widg
             }
         ";
     }
-
+//header of the form
     public function getHeaderText()
     {
         if (Mage::registry('example_data') && Mage::registry('example_data')->getId()) {
-            return Mage::helper('evozon_qa')->__('Edit Example "%s"', $this->htmlEscape(Mage::registry('example_data')->getName()));
+            return Mage::helper('evozon_qa')->__('Edit Question "%s"', $this->htmlEscape(Mage::registry('example_data')->getQuestionId()));
         } else {
-            return Mage::helper('evozon_qa')->__('New Example');
+            return Mage::helper('evozon_qa')->__('New Question');
         }
     }
 
