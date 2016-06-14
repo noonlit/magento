@@ -1,0 +1,30 @@
+.row-question {
+    color: #000;
+    background-color: #f4f4f4;
+    border: 1px solid #cccccc;
+    padding: 5px;
+}
+.row-answer {
+    color: #000;
+    background-color: #f4f4f4;
+    padding: 2px 0 0 5px;
+    margin: 0 20px 10px ;
+    border: 1px solid #cccccc;
+}
+
+#qa_name {
+    color: #3399cc;
+    font-size: 90%;
+}
+
+#qa_text {
+    color: #636363;
+    font-size: 125%;
+    font-weight: lighter;
+}
+
+#q_submit_button {
+    background-color: #fff;
+    border: none;
+    color: #3399cc;
+}
