@@ -1,7 +1,8 @@
-<form action="" id="qa_form" method="post">  
+<form action="<?php echo $this->getUrl('question/question/add') ?>" id="qa_form" method="post">  
     <label for="qa_question"><?php echo $this->__('Question') ?></label>
     <div class="input-box">        
         <input type="text" name="qa_question" id="qa_question" placeholder="Type your question here..." spellcheck="true" value="" autocomplete="off">
+        <input type="hidden" name="qa_current_product" id="qa_current_product" value="<?php echo $this->getCurrentProductId()?>">
         <input type="submit" value="Submit">        
     </div>
 </form>
@@ -15,6 +16,7 @@
 <?php
     echo '<script type="text/javascript">tempAlert();</script>';
 ?>
+
 
 
 
