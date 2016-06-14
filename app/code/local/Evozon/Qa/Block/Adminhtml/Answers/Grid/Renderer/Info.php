@@ -23,7 +23,7 @@ class Evozon_Qa_Adminhtml_Block_Answers_Grid_Renderer_Info
     public function render(Varien_Object $row)
     {
         //LOOOK THIS UP
-        $helper = Mage::helper('evozon_qa_adminhtml');
+        $helper = Mage::helper('evozon_qa');
         switch ($row->getType()) {
             case VF_CustomMenu_Model_Resource_Menu_Attribute_Source_Type::LINK_INTERNAL:
                 return '<strong>' . $helper->__('Path') . ':</strong> ' . $row->getUrl();

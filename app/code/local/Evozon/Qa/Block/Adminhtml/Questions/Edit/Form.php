@@ -11,7 +11,7 @@
  *
  * @author bogdanhaidu
  */
-class Evozon_Qa_Adminhtml_Block_Questions_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
+class Evozon_Qa_Block_Adminhtml_Questions_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
 {
     /**
      * prepare the form
@@ -46,26 +46,26 @@ class Evozon_Qa_Adminhtml_Block_Questions_Edit_Form extends Mage_Adminhtml_Block
         $this->setForm($form);
  
         $fieldset = $form->addFieldset('example_form', array(
-             'legend' =>Mage::helper('evozon_qa_adminhtml')->__('Example Information')
+             'legend' =>Mage::helper('evozon_qa')->__('Example Information')
         ));
  
         $fieldset->addField('name', 'text', array(
-             'label'     => Mage::helper('evozon_qa_adminhtml')->__('Name'),
+             'label'     => Mage::helper('evozon_qa')->__('Name'),
              'class'     => 'required-entry',
              'required'  => true,
              'name'      => 'name',
-             'note'     => Mage::helper('evozon_qa_adminhtml')->__('The name of the example.'),
+             'note'     => Mage::helper('evozon_qa')->__('The name of the example.'),
         ));
  
         $fieldset->addField('description', 'text', array(
-             'label'     => Mage::helper('evozon_qa_adminhtml')->__('Description'),
+             'label'     => Mage::helper('evozon_qa')->__('Description'),
              'class'     => 'required-entry',
              'required'  => true,
              'name'      => 'description',
         ));
  
         $fieldset->addField('other', 'text', array(
-             'label'     => Mage::helper('evozon_qa_adminhtml')->__('Other'),
+             'label'     => Mage::helper('evozon_qa')->__('Other'),
              'class'     => 'required-entry',
              'required'  => true,
              'name'      => 'other',

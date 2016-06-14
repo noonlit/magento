@@ -1,6 +1,6 @@
 <?php
 
-class Evozon_Qa_Adminhtml_Block_Questions_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
+class Evozon_Qa_Block_Adminhtml_Questions_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
 {
 
     public function __construct()
@@ -17,7 +17,7 @@ class Evozon_Qa_Adminhtml_Block_Questions_Edit extends Mage_Adminhtml_Block_Widg
             'onclick' => 'saveAndContinueEdit()',
             'class' => 'save',
                 ), -100);
-        $this->_updateButton('save', 'label', Mage::helper('evozon_qa_adminhtml')->__('Save Example'));
+        $this->_updateButton('save', 'label', Mage::helper('evozon_qa')->__('Save Example'));
 
         $this->_formScripts[] = "
             function toggleEditor() {
@@ -37,9 +37,9 @@ class Evozon_Qa_Adminhtml_Block_Questions_Edit extends Mage_Adminhtml_Block_Widg
     public function getHeaderText()
     {
         if (Mage::registry('example_data') && Mage::registry('example_data')->getId()) {
-            return Mage::helper('evozon_qa_adminhtml')->__('Edit Example "%s"', $this->htmlEscape(Mage::registry('example_data')->getName()));
+            return Mage::helper('evozon_qa')->__('Edit Example "%s"', $this->htmlEscape(Mage::registry('example_data')->getName()));
         } else {
-            return Mage::helper('evozon_qa_adminhtml')->__('New Example');
+            return Mage::helper('evozon_qa')->__('New Example');
         }
     }
 

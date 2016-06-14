@@ -11,7 +11,7 @@
  *
  * @author bogdanhaidu
  */
-class Evozon_Qa_Adminhtml_Model_Questions extends Mage_Core_Model_Abstract
+class Evozon_Qa_Model_Adminhtml_Answers extends Mage_Core_Model_Abstract
 {
     /**
      * Initialize resources
@@ -20,7 +20,7 @@ class Evozon_Qa_Adminhtml_Model_Questions extends Mage_Core_Model_Abstract
      */
     protected function _construct()
     {
-        $this->_init('evozon_qa_adminhtml/questions');
+        $this->_init('evozon_qa/answer');
     }
     /**
      * Get default category id

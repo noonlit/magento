@@ -4,13 +4,5 @@
             <active>true</active>
             <codePool>local</codePool>
         </Evozon_Qa>   
-        <Evozon_Qa_admin>
-            <active>true</active>
-            <codePool>local</codePool>
-        </Evozon_Qa_admin>
-        <Evozon_Qa_Adminhtml>
-            <active>true</active>
-            <codePool>local</codePool>
-        </Evozon_Qa_Adminhtml>
     </modules>
 </config>

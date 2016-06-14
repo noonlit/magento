@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config>
     <menu>
-        <qa module="evozon_qa_adminhtml" translate="title">
+        <qa module="evozon_qa" translate="title">
             <title>Q A Management</title>
             <sort_order>100</sort_order>
             <children>
@@ -10,7 +10,7 @@
                     <sort_order>1</sort_order>
                     <action>adminhtml/qa/</action>
                 </qa_adminhtml>
-                <answers module="evozon_qa_adminhtml" translate="title">
+                <answers module="evozon_qa" translate="title">
                     <title>See Answers</title>
                     <sort_order>2</sort_order>
                     <action>adminhtml/qa/answers</action>
@@ -22,7 +22,7 @@
         <resources>
             <admin>
                 <children>                
-                    <evozon_qa translate="title" module="evozon_qa_adminhtml">
+                    <evozon_qa translate="title" module="evozon_qa">
                         <title>QA Item</title>
                         <sort_order>1</sort_order>
                         <children>

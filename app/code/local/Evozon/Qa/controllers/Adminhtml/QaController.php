@@ -17,7 +17,7 @@
  * please refer to http://www.magentocommerce.com for more information.
  *
  * @category   Evozon Qa
- * @package    Evozon Qa Adminhtml //NEED TO LEARN ABOUT PACKAGE
+ * @package    Evozon Qa Adminhtml
  * @copyright  Copyright (C) 2016 Evozon Internship (https://github.com/noonlit/magento.git branch develop)
  * @license    Bla Bla
  */
@@ -74,7 +74,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     public function editAction()
     {
         $id = $this->getRequest()->getParam('id', null);
-        $model = Mage::getModel('evozon_qa_adminhtml/questions'); //adminhtml questions model
+        $model = Mage::getModel('evozon_qa/adminhtml_questions'); //adminhtml questions model
         if ($id) {
             $model->load((int) $id);
             if ($model->getId()) {
@@ -83,11 +83,11 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
                     $model->setData($data)->setId($id); //TODO search wat is this
                 }
             } else {
-                Mage::getSingleton('adminhtml/session')->addError(Mage::helper('evozon_qa_adminhtml')->__('Example does not exist'));
+                Mage::getSingleton('adminhtml/session')->addError(Mage::helper('evozon_qa')->__('Example does not exist'));
                 $this->_redirect('*/*/');
             }
         }
-        //TODO WHAT name to put instead of example_data ?
+        //TODO WHAT name to put instead of example_data ??
         Mage::register('example_data', $model); 
 
         $this->loadLayout();
@@ -98,7 +98,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     public function saveAction()
     {
         if ($data = $this->getRequest()->getPost()) {
-            $model = Mage::getModel('evozon_qa_adminhtml/questions');
+            $model = Mage::getModel('evozon_qa/adminhtml_questions');
             $id = $this->getRequest()->getParam('id');
             if ($id) {
                 $model->load($id);
@@ -113,10 +113,10 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
                 $model->save();
 
                 if (!$model->getId()) {
-                    Mage::throwException(Mage::helper('evozon_qa_adminhtml')->__('Error saving example'));
+                    Mage::throwException(Mage::helper('evozon_qa')->__('Error saving example'));
                 }
 
-                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa_adminhtml')->__('Example was successfully saved.'));
+                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa')->__('Example was successfully saved.'));
                 Mage::getSingleton('adminhtml/session')->setFormData(false);
 
                 // The following line decides if it is a "save" or "save and continue"
@@ -136,7 +136,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
 
             return;
         }
-        Mage::getSingleton('adminhtml/session')->addError(Mage::helper('evozon_qa_adminhtml')->__('No data found to save'));
+        Mage::getSingleton('adminhtml/session')->addError(Mage::helper('evozon_qa')->__('No data found to save'));
         $this->_redirect('*/*/');
     }
 
@@ -144,10 +144,10 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     {
         if ($id = $this->getRequest()->getParam('id')) {
             try {
-                $model = Mage::getModel('evozon_qa_adminhtml/questions');
+                $model = Mage::getModel('evozon_qa/adminhtml_questions');
                 $model->setId($id);
                 $model->delete();
-                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa_adminhtml')->__('The example has been deleted.'));
+                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa')->__('The example has been deleted.'));
                 $this->_redirect('*/*/');
                 return;
             } catch (Exception $e) {
