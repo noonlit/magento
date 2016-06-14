@@ -11,7 +11,7 @@
  *
  * @author bogdanhaidu
  */
-class Evozon_Qa_Adminhtml_Block_Menu_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
+class Evozon_Qa_Adminhtml_Block_Answers_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
 {
     /**
      * prepare the form

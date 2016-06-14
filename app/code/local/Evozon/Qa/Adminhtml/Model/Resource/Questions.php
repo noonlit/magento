@@ -11,7 +11,7 @@
  *
  * @author bogdanhaidu
  */
-class Evozon_Qa_Adminhtml_Model_Resource_Menu extends Mage_Core_Model_Resource_Db_Abstract
+class Evozon_Qa_Adminhtml_Model_Resource_Questions extends Mage_Core_Model_Resource_Db_Abstract
 {
     /**
      * Init
@@ -20,6 +20,6 @@ class Evozon_Qa_Adminhtml_Model_Resource_Menu extends Mage_Core_Model_Resource_D
      */
     protected function _construct()
     {
-        $this->_init('evozon_qa_adminhtml/menu', 'question_id');
+        $this->_init('evozon_qa_adminhtml/questions', 'question_id');
     }
 }

@@ -18,10 +18,9 @@
             <evozon_qa_adminhtml_resource>
                 <class>Evozon_Qa_Adminhtml_Model_Resource</class>
                 <entities>
-                    <menu>
-                        <!--                        CHANGE WITH THE TABLE NAME-->
+                    <questions>
                         <table>evozon_questions</table>
-                    </menu>
+                    </questions>
                     <answers>
                         <table>evozon_answers</table>
                     </answers>

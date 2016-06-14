@@ -7,7 +7,7 @@
  *
  * @author bogdanhaidu
  */
-class Evozon_Qa_Adminhtml_Model_Resource_Menu_Attribute_Source_Type
+class Evozon_Qa_Adminhtml_Model_Resource_Questions_Attribute_Source_Type
 {
     const LINK_INTERNAL = 1;
     const LINK_EXTERNAL = 2;
@@ -20,7 +20,7 @@ class Evozon_Qa_Adminhtml_Model_Resource_Menu_Attribute_Source_Type
      */
     public static function getValues()
     {
-        $helper = Mage::helper('menu');
+        $helper = Mage::helper('evozon_qa_adminhtml');
         return array(
             self::LINK_INTERNAL => $helper->__('Link Internal'),
             self::LINK_EXTERNAL => $helper->__('Link External'),

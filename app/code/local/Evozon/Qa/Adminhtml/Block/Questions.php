@@ -1,6 +1,6 @@
 <?php
 
-class Evozon_Qa_Adminhtml_Block_Menu extends Mage_Adminhtml_Block_Widget_Grid_Container
+class Evozon_Qa_Adminhtml_Block_Questions extends Mage_Adminhtml_Block_Widget_Grid_Container
 {
 
     /*
@@ -12,7 +12,7 @@ class Evozon_Qa_Adminhtml_Block_Menu extends Mage_Adminhtml_Block_Widget_Grid_Co
     public function __construct()
     {
         parent::__construct();
-        $this->_controller = 'menu';
+        $this->_controller = 'questions';
         $this->_blockGroup = 'evozon_qa_adminhtml';
         $this->_headerText = Mage::helper('evozon_qa_adminhtml')->__('Qa Panel');
     }

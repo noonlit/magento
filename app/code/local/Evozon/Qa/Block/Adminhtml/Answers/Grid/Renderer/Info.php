@@ -11,7 +11,7 @@
  *
  * @author bogdanhaidu
  */
-class Evozon_Qa_Adminhtml_Block_Menu_Grid_Renderer_Info
+class Evozon_Qa_Adminhtml_Block_Answers_Grid_Renderer_Info
     extends Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Abstract
 {
     /**
@@ -22,7 +22,8 @@ class Evozon_Qa_Adminhtml_Block_Menu_Grid_Renderer_Info
      */
     public function render(Varien_Object $row)
     {
-        $helper = Mage::helper('menu');
+        //LOOOK THIS UP
+        $helper = Mage::helper('evozon_qa_adminhtml');
         switch ($row->getType()) {
             case VF_CustomMenu_Model_Resource_Menu_Attribute_Source_Type::LINK_INTERNAL:
                 return '<strong>' . $helper->__('Path') . ':</strong> ' . $row->getUrl();

@@ -2,7 +2,7 @@
 <layout>
     <adminhtml_qa_index>
         <reference name="content">
-            <block type="evozon_qa_adminhtml/menu" name="menu_grid_container" />
+            <block type="evozon_qa_adminhtml/questions" name="questions_grid_container" />
         </reference>
     </adminhtml_qa_index>
     
@@ -19,12 +19,12 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="evozon_qa_adminhtml/menu_edit" name="menu_edit_container" />
+            <block type="evozon_qa_adminhtml/questions_edit" name="questions_edit_container" />
         </reference>
     </adminhtml_qa_edit>
 
     <adminhtml_qa_grid>
         <remove name="root" />
-        <block type="evozon_qa_adminhtml/menu_grid" name="menu_grid" output="toHtml" />
+        <block type="evozon_qa_adminhtml/questions_grid" name="questions_grid" output="toHtml" />
     </adminhtml_qa_grid>
 </layout>

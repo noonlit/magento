@@ -1,6 +1,6 @@
 <?php
 
-class Evozon_Qa_Adminhtml_Block_Menu_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
+class Evozon_Qa_Adminhtml_Block_Questions_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
 {
 
     public function __construct()
@@ -9,7 +9,7 @@ class Evozon_Qa_Adminhtml_Block_Menu_Edit extends Mage_Adminhtml_Block_Widget_Fo
 
         $this->_objectId = 'id';
         $this->_blockGroup = 'evozon_qa_adminhtml';
-        $this->_controller = 'menu';
+        $this->_controller = 'questions';
         $this->_mode = 'edit';
 
         $this->_addButton('save_and_continue', array(

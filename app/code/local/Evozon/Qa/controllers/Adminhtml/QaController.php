@@ -1,18 +1,51 @@
 <?php
-
+/**
+ * Questions and Answers extension for Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade
+ * the Evozon Q A Adminhtml module to newer versions in the future.
+ * If you wish to customize the Evozon Q A Adminhtml module for your needs
+ * please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   Evozon Qa
+ * @package    Evozon Qa Adminhtml //NEED TO LEARN ABOUT PACKAGE
+ * @copyright  Copyright (C) 2016 Evozon Internship (https://github.com/noonlit/magento.git branch develop)
+ * @license    Bla Bla
+ */
+/**
+ * manage Questions and Answers controller
+ *
+ * @category   Evozon Qa
+ * @package    Evozon Qa Adminhtml 
+ * @subpackage controllers
+ * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
+ */
 class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
 {
 
+    /**
+     * shows the questions grid
+     */
     public function indexAction()
     {
-
         $this->loadLayout();
         $this->_setActiveMenu('qa')
                 ->_title('Q & A Management');
         $this->_addBreadcrumb($this->__('Q A Management'), $this->__('Q A Management'));
         $this->renderLayout();
     }
-
+    /**
+     * shows the answers grid
+     */
     public function answersAction()
     {
         $this->loadLayout();
@@ -21,35 +54,41 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $this->_addBreadcrumb($this->__('Q A Management'), $this->__('Q A Management'));
         $this->renderLayout();
     }
-
+    /**
+     * DON'T KNOW IF THIS WORKS
+     */
     protected function _isAllowed()
     {
         return Mage::getSingleton('admin/session')->isAllowed('qa');
     }
-
+    /**
+     * the first actopm will be edit
+     */
     public function newAction()
     {
         $this->_forward('edit');
     }
-
+    /**
+     * edit action
+     */
     public function editAction()
     {
-
         $id = $this->getRequest()->getParam('id', null);
-        $model = Mage::getModel('evozon_qa_adminhtml/menu');
+        $model = Mage::getModel('evozon_qa_adminhtml/questions'); //adminhtml questions model
         if ($id) {
             $model->load((int) $id);
             if ($model->getId()) {
                 $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
                 if ($data) {
-                    $model->setData($data)->setId($id);
+                    $model->setData($data)->setId($id); //TODO search wat is this
                 }
             } else {
                 Mage::getSingleton('adminhtml/session')->addError(Mage::helper('evozon_qa_adminhtml')->__('Example does not exist'));
                 $this->_redirect('*/*/');
             }
         }
-        Mage::register('example_data', $model);
+        //TODO WHAT name to put instead of example_data ?
+        Mage::register('example_data', $model); 
 
         $this->loadLayout();
         $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
@@ -59,7 +98,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     public function saveAction()
     {
         if ($data = $this->getRequest()->getPost()) {
-            $model = Mage::getModel('evozon_qa_adminhtml/menu');
+            $model = Mage::getModel('evozon_qa_adminhtml/questions');
             $id = $this->getRequest()->getParam('id');
             if ($id) {
                 $model->load($id);
@@ -105,7 +144,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     {
         if ($id = $this->getRequest()->getParam('id')) {
             try {
-                $model = Mage::getModel('evozon_qa_adminhtml/menu');
+                $model = Mage::getModel('evozon_qa_adminhtml/questions');
                 $model->setId($id);
                 $model->delete();
                 Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa_adminhtml')->__('The example has been deleted.'));
