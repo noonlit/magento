@@ -12,5 +12,6 @@
             <active>true</active>
             <codePool>local</codePool>
         </Evozon_Qa_Adminhtml>
+        </Evozon_Qa>    
     </modules>
 </config>
