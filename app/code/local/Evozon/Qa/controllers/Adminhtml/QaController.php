@@ -5,11 +5,26 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
 
     public function indexAction()
     {
+
         $this->loadLayout();
         $this->_setActiveMenu('qa')
                 ->_title('Q & A Management');
         $this->_addBreadcrumb($this->__('Q A Management'), $this->__('Q A Management'));
         $this->renderLayout();
+    }
+
+    public function answersAction()
+    {
+        $this->loadLayout();
+        $this->_setActiveMenu('qa')
+                ->_title('Q & A Management');
+        $this->_addBreadcrumb($this->__('Q A Management'), $this->__('Q A Management'));
+        $this->renderLayout();
+    }
+
+    protected function _isAllowed()
+    {
+        return Mage::getSingleton('admin/session')->isAllowed('qa');
     }
 
     public function newAction()

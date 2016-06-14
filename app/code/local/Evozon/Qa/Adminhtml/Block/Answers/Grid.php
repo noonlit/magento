@@ -11,7 +11,7 @@
  *
  * @author bogdanhaidu
  */
-class Evozon_Qa_Adminhtml_Block_Menu_Grid extends Mage_Adminhtml_Block_Widget_Grid
+class Evozon_Qa_Adminhtml_Block_Answers_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
 
     public function __construct()
@@ -25,7 +25,7 @@ class Evozon_Qa_Adminhtml_Block_Menu_Grid extends Mage_Adminhtml_Block_Widget_Gr
 
     protected function _prepareCollection()
     {
-        $collection = Mage::getModel('evozon_qa_adminhtml/menu')->getCollection();
+        $collection = Mage::getModel('evozon_qa_adminhtml/answers')->getCollection();
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
@@ -33,29 +33,29 @@ class Evozon_Qa_Adminhtml_Block_Menu_Grid extends Mage_Adminhtml_Block_Widget_Gr
     protected function _prepareColumns()
     {
         //NEED TO ADD THE COLUMNS FROM THE QUESTION TABLE
-        $this->addColumn('question_id', array(
+        $this->addColumn('answer_id', array(
             'header' => Mage::helper('evozon_qa_adminhtml')->__('ID'),
             'align' => 'right',
             'width' => '50px',
+            'index' => 'answer_id',
+        ));
+
+        $this->addColumn('question_id', array(
+            'header' => Mage::helper('evozon_qa_adminhtml')->__('Question Id'),
+            'align' => 'left',
             'index' => 'question_id',
         ));
 
-        $this->addColumn('text', array(
-            'header' => Mage::helper('evozon_qa_adminhtml')->__('Text'),
+        $this->addColumn('answer', array(
+            'header' => Mage::helper('evozon_qa_adminhtml')->__('Answer'),
             'align' => 'left',
-            'index' => 'text',
+            'index' => 'answer',
         ));
 
-        $this->addColumn('status', array(
-            'header' => Mage::helper('evozon_qa_adminhtml')->__('Status'),
+        $this->addColumn('user_id', array(
+            'header' => Mage::helper('evozon_qa_adminhtml')->__('User Id'),
             'align' => 'left',
-            'index' => 'status',
-        ));
-
-        $this->addColumn('product_id', array(
-            'header' => Mage::helper('evozon_qa_adminhtml')->__('Product Id'),
-            'align' => 'left',
-            'index' => 'product_id',
+            'index' => 'user_id',
         ));
 
         return parent::_prepareColumns();

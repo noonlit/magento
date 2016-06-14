@@ -7,7 +7,7 @@ $installer->startSetup();
 
 $tableName = $installer->getTable('evozon_qa/answer');
 if($installer->getConnection()->isTableExists($tableName) != true) {
-    $table-> $installer->getConnection()
+    $table =  $installer->getConnection()
         ->newTable($tableName)
         ->addColumn('answer_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
             'primary' => true,
@@ -38,7 +38,7 @@ if($installer->getConnection()->isTableExists($tableName) != true) {
             Varien_Db_Ddl_Table::ACTION_CASCADE, 
             Varien_Db_Ddl_Table::ACTION_CASCADE
         ) 
-        ->addColumn('answer', Varien_Db_Ddl_Table::TYPE_TEXT, null, array(
+        ->addColumn('answer', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array(
             'nullable' => false
         ))
         ->setComment("Answer Tables!");

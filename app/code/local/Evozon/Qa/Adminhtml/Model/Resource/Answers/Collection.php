@@ -7,19 +7,19 @@
  */
 
 /**
- * Description of Menu
+ * Description of Collection
  *
  * @author bogdanhaidu
  */
-class Evozon_Qa_Adminhtml_Model_Resource_Menu extends Mage_Core_Model_Resource_Db_Abstract
+class Evozon_Qa_Adminhtml_Model_Resource_Answers_Collection extends Mage_Core_Model_Resource_Db_Collection_Abstract
 {
     /**
-     * Init
+     * Init menu collection
      *
      * @return void
      */
     protected function _construct()
     {
-        $this->_init('evozon_qa_adminhtml/menu', 'question_id');
+        $this->_init('evozon_qa_adminhtml/answers');
     }
 }

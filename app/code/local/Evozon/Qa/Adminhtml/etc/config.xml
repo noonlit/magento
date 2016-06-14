@@ -19,16 +19,23 @@
                 <class>Evozon_Qa_Adminhtml_Model_Resource</class>
                 <entities>
                     <menu>
-<!--                        CHANGE WITH THE TABLE NAME-->
-                        <table>customer_entity</table>
+                        <!--                        CHANGE WITH THE TABLE NAME-->
+                        <table>evozon_questions</table>
                     </menu>
+                    <answers>
+                        <table>evozon_answers</table>
+                    </answers>
                 </entities>
             </evozon_qa_adminhtml_resource>
         </models>
         <resources>
             <qa_menu_setup>
                 <setup>
-                    <module>Super_Awesome</module>
+                    <module>Evozon_Qa_Adminhtml</module>
+                    <class>Mage_Core_Model_Resource_Setup</class>
+                    <connection>
+                        <use>core_setup</use>
+                    </connection>
                 </setup>
                 <connection>
                     <use>core_setup</use>

@@ -1,7 +1,68 @@
 <config>	
     <modules>
         <Evozon_Qa>
-            <version>0.1.0</version>
+            <version>0.1.1</version>
         </Evozon_Qa>
     </modules>
+    
+    <global>
+        <blocks>
+            <evozon_qa>
+                <class>Evozon_Qa_Block</class>
+            </evozon_qa>
+        </blocks>
+        
+        <models>
+            <evozon_qa>
+                <class>Evozon_Qa_Model</class>
+                <resourceModel>evozon_qa_resource</resourceModel>
+            </evozon_qa>
+            
+            <evozon_qa_resource>
+                <class>Evozon_Qa_Model_Resource</class>
+                <entities>
+                    <question>
+                        <table>evozon_questions</table>
+                    </question>
+                    <answer>
+                        <table>evozon_answers</table>
+                    </answer>
+                </entities>
+            </evozon_qa_resource>
+        </models>
+        
+        <resources>
+            <evozon_qa_setup>
+                <setup>
+                    <module>Evozon_Qa</module>
+                    <class>Evozon_Qa_Model_Resource_Setup</class>
+                    <connection>
+                        <use>core_setup</use>
+                    </connection>
+                </setup>
+                
+                <evozon_qa_write>
+                    <connection>
+                        <use>core_write</use>
+                    </connection>
+                </evozon_qa_write>
+                
+                <evozon_qa_read>
+                    <connection>
+                        <use>core_read</use>
+                    </connection>
+                </evozon_qa_read>
+            </evozon_qa_setup> 
+        </resources>
+    </global>
+    
+    <frontend>
+        <layout>
+            <updates>
+                <evozon_qa>
+                    <file>questions.xml</file>
+                </evozon_qa>                
+            </updates>                
+        </layout>
+    </frontend>
 </config>
