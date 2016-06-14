@@ -10,6 +10,40 @@
                 <class>Evozon_Qa_Adminhtml_Block</class>
             </evozon_qa_adminhtml>
         </blocks>
+        <models>
+            <evozon_qa_adminhtml>
+                <class>Evozon_Qa_Adminhtml_Model</class>
+                <resourceModel>evozon_qa_adminhtml_resource</resourceModel>
+            </evozon_qa_adminhtml>
+            <evozon_qa_adminhtml_resource>
+                <class>Evozon_Qa_Adminhtml_Model_Resource</class>
+                <entities>
+                    <menu>
+                        <table>evozon_test_table</table>
+                    </menu>
+                </entities>
+            </evozon_qa_adminhtml_resource>
+        </models>
+        <resources>
+            <qa_menu_setup>
+                <setup>
+                    <module>Super_Awesome</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </qa_menu_setup>
+            <qa_menu_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </qa_menu_write>
+            <qa_menu_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </qa_menu_read>
+        </resources>
         <helpers>
             <evozon_qa_adminhtml>
                 <class>Evozon_Qa_Adminhtml_Helper</class>
@@ -22,27 +56,18 @@
             <adminhtml>
                 <args>
                     <modules>
-                        <custom_menu after="Mage_Adminhtml">Evozon_Qa_Adminhtml</custom_menu>
+                        <qa_adminhtml after="Mage_Adminhtml">Evozon_Qa_Adminhtml</qa_adminhtml>
                     </modules>
                 </args>
             </adminhtml>
         </routers>
     </admin>
-    <frontend>
-        <layout>
-            <updates>
-                <qa_menu>
-                    <file>menu.xml</file>
-                </qa_menu>
-            </updates>
-        </layout>
-    </frontend>
     <adminhtml>
         <layout>
             <updates>
-                <qa_menu2>
+                <qa_menu>
                     <file>qa_menu.xml</file>
-                </qa_menu2>
+                </qa_menu>
             </updates>
         </layout>
     </adminhtml>

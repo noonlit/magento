@@ -1,24 +1,22 @@
 <?xml version="1.0" ?>
 <layout>
-<!--   THE BLOCKS NEED TO BE EDITED-->
     <adminhtml_qa_index>
         <reference name="content">
-<!--            <remove name="head"/>-->
-            <block type="evozon_qa_adminhtml/adminhtml_content" name="menu_grid_container" />
+            <block type="evozon_qa_adminhtml/menu" name="menu_grid_container" />
         </reference>
     </adminhtml_qa_index>
 
-    <adminhtml_menu_edit>
+    <adminhtml_qa_edit>
         <reference name="head">
-<!--            <action method="addJs"><file>custom-menu/admin.js</file></action>-->
+            <action method="addJs"><file>custom-menu/admin.js</file></action>
         </reference>
         <reference name="content">
-            <block type="menu/adminhtml_menu_edit" name="menu_edit_container" />
+            <block type="evozon_qa_adminhtml/menu_edit" name="menu_edit_container" />
         </reference>
-    </adminhtml_menu_edit>
+    </adminhtml_qa_edit>
 
-    <adminhtml_menu_grid>
+    <adminhtml_qa_grid>
         <remove name="root" />
-        <block type="menu/adminhtml_menu_grid" name="menu_grid" output="toHtml" />
-    </adminhtml_menu_grid>
+        <block type="evozon_qa_adminhtml/menu_grid" name="menu_grid" output="toHtml" />
+    </adminhtml_qa_grid>
 </layout>
