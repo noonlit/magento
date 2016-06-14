@@ -61,7 +61,6 @@
             <updates>
                 <evozon_qa>
                     <file>questions.xml</file>
-                    <file>form.xml</file>
                 </evozon_qa>                
             </updates>                
         </layout>
