@@ -19,7 +19,8 @@
                 <class>Evozon_Qa_Adminhtml_Model_Resource</class>
                 <entities>
                     <menu>
-                        <table>evozon_test_table</table>
+<!--                        CHANGE WITH THE TABLE NAME-->
+                        <table>customer_entity</table>
                     </menu>
                 </entities>
             </evozon_qa_adminhtml_resource>

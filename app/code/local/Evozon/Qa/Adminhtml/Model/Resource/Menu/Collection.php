@@ -20,6 +20,6 @@ class Evozon_Qa_Adminhtml_Model_Resource_Menu_Collection extends Mage_Core_Model
      */
     protected function _construct()
     {
-        $this->_init('menu/menu');
+        $this->_init('evozon_qa_adminhtml/menu');
     }
 }

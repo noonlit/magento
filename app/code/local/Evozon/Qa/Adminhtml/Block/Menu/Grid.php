@@ -31,29 +31,18 @@ class Evozon_Qa_Adminhtml_Block_Menu_Grid extends Mage_Adminhtml_Block_Widget_Gr
  
     protected function _prepareColumns()
     {
-        $this->addColumn('id', array(
+        //NEED TO ADD THE COLUMNS FROM THE QUESTION TABLE
+        $this->addColumn('entity_id', array(
             'header'    => Mage::helper('evozon_qa_adminhtml')->__('ID'),
             'align'     =>'right',
             'width'     => '50px',
-            'index'     => 'id',
+            'index'     => 'entity_id',
         ));
  
-        $this->addColumn('name', array(
-            'header'    => Mage::helper('evozon_qa_adminhtml')->__('Name'),
+        $this->addColumn('email', array(
+            'header'    => Mage::helper('evozon_qa_adminhtml')->__('Email'),
             'align'     =>'left',
-            'index'     => 'name',
-        ));
- 
-        $this->addColumn('description', array(
-            'header'    => Mage::helper('evozon_qa_adminhtml')->__('Description'),
-            'align'     =>'left',
-            'index'     => 'description',
-        ));
- 
-        $this->addColumn('other', array(
-            'header'    => Mage::helper('evozon_qa_adminhtml')->__('Other'),
-            'align'     => 'left',
-            'index'     => 'other',
+            'index'     => 'email',
         ));
  
         return parent::_prepareColumns();

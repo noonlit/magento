@@ -20,6 +20,6 @@ class Evozon_Qa_Adminhtml_Model_Resource_Menu extends Mage_Core_Model_Mysql4_Abs
      */
     protected function _construct()
     {
-        $this->_init('menu/menu', 'item_id');
+        $this->_init('evozon_qa_adminhtml/menu', 'item_id');
     }
 }

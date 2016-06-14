@@ -46,26 +46,26 @@ class Evozon_Qa_Adminhtml_Block_Menu_Edit_Form extends Mage_Adminhtml_Block_Widg
         $this->setForm($form);
  
         $fieldset = $form->addFieldset('example_form', array(
-             'legend' =>Mage::helper('awesome')->__('Example Information')
+             'legend' =>Mage::helper('evozon_qa_adminhtml')->__('Example Information')
         ));
  
         $fieldset->addField('name', 'text', array(
-             'label'     => Mage::helper('awesome')->__('Name'),
+             'label'     => Mage::helper('evozon_qa_adminhtml')->__('Name'),
              'class'     => 'required-entry',
              'required'  => true,
              'name'      => 'name',
-             'note'     => Mage::helper('awesome')->__('The name of the example.'),
+             'note'     => Mage::helper('evozon_qa_adminhtml')->__('The name of the example.'),
         ));
  
         $fieldset->addField('description', 'text', array(
-             'label'     => Mage::helper('awesome')->__('Description'),
+             'label'     => Mage::helper('evozon_qa_adminhtml')->__('Description'),
              'class'     => 'required-entry',
              'required'  => true,
              'name'      => 'description',
         ));
  
         $fieldset->addField('other', 'text', array(
-             'label'     => Mage::helper('awesome')->__('Other'),
+             'label'     => Mage::helper('evozon_qa_adminhtml')->__('Other'),
              'class'     => 'required-entry',
              'required'  => true,
              'name'      => 'other',

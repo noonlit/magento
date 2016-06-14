@@ -147,6 +147,9 @@ abstract class Mage_Core_Model_Abstract extends Varien_Object
      */
     public function getIdFieldName()
     {
+        //BOGDAN WAS HERE
+        //var_dump($this);
+        //
         if (!($fieldName = parent::getIdFieldName())) {
             $fieldName = $this->_getResource()->getIdFieldName();
             $this->setIdFieldName($fieldName);
