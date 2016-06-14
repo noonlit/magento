@@ -63,7 +63,7 @@ class Evozon_Qa_Block_Adminhtml_Answers_Grid extends Mage_Adminhtml_Block_Widget
 
     public function getRowUrl($row)
     {
-        return $this->getUrl('*/*/edit', array('id' => $row->getId()));
+        return $this->getUrl('*/*/editanswer', array('id' => $row->getId()));
     }
 
 }

@@ -2,7 +2,7 @@
 <layout>
     <adminhtml_qa_index>
         <reference name="content">
-            <block type="evozon_qa/adminhtml_questions" name="questions_grid_container" />
+            <block type="evozon_qa/adminhtml_answerquestions" name="answerquestions_grid_container" />
         </reference>
     </adminhtml_qa_index>
     
@@ -11,7 +11,12 @@
             <block type="evozon_qa/adminhtml_answers" name="answers_grid_container" />
         </reference>
     </adminhtml_qa_answers>
-
+    <adminhtml_qa_questions>
+        <reference name="content">
+            <block type="evozon_qa/adminhtml_questions" name="questions_grid_container" />
+        </reference>
+    </adminhtml_qa_questions>
+    
     <adminhtml_qa_edit>
         <reference name="head">
             <action method="addJs">
@@ -22,6 +27,28 @@
             <block type="evozon_qa/adminhtml_questions_edit" name="questions_edit_container" />
         </reference>
     </adminhtml_qa_edit>
+    
+    <adminhtml_qa_editanswer>
+        <reference name="head">
+            <action method="addJs">
+                <file>custom-menu/admin.js</file>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="evozon_qa/adminhtml_answers_edit" name="answers_edit_container" />
+        </reference>
+    </adminhtml_qa_editanswer>
+
+    <adminhtml_qa_answer>
+        <reference name="head">
+            <action method="addJs">
+                <file>custom-menu/admin.js</file>
+            </action>
+        </reference>
+        <reference name="content">
+            <block type="evozon_qa/adminhtml_answerquestions_answer" name="answerquestions_answer_container" />
+        </reference>
+    </adminhtml_qa_answer>
 
     <adminhtml_qa_grid>
         <remove name="root" />

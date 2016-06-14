@@ -31,7 +31,7 @@
  * @subpackage controllers
  * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
  */
-class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widget_Grid
+class Evozon_Qa_Block_Adminhtml_Answerquestions_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
 
     public function __construct()
@@ -84,7 +84,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
 
     public function getRowUrl($row)
     {
-        return $this->getUrl('*/*/edit', array('id' => $row->getId())); //action controller on row click
+        return $this->getUrl('*/*/answer', array('id' => $row->getId())); //action controller on row click
     }
 
 }
