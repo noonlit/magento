@@ -12,14 +12,18 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
     public function fetchQuestions()
     {
         $collection = $this->getCollection();
+        $status = 'approved';
         $currentProductId = Mage::registry('current_product')->getId();
-        $collection->addFieldToFilter('product_id', $currentProductId)
-                ->join(array('answers' => 'evozon_qa/answer'), 'main_table.question_id = answers.question_id')
-                ->join(array('customer' => 'customer/entity'), 'main_table.customer_id = customer.entity_id')
-                ;
-        Mage::log($collection->getSelect()->__toString(), null, 'myLog.log');
-        Mage::log($collection->getData(), null, 'myLog.log');
+        $collection->getSelect()
+                ->joinLeft(array('answers' => 'evozon_answers'), 'main_table.question_id = answers.question_id', array('answer','user_id'))
+                ->joinLeft(array('customer' => 'customer_entity'), 'main_table.customer_id = customer.entity_id', array('email'))
+                ->joinLeft(array('admin' => 'admin_user'), 'answers.user_id = admin.user_id', array('firstname', 'lastname'))
+                ->where('product_id = ?', $currentProductId)
+                ->where('status = ?', $status);
+//        Mage::log($collection->getSelect()->__toString(), null, 'myLog.log');
+//        Mage::log($collection->getData(), null, 'myLog.log');
+//        Mage::log($currentProductId, null, 'myLog.log');
         return $collection;
     }
-
 }
+

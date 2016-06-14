@@ -1,11 +1,19 @@
-<?php $questions = $this->fetchQuestions();
-?>
+<?php $questions = $this->fetchQuestions(); ?>
 <div class="reviews-container">
     <?php foreach ($questions as $question): ?>
         <div class="row-question">
-            <p><?= $question->getData('email');?></p>
-            <p><?= $question->getData('text');?></p>
-            <p><?= $question->getData('answer');?></p>
-        </div>
+            <p><?php
+                $email = $question->getData('email');
+                $text = $question->getData('text');
+                $adminName = $question->getData('firstname') . ' ' . $question->getData('lastname');
+                $answer = $question->getData('answer');
+                echo $email . ': ' . $text;
+                ?></p>
+            <p><?php
+                if ($answer) {
+                    echo $adminName . ': ' . $answer;
+                }
+                ?>
+            </p></div><br>
     <?php endforeach; ?>
 </div>
