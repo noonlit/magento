@@ -70,11 +70,6 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
 
         $this->loadLayout();
         $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
-//        $block = $this->getLayout()
-//        ->createBlock('core/text', 'example-block')
-//        ->setText('<h1>This is a text block</h1>');
-//
-//        $this->_addContent($block);
         $this->renderLayout();
     }
 
@@ -127,33 +122,27 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $data = $this->getRequest()->getPost();
 
         if ($data) {
-            $model = Mage::getModel('evozon_qa/question');
-            $answerModel = Mage::getModel('evozon_qa/answer');
             $id = $this->getRequest()->getParam('id');
+            $this->changeStatus($data, $id);
             $this->addAnswer($data, $id);
-
-//            if ($id) {
-//                $model->load($id);
-//                $answer = $answerModel->getQuestionById($id)->getFirstItem();
-//            }
-//
-//            if (!empty($answerId = $answer->getData('answer_id'))) {
-//                $answerModel->load($answerId);
-//                $answer->setAnswer($answerText);
-//            }
-//            $model->setData($data);
-//            if (!empty($answer)) {
-//                $answerModel->setData($answer->getData());
-//            }
-//            
-//            Mage::getSingleton('adminhtml/session')->setFormData($data);
-//            $this->trySave($id,$answerId,$model,$answerModel);
 
             return;
         }
 
         Mage::getSingleton('adminhtml/session')->addError(Mage::helper('evozon_qa')->__('No data found to save'));
         $this->_redirect('*/*/');
+    }
+
+    public function changeStatus($formData, $questionId = null)
+    {
+        if ($questionId) {
+            $questionModel = Mage::getModel('evozon_qa/question');
+            $questionModel->load($questionId);
+            $questionModel->setStatus($formData['status']);
+            Mage::getSingleton('adminhtml/session')->setFormData($questionModel->getData());
+
+            $this->trySave($questionModel,'Status');
+        }
     }
 
     public function addAnswer($formData, $questionId = null)
@@ -164,11 +153,11 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
             $questions = $answerModel->getQuestionById($questionId);
             $answerId = $questions->getFirstItem()->getData('answer_id');
         }
-        
-        if ($answerId){
+
+        if ($answerId) {
             $answerModel->load($answerId);
         }
-        
+
         $answerModel->setQuestionId($questionId);
         $answerModel->setUserId($userId);
         $answerModel->setAnswer($formData['answer']);
@@ -178,14 +167,14 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $this->trySave($answerModel);
     }
 
-    private function trySave($model)
+    private function trySave($model,$itemInfo='Answer')
     {
         try {
             $model->save();
             if (!$model->getId()) {
-                Mage::throwException(Mage::helper('evozon_qa')->__('Error saving example'));
+                Mage::throwException(Mage::helper('evozon_qa')->__('Error saving '.lcfirst($itemInfo)));
             }
-            Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa')->__('Example was successfully saved.'));
+            Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa')->__($itemInfo .' was successfully saved.'));
             Mage::getSingleton('adminhtml/session')->setFormData(false);
             $this->setBackButton($model, 'answer'); //set the back button
         } catch (Exception $e) {
@@ -217,7 +206,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     {
         $questionIds = $this->getRequest()->getParam('evozon_qa_questions_id');
 
-        if(!is_array($questionIds)) {
+        if (!is_array($questionIds)) {
             Mage::getSingleton('adminhtml/session')->addError($this->__('Please select Questions.'));
         } else {
             try {
@@ -237,7 +226,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     {
         $questionIds = $this->getRequest()->getParam('evozon_qa_questions_id');
 
-        if(!is_array($questionIds)) {
+        if (!is_array($questionIds)) {
             Mage::getSingleton('adminhtml/session')->addError($this->__('Please select Questions.'));
         } else {
             try {
@@ -257,7 +246,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     {
         $questionIds = $this->getRequest()->getParam('evozon_qa_questions_id');
 
-        if(!is_array($questionIds)) {
+        if (!is_array($questionIds)) {
             Mage::getSingleton('adminhtml/session')->addError($this->__('Please select Questions.'));
         } else {
             try {
@@ -354,7 +343,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     {
         $answerIds = $this->getRequest()->getParam('evozon_qa_answers_id');
 
-        if(!is_array($answerIds)) {
+        if (!is_array($answerIds)) {
             Mage::getSingleton('adminhtml/session')->addError($this->__('Please select Answers.'));
         } else {
             try {
