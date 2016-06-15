@@ -5,7 +5,8 @@
  *
  * @category   
  * @package    Evozon_Qa
- * @author     Ilinca Dobre: ilinca.dobre@evozon.com
+ * @author     Ilinca Dobre <ilinca.dobre@evozon.com>
+ * @author     Georgiana Tobosi <georgiana.tobosi@evozon.com>
  */
 class Evozon_Qa_QuestionController extends Mage_Core_Controller_Front_Action
 {

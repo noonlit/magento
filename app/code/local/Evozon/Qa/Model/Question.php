@@ -5,6 +5,7 @@
  * @category   Evozon
  * @package    Evozon_Qa
  * @author     Ilinca Dobre <ilinca.dobre@evozon.com>
+ * @author     Georgiana Tobosi <georgiana.tobosi@evozon.com>
  * @author     Delia Dumitru <delia.dumitru@evozon.com>
  * @author     Andrei Bodea <andrei.bodea@evozon.com>
  */
