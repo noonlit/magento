@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Qa_Question Collection
+ *
+ * @category   Evozon
+ * @package    Evozon_Qa
+ * @author     Marius Adam <marius.adam@evozon.com>
+ */
 class Evozon_Qa_Model_Resource_Answer_Collection extends Mage_Core_Model_Resource_Db_Collection_Abstract
 {
 

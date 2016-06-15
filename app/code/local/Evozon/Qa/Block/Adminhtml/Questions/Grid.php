@@ -90,24 +90,24 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
     protected function _prepareMassaction()
     {
         $this->setMassactionIdField('evozon_qa_question_id');
-        $this->getMassactionBlock()->setFormFieldName('evozon_qa_id');
+        $this->getMassactionBlock()->setFormFieldName('evozon_qa_questions_id');
         //add mass delete action
         $this->getMassactionBlock()->addItem('delete', array(
             'label'=> $this->__('Delete'),
-            'url'  => $this->getUrl('*/*/massDelete', array('' => '')),
+            'url'  => $this->getUrl('*/*/massDeleteQuestions', array('' => '')),
             'confirm' => $this->__('Are you sure you want to delete the selected questions?')
         ));
 
         //add mass approove action
         $this->getMassactionBlock()->addItem('approve', array(
             'label'=> $this->__('Approve'),
-            'url'  => $this->getUrl('*/*/massApprove', array('' => '')),
+            'url'  => $this->getUrl('*/*/massApproveQuestions', array('' => '')),
             'confirm' => $this->__('Are you sure you want to approve the selected questions?')
         ));
 
         $this->getMassactionBlock()->addItem('disabled', array(
             'label'=> $this->__('Disable'),
-            'url'  => $this->getUrl('*/*/massDisable', array('' => '')),
+            'url'  => $this->getUrl('*/*/massDisableQuestions', array('' => '')),
             'confirm' => $this->__('Are you sure you want to disable the selected questions?')
         ));
         return $this;

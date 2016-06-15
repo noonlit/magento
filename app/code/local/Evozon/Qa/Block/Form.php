@@ -4,7 +4,8 @@
  * Question form block
  *
  * @package    Evozon_Qa
- * @author     Ilinca Dobre: ilinca.dobre@evozon.com
+ * @author     Ilinca Dobre <ilinca.dobre@evozon.com>
+ * @author     Georgiana Tobosi <georgiana.tobosi@evozon.com>
  */
 class Evozon_QA_Block_Form extends Mage_Core_Block_Template
 {
