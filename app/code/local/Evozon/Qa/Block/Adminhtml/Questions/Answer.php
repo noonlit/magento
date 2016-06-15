@@ -1,6 +1,6 @@
 <?php
 
-class Evozon_Qa_Block_Adminhtml_AnswerQuestions_Answer extends Mage_Adminhtml_Block_Widget_Form_Container
+class Evozon_Qa_Block_Adminhtml_Questions_Answer extends Mage_Adminhtml_Block_Widget_Form_Container
 {
 
     public function __construct()
@@ -8,7 +8,7 @@ class Evozon_Qa_Block_Adminhtml_AnswerQuestions_Answer extends Mage_Adminhtml_Bl
         parent::__construct();
         $this->_objectId = 'id';
         $this->_blockGroup = 'evozon_qa_adminhtml'; //block_adminhtml tag
-        $this->_controller = 'answerquestions';
+        $this->_controller = 'questions';
         $this->_mode = 'answer';
 
         $this->_addButton('save_and_continue', array(

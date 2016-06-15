@@ -92,7 +92,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     public function editAction()
     {
         $id = $this->getRequest()->getParam('id', null);
-        $model = Mage::getModel('evozon_qa/adminhtml_questions'); //adminhtml questions model
+        $model = Mage::getModel('evozon_qa/question'); //adminhtml questions model
         if ($id)
         {
             $model->load((int) $id);
@@ -119,7 +119,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     public function editanswerAction()
     {
         $id = $this->getRequest()->getParam('id', null);
-        $model = Mage::getModel('evozon_qa/adminhtml_answers'); //adminhtml questions model
+        $model = Mage::getModel('evozon_qa/answer'); //adminhtml questions model
         if ($id)
         {
             $model->load((int) $id);
@@ -149,7 +149,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     public function answerAction()
     {
         $id = $this->getRequest()->getParam('id', null);
-        $model = Mage::getModel('evozon_qa/adminhtml_questions'); //adminhtml questions model
+        $model = Mage::getModel('evozon_qa/question'); //adminhtml questions model
         if ($id)
         {
             $model->load((int) $id);
@@ -200,7 +200,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     {
         if ($data = $this->getRequest()->getPost())
         {
-            $model = Mage::getModel('evozon_qa/adminhtml_questions');
+            $model = Mage::getModel('evozon_qa/question');
             $id = $this->getRequest()->getParam('id');
             if ($id)
             {
@@ -257,7 +257,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         {
             try
             {
-                $model = Mage::getModel('evozon_qa/adminhtml_questions');
+                $model = Mage::getModel('evozon_qa/question');
                 $model->setId($id);
                 $model->delete();
                 Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa')->__('The example has been deleted.'));

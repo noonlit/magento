@@ -45,7 +45,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
 
     protected function _prepareCollection()
     {
-        $collection = Mage::getModel('evozon_qa/adminhtml_questions')->getCollection(); //questions collection
+        $collection = Mage::getModel('evozon_qa/question')->getCollection(); //questions collection
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
@@ -84,7 +84,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
 
     public function getRowUrl($row)
     {
-        return $this->getUrl('*/*/edit', array('id' => $row->getId())); //action controller on row click
+        return $this->getUrl('*/*/answer', array('id' => $row->getId())); //action controller on row click
     }
 
 }

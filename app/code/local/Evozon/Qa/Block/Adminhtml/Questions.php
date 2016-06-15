@@ -33,7 +33,7 @@
 class Evozon_Qa_Block_Adminhtml_Questions extends Mage_Adminhtml_Block_Widget_Grid_Container
 {
     
-    protected $_addButtonLabel = 'Add Question'; //Name of the Visible Button
+    protected $_addButtonLabel = 'Remove this button'; //Name of the Visible Button
 
     public function __construct()
     {

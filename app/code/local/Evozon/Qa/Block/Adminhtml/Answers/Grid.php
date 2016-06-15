@@ -25,7 +25,7 @@ class Evozon_Qa_Block_Adminhtml_Answers_Grid extends Mage_Adminhtml_Block_Widget
 
     protected function _prepareCollection()
     {
-        $collection = Mage::getModel('evozon_qa/adminhtml_answers')->getCollection();
+        $collection = Mage::getModel('evozon_qa/answer')->getCollection();
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }

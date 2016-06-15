@@ -5,21 +5,16 @@
             <title>Q A Management</title>
             <sort_order>100</sort_order>
             <children>
-                <qa_adminhtml>
+                <questions>
                     <title>See Questions</title>
                     <sort_order>1</sort_order>
                     <action>adminhtml/qa/</action>
-                </qa_adminhtml>
+                </questions>
                 <answers module="evozon_qa" translate="title">
                     <title>See Answers</title>
                     <sort_order>2</sort_order>
                     <action>adminhtml/qa/answers</action>
                 </answers>
-                <edit_questions module="evozon_qa" translate="title">
-                    <title>Edit Questions</title>
-                    <sort_order>3</sort_order>
-                    <action>adminhtml/qa/questions</action>
-                </edit_questions>
             </children>
         </qa>
     </menu>

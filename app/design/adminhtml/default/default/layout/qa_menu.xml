@@ -2,7 +2,7 @@
 <layout>
     <adminhtml_qa_index>
         <reference name="content">
-            <block type="evozon_qa/adminhtml_answerquestions" name="answerquestions_grid_container" />
+            <block type="evozon_qa/adminhtml_questions" name="questions_grid_container" />
         </reference>
     </adminhtml_qa_index>
     
@@ -46,7 +46,7 @@
             </action>
         </reference>
         <reference name="content">
-            <block type="evozon_qa/adminhtml_answerquestions_answer" name="answerquestions_answer_container" />
+            <block type="evozon_qa/adminhtml_questions_answer" name="questions_answer_container" />
         </reference>
     </adminhtml_qa_answer>
 
