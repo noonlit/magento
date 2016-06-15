@@ -350,15 +350,6 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         return $userId;
     }
 
-    /**
-     * DON'T KNOW IF THIS WORKS
-     */
-    protected function _isAllowed()
-    {
-        return true;
-        //return Mage::getSingleton('admin/session')->isAllowed('admin/evozon_qa');
-    }
-
     public function massDeleteAnswersAction()
     {
         $answerIds = $this->getRequest()->getParam('evozon_qa_answers_id');
