@@ -11,10 +11,12 @@
  * Create guest user account
  */
 
+Mage::log('Started data-install-0.1.0', NULL, 'scripts.log');
+
 try {
-    Mage::log('Started data-upgrade-0.1.0-0.1.1', NULL, 'scripts.log');
     $websiteId = Mage::app()->getWebsite()->getId();
     $store = Mage::app()->getStore();
+    
     $customer = Mage::getModel("customer/customer");
     $id = $customer->setWebsiteId(Mage::app()->getStore()->getWebsiteId())
                     ->loadByEmail('guestUser@madisonIsland.com')->getId();
@@ -30,3 +32,4 @@ try {
 } catch (Exception $e) {
     Mage::log($e->getMessage(), NULL, 'scripts.log');
 }
+Mage::log('Finished data-install-0.1.0', NULL, 'scripts.log');

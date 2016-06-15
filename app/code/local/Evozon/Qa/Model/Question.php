@@ -67,7 +67,8 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
             'text' => $question,
             'status' => 'new',
             'product_id' => $productId,
-            'customer_id' => $customerId
+            'customer_id' => $customerId,
+            'store_id' => Mage::app()->getStore()->getStoreId()
         ));
         $questionModel->save();
 
