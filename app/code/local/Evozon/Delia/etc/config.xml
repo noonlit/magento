@@ -19,9 +19,9 @@
             <evozon_delia_resource>
                 <class>Evozon_Delia_Model_Resource</class>
                 <entities>
-                    <delia>
-                        <table>evozon_delia_banners</table>
-                    </delia>
+                    <banner>
+                        <table>evozon_banners</table>
+                    </banner>
                 </entities>
             </evozon_delia_resource>
         </models>
