@@ -1,7 +1,12 @@
 <?php
 
-/*
- *  @author Ilinca Dobre <>
+/**
+ * Question model
+ *
+ * @category    
+ * @package     Evozon_Qa
+ * @author      Ilinca Dobre: ilinca.dobre@evozon.com
+ * @author      Andrei Bodea:
  */
 
 class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
@@ -30,11 +35,19 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
         return $collection;
     }
 
-    public function addQuestion($formData = null)
+    /**
+     * Saves a submitted question to database
+     * 
+     * @param array $formData
+     * @return boolean
+     */
+    public function addQuestion($formData)
     {
         $questionModel = Mage::getModel('evozon_qa/question');
-        $question = $formData['question'];
-        $productId = $formData['product_id'];
+
+        $question = $formData['qa_question'];
+        $productId = $formData['qa_current_product'];
+
         if (Mage::getSingleton('customer/session')->isLoggedIn()) {
             $customerId = Mage::getSingleton('customer/session')->getCustomer()->getId();
         } else {
@@ -51,7 +64,28 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
             'customer_id' => $customerId
         ));
         $questionModel->save();
+
         return true;
+    }
+
+    /**
+     * Validation for form inputs: checks if the question field is not empty
+     * 
+     * @return boolean/array
+     */
+    public function validate()
+    {
+        $errors = array();
+        $data = $this->getData();
+        $questionText = $data['qa_question'];
+        if (!Zend_Validate::is($questionText, 'NotEmpty')) {
+            $errors[] = Mage::helper('evozon_qa/data')->__('Question can\'t be empty');
+        }
+
+        if (empty($errors)) {
+            return true;
+        }
+        return $errors;
     }
 
 }

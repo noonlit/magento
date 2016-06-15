@@ -2,18 +2,8 @@
 <form action="<?php echo $this->getUrl('question/question/add') ?>" id="qa_form" method="post">  
     <label for="qa_question"><?php echo $this->__('Question:') ?></label>
     <div class="input-box">        
-        <input type="text" name="qa_question" id="qa_question" placeholder="Type your question here..." spellcheck="true" value="" autocomplete="off">
-         <input type="hidden" name="qa_current_product" id="qa_current_product" value="<?php echo $this->getCurrentProductId()?>">
+        <input type="text" class="input-text required-entry" name="qa_question" id="qa_question" placeholder="Type your question here..." spellcheck="true" value="" autocomplete="off">
+        <input type="hidden" name="qa_current_product" id="qa_current_product" value="<?php echo $this->getCurrentProductId() ?>">
         <input id="q_submit_button" type="submit" value="SUBMIT">        
     </div>
 </form>
-
-<div id="success_modal" class="modal">
-  <div class="modal-content">  
-      <p><?php echo $this->showSubmitMessage(); ?></p>
-  </div>
-</div>
-
-<?php
-    echo '<script type="text/javascript">tempAlert();</script>';
-?>
