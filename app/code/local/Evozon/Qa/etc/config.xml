@@ -65,6 +65,15 @@
     </global>
     
     <frontend>
+        <routers>
+            <evozon_qa>
+                <use>standard</use>
+                <args>
+                    <module>Evozon_Qa</module>
+                    <frontName>question</frontName>
+                </args>
+            </evozon_qa>
+        </routers>
         <layout>
             <updates>
                 <evozon_qa>
