@@ -34,8 +34,10 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
         if (Mage::getSingleton('customer/session')->isLoggedIn()) {
             $customerId = Mage::getSingleton('customer/session')->getCustomer()->getId();
         } else {
-            // to do: set guest id   
-            $customerId = 24;
+            $customer = Mage::getModel("customer/customer");
+            $id = $customer->setWebsiteId(Mage::app()->getStore()->getWebsiteId())
+                            ->loadByEmail('guestUser@madisonIsland.com')->getId();
+            $customerId = $id;
         }
 
         $questionModel->setData(array(
