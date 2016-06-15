@@ -1,29 +1,6 @@
 <?php
 
 /**
- * Questions and Answers extension for Magento
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Open Software License (OSL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://opensource.org/licenses/osl-3.0.php
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade
- * the Evozon Q A Adminhtml module to newer versions in the future.
- * If you wish to customize the Evozon Q A Adminhtml module for your needs
- * please refer to http://www.magentocommerce.com for more information.
- *
- * @category   Evozon Qa
- * @package    Evozon Qa Adminhtml
- * @copyright  Copyright (C) 2016 Evozon Internship (https://github.com/noonlit/magento.git branch develop)
- * @license    Bla Bla
- */
-
-/**
  * manage Questions and Answers controller
  *
  * @category   Evozon Qa
@@ -40,7 +17,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     public function indexAction()
     {
         $this->loadLayout();
-        $this->_setActiveMenu('qa')
+        $this->_setActiveMenu('evozon_qa')
                 ->_title('Q & A Management');
         $this->_addBreadcrumb($this->__('Q A Management'), $this->__('Q A Management'));
         $this->renderLayout();
@@ -52,7 +29,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     public function answersAction()
     {
         $this->loadLayout();
-        $this->_setActiveMenu('qa')
+        $this->_setActiveMenu('evozon_qa')
                 ->_title('Q & A Management');
         $this->_addBreadcrumb($this->__('Q A Management'), $this->__('Q A Management'));
         $this->renderLayout();
@@ -64,17 +41,18 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     public function questionsAction()
     {
         $this->loadLayout();
-        $this->_setActiveMenu('qa')
+        $this->_setActiveMenu('evozon_qa')
                 ->_title('Q & A Management');
         $this->_addBreadcrumb($this->__('Q A Management'), $this->__('Q A Management'));
         $this->renderLayout();
     }
 
     /**
-     * DON'T KNOW IF THIS WORKS
+     * checks if current user has permissions
+     * @return boolean
      */
     protected function _isAllowed()
-    {return true;
+    {
         return Mage::getSingleton('admin/session')->isAllowed('admin/evozon_qa');
     }
 
