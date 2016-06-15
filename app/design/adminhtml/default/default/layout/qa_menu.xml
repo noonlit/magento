@@ -11,6 +11,7 @@
             <block type="evozon_qa/adminhtml_answers" name="answers_grid_container" />
         </reference>
     </adminhtml_qa_answers>
+    
     <adminhtml_qa_questions>
         <reference name="content">
             <block type="evozon_qa/adminhtml_questions" name="questions_grid_container" />

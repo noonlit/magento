@@ -9,7 +9,6 @@
  * @author     Delia Dumitru <delia.dumitru@evozon.com>
  * @author     Andrei Bodea <andrei.bodea@evozon.com>
  */
-
 class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
 {
 

@@ -106,19 +106,8 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $this->renderLayout();
     }
 
-    public function registerModel($id, $model, $dataName)
-    {
-        if ($id) {
-            $this->setIdToFormData($id, $model);
-        }
-        //TODO WHAT name to put instead of example_data ??
-        Mage::register($dataName, $model);
-    }
-
     public function saveAction()
     {
-        //IT CAN JUST EDIT EXISTING ANSWERS, TODO FOR NEW ANSWERS
-        //SHOULD USE A NEW ADD ANSWER
         $data = $this->getRequest()->getPost();
 
         if ($data) {
@@ -141,7 +130,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
             $questionModel->setStatus($formData['status']);
             Mage::getSingleton('adminhtml/session')->setFormData($questionModel->getData());
 
-            $this->trySave($questionModel,'Status');
+            $this->trySave($questionModel, 'Status');
         }
     }
 
@@ -167,14 +156,14 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $this->trySave($answerModel);
     }
 
-    private function trySave($model,$itemInfo='Answer')
+    private function trySave($model, $itemInfo = 'Answer')
     {
         try {
             $model->save();
             if (!$model->getId()) {
-                Mage::throwException(Mage::helper('evozon_qa')->__('Error saving '.lcfirst($itemInfo)));
+                Mage::throwException(Mage::helper('evozon_qa')->__('Error saving ' . lcfirst($itemInfo)));
             }
-            Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa')->__($itemInfo .' was successfully saved.'));
+            Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa')->__($itemInfo . ' was successfully saved.'));
             Mage::getSingleton('adminhtml/session')->setFormData(false);
             $this->setBackButton($model, 'answer'); //set the back button
         } catch (Exception $e) {
@@ -262,6 +251,26 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $this->_redirect('*/*/');
     }
 
+    public function massDeleteAnswersAction()
+    {
+        $answerIds = $this->getRequest()->getParam('evozon_qa_answers_id');
+
+        if (!is_array($answerIds)) {
+            Mage::getSingleton('adminhtml/session')->addError($this->__('Please select Answers.'));
+        } else {
+            try {
+                $model = Mage::getModel('evozon_qa/answer');
+                foreach ($answerIds as $answerId) {
+                    $model->load($answerId)->delete();
+                }
+                Mage::getSingleton('adminhtml/session')->addSuccess($this->__('Total of %d answers(s) were deleted.', count($answerIds)));
+            } catch (Exception $e) {
+                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+            }
+        }
+        $this->_redirect('*/*/answers');
+    }
+    
     /**
      * sets the Id for the Answer Form Data
      * 
@@ -339,24 +348,14 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         //return Mage::getSingleton('admin/session')->isAllowed('admin/evozon_qa');
     }
 
-    public function massDeleteAnswersAction()
+    public function registerModel($id, $model, $dataName)
     {
-        $answerIds = $this->getRequest()->getParam('evozon_qa_answers_id');
-
-        if (!is_array($answerIds)) {
-            Mage::getSingleton('adminhtml/session')->addError($this->__('Please select Answers.'));
-        } else {
-            try {
-                $model = Mage::getModel('evozon_qa/answer');
-                foreach ($answerIds as $answerId) {
-                    $model->load($answerId)->delete();
-                }
-                Mage::getSingleton('adminhtml/session')->addSuccess($this->__('Total of %d answers(s) were deleted.', count($answerIds)));
-            } catch (Exception $e) {
-                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
-            }
+        if ($id) {
+            $this->setIdToFormData($id, $model);
         }
-        $this->_redirect('*/*/answers');
+        //TODO WHAT name to put instead of example_data ??
+        Mage::register($dataName, $model);
     }
+    
 
 }

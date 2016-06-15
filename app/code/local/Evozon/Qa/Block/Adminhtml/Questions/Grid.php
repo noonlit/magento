@@ -45,7 +45,15 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
 
     protected function _prepareCollection()
     {
+        $product = Mage::getModel('catalog/product');
         $collection = Mage::getModel('evozon_qa/question')->getCollection(); //questions collection
+
+        foreach($collection as $element){
+            $productId = $element->getProductId();
+            $storeId = $product->load($productId)->getStoreId();
+            $element->setData('store_id',$storeId);
+        }
+        
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
@@ -53,12 +61,18 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
 //ADDS THE COLUMNS OF THE GRID TABLE
     protected function _prepareColumns()
     {
-
         $this->addColumn('question_id', array(
             'header' => Mage::helper('evozon_qa')->__('ID'),
             'align' => 'right',
             'width' => '50px',
             'index' => 'question_id',
+        ));
+
+        $this->addColumn('store_id', array(
+            'header' => Mage::helper('evozon_qa')->__('Store Id'),
+            'align' => 'right',
+            'width' => '50px',
+            'index' => 'store_id',
         ));
 
         $this->addColumn('text', array(
@@ -93,21 +107,21 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
         $this->getMassactionBlock()->setFormFieldName('evozon_qa_questions_id');
         //add mass delete action
         $this->getMassactionBlock()->addItem('delete', array(
-            'label'=> $this->__('Delete'),
-            'url'  => $this->getUrl('*/*/massDeleteQuestions', array('' => '')),
+            'label' => $this->__('Delete'),
+            'url' => $this->getUrl('*/*/massDeleteQuestions', array('' => '')),
             'confirm' => $this->__('Are you sure you want to delete the selected questions?')
         ));
 
         //add mass approove action
         $this->getMassactionBlock()->addItem('approve', array(
-            'label'=> $this->__('Approve'),
-            'url'  => $this->getUrl('*/*/massApproveQuestions', array('' => '')),
+            'label' => $this->__('Approve'),
+            'url' => $this->getUrl('*/*/massApproveQuestions', array('' => '')),
             'confirm' => $this->__('Are you sure you want to approve the selected questions?')
         ));
 
         $this->getMassactionBlock()->addItem('disabled', array(
-            'label'=> $this->__('Disable'),
-            'url'  => $this->getUrl('*/*/massDisableQuestions', array('' => '')),
+            'label' => $this->__('Disable'),
+            'url' => $this->getUrl('*/*/massDisableQuestions', array('' => '')),
             'confirm' => $this->__('Are you sure you want to disable the selected questions?')
         ));
         return $this;
