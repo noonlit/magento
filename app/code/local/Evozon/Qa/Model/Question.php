@@ -28,14 +28,16 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
     {
         $status = 'approved';
         $currentProductId = Mage::registry('current_product')->getId();
-
+        $currentStore = Mage::app()->getStore()->getStoreId();
+        
         $collection = $this->getCollection();
         $collection->getSelect()
                 ->joinLeft(array('answers' => 'evozon_answers'), 'main_table.question_id = answers.question_id', array('answer', 'user_id'))
                 ->joinLeft(array('customer' => 'customer_entity'), 'main_table.customer_id = customer.entity_id', array('email'))
                 ->joinLeft(array('admin' => 'admin_user'), 'answers.user_id = admin.user_id', array('firstname', 'lastname'))
                 ->where('product_id = ?', $currentProductId)
-                ->where('status = ?', $status);
+                ->where('status = ?', $status)
+                ->where('main_table.store_id = ?', $currentStore);
 
         return $collection;
     }
@@ -67,7 +69,8 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
             'text' => $question,
             'status' => 'new',
             'product_id' => $productId,
-            'customer_id' => $customerId
+            'customer_id' => $customerId,
+            'store_id' => Mage::app()->getStore()->getStoreId()
         ));
         $questionModel->save();
 

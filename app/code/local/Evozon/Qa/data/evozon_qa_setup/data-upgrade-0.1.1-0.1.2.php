@@ -1,12 +1,18 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: marius
- * Date: 6/14/16
- * Time: 11:32 AM
+ *
+ * @category   Evozon
+ * @package    Evozon_Qa
+ * @author     Marius Adam <marius.adam@evozon.com>
  */
-Mage::log('Started adding a user and assign the Qa role', null, 'scripts.log');
-//Create New admin User programmatically.
+
+/**
+ * Create new admin user
+ */
+
+Mage::log('Started data-upgrade-0.1.1-0.1.2', null, 'scripts.log');
+
 try {
     $user = Mage::getModel('admin/user')
         ->setData(array(
@@ -17,21 +23,28 @@ try {
             'password'  =>'password123',
             'is_active' => 1,
         ))->save();
+        Mage::log('The user was added', null, 'scripts.log');
 } catch (Exception $e) {
     Mage::log($e->getMessage(), null, 'scripts.log');
     return;
 }
-//Assign Role Id
+
+/**
+ * Assign new role id
+ */
+
 try {
     $roleCollection = Mage::getModel('admin/role')
         ->getCollection()
         ->addFieldToFilter('role_name', 'Qa manager');
     $role = $roleCollection->getColumnValues('role_id');
     $user
-        ->setRoleIds($role)  //Administrator role id is 1 ,Here you can assign other roles ids
+        ->setRoleIds($role)  //Administrator role id is 1, here you can assign other role ids
         ->setRoleUserId($user->getUserId())
         ->saveRelations();
-    Mage::log('The user was added and asigned the role', null, 'scripts.log');
+    Mage::log('The role was assigned to the user', null, 'scripts.log');
 } catch (Exception $e) {
     Mage::log($e->getMessage(), null, 'scripts.log');
 }
+
+Mage::log('Finished data-upgrade-0.1.1-0.1.2', null, 'scripts.log');

@@ -17,7 +17,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     public function indexAction()
     {
         $this->loadLayout();
-        $this->_setActiveMenu('qa')
+        $this->_setActiveMenu('evozon_qa')
                 ->_title('Q & A Management');
         $this->_addBreadcrumb($this->__('Q A Management'), $this->__('Q A Management'));
         $this->renderLayout();
@@ -29,7 +29,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     public function answersAction()
     {
         $this->loadLayout();
-        $this->_setActiveMenu('qa')
+        $this->_setActiveMenu('evozon_qa')
                 ->_title('Q & A Management');
         $this->_addBreadcrumb($this->__('Q A Management'), $this->__('Q A Management'));
         $this->renderLayout();
@@ -41,14 +41,14 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     public function questionsAction()
     {
         $this->loadLayout();
-        $this->_setActiveMenu('qa')
+        $this->_setActiveMenu('evozon_qa')
                 ->_title('Q & A Management');
         $this->_addBreadcrumb($this->__('Q A Management'), $this->__('Q A Management'));
         $this->renderLayout();
     }
 
     /**
-     * the first action will be edit
+     * the first actopm will be edit
      */
     public function newAction()
     {
@@ -349,6 +349,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     }
 
     public function registerModel($id, $model, $dataName)
+
     {
         if ($id) {
             $this->setIdToFormData($id, $model);

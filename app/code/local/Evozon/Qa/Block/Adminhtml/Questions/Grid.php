@@ -1,29 +1,6 @@
 <?php
 
 /**
- * Questions and Answers extension for Magento
- *
- * NOTICE OF LICENSE
- *
- * This source file is subject to the Open Software License (OSL 3.0)
- * that is bundled with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://opensource.org/licenses/osl-3.0.php
- *
- * DISCLAIMER
- *
- * Do not edit or add to this file if you wish to upgrade
- * the Evozon Q A Adminhtml module to newer versions in the future.
- * If you wish to customize the Evozon Q A Adminhtml module for your needs
- * please refer to http://www.magentocommerce.com for more information.
- *
- * @category   Evozon Qa
- * @package    Evozon Qa Adminhtml
- * @copyright  Copyright (C) 2016 Evozon Internship (https://github.com/noonlit/magento.git branch develop)
- * @license    -----
- */
-
-/**
  * questions grid
  *
  * @category   Evozon Qa
@@ -45,15 +22,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
 
     protected function _prepareCollection()
     {
-        $product = Mage::getModel('catalog/product');
         $collection = Mage::getModel('evozon_qa/question')->getCollection(); //questions collection
-
-        foreach($collection as $element){
-            $productId = $element->getProductId();
-            $storeId = $product->load($productId)->getStoreId();
-            $element->setData('store_id',$storeId);
-        }
-        
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
@@ -66,13 +35,6 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
             'align' => 'right',
             'width' => '50px',
             'index' => 'question_id',
-        ));
-
-        $this->addColumn('store_id', array(
-            'header' => Mage::helper('evozon_qa')->__('Store Id'),
-            'align' => 'right',
-            'width' => '50px',
-            'index' => 'store_id',
         ));
 
         $this->addColumn('text', array(
@@ -92,6 +54,13 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
             'align' => 'left',
             'index' => 'product_id',
         ));
+
+        $this->addColumn('store_id', array(
+            'header' => Mage::helper('evozon_qa')->__('Store Id'),
+            'align' => 'left',
+            'index' => 'store_id',
+        ));
+
 
         return parent::_prepareColumns();
     }
