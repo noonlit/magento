@@ -28,7 +28,7 @@
  *
  * @category   Evozon Qa
  * @package    Evozon Qa Adminhtml 
- * @subpackage controllers
+ * @subpackage grid block
  * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
  */
 class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widget_Grid
