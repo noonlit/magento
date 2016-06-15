@@ -30,4 +30,28 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
         return $collection;
     }
 
+    public function addQuestion($formData = null)
+    {
+        $questionModel = Mage::getModel('evozon_qa/question');
+        $question = $formData['question'];
+        $productId = $formData['product_id'];
+        if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+            $customerId = Mage::getSingleton('customer/session')->getCustomer()->getId();
+        } else {
+            $customer = Mage::getModel("customer/customer");
+            $id = $customer->setWebsiteId(Mage::app()->getStore()->getWebsiteId())
+                            ->loadByEmail('guestUser@madisonIsland.com')->getId();
+            $customerId = $id;
+        }
+
+        $questionModel->setData(array(
+            'text' => $question,
+            'status' => 'new',
+            'product_id' => $productId,
+            'customer_id' => $customerId
+        ));
+        $questionModel->save();
+        return true;
+    }
+
 }

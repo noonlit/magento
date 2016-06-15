@@ -184,6 +184,8 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
 
     public function saveAction()
     {
+        //IT CAN JUST EDIT EXISTING ASNWERS, TODO FOR NEW ANSWERS
+        //SHOULD USE A NEW ADD ANSWER
         if ($data = $this->getRequest()->getPost()) {
 
             $model = Mage::getModel('evozon_qa/question');
@@ -192,13 +194,12 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
             if ($id) {
                 $model->load($id);
                 $answer = $answerModel->getQuestionById($id)->getFirstItem();
-                
             }
             if (!empty($data['answer'])) {
                 $answerText = $data['answer'];
                 unset($data['answer']);
             }
-            if (!empty($answerId=$answer->getData('answer_id'))) {
+            if (!empty($answerId = $answer->getData('answer_id'))) {
                 $answerModel->load($answerId);
                 $answer->setAnswer($answerText);
             }
@@ -210,6 +211,8 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
             try {
                 if ($id) {
                     $model->setId($id);
+                }
+                if ($answerId) {
                     $answerModel->setId($answerId);
                 }
                 $model->save();
