@@ -28,10 +28,7 @@
             </block>
         </reference>  
         
-        <reference name="head">
-            <action method="addJs">
-                <script>evozon/qa/message.js</script>
-            </action> 
+        <reference name="head">            
             <action method="addCss">
                 <stylesheet>../../evozon/default/css/message_style.css</stylesheet>
             </action>
