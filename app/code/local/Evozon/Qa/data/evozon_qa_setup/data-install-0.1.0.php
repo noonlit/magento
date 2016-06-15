@@ -11,6 +11,7 @@
  * Create guest user account
  */
 
+
 try {
     Mage::log('Started data-upgrade-0.1.0-0.1.1', NULL, 'scripts.log');
     $websiteId = Mage::app()->getWebsite()->getId();
