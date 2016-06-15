@@ -1,26 +1,33 @@
 <?php
 
+/**
+ * Question form block
+ *
+ * @package    Evozon_Qa
+ * @author     Ilinca Dobre <ilinca.dobre@evozon.com>
+ * @author     Georgiana Tobosi <georgiana.tobosi@evozon.com>
+ */
 class Evozon_QA_Block_Form extends Mage_Core_Block_Template
 {
 
+    /**
+     * Returns the action URL of the question form
+     * 
+     * @return string
+     */
     public function getFormActionUrl()
     {
         return $this->getUrl('evozon_qa/question/addquestion');
-    }    
-    
-    public function showQuestion()
-    {
-        return $this->getRequest()->getParam('qa_question');
     }
 
-    public function showSubmitMessage()
+    /**
+     * Return the current product id
+     * 
+     * @return int
+     */
+    public function getCurrentProductId()
     {
-        return "Your question was submitted and will be soon reviewed!";
+        return Mage::registry('current_product')->getId();
     }
-    public function getCurrentProductId() 
-    {
-        return Mage::registry('current_product')->getId();       
-    }
+
 }
-
-
