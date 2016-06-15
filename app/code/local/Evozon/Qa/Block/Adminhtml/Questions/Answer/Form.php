@@ -28,7 +28,7 @@
  *
  * @category   Evozon Qa
  * @package    Evozon Qa Adminhtml 
- * @subpackage controllers
+ * @subpackage form block
  * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
  */
 class Evozon_Qa_Block_Adminhtml_Questions_Answer_Form extends Mage_Adminhtml_Block_Widget_Form
@@ -41,21 +41,27 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer_Form extends Mage_Adminhtml_Blo
      */
     protected function _prepareForm()
     {
-        if (Mage::getSingleton('adminhtml/session')->getExampleData())
-        {
+        $questionId = $this->getRequest()->getParam('id');
+        $answerItems = Mage::getModel('evozon_qa/answer')->getQuestionById($questionId)->getFirstItem();
+
+        $answerText = array('answer'=>$answerItems->getAnswer());
+
+        if (Mage::getSingleton('adminhtml/session')->getExampleData()) {
             $data = Mage::getSingleton('adminhtml/session')->getExamplelData();
             Mage::getSingleton('adminhtml/session')->getExampleData(null);
-        } elseif (Mage::registry('example_data'))
-        {
+        } elseif (Mage::registry('example_data')) {
             $data = Mage::registry('example_data')->getData();
-        } else
-        {
+        } else {
             $data = array();
         }
-
+        //THIS SHOULD BE LOOKED UPP
+        if ($answerItems->getAnswer()) {
+            $data+=$answerText;
+        }
+        
         $form = new Varien_Data_Form(array(
             'id' => 'edit_form',
-            'action' => $this->getUrl('*/*/save', array('id' => $this->getRequest()->getParam('id'))),
+            'action' => $this->getUrl('*/*/save', array('id' => $questionId)),
             'method' => 'post',
             'enctype' => 'multipart/form-data',
         ));
@@ -73,6 +79,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer_Form extends Mage_Adminhtml_Blo
             'class' => 'required-entry',
             'required' => true,
             'name' => 'text',
+            'readonly' => true,
             'note' => Mage::helper('evozon_qa')->__('Question Content.'),
         ));
 
@@ -86,7 +93,17 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer_Form extends Mage_Adminhtml_Blo
             'options' => $values,
         ));
 
+        $fieldset->addField('answer', 'textarea', array(//is this the correct place to set the type textarea?
+            'label' => Mage::helper('evozon_qa')->__('Answer'),
+            'class' => 'required-entry',
+            'required' => true,
+            'name' => 'answer',
+            'note' => Mage::helper('evozon_qa')->__('Answer Content.'),
+        ));
+
         $form->setValues($data);
+
+
 
         return parent::_prepareForm();
     }
