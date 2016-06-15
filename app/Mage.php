@@ -46,7 +46,7 @@ if (defined('COMPILER_INCLUDE_PATH')) {
     $paths[] = BP . DS . 'lib';
 
     $appPath = implode(PS, $paths);
-    set_include_path($appPath . PS . Mage::registry('original_include_path'));
+     set_include_path($appPath . PS . Mage::registry('original_include_path'));
     include_once "Mage/Core/functions.php";
     include_once "Varien/Autoload.php";
 }
@@ -350,7 +350,7 @@ final class Mage
      */
     public static function getStoreConfig($path, $store = null)
     {
-        return self::app()->getStore($store)->getConfig($path);
+         return self::app()->getStore($store)->getConfig($path);
     }
 
     /**
@@ -411,7 +411,7 @@ final class Mage
      */
     public static function getConfig()
     {
-        return self::$_config;
+         return self::$_config;
     }
 
     /**
@@ -605,7 +605,7 @@ final class Mage
      */
     public static function app($code = '', $type = 'store', $options = array())
     {
-        if (null === self::$_app) {
+            if (null === self::$_app) {
             self::$_app = new Mage_Core_Model_App();
             self::setRoot();
             self::$_events = new Varien_Event_Collection();
@@ -789,7 +789,7 @@ final class Mage
         }
 
         try {
-            $logActive = self::getStoreConfig('dev/log/active');
+                     $logActive = self::getStoreConfig('dev/log/active');
             if (empty($file)) {
                 $file = self::getStoreConfig('dev/log/file');
             }
