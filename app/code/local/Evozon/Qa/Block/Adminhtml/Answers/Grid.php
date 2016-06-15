@@ -66,4 +66,18 @@ class Evozon_Qa_Block_Adminhtml_Answers_Grid extends Mage_Adminhtml_Block_Widget
         return $this->getUrl('*/*/editanswer', array('id' => $row->getId()));
     }
 
+    protected function _prepareMassaction()
+    {
+        $this->setMassactionIdField('evozon_qa_answer_id');
+        $this->getMassactionBlock()->setFormFieldName('evozon_qa_answers_id');
+        //add mass delete action
+        $this->getMassactionBlock()->addItem('delete', array(
+            'label'=> $this->__('Delete'),
+            'url'  => $this->getUrl('*/*/massDeleteAnswers', array('' => '')),
+            'confirm' => $this->__('Are you sure you want to delete the selected answers?')
+        ));
+
+        return $this;
+    }
+
 }
