@@ -1,7 +1,7 @@
 <config>	
     <modules>
         <Evozon_Qa>
-            <version>0.1.1</version>
+            <version>0.1.2</version>
         </Evozon_Qa>
     </modules>
     
@@ -54,8 +54,39 @@
                 </evozon_qa_read>
             </evozon_qa_setup> 
         </resources>
+
+        <helpers>
+            <evozon_qa>
+                <class>Evozon_Qa_Helper</class>
+            </evozon_qa>
+        </helpers>
     </global>
-    
+
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <!-- This is how we load our Adminhtml controllers -->
+                    <modules>
+                        <Evozon_Qa after="Mage_Adminhtml">Evozon_Qa_Adminhtml</Evozon_Qa>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+
+    <admimhtml>
+        <layout>
+            <updates>
+                <evozon_qa>
+                    <file>questions.xml</file>
+                </evozon_qa>
+            </updates>
+        </layout>
+
+
+    </admimhtml>
+
     <frontend>
         <layout>
             <updates>
