@@ -11,7 +11,7 @@
  *
  * @author bogdanhaidu
  */
-class Evozon_Qa_Adminhtml_Block_Menu_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
+class Evozon_Qa_Block_Adminhtml_Answers_Edit_Form extends Mage_Adminhtml_Block_Widget_Form
 {
     /**
      * prepare the form
@@ -45,30 +45,23 @@ class Evozon_Qa_Adminhtml_Block_Menu_Edit_Form extends Mage_Adminhtml_Block_Widg
  
         $this->setForm($form);
  
-        $fieldset = $form->addFieldset('example_form', array(
-             'legend' =>Mage::helper('evozon_qa_adminhtml')->__('Example Information')
+        $fieldset = $form->addFieldset('answer_form', array(
+            'legend' => Mage::helper('evozon_qa')->__('Answer Information') //FORM TAB NAME
         ));
- 
-        $fieldset->addField('name', 'text', array(
-             'label'     => Mage::helper('evozon_qa_adminhtml')->__('Name'),
-             'class'     => 'required-entry',
-             'required'  => true,
-             'name'      => 'name',
-             'note'     => Mage::helper('evozon_qa_adminhtml')->__('The name of the example.'),
+
+        $fieldset->addField('answer', 'textarea', array(//is this the correct place to set the type textarea?
+            'label' => Mage::helper('evozon_qa')->__('Answer'),
+            'class' => 'required-entry',
+            'required' => true,
+            'name' => 'answer',
+            'note' => Mage::helper('evozon_qa')->__('Answer Content.'),
         ));
- 
-        $fieldset->addField('description', 'text', array(
-             'label'     => Mage::helper('evozon_qa_adminhtml')->__('Description'),
-             'class'     => 'required-entry',
-             'required'  => true,
-             'name'      => 'description',
-        ));
- 
-        $fieldset->addField('other', 'text', array(
-             'label'     => Mage::helper('evozon_qa_adminhtml')->__('Other'),
-             'class'     => 'required-entry',
-             'required'  => true,
-             'name'      => 'other',
+        
+        $fieldset->addField('question_id', 'text', array(
+            'label' => Mage::helper('evozon_qa')->__('Question Id'),
+            'class' => 'required-entry',
+            'required' => true,
+            'name' => 'question_id',
         ));
  
         $form->setValues($data);

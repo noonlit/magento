@@ -11,7 +11,7 @@
  *
  * @author bogdanhaidu
  */
-class Evozon_Qa_Adminhtml_Model_Attribute
+class Evozon_Qa_Model_Adminhtml_Attribute
 {
     /**
      * get ln attributes

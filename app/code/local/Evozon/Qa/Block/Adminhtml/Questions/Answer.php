@@ -1,24 +1,22 @@
 <?php
 
-class Evozon_Qa_Adminhtml_Block_Menu_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
+class Evozon_Qa_Block_Adminhtml_Questions_Answer extends Mage_Adminhtml_Block_Widget_Form_Container
 {
 
     public function __construct()
     {
         parent::__construct();
-
         $this->_objectId = 'id';
-        $this->_blockGroup = 'evozon_qa_adminhtml';
-        $this->_controller = 'menu';
-        $this->_mode = 'edit';
+        $this->_blockGroup = 'evozon_qa_adminhtml'; //block_adminhtml tag
+        $this->_controller = 'questions';
+        $this->_mode = 'answer';
 
         $this->_addButton('save_and_continue', array(
             'label' => Mage::helper('adminhtml')->__('Save And Continue Edit'),
             'onclick' => 'saveAndContinueEdit()',
             'class' => 'save',
                 ), -100);
-        $this->_updateButton('save', 'label', Mage::helper('evozon_qa_adminhtml')->__('Save Example'));
-
+        $this->_updateButton('save', 'label', Mage::helper('evozon_qa')->__('Answer Question'));
         $this->_formScripts[] = "
             function toggleEditor() {
                 if (tinyMCE.getInstanceById('form_content') == null) {
@@ -29,17 +27,20 @@ class Evozon_Qa_Adminhtml_Block_Menu_Edit extends Mage_Adminhtml_Block_Widget_Fo
             }
  
             function saveAndContinueEdit(){
-                editForm.submit($('edit_form').action+'back/edit/');
+                answerForm.submit($('edit_form').action+'back/answer/');
             }
         ";
     }
 
+//header of the form
     public function getHeaderText()
     {
-        if (Mage::registry('example_data') && Mage::registry('example_data')->getId()) {
-            return Mage::helper('evozon_qa_adminhtml')->__('Edit Example "%s"', $this->htmlEscape(Mage::registry('example_data')->getName()));
-        } else {
-            return Mage::helper('evozon_qa_adminhtml')->__('New Example');
+        if (Mage::registry('example_data') && Mage::registry('example_data')->getId())
+        {
+            return Mage::helper('evozon_qa')->__('Answer Question "%s"', $this->htmlEscape(Mage::registry('example_data')->getQuestionId()));
+        } else
+        {
+            return Mage::helper('evozon_qa')->__('New Question');
         }
     }
 
