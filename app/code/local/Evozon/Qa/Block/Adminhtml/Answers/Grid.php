@@ -83,7 +83,8 @@ class Evozon_Qa_Block_Adminhtml_Answers_Grid extends Mage_Adminhtml_Block_Widget
     }
 
     /**
-     * Prepare the delete mass action for the answers grid
+     * Prepares the delete mass action for the answers grid
+     * 
      * @return Evozon_Qa_Block_Adminhtml_Answers_Grid
      * @author Raul Onea <raul.onea@evozon.com>
      * @author Marius Adam <marius.adam@evozon.com>

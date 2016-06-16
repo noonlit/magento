@@ -13,6 +13,9 @@
 
 Mage::log('Started data-install-0.1.0', NULL, 'scripts.log');
 
+$installer = $this;
+$installer->startSetup();
+
 try {
     $websiteId = Mage::app()->getWebsite()->getId();
     $store = Mage::app()->getStore();
