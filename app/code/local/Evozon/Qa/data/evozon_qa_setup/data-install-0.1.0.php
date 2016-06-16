@@ -19,13 +19,13 @@ try {
     
     $customer = Mage::getModel("customer/customer");
     $id = $customer->setWebsiteId(Mage::app()->getStore()->getWebsiteId())
-                    ->loadByEmail('guestUser@madisonIsland.com')->getId();
+                    ->loadByEmail('guest_user@madison_island.com')->getId();
     if (!$id) {
         $customer->setWebsiteId($websiteId)
                 ->setStore($store)
-                ->setFirstname('User')
-                ->setLastname('Guest')
-                ->setEmail('guestUser@madisonIsland.com')
+                ->setFirstname('Guest')
+                ->setLastname('User')
+                ->setEmail('guest_user@madison_island.com')
                 ->setPassword('password');
         $customer->save();
     }

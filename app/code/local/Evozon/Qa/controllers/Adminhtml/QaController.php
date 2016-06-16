@@ -415,7 +415,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         } else {
             $customer = Mage::getModel("customer/customer");
             $id = $customer->setWebsiteId(Mage::app()->getStore()->getWebsiteId())
-                            ->loadByEmail('guestUser@madisonIsland.com')->getId();
+                            ->loadByEmail('guest_user@madison_island.com')->getId();
             $userId = $id;
         }
         return $userId;
