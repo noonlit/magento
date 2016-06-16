@@ -8,7 +8,6 @@
  * @subpackage Adminhtml
  * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
  */
-
 class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
 {
 
@@ -201,7 +200,6 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
      * @param string $backurl // adjust the back button url
      * @param string $itemInfo // adjust the info message after a succesfully save
      */
-    
     private function trySave($model, $backurl, $itemInfo = 'Answer')
     {
         try {
@@ -244,6 +242,13 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $this->_redirect('*/*/');
     }
 
+    /**
+     * Changes the status of the selected questions from the grid to approved
+     *
+     * @return null
+     * @author Raul Onea <raul.onea@evozon.com>
+     * @author Marius Adam <marius.adam@evozon.com>
+     */
     public function massApproveQuestionsAction()
     {
         $questionIds = $this->getRequest()->getParam('evozon_qa_questions_id');
@@ -264,6 +269,13 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $this->_redirect('*/*/');
     }
 
+    /**
+     * Changes the status of the selected questions from the grid to disabled
+     *
+     * @return null
+     * @author Raul Onea <raul.onea@evozon.com>
+     * @author Marius Adam <marius.adam@evozon.com>
+     */
     public function massDisableQuestionsAction()
     {
         $questionIds = $this->getRequest()->getParam('evozon_qa_questions_id');
@@ -284,6 +296,13 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $this->_redirect('*/*/');
     }
 
+    /**
+     * Deletes the selected questions from the grid
+     *
+     * @return null
+     * @author Raul Onea <raul.onea@evozon.com>
+     * @author Marius Adam <marius.adam@evozon.com>
+     */
     public function massDeleteQuestionsAction()
     {
         $questionIds = $this->getRequest()->getParam('evozon_qa_questions_id');
@@ -304,6 +323,13 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $this->_redirect('*/*/');
     }
 
+    /**
+     * Deletes the selected answers from the grid
+     *
+     * @return null
+     * @author Raul Onea <raul.onea@evozon.com>
+     * @author Marius Adam <marius.adam@evozon.com>
+     */
     public function massDeleteAnswersAction()
     {
         $answerIds = $this->getRequest()->getParam('evozon_qa_answers_id');
@@ -375,17 +401,16 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
             $this->_redirect('*/*/');
         }
     }
-    
+
     /**
      * returns the current logged in user id
      * 
      * @return int
      */
-    
     public function getUserId()
     {
         $userId = null;
-        if (Mage::getSingleton('customer/session')->isLoggedIn()) { //cheks the customer ID
+        if (Mage::getSingleton('customer/session')->isLoggedIn()) { //checks the customer ID
             $userId = Mage::getSingleton('customer/session')->getCustomer()->getId();
         } else if (Mage::getSingleton('admin/session')->isLoggedIn()) {//checks the user ID
             $userId = Mage::getSingleton('admin/session')->getUser()->getId();
@@ -399,15 +424,13 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     }
 
     /**
-     * checks if the module is allowed on the admin role
-     * 
+     * Checks if the current logged admin has permissions to access evozon_qa resource
+     *
      * @return boolean
      */
-    
     protected function _isAllowed()
     {
-        return true;
-        //return Mage::getSingleton('admin/session')->isAllowed('admin/evozon_qa');
+        return Mage::getSingleton('admin/session')->isAllowed('admin/evozon_qa');
     }
 
     /**
@@ -417,7 +440,6 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
      * @param object $model
      * @param string $dataName
      */
-    
     public function registerModel($id, $model, $dataName)
     {
         if ($id) {
