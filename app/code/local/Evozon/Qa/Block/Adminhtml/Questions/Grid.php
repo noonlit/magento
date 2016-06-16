@@ -7,7 +7,7 @@
  * @package    Evozon Qa
  * @subpackage adminhtml
  * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
- * @author     Marius Adam
+ * @author     Marius Adam <marius.adam@evozon.com>
  */
 class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
@@ -76,6 +76,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
     /**
      * Prepares delete, approve and disable mass actions for the selected questions
      * from the grid
+     * 
      * @return Evozon_Qa_Block_Adminhtml_Questions_Grid
      * @author Raul Onea <raul.onea@evozon.com>
      * @author Marius Adam <marius.adam@evozon.com>

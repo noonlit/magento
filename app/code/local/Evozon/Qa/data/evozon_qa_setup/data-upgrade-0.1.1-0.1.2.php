@@ -26,7 +26,6 @@ try {
         Mage::log('The user was added', null, 'scripts.log');
 } catch (Exception $e) {
     Mage::log($e->getMessage(), null, 'scripts.log');
-    return;
 }
 
 /**
@@ -38,6 +37,7 @@ try {
         ->getCollection()
         ->addFieldToFilter('role_name', 'Qa manager');
     $role = $roleCollection->getColumnValues('role_id');
+    $user = Mage::getModel('admin/user')->load('admin_qa', 'username');
     $user
         ->setRoleIds($role)  //Administrator role id is 1, here you can assign other role ids
         ->setRoleUserId($user->getUserId())
