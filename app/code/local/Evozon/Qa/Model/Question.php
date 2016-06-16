@@ -49,8 +49,6 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
 //                ->group('main_table.question_id');
 //        ;
 
-        Mage::log($collection->getSelect()->__toString(), null, 'myLog.log');
-        Mage::log($collection->getData(), null, 'myLog.log');
         return $collection;
     }
 
