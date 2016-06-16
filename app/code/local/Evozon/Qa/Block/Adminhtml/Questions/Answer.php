@@ -1,10 +1,10 @@
 <?php
 
 /**
- * answer form container
+ * answer questions form container
  *
  * @category   Evozon
- * @package    Evozon Qa
+ * @package    Qa
  * @subpackage adminhtml
  * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
  */
@@ -24,7 +24,11 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer extends Mage_Adminhtml_Block_Wi
         $this->formScripts(); //updated form scripts
     }
 
-    //header of the form
+    /**
+     * return the table header
+     * 
+     * @return object
+     */
 
     public function getHeaderText()
     {

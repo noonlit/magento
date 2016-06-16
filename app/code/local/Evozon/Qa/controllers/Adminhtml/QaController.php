@@ -215,6 +215,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         Mage::getSingleton('adminhtml/session')->setFormData($answerModel->getData());
 
         $this->trySave($answerModel, 'answers', 'Answer ' . $answerId);
+        $this->_redirect('*/*/answers');
     }
 
     /**
@@ -422,7 +423,8 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     }
 
     /**
-     * DON'T KNOW IF THIS WORKS
+     * verify if the Module is allowed on Admin Panel
+     * @return boolean
      */
     protected function _isAllowed()
     {

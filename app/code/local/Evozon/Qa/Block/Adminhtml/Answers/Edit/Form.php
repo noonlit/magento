@@ -6,7 +6,7 @@
  * answers form block
  *
  * @category   Evozon
- * @package    Evozon Qa
+ * @package    Qa
  * @subpackage adminhtml
  * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
  */
@@ -16,18 +16,11 @@ class Evozon_Qa_Block_Adminhtml_Answers_Edit_Form extends Mage_Adminhtml_Block_W
     /**
      * prepare the form
      *
-     *@return Mage_Adminhtml_Block_Widget_Form|void
+     * @return Mage_Adminhtml_Block_Widget_Form|void
      */
     protected function _prepareForm()
     {
-        if (Mage::getSingleton('adminhtml/session')->getExampleData()) {
-            $data = Mage::getSingleton('adminhtml/session')->getExamplelData();
-            Mage::getSingleton('adminhtml/session')->getExampleData(null);
-        } elseif (Mage::registry('example_data')) {
-            $data = Mage::registry('example_data')->getData();
-        } else {
-            $data = array();
-        }
+        $data = $this->getFormData(); //populate the form with existing data
 
         $form = new Varien_Data_Form(array(
             'id' => 'edit_form',
@@ -40,6 +33,36 @@ class Evozon_Qa_Block_Adminhtml_Answers_Edit_Form extends Mage_Adminhtml_Block_W
 
         $this->setForm($form);
 
+        $this->addFieldsToForm($form); //add the form fields
+
+        $form->setValues($data);
+
+        return parent::_prepareForm();
+    }
+
+    /**
+     * returns the existing data from the question, and adds the answer value if it exists
+     * @param int $questionId
+     * @return array
+     */
+    protected function getFormData()
+    {
+        if (Mage::getSingleton('adminhtml/session')->getExampleData()) {
+            $data = Mage::getSingleton('adminhtml/session')->getExamplelData();
+            Mage::getSingleton('adminhtml/session')->getExampleData(null);
+        } elseif (Mage::registry('example_data')) {
+            $data = Mage::registry('example_data')->getData();
+        } else {
+            $data = array();
+        }
+        return $data;
+    }
+
+    /**
+     * adds the input fields for the form object
+     */
+    protected function addFieldsToForm($form)
+    {
         $fieldset = $form->addFieldset('answer_form', array(
             'legend' => Mage::helper('evozon_qa')->__('Answer Information') //FORM TAB NAME
         ));
@@ -51,10 +74,6 @@ class Evozon_Qa_Block_Adminhtml_Answers_Edit_Form extends Mage_Adminhtml_Block_W
             'name' => 'answer',
             'note' => Mage::helper('evozon_qa')->__('Answer Content.'),
         ));
-
-        $form->setValues($data);
-
-        return parent::_prepareForm();
     }
 
 }

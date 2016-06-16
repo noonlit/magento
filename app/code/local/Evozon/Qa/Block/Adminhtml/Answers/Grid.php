@@ -6,7 +6,7 @@
  * answer grid widget
  *
  * @category   Evozon
- * @package    Evozon Qa
+ * @package    Qa
  * @subpackage adminhtml
  * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
  */
@@ -22,6 +22,11 @@ class Evozon_Qa_Block_Adminhtml_Answers_Grid extends Mage_Adminhtml_Block_Widget
         $this->setSaveParametersInSession(true);
     }
 
+    /**
+     * prepares collection for the grid
+     * 
+     * @return object
+     */
     protected function _prepareCollection()
     {
         $collection = Mage::getModel('evozon_qa/answer')->getCollection();
@@ -29,9 +34,13 @@ class Evozon_Qa_Block_Adminhtml_Answers_Grid extends Mage_Adminhtml_Block_Widget
         return parent::_prepareCollection();
     }
 
+    /**
+     * prepares the columns
+     * @return object
+     */
     protected function _prepareColumns()
     {
-        //NEED TO ADD THE COLUMNS FROM THE QUESTION TABLE
+
         $this->addColumn('answer_id', array(
             'header' => Mage::helper('evozon_qa')->__('ID'),
             'align' => 'right',
@@ -60,6 +69,11 @@ class Evozon_Qa_Block_Adminhtml_Answers_Grid extends Mage_Adminhtml_Block_Widget
         return parent::_prepareColumns();
     }
 
+    /**
+     * returns the Row Url
+     * @param object $row
+     * @return string
+     */
     public function getRowUrl($row)
     {
         return $this->getUrl('*/*/editanswer', array('id' => $row->getId()));
@@ -71,8 +85,8 @@ class Evozon_Qa_Block_Adminhtml_Answers_Grid extends Mage_Adminhtml_Block_Widget
         $this->getMassactionBlock()->setFormFieldName('evozon_qa_answers_id');
         //add mass delete action
         $this->getMassactionBlock()->addItem('delete', array(
-            'label'=> $this->__('Delete'),
-            'url'  => $this->getUrl('*/*/massDeleteAnswers', array('' => '')),
+            'label' => $this->__('Delete'),
+            'url' => $this->getUrl('*/*/massDeleteAnswers', array('' => '')),
             'confirm' => $this->__('Are you sure you want to delete the selected answers?')
         ));
 

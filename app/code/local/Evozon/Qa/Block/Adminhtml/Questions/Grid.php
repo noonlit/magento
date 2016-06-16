@@ -4,7 +4,7 @@
  * questions grid widget
  *
  * @category   Evozon
- * @package    Evozon Qa
+ * @package    Qa
  * @subpackage adminhtml
  * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
  * @author     Marius Adam
@@ -21,6 +21,11 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
         $this->setSaveParametersInSession(true); //stores the parameters in session
     }
 
+    /**
+     * prepares collection for the grid
+     * 
+     * @return object
+     */
     protected function _prepareCollection()
     {
         $collection = Mage::getModel('evozon_qa/question')->getCollection(); //questions collection
@@ -28,7 +33,11 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
         return parent::_prepareCollection();
     }
 
-//ADDS THE COLUMNS OF THE GRID TABLE
+    /**
+     * prepares the columns
+     * @return object
+     */
+
     protected function _prepareColumns()
     {
         $this->addColumn('question_id', array(
@@ -68,6 +77,12 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
         return parent::_prepareColumns();
     }
 
+   /**
+    * returns the Row Url
+    * @param object $row
+    * @return string
+    */
+    
     public function getRowUrl($row)
     {
         return $this->getUrl('*/*/answer', array('id' => $row->getId())); //action controller on row click
