@@ -194,6 +194,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         Mage::getSingleton('adminhtml/session')->setFormData($answerModel->getData());
 
         $this->trySave($answerModel, 'answer', 'Answer for Question ' . $questionId);
+        $this->_redirect('*/*/');
     }
 
     /**
@@ -237,7 +238,6 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         } catch (Exception $e) {
             $this->SetExceptionError($model, $e, $backurl);
         }
-        $this->_redirect('*/*/answers');
     }
 
     /**
