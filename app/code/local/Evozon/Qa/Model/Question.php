@@ -42,7 +42,6 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
                 ->where('main_table.store_id = ?', $currentStore)
                 ->from(null, array('user_name' => new Zend_Db_Expr('GROUP_CONCAT(name.value SEPARATOR \' \')')))
                 ->group('main_table.question_id');
-
         ;
 
         Mage::log($collection->getSelect()->__toString(), null, 'myLog.log');
