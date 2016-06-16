@@ -1,12 +1,13 @@
 <?php
 
 /**
- * questions grid
+ * questions grid widget
  *
- * @category   Evozon Qa
- * @package    Evozon Qa Adminhtml 
- * @subpackage grid block
+ * @category   Evozon
+ * @package    Evozon Qa
+ * @subpackage adminhtml
  * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
+ * @author     Marius Adam
  */
 class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
@@ -46,21 +47,23 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
         $this->addColumn('status', array(
             'header' => Mage::helper('evozon_qa')->__('Status'),
             'align' => 'left',
+            'width' => '100px',
             'index' => 'status',
         ));
 
         $this->addColumn('product_id', array(
             'header' => Mage::helper('evozon_qa')->__('Product Id'),
-            'align' => 'left',
+            'align' => 'center',
+            'width' => '50px',
             'index' => 'product_id',
         ));
 
         $this->addColumn('store_id', array(
             'header' => Mage::helper('evozon_qa')->__('Store Id'),
-            'align' => 'left',
+            'align' => 'center',
+            'width' => '50px',
             'index' => 'store_id',
         ));
-
 
         return parent::_prepareColumns();
     }
@@ -87,7 +90,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
             'url' => $this->getUrl('*/*/massApproveQuestions', array('' => '')),
             'confirm' => $this->__('Are you sure you want to approve the selected questions?')
         ));
-
+        //add mass disabled action
         $this->getMassactionBlock()->addItem('disabled', array(
             'label' => $this->__('Disable'),
             'url' => $this->getUrl('*/*/massDisableQuestions', array('' => '')),
