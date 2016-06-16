@@ -426,6 +426,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     /**
      * Checks if the current logged admin has permissions to access evozon_qa resource
      *
+     * verify if the Module is allowed on Admin Panel
      * @return boolean
      */
     protected function _isAllowed()

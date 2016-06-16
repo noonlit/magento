@@ -3,10 +3,10 @@
 /**
  * Questions and Answers extension for Magento
  *
- * answers form container
+ * edit answer form container
  *
  * @category   Evozon
- * @package    Evozon Qa
+ * @package    Qa
  * @subpackage adminhtml
  * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
  */
@@ -29,6 +29,7 @@ class Evozon_Qa_Block_Adminhtml_Answers_Edit extends Mage_Adminhtml_Block_Widget
 
     /**
      * sets the header of the form
+     * return the table header
      * 
      * @return object
      */
@@ -54,6 +55,7 @@ class Evozon_Qa_Block_Adminhtml_Answers_Edit extends Mage_Adminhtml_Block_Widget
             'class' => 'save',
                 ), -100);
     }
+
 
     //updates existing buttons from the container
 

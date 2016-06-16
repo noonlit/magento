@@ -22,7 +22,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
     }
 
     /**
-     * preparing collection
+     * prepares collection for the grid
      * 
      * @return object
      */
@@ -34,6 +34,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
     }
 
     /**
+      <<<<<<< HEAD
      * preparing columns
      * 
      * @return object
@@ -98,7 +99,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
     {
         $this->setMassactionIdField('evozon_qa_question_id');
         $this->getMassactionBlock()->setFormFieldName('evozon_qa_questions_id');
-        
+
         //add mass delete action
         $this->getMassactionBlock()->addItem('delete', array(
             'label' => $this->__('Delete'),
@@ -112,7 +113,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
             'url' => $this->getUrl('*/*/massApproveQuestions', array('' => '')),
             'confirm' => $this->__('Are you sure you want to approve the selected questions?')
         ));
-        
+
         //add mass disabled action
         $this->getMassactionBlock()->addItem('disabled', array(
             'label' => $this->__('Disable'),

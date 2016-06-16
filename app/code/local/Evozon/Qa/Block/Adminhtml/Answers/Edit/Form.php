@@ -21,6 +21,7 @@ class Evozon_Qa_Block_Adminhtml_Answers_Edit_Form extends Mage_Adminhtml_Block_W
     protected function _prepareForm()
     {
         $data = $this->getFormData(); //populate the form with existing data
+        
         $form = new Varien_Data_Form(array(
             'id' => 'edit_form',
             'action' => $this->getUrl('*/*/saveEditAnswer', array('id' => $this->getRequest()->getParam('id'))),
@@ -41,6 +42,7 @@ class Evozon_Qa_Block_Adminhtml_Answers_Edit_Form extends Mage_Adminhtml_Block_W
 
     /**
      * returns the existing data from the question, and adds the answer value if it exists
+     * @param int $questionId
      * @return array
      */
     protected function getFormData()

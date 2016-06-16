@@ -25,6 +25,8 @@ class Evozon_Qa_Block_Adminhtml_Answers_Grid extends Mage_Adminhtml_Block_Widget
 
     /**
      * preparing collection
+     * prepares collection for the grid
+
      * 
      * @return object
      */
