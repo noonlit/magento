@@ -257,9 +257,10 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
             Mage::getSingleton('adminhtml/session')->addError($this->__('Please select Questions.'));
         } else {
             try {
+                /* @var $model Evozon_Qa_Model_Question */
                 $model = Mage::getModel('evozon_qa/question');
                 foreach ($questionIds as $questionId) {
-                    $model->load($questionId)->setStatus('approved')->save();
+                    $model->load($questionId)->setStatus($model::STATUS_APPROVED)->save();
                 }
                 Mage::getSingleton('adminhtml/session')->addSuccess($this->__('Total of %d question(s) were approved.', count($questionIds)));
             } catch (Exception $e) {
@@ -284,9 +285,10 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
             Mage::getSingleton('adminhtml/session')->addError($this->__('Please select Questions.'));
         } else {
             try {
+                /* @var $model Evozon_Qa_Model_Question */
                 $model = Mage::getModel('evozon_qa/question');
                 foreach ($questionIds as $questionId) {
-                    $model->load($questionId)->setStatus('disabled')->save();
+                    $model->load($questionId)->setStatus($model::STATUS_DISABLED)->save();
                 }
                 Mage::getSingleton('adminhtml/session')->addSuccess($this->__('Total of %d questions(s) were disabled.', count($questionIds)));
             } catch (Exception $e) {
@@ -324,33 +326,6 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     }
 
     /**
-     * Deletes the selected answers from the grid
-     *
-     * @return null
-     * @author Raul Onea <raul.onea@evozon.com>
-     * @author Marius Adam <marius.adam@evozon.com>
-     */
-    public function massDeleteAnswersAction()
-    {
-        $answerIds = $this->getRequest()->getParam('evozon_qa_answers_id');
-
-        if (!is_array($answerIds)) {
-            Mage::getSingleton('adminhtml/session')->addError($this->__('Please select Answers.'));
-        } else {
-            try {
-                $model = Mage::getModel('evozon_qa/answer');
-                foreach ($answerIds as $answerId) {
-                    $model->load($answerId)->delete();
-                }
-                Mage::getSingleton('adminhtml/session')->addSuccess($this->__('Total of %d answers(s) were deleted.', count($answerIds)));
-            } catch (Exception $e) {
-                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
-            }
-        }
-        $this->_redirect('*/*/answers');
-    }
-
-    /**
      * sets the Id for the Answer Form Data
      * 
      * @param int $id
@@ -366,23 +341,6 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
             }
         } else {
             Mage::getSingleton('adminhtml/session')->addError(Mage::helper('evozon_qa')->__('Example does not exist'));
-            $this->_redirect('*/*/');
-        }
-    }
-
-    /**
-     * sets The Exception Error, used after try
-     * 
-     * @param object $model
-     * @param object $e
-     * @param string $redirect
-     */
-    public function SetExceptionError($model, $e, $redirect = 'answer')
-    {
-        Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
-        if ($model && $model->getId()) {
-            $this->_redirect('*/*/' . $redirect, array('id' => $model->getId()));
-        } else {
             $this->_redirect('*/*/');
         }
     }

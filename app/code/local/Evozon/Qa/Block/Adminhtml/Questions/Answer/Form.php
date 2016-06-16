@@ -85,11 +85,11 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer_Form extends Mage_Adminhtml_Blo
          * disabled
          */
 
-        $fieldset->addField('text', 'textarea', array(
-            'label' => Mage::helper('evozon_qa')->__('Text'),
+        $fieldset->addField('question', 'textarea', array(
+            'label' => Mage::helper('evozon_qa')->__('Question'),
             'class' => 'required-entry',
             'required' => true,
-            'name' => 'text',
+            'name' => 'question',
             'disabled' => true,
             'readonly' => true,
             'note' => Mage::helper('evozon_qa')->__('Question Content.'),

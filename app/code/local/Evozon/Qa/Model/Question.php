@@ -31,20 +31,20 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
      */
     public function fetchQuestions()
     {
-        $status = 'approved';
+
         $currentProductId = Mage::registry('current_product')->getId();
         $currentStore = Mage::app()->getStore()->getStoreId();
 
         $collection = $this->getCollection();
-        $collection->getSelect();
-//                ->joinLeft(array('answers' => 'evozon_answers'), 'main_table.question_id = answers.question_id', array('answer', 'user_id'))
+        $collection->getSelect()
+                ->joinLeft(array('answers' => 'evozon_answers'), 'main_table.question_id = answers.question_id', array('answer', 'admin_id'))
 //                ->joinLeft(array('name' => 'customer_entity_varchar'), 'main_table.customer_id = name.entity_id', array('attribute_id', 'value'))
 //                ->joinLeft(array('att' => 'eav_attribute'), 'name.attribute_id = att.attribute_id', array('attribute_code'))
-//                ->joinLeft(array('admin' => 'admin_user'), 'answers.user_id = admin.user_id', array('firstname', 'lastname'))
+                ->joinLeft(array('admin' => 'admin_user'), 'answers.admin_id = admin.user_id', array('firstname', 'lastname'))
 //                ->where('attribute_code IN (?)', array('firstname', 'lastname'))
-//                ->where('product_id = ?', $currentProductId)
-//                ->where('status = ?', $status)
-//                ->where('main_table.store_id = ?', $currentStore)
+                ->where('product_id = ?', $currentProductId)
+                ->where('status = ?', static::STATUS_APPROVED)
+                ->where('main_table.store_id = ?', $currentStore);
 //                ->from(null, array('user_name' => new Zend_Db_Expr('GROUP_CONCAT(name.value ORDER BY name.attribute_id SEPARATOR \' \')')))
 //                ->group('main_table.question_id');
 //        ;
@@ -63,28 +63,19 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
      */
     public function addQuestion($formData)
     {
-        $questionModel = Mage::getModel('evozon_qa/question');
 
         $question = $formData['qa_question'];
         $productId = $formData['qa_current_product'];
 
-        if (Mage::getSingleton('customer/session')->isLoggedIn()) {
-            $customerId = Mage::getSingleton('customer/session')->getCustomer()->getId();
-        } else {
-            $customer = Mage::getModel("customer/customer");
-            $id = $customer->setWebsiteId(Mage::app()->getStore()->getWebsiteId())
-                            ->loadByEmail('guest_user@madison_island.com')->getId();
-            $customerId = $id;
-        }
-
-        $questionModel->setData(array(
+        $this->setData(array(
             'question' => $question,
-            'status' => 'new',
+            'status' => static::STATUS_NEW,
             'product_id' => $productId,
-            'customer_id' => $customerId,
-            'store_id' => Mage::app()->getStore()->getStoreId()
+            'customer_name' => 'John Doe',
+            'store_id' => Mage::app()->getStore()->getStoreId(),
+            'created_at' => strtotime('now'),
         ));
-        $questionModel->save();
+        $this->save();
 
         return $this;
     }
@@ -117,10 +108,10 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
     static public function getOptionArray()
     {
         return array(
-            self::STATUS_NEW        => Mage::helper('evozon_qa')->__('New'),
-            self::STATUS_PENDING    => Mage::helper('evozon_qa')->__('Pending'),
-            self::STATUS_APPROVED   => Mage::helper('evozon_qa')->__('Approved'),
-            self::STATUS_DISABLED   => Mage::helper('evozon_qa')->__('Disabled')
+            static::STATUS_NEW        => Mage::helper('evozon_qa')->__('New'),
+            static::STATUS_PENDING    => Mage::helper('evozon_qa')->__('Pending'),
+            static::STATUS_APPROVED   => Mage::helper('evozon_qa')->__('Approved'),
+            static::STATUS_DISABLED   => Mage::helper('evozon_qa')->__('Disabled')
         );
     }
 

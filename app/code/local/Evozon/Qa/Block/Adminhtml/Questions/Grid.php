@@ -30,11 +30,13 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
     {
         //questions collection
         $collection = Mage::getModel('evozon_qa/question')->getCollection();
-//            ->getSelect()
-//            ->joinLeft(array('answers' => 'evozon_answers'), 'main_table.question_id = answers.question_id', array('answer'))
-//            ->joinLeft(array('product' => 'catalog_product_entity'), 'main_table.product_id = product.entity_id', array('sku'))
-//            ->joinLeft(array('store'   => 'core_store'), 'main_table.store_id = store.store_id', array('store_name' => 'name'));
         $this->setCollection($collection);
+
+        $collection->getSelect()
+            ->joinLeft(array('answers' => 'evozon_answers'), 'main_table.question_id = answers.question_id', array('answer'))
+            ->joinLeft(array('product' => 'catalog_product_entity'), 'main_table.product_id = product.entity_id', array('sku'));
+        $petru = $collection->getSelect()->__toString();
+
         return parent::_prepareCollection();
     }
 
@@ -61,7 +63,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
         $this->addColumn('answer', array(
             'header' => Mage::helper('evozon_qa')->__('Answer'),
             'align' => 'left',
-            'index' => 'question',
+            'index' => 'answer',
         ));
 
         $this->addColumn('status', array(
@@ -84,7 +86,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
             'header' => Mage::helper('evozon_qa')->__('Product sku'),
             'align' => 'center',
             'width' => '100px',
-            'index' => 'product_id',
+            'index' => 'sku',
         ));
 
         $this->addColumn('store_id', array(
