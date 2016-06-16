@@ -16,23 +16,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
      */
     public function indexAction()
     {
-        $this->loadLayout();
-        $this->_setActiveMenu('evozon_qa')
-                ->_title('Q & A Management');
-        $this->_addBreadcrumb($this->__('Q A Management'), $this->__('Q A Management'));
-        $this->renderLayout();
-    }
-
-    /**
-     * shows the answers grid
-     */
-    public function answersAction()
-    {
-        $this->loadLayout();
-        $this->_setActiveMenu('evozon_qa')
-                ->_title('Q & A Management');
-        $this->_addBreadcrumb($this->__('Q A Management'), $this->__('Q A Management'));
-        $this->renderLayout();
+        $this->questionsAction();
     }
 
     /**
@@ -61,7 +45,10 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     public function answerAction()
     {
         $id = $this->getRequest()->getParam('id', null);
-        $model = Mage::getModel('evozon_qa/question'); //adminhtml questions model
+        if (is_null($id)) {
+            $this->_redirect('*/*/');
+        }
+        $model = Mage::getModel('evozon_qa/question');
         if ($id) {
             $this->setIdToFormData($id, $model);
         }
@@ -95,17 +82,39 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
      */
     public function saveAction()
     {
-        $data = $this->getRequest()->getPost();
-
-        if ($data) {
-            $id = $this->getRequest()->getParam('id');
-            $this->changeStatus($data, $id);
-            $this->addAnswer($data, $id);
-
+        if($this->_validateFormKey() === false) {
+            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('evozon_qa')->__('Invalid form key! Reload the page...'));
+            $this->_redirect('*/*/');
             return;
         }
+        $data = $this->getRequest()->getPost();
 
-        Mage::getSingleton('adminhtml/session')->addError(Mage::helper('evozon_qa')->__('No data found to save'));
+        $questionId = $this->getRequest()->getParam('id');
+        $now = strtotime('now');
+        try {
+            $questionModel = Mage::getModel('evozon_qa/question')->load($questionId)
+                ->setQuestion($data['question'])
+                ->setStatus($data['status'])
+                ->setUpdatedAt($now)
+                ->save();
+
+            $answerModel = Mage::getModel('evozon_qa/answer')->load($questionId, 'question_id');
+            if(is_null($answerModel->getId())) {
+                //set created_at and question_id attributes only if the answer does not exists
+                $answerModel->setCreatedAt($now);
+                $answerModel->setQuestionId($questionId);
+            } else {
+                $answerModel->setUpdatedAt($now);
+            }
+
+            $answerModel->setAnswer($data['answer'])
+                ->setAdminId(Mage::getSingleton('admin/session')->getUser()->getId())
+                ->save();
+            Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa')->__('Question informations have been saved.'));
+        }catch(Exception $ex) {
+            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('evozon_qa')->__($ex->getMessage()));
+        }
+
         $this->_redirect('*/*/');
     }
 
@@ -340,7 +349,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
                 $model->setData($data)->setId($id); //sets the QuestionId for the formdata
             }
         } else {
-            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('evozon_qa')->__('Example does not exist'));
+            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('evozon_qa')->__('Question does not exist'));
             $this->_redirect('*/*/');
         }
     }

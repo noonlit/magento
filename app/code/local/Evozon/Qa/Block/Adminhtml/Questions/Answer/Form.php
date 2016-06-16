@@ -30,14 +30,8 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer_Form extends Mage_Adminhtml_Blo
         ));
 
         $form->setUseContainer(true);
-
         $this->setForm($form);
-
-        $statusModel = Mage::getResourceModel('evozon_qa/question_attribute_source_status');
-        $statusValues = $statusModel::getValues(); //returns the optionValues for the Status field
-
-        $this->addFieldsToForm($form, $statusValues); //add the form fields
-
+        $this->addFieldsToForm($form); //add the form fields
         $form->setValues($data);
 
         return parent::_prepareForm();
@@ -50,21 +44,21 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer_Form extends Mage_Adminhtml_Blo
      */
     protected function getFormData($questionId)
     {
-        $answerItems = Mage::getModel('evozon_qa/answer')->getQuestionById($questionId)->getFirstItem();
+        $answer = Mage::getModel('evozon_qa/answer')->load($questionId, 'question_id')->getAnswer();
+        /* @var $questionModel Evozon_Qa_Model_Question */
+        $questionModel = Mage::getModel('evozon_qa/question')->load($questionId);
 
-        if (Mage::getSingleton('adminhtml/session')->getExampleData()) {
-            $data = Mage::getSingleton('adminhtml/session')->getExamplelData();
-            Mage::getSingleton('adminhtml/session')->getExampleData(null);
-        } elseif (Mage::registry('example_data')) {
-            $data = Mage::registry('example_data')->getData();
-        } else {
-            $data = array();
+        $status = $questionModel->getStatus();
+        if($status == $questionModel::STATUS_NEW) {
+            $status = $questionModel::STATUS_PENDING;
         }
 
-        if ($answerItems->getAnswer()) { //if a answer to the question exists
-            $answerText = array('answer' => $answerItems->getAnswer());
-            $data+=$answerText;
-        }
+        $data = array(
+            'question' => $questionModel->getQuestion(),
+            'answer'   => $answer,
+            'status'   => $status,
+        );
+
         return $data;
     }
     
@@ -74,7 +68,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer_Form extends Mage_Adminhtml_Blo
      * @param object $form
      * @param array $statusValues
      */
-    protected function addFieldsToForm($form, $statusValues)
+    protected function addFieldsToForm($form)
     {
         $fieldset = $form->addFieldset('question_form', array(
             'legend' => Mage::helper('evozon_qa')->__('Question Information') //form tab name
@@ -90,8 +84,6 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer_Form extends Mage_Adminhtml_Blo
             'class' => 'required-entry',
             'required' => true,
             'name' => 'question',
-            'disabled' => true,
-            'readonly' => true,
             'note' => Mage::helper('evozon_qa')->__('Question Content.'),
         ));
 
@@ -99,12 +91,14 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer_Form extends Mage_Adminhtml_Blo
          * type = select
          */
 
+        $model = Mage::getModel('evozon_qa/question');
+
         $fieldset->addField('status', 'select', array(
             'label' => Mage::helper('evozon_qa')->__('Status'),
             'class' => 'required-entry',
             'required' => true,
             'name' => 'status',
-            'options' => $statusValues,
+            'options' => $model::getOptionArray(),
         ));
 
         /* question answer, different table
