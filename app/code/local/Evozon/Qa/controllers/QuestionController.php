@@ -19,12 +19,12 @@ class Evozon_Qa_QuestionController extends Mage_Core_Controller_Front_Action
     {
         $formData = $this->getRequest()->getPost();
         $session = Mage::getSingleton('core/session');
-        $question = Mage::getModel('evozon_qa/question')->setData($this->_cropQuestionData($formData));
+        $question = Mage::getModel('evozon_qa/question');
 
-        $validate = $question->validate();
+        $validate = $question->validate($formData);
         if ($validate === true) {
             try {
-                Mage::getModel('evozon_qa/question')->addQuestion($formData);
+                $question->addQuestion($formData);
                 $session->addSuccess($this->__('Your question has been accepted for moderation.'));
             } catch (Exception $ex) {
                 $session->setFormData($formData);
@@ -42,25 +42,4 @@ class Evozon_Qa_QuestionController extends Mage_Core_Controller_Front_Action
         }
         $this->_redirectReferer();
     }
-
-    /**
-     * Cropps POST values
-     * 
-     * @param array $questionData
-     * @return array
-     */
-    protected function _cropQuestionData(array $questionData)
-    {
-        $croppedValues = array();
-        $allowedKeys = array_fill_keys(array('qa_question'), true);
-
-        foreach ($questionData as $key => $value) {
-            if (isset($allowedKeys[$key])) {
-                $croppedValues[$key] = $value;
-            }
-        }
-
-        return $croppedValues;
-    }
-
 }
