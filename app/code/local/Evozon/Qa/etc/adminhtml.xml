@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <evozon_qa module="evozon_qa" translate="title">
+            <title>QA Management</title>
+            <sort_order>100</sort_order>
+            <children>
+                <questions>
+                    <title>See Questions</title>
+                    <sort_order>1</sort_order>
+                    <action>adminhtml/qa/</action>
+                </questions>
+                <answers module="evozon_qa" translate="title">
+                    <title>See Answers</title>
+                    <sort_order>2</sort_order>
+                    <action>adminhtml/qa/answers</action>
+                </answers>
+            </children>
+        </evozon_qa>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>                
+                    <evozon_qa translate="title" module="evozon_qa">
+                        <title>QA Item</title>
+                        <sort_order>1</sort_order>
+                        <children>
+                            <questions translate="title" module="evozon_qa">
+                                <title>Qa questions</title>
+                            </questions>
+                            <answers translate="title" module="evozon_qa">
+                                <title>Qa questions</title>
+                            </answers>
+                        </children>
+                    </evozon_qa>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

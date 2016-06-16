@@ -1,0 +1,38 @@
+<layout version="0.1.0">
+    <catalog_product_view> 
+        <reference name="head">
+            <action method="addItem"><type>skin_css</type><file>css/qa_styles.css</file></action>
+        </reference>
+        
+        <reference name="product.info">
+            <block type="evozon_qa/question" name="questions_block" as="questions_block" template="catalog/product/questions.phtml">
+                
+                <action method="addToParentGroup">
+                    <group>detailed_info</group>
+                </action>
+               
+                <action method="setTitle" translate="value">
+                    <value>Questions</value>
+                </action>
+            </block>
+            
+            <block type="evozon_qa/form" name="evozon_qa_form" as="evozon_qa_form" template="catalog/product/form.phtml">
+                
+                <action method="addToParentGroup">
+                    <group>detailed_info</group>
+                </action>
+               
+                <action method="setTitle" translate="value">
+                    <value>Ask a question</value>
+                </action>
+            </block>
+        </reference>  
+        
+        <reference name="head">            
+            <action method="addCss">
+                <stylesheet>../../evozon/default/css/message_style.css</stylesheet>
+            </action>
+        </reference>    
+    </catalog_product_view>
+</layout>
+
