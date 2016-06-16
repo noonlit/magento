@@ -267,6 +267,13 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $this->_redirect('*/*/');
     }
 
+    /**
+     * Changes the status of the selected questions from the grid to approved
+     *
+     * @return null
+     * @author Raul Onea <raul.onea@evozon.com>
+     * @author Marius Adam <marius.adam@evozon.com>
+     */
     public function massApproveQuestionsAction()
     {
         $questionIds = $this->getRequest()->getParam('evozon_qa_questions_id');
@@ -287,6 +294,13 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $this->_redirect('*/*/');
     }
 
+    /**
+     * Changes the status of the selected questions from the grid to disabled
+     *
+     * @return null
+     * @author Raul Onea <raul.onea@evozon.com>
+     * @author Marius Adam <marius.adam@evozon.com>
+     */
     public function massDisableQuestionsAction()
     {
         $questionIds = $this->getRequest()->getParam('evozon_qa_questions_id');
@@ -307,6 +321,13 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $this->_redirect('*/*/');
     }
 
+    /**
+     * Deletes the selected questions from the grid
+     *
+     * @return null
+     * @author Raul Onea <raul.onea@evozon.com>
+     * @author Marius Adam <marius.adam@evozon.com>
+     */
     public function massDeleteQuestionsAction()
     {
         $questionIds = $this->getRequest()->getParam('evozon_qa_questions_id');
@@ -327,6 +348,13 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $this->_redirect('*/*/');
     }
 
+    /**
+     * Deletes the selected answers from the grid
+     *
+     * @return null
+     * @author Raul Onea <raul.onea@evozon.com>
+     * @author Marius Adam <marius.adam@evozon.com>
+     */
     public function massDeleteAnswersAction()
     {
         $answerIds = $this->getRequest()->getParam('evozon_qa_answers_id');
@@ -408,7 +436,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     public function getUserId()
     {
         $userId = null;
-        if (Mage::getSingleton('customer/session')->isLoggedIn()) { //cheks the customer ID
+        if (Mage::getSingleton('customer/session')->isLoggedIn()) { //checks the customer ID
             $userId = Mage::getSingleton('customer/session')->getCustomer()->getId();
         } else if (Mage::getSingleton('admin/session')->isLoggedIn()) {//checks the user ID
             $userId = Mage::getSingleton('admin/session')->getUser()->getId();
@@ -422,12 +450,13 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     }
 
     /**
-     * DON'T KNOW IF THIS WORKS
+     * Checks if the current logged admin has permissions to access evozon_qa resource
+     *
+     * @return boolean
      */
     protected function _isAllowed()
     {
-        return true;
-        //return Mage::getSingleton('admin/session')->isAllowed('admin/evozon_qa');
+        return Mage::getSingleton('admin/session')->isAllowed('admin/evozon_qa');
     }
 
     /**
