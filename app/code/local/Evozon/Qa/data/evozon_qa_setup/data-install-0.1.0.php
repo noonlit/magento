@@ -23,8 +23,8 @@ try {
     if (!$id) {
         $customer->setWebsiteId($websiteId)
                 ->setStore($store)
-                ->setFirstname('Guest')
-                ->setLastname('user')
+                ->setFirstname('User')
+                ->setLastname('Guest')
                 ->setEmail('guestUser@madisonIsland.com')
                 ->setPassword('password');
         $customer->save();

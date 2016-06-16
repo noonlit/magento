@@ -4,12 +4,12 @@
     <?php foreach ($questions as $question): ?>
         <div class="row-question">
             <p><?php
-                $email = $question->getData('email');
+                $userName = $question->getData('user_name');
                 $text = $question->getData('text');
                 $adminName = $question->getData('firstname') . ' ' . $question->getData('lastname');
                 $answer = $question->getData('answer');
                 ?>
-            <div id="qa_name"><?= $email ?></div>
+            <div id="qa_name"><?= $userName?></div>
             <div id="qa_text"><?= $text ?></div></p>
             <?php if ($answer) : ?>
                 <div class="row-answer"><p>
