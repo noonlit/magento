@@ -36,18 +36,18 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
         $currentStore = Mage::app()->getStore()->getStoreId();
 
         $collection = $this->getCollection();
-        $collection->getSelect()
-                ->joinLeft(array('answers' => 'evozon_answers'), 'main_table.question_id = answers.question_id', array('answer', 'user_id'))
-                ->joinLeft(array('name' => 'customer_entity_varchar'), 'main_table.customer_id = name.entity_id', array('attribute_id', 'value'))
-                ->joinLeft(array('att' => 'eav_attribute'), 'name.attribute_id = att.attribute_id', array('attribute_code'))
-                ->joinLeft(array('admin' => 'admin_user'), 'answers.user_id = admin.user_id', array('firstname', 'lastname'))
-                ->where('attribute_code IN (?)', array('firstname', 'lastname'))
-                ->where('product_id = ?', $currentProductId)
-                ->where('status = ?', $status)
-                ->where('main_table.store_id = ?', $currentStore)
-                ->from(null, array('user_name' => new Zend_Db_Expr('GROUP_CONCAT(name.value ORDER BY name.attribute_id SEPARATOR \' \')')))
-                ->group('main_table.question_id');
-        ;
+        $collection->getSelect();
+//                ->joinLeft(array('answers' => 'evozon_answers'), 'main_table.question_id = answers.question_id', array('answer', 'user_id'))
+//                ->joinLeft(array('name' => 'customer_entity_varchar'), 'main_table.customer_id = name.entity_id', array('attribute_id', 'value'))
+//                ->joinLeft(array('att' => 'eav_attribute'), 'name.attribute_id = att.attribute_id', array('attribute_code'))
+//                ->joinLeft(array('admin' => 'admin_user'), 'answers.user_id = admin.user_id', array('firstname', 'lastname'))
+//                ->where('attribute_code IN (?)', array('firstname', 'lastname'))
+//                ->where('product_id = ?', $currentProductId)
+//                ->where('status = ?', $status)
+//                ->where('main_table.store_id = ?', $currentStore)
+//                ->from(null, array('user_name' => new Zend_Db_Expr('GROUP_CONCAT(name.value ORDER BY name.attribute_id SEPARATOR \' \')')))
+//                ->group('main_table.question_id');
+//        ;
 
         Mage::log($collection->getSelect()->__toString(), null, 'myLog.log');
         Mage::log($collection->getData(), null, 'myLog.log');
@@ -78,7 +78,7 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
         }
 
         $questionModel->setData(array(
-            'text' => $question,
+            'question' => $question,
             'status' => 'new',
             'product_id' => $productId,
             'customer_id' => $customerId,
@@ -91,6 +91,7 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
 
     /**
      * Validation for form inputs: checks if the question field is not empty
+     * 
      * @author     Ilinca Dobre <ilinca.dobre@evozon.com>
      * @return boolean/array
      */
