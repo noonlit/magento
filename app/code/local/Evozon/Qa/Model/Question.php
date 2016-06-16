@@ -12,6 +12,11 @@
 class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
 {
 
+    const STATUS_NEW      = 1;
+    const STATUS_PENDING  = 2;
+    const STATUS_APPROVED = 3;
+    const STATUS_DISABLED = 4;
+
     protected function _construct()
     {
         //sets the resource model class instance used for this model
@@ -101,6 +106,21 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
             return true;
         }
         return $errors;
+    }
+
+    /**
+     * Retrieve option array
+     *
+     * @return array
+     */
+    static public function getOptionArray()
+    {
+        return array(
+            self::STATUS_NEW        => Mage::helper('evozon_qa')->__('New'),
+            self::STATUS_PENDING    => Mage::helper('evozon_qa')->__('Pending'),
+            self::STATUS_APPROVED   => Mage::helper('evozon_qa')->__('Approved'),
+            self::STATUS_DISABLED   => Mage::helper('evozon_qa')->__('Disabled')
+        );
     }
 
 }

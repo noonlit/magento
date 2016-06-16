@@ -28,13 +28,17 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
      */
     protected function _prepareCollection()
     {
-        $collection = Mage::getModel('evozon_qa/question')->getCollection(); //questions collection
+        //questions collection
+        $collection = Mage::getModel('evozon_qa/question')->getCollection();
+//            ->getSelect()
+//            ->joinLeft(array('answers' => 'evozon_answers'), 'main_table.question_id = answers.question_id', array('answer'))
+//            ->joinLeft(array('product' => 'catalog_product_entity'), 'main_table.product_id = product.entity_id', array('sku'))
+//            ->joinLeft(array('store'   => 'core_store'), 'main_table.store_id = store.store_id', array('store_name' => 'name'));
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
 
     /**
-      <<<<<<< HEAD
      * preparing columns
      * 
      * @return object
@@ -48,8 +52,14 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
             'index' => 'question_id',
         ));
 
-        $this->addColumn('text', array(
-            'header' => Mage::helper('evozon_qa')->__('Text'),
+        $this->addColumn('question', array(
+            'header' => Mage::helper('evozon_qa')->__('Question'),
+            'align' => 'left',
+            'index' => 'text',
+        ));
+
+        $this->addColumn('answer', array(
+            'header' => Mage::helper('evozon_qa')->__('Answer'),
             'align' => 'left',
             'index' => 'text',
         ));
@@ -59,20 +69,31 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
             'align' => 'left',
             'width' => '100px',
             'index' => 'status',
+            'type'  => 'options',
+            'options' => Mage::getModel('evozon_qa/question')->getOptionArray(),
         ));
 
-        $this->addColumn('product_id', array(
-            'header' => Mage::helper('evozon_qa')->__('Product Id'),
+        $this->addColumn('customer_name', array(
+            'header' => Mage::helper('evozon_qa')->__('Customer name'),
+            'align' => 'left',
+            'width' => '100px',
+            'index' => 'customer_name',
+        ));
+
+        $this->addColumn('sku', array(
+            'header' => Mage::helper('evozon_qa')->__('Product sku'),
             'align' => 'center',
-            'width' => '50px',
+            'width' => '100px',
             'index' => 'product_id',
         ));
 
         $this->addColumn('store_id', array(
-            'header' => Mage::helper('evozon_qa')->__('Store Id'),
-            'align' => 'center',
-            'width' => '50px',
-            'index' => 'store_id',
+            'header'    => Mage::helper('evozon_qa')->__('Store'),
+            'align'     => 'center',
+            'width'     => '100px',
+            'index'     => 'store_id',
+            'type'      => 'options',
+            'options'   => Mage::getModel('core/store')->getCollection()->toOptionHash(),
         ));
 
         return parent::_prepareColumns();

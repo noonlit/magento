@@ -39,7 +39,7 @@ try {
     $role = $roleCollection->getColumnValues('role_id');
     $user = Mage::getModel('admin/user')->load('admin_qa', 'username');
     $user
-        ->setRoleIds($role)  //Administrator role id is 1, here you can assign other role ids
+        ->setRoleIds($role)  
         ->setRoleUserId($user->getUserId())
         ->saveRelations();
     Mage::log('The role was assigned to the user', null, 'scripts.log');

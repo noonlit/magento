@@ -15,7 +15,7 @@ Mage::log('Started data-upgrade-0.1.0-0.1.1', null, 'scripts.log');
 
 try {
     $roleName = 'Qa manager';
-    $resources = array('admin/evozon_qa', 'admin/evozon_qa/questions', 'admin/evozon_qa/answers');
+    $resources = array('admin/evozon_qa', 'admin/evozon_qa/questions');
     $role = Mage::getModel('admin/role')->load($roleName, 'role_name');
     if(!$role->getId()) {
         $model = Mage::getModel('admin/role')
