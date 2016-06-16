@@ -1,15 +1,14 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of Attribute
+ * Questions and Answers extension for Magento
  *
- * @author bogdanhaidu
+ * attribute class 
+ *
+ * @category   Evozon
+ * @package    Evozon Qa
+ * @subpackage adminhtml
+ * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
  */
 class Evozon_Qa_Model_Adminhtml_Attribute
 {

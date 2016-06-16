@@ -34,7 +34,6 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
     }
 
     /**
-      <<<<<<< HEAD
      * preparing columns
      * 
      * @return object

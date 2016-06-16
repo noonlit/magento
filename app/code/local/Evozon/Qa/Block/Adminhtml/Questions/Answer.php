@@ -36,8 +36,9 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer extends Mage_Adminhtml_Block_Wi
         }
     }
 
-    //adds new buttons to the container
-
+    /**
+     * adds new buttons to the container
+     */
     protected function addButtons()
     {
         $this->_addButton('save_and_continue', array(
@@ -47,15 +48,17 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer extends Mage_Adminhtml_Block_Wi
                 ), -100);
     }
 
-    //updates existing buttons from the container
-
+    /**
+     * updates existing buttons from the container
+     */
     public function updateButtons()
     {
-        $this->_updateButton('save', 'label', Mage::helper('evozon_qa')->__('Answer Question')); //change the save button label 
+        $this->_updateButton('save', 'label', Mage::helper('evozon_qa')->__('Answer Question')); //changes the save button label 
     }
 
-    //updated form scripts
-
+    /**
+     * updated form scripts
+     */
     protected function formScripts()
     {
         $this->_formScripts[] = "

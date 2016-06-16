@@ -29,7 +29,6 @@ class Evozon_Qa_Block_Adminhtml_Answers_Edit extends Mage_Adminhtml_Block_Widget
 
     /**
      * sets the header of the form
-     * return the table header
      * 
      * @return object
      */
@@ -45,8 +44,9 @@ class Evozon_Qa_Block_Adminhtml_Answers_Edit extends Mage_Adminhtml_Block_Widget
         }
     }
 
-    //adds new buttons to the container
-
+    /**
+     * adds new buttons to the container
+     */
     protected function addButtons()
     {
         $this->_addButton('save_and_continue', array(
@@ -56,17 +56,18 @@ class Evozon_Qa_Block_Adminhtml_Answers_Edit extends Mage_Adminhtml_Block_Widget
                 ), -100);
     }
 
-
-    //updates existing buttons from the container
-
+    /**
+     * updates existing buttons from the container
+     */
     public function updateButtons()
     {
-        $this->_updateButton('save', 'label', Mage::helper('evozon_qa')->__('Save Answer'));
-        $this->_updateButton('back', 'onclick', 'setLocation(\'' . $this->getUrl('*/*/answers') . '\')');
+        $this->_updateButton('save', 'label', Mage::helper('evozon_qa')->__('Save Answer')); //changes the save button label 
+        $this->_updateButton('back', 'onclick', 'setLocation(\'' . $this->getUrl('*/*/answers') . '\')'); //changes the url back button
     }
 
-    //updated form scripts
-
+    /**
+     * updated form scripts
+     */
     protected function formScripts()
     {
         $this->_formScripts[] = "
