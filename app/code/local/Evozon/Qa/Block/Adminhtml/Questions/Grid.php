@@ -29,6 +29,14 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
     protected function _prepareCollection()
     {
         $collection = Mage::getModel('evozon_qa/question')->getCollection(); //questions collection
+        $product = Mage::getModel('catalog/product');
+        
+        
+        foreach ($collection as $element) {
+            $product->load($element->getProductId());
+            $element ->setSku($product->getSku());
+        }
+
         $this->setCollection($collection);
         return parent::_prepareCollection();
     }
@@ -60,11 +68,11 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
             'index' => 'status',
         ));
 
-        $this->addColumn('product_id', array(
-            'header' => Mage::helper('evozon_qa')->__('Product Id'),
+        $this->addColumn('sku', array(
+            'header' => Mage::helper('evozon_qa')->__('Sku'),
             'align' => 'center',
             'width' => '50px',
-            'index' => 'product_id',
+            'index' => 'sku',
         ));
 
         $this->addColumn('store_id', array(

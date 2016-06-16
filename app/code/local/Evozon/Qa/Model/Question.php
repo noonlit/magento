@@ -104,4 +104,19 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
         return $errors;
     }
 
+    /**
+     * saves the status value from the Answer form data
+     * @param type $formData
+     * @param type $questionId
+     */
+    public function editQuestion($formData, $questionId = null)
+    {
+        if ($questionId) {
+            $this->load($questionId);
+            $this->setStatus($formData['status']);
+            //Mage::getSingleton('adminhtml/session')->setFormData($questionModel->getData());
+        }
+        return $this;
+    }
+
 }

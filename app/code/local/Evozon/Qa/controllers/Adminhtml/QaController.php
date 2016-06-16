@@ -57,11 +57,12 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
 
     /**
      * answer action
+     * block - answer question form
      */
     public function answerAction()
     {
         $id = $this->getRequest()->getParam('id', null);
-        $model = Mage::getModel('evozon_qa/question'); //adminhtml questions model
+        $model = Mage::getModel('evozon_qa/question');
         if ($id) {
             $this->setIdToFormData($id, $model);
         }
@@ -79,7 +80,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     public function editAnswerAction()
     {
         $id = $this->getRequest()->getParam('id', null);
-        $model = Mage::getModel('evozon_qa/answer'); //adminhtml questions model
+        $model = Mage::getModel('evozon_qa/answer');
         if ($id) {
             $this->setIdToFormData($id, $model);
         }
@@ -96,16 +97,37 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     public function saveAction()
     {
         $data = $this->getRequest()->getPost();
+        $answerModel = Mage::getModel('evozon_qa/answer');
+        $questionModel = Mage::getModel('evozon_qa/question');
 
-        if ($data) {
-            $id = $this->getRequest()->getParam('id');
-            $this->changeStatus($data, $id);
-            $this->addAnswer($data, $id);
+        try {
+            if ($data) {
 
-            return;
+                $questionId = $this->getRequest()->getParam('id');
+
+                $questionModel->editQuestion($data, $questionId);
+                $questionModel->save();
+                $questionInfo = 'Status for Question';
+                if (!$questionModel->getId()) {
+                    Mage::throwException(Mage::helper('evozon_qa')->__('Error saving ' . lcfirst($questionInfo)));
+                    Mage::getSingleton('adminhtml/session')->setFormData(false);
+                }
+                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa')
+                                ->__($questionInfo . ' was successfully saved.'));
+                $answerModel->addAnswer($data, $questionId);
+                $answerModel->save();
+                $answerInfo = 'Answer for Question';
+                if (!$answerModel->getId()) {
+                    Mage::throwException(Mage::helper('evozon_qa')->__('Error saving ' . lcfirst($answerInfo)));
+                    Mage::getSingleton('adminhtml/session')->setFormData(false);
+                }
+                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa')
+                                ->__($answerInfo . ' was successfully saved.'));
+            }
+        } catch (Exception $e) {
+            Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
         }
 
-        Mage::getSingleton('adminhtml/session')->addError(Mage::helper('evozon_qa')->__('No data found to save'));
         $this->_redirect('*/*/');
     }
 
@@ -119,8 +141,6 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         if ($data) {
             $id = $this->getRequest()->getParam('id');
             $this->editAnswerFormData($data, $id);
-
-            return;
         }
 
         Mage::getSingleton('adminhtml/session')->addError(Mage::helper('evozon_qa')->__('No data found to save'));
@@ -128,96 +148,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     }
 
     /**
-     * saves the status value from the Answer form data
-     * @param type $formData
-     * @param type $questionId
-     */
-    public function changeStatus($formData, $questionId = null)
-    {
-        if ($questionId) {
-            $questionModel = Mage::getModel('evozon_qa/question');
-            $questionModel->load($questionId);
-            $questionModel->setStatus($formData['status']); //TODO check if the answer is pending, and change it to approved
-            Mage::getSingleton('adminhtml/session')->setFormData($questionModel->getData());
-
-            $this->trySave($questionModel, 'answer', 'Status for Question ' . $questionId);
-        }
-    }
-
-    /**
-     * saves the answer value from the Answer form data
-     * @param type $formData
-     * @param type $questionId
-     */
-    public function addAnswer($formData, $questionId = null)
-    {
-        $answerModel = Mage::getModel('evozon_qa/answer');
-        $userId = $this->getUserId();
-        if ($questionId) {
-            $questions = $answerModel->getQuestionById($questionId);
-            $answerId = $questions->getFirstItem()->getData('answer_id');
-        }
-
-        if ($answerId) {
-            $answerModel->load($answerId);
-        }
-
-        $answerModel->setQuestionId($questionId);
-        $answerModel->setUserId($userId);
-        $answerModel->setAnswer($formData['answer']);
-
-        Mage::getSingleton('adminhtml/session')->setFormData($answerModel->getData());
-
-        $this->trySave($answerModel, 'answer', 'Answer for Question ' . $questionId);
-        $this->_redirect('*/*/');
-    }
-
-    /**
-     * saves the answer value from the Edit Answer form data
-     * @param type $formData
-     * @param type $answerId
-     */
-    public function editAnswerFormData($formData, $answerId = null)
-    {
-        $answerModel = Mage::getModel('evozon_qa/answer');
-
-        if ($answerId) {
-            $answerModel->load($answerId);
-        }
-
-        $answerModel->setAnswer($formData['answer']);
-
-        Mage::getSingleton('adminhtml/session')->setFormData($answerModel->getData());
-
-        $this->trySave($answerModel, 'answers', 'Answer ' . $answerId);
-        $this->_redirect('*/*/answers');
-    }
-
-    /**
-     * final form saving process
-     * 
-     * @param object $model
-     * @param string $backurl // adjust the back button url
-     * @param string $itemInfo // adjust the info message after a succesfully save
-     */
-    private function trySave($model, $backurl, $itemInfo = 'Answer')
-    {
-        try {
-            $model->save();
-            if (!$model->getId()) {
-                Mage::throwException(Mage::helper('evozon_qa')->__('Error saving ' . lcfirst($itemInfo)));
-            }
-            Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa')->__($itemInfo . ' was successfully saved.'));
-            Mage::getSingleton('adminhtml/session')->setFormData(false);
-            $this->setBackButton($model, $backurl); //set the back button
-        } catch (Exception $e) {
-            $this->SetExceptionError($model, $e, $backurl);
-        }
-    }
-
-    /**
      * common delete action
-     * bogdan : TODO check the element type which is due to be deleted
      * and adjust the messages and redirect paths accordingly
      * @return
      */
@@ -388,42 +319,6 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     }
 
     /**
-     * set the redirect parameter for the back button
-     * 
-     * @param object $model
-     * @param string $redirect
-     */
-    public function setBackButton($model, $redirect)
-    {
-        if ($this->getRequest()->getParam('back')) {
-            $this->_redirect('*/*/' . $redirect, array('id' => $model->getId()));
-        } else {
-            $this->_redirect('*/*/');
-        }
-    }
-
-    /**
-     * returns the current logged in user id
-     * 
-     * @return int
-     */
-    public function getUserId()
-    {
-        $userId = null;
-        if (Mage::getSingleton('customer/session')->isLoggedIn()) { //checks the customer ID
-            $userId = Mage::getSingleton('customer/session')->getCustomer()->getId();
-        } else if (Mage::getSingleton('admin/session')->isLoggedIn()) {//checks the user ID
-            $userId = Mage::getSingleton('admin/session')->getUser()->getId();
-        } else {
-            $customer = Mage::getModel("customer/customer");
-            $id = $customer->setWebsiteId(Mage::app()->getStore()->getWebsiteId())
-                            ->loadByEmail('guest_user@madison_island.com')->getId();
-            $userId = $id;
-        }
-        return $userId;
-    }
-
-    /**
      * Checks if the current logged admin has permissions to access evozon_qa resource
      *
      * verify if the Module is allowed on Admin Panel
@@ -432,21 +327,6 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     protected function _isAllowed()
     {
         return Mage::getSingleton('admin/session')->isAllowed('admin/evozon_qa');
-    }
-
-    /**
-     * registers a model
-     * 
-     * @param int $id
-     * @param object $model
-     * @param string $dataName
-     */
-    public function registerModel($id, $model, $dataName)
-    {
-        if ($id) {
-            $this->setIdToFormData($id, $model);
-        }
-        Mage::register($dataName, $model);
     }
 
 }

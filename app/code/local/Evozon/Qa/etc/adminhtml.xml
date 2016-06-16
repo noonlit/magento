@@ -3,7 +3,7 @@
     <menu>
         <evozon_qa module="evozon_qa" translate="title">
             <title>QA Management</title>
-            <sort_order>100</sort_order>
+            <sort_order>85</sort_order>
             <children>
                 <questions>
                     <title>See Questions</title>
