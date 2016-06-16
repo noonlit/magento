@@ -6,9 +6,10 @@
  * answer grid widget
  *
  * @category   Evozon
- * @package    Evozon Qa
+ * @package    Qa
  * @subpackage adminhtml
  * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
+ * @author     Marius Adam
  */
 class Evozon_Qa_Block_Adminhtml_Answers_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
@@ -16,12 +17,17 @@ class Evozon_Qa_Block_Adminhtml_Answers_Grid extends Mage_Adminhtml_Block_Widget
     public function __construct()
     {
         parent::__construct();
-        $this->setId('example_grid');
-        $this->setDefaultSort('id');
-        $this->setDefaultDir('desc');
-        $this->setSaveParametersInSession(true);
+        $this->setId('answer_grid'); // Grid id
+        $this->setDefaultSort('id'); //sorting by id
+        $this->setDefaultDir('desc'); //direction
+        $this->setSaveParametersInSession(true); //stores the parameters in session
     }
 
+    /**
+     * preparing collection
+     * 
+     * @return object
+     */
     protected function _prepareCollection()
     {
         $collection = Mage::getModel('evozon_qa/answer')->getCollection();
@@ -29,9 +35,13 @@ class Evozon_Qa_Block_Adminhtml_Answers_Grid extends Mage_Adminhtml_Block_Widget
         return parent::_prepareCollection();
     }
 
+    /**
+     * preparing columns
+     * 
+     * @return object
+     */
     protected function _prepareColumns()
     {
-        //NEED TO ADD THE COLUMNS FROM THE QUESTION TABLE
         $this->addColumn('answer_id', array(
             'header' => Mage::helper('evozon_qa')->__('ID'),
             'align' => 'right',
@@ -60,6 +70,11 @@ class Evozon_Qa_Block_Adminhtml_Answers_Grid extends Mage_Adminhtml_Block_Widget
         return parent::_prepareColumns();
     }
 
+    /**
+     * sets the row url redirect
+     * @param object $row
+     * @return 'string'
+     */
     public function getRowUrl($row)
     {
         return $this->getUrl('*/*/editanswer', array('id' => $row->getId()));
@@ -71,8 +86,8 @@ class Evozon_Qa_Block_Adminhtml_Answers_Grid extends Mage_Adminhtml_Block_Widget
         $this->getMassactionBlock()->setFormFieldName('evozon_qa_answers_id');
         //add mass delete action
         $this->getMassactionBlock()->addItem('delete', array(
-            'label'=> $this->__('Delete'),
-            'url'  => $this->getUrl('*/*/massDeleteAnswers', array('' => '')),
+            'label' => $this->__('Delete'),
+            'url' => $this->getUrl('*/*/massDeleteAnswers', array('' => '')),
             'confirm' => $this->__('Are you sure you want to delete the selected answers?')
         ));
 

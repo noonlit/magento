@@ -1,10 +1,10 @@
 <?php
 
 /**
- * answer form
+ * answer question form block
  *
  * @category   Evozon
- * @package    Evozon Qa
+ * @package    Qa
  * @subpackage adminhtml
  * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
  */
@@ -67,9 +67,12 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer_Form extends Mage_Adminhtml_Blo
         }
         return $data;
     }
-
+    
     /**
      * adds the input fields for the form object
+     * 
+     * @param object $form
+     * @param array $statusValues
      */
     protected function addFieldsToForm($form, $statusValues)
     {
