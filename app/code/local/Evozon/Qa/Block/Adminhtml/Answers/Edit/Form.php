@@ -16,7 +16,7 @@ class Evozon_Qa_Block_Adminhtml_Answers_Edit_Form extends Mage_Adminhtml_Block_W
     /**
      * prepare the form
      *
-     * @return Mage_Adminhtml_Block_Widget_Form|void
+     *@return Mage_Adminhtml_Block_Widget_Form|void
      */
     protected function _prepareForm()
     {
