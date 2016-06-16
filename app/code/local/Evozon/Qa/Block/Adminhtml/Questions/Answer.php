@@ -1,10 +1,10 @@
 <?php
 
 /**
- * answer form container
+ * answer question form container
  *
  * @category   Evozon
- * @package    Evozon Qa
+ * @package    Qa
  * @subpackage adminhtml
  * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
  */
@@ -24,8 +24,11 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer extends Mage_Adminhtml_Block_Wi
         $this->formScripts(); //updated form scripts
     }
 
-    //header of the form
-
+    /**
+     * sets the header of the form
+     * 
+     * @return object
+     */
     public function getHeaderText()
     {
         if (Mage::registry('example_data') && Mage::registry('example_data')->getId()) {
@@ -50,7 +53,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer extends Mage_Adminhtml_Block_Wi
     {
         $this->_updateButton('save', 'label', Mage::helper('evozon_qa')->__('Answer Question')); //change the save button label 
     }
-    
+
     //updated form scripts
 
     protected function formScripts()

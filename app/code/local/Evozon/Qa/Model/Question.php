@@ -81,7 +81,7 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
         ));
         $questionModel->save();
 
-        return true;
+        return $this;
     }
 
     /**
@@ -89,11 +89,10 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
      * @author     Ilinca Dobre <ilinca.dobre@evozon.com>
      * @return boolean/array
      */
-    public function validate()
+    public function validate($formData)
     {
         $errors = array();
-        $data = $this->getData();
-        $questionText = $data['qa_question'];
+        $questionText = $formData['qa_question'];
         if (!Zend_Validate::is($questionText, 'NotEmpty')) {
             $errors[] = Mage::helper('evozon_qa/data')->__('Question can\'t be empty');
         }

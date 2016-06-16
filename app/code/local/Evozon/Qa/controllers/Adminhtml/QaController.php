@@ -8,12 +8,6 @@
  * @subpackage Adminhtml
  * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
  */
-
-/* 
- * bogdan
- * TODO SEE IF WE CAN SPLIT THIS CONTROLLER IN SMALLER PIECES
- */
-
 class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
 {
 
@@ -65,25 +59,6 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
      * answer action
      */
     public function answerAction()
-    {
-        $id = $this->getRequest()->getParam('id', null);
-        $model = Mage::getModel('evozon_qa/question'); //adminhtml questions model
-        if ($id) {
-            $this->setIdToFormData($id, $model);
-        }
-        Mage::register('example_data', $model);
-
-        $this->loadLayout();
-        $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
-        $this->renderLayout();
-    }
-
-    /**
-     * edit action 
-     * block - question form
-     * MOMENTARELY NOT USED
-     */
-    public function editAction()
     {
         $id = $this->getRequest()->getParam('id', null);
         $model = Mage::getModel('evozon_qa/question'); //adminhtml questions model
@@ -215,6 +190,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         Mage::getSingleton('adminhtml/session')->setFormData($answerModel->getData());
 
         $this->trySave($answerModel, 'answers', 'Answer ' . $answerId);
+        $this->_redirect('*/*/answers');
     }
 
     /**
@@ -224,7 +200,6 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
      * @param string $backurl // adjust the back button url
      * @param string $itemInfo // adjust the info message after a succesfully save
      */
-    
     private function trySave($model, $backurl, $itemInfo = 'Answer')
     {
         try {
@@ -426,13 +401,12 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
             $this->_redirect('*/*/');
         }
     }
-    
+
     /**
      * returns the current logged in user id
      * 
      * @return int
      */
-    
     public function getUserId()
     {
         $userId = null;
@@ -452,6 +426,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     /**
      * Checks if the current logged admin has permissions to access evozon_qa resource
      *
+     * verify if the Module is allowed on Admin Panel
      * @return boolean
      */
     protected function _isAllowed()
@@ -466,7 +441,6 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
      * @param object $model
      * @param string $dataName
      */
-    
     public function registerModel($id, $model, $dataName)
     {
         if ($id) {
