@@ -10,7 +10,7 @@
 /**
  * Create table 'evozon_qa/question'
  */
-Mage::log('Started install-0.1.0', null, 'scripts.log');
+Mage::log('Started install-0.1.0', null, 'evozon_scripts.log');
 
 $installer = $this;
 $installer->startSetup();
@@ -30,7 +30,7 @@ try {
                 ->addColumn('question', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array(
                     'nullable' => false
                         ), 'Question text')
-                ->addColumn('status', Varien_Db_Ddl_Table::TYPE_TEXT, 50, array(
+                ->addColumn('status', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
                     'nullable' => false
                         ), 'Question status')
                 ->addColumn('product_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
@@ -54,11 +54,13 @@ try {
                                 'evozon_qa/question', 'product_id', 'catalog/product', 'entity_id'
                         ), 'product_id', $installer->getTable('catalog/product'), 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_CASCADE)
                 ->addForeignKey(
-                $installer->getFkName(
-                        'evozon_qa/question', 'store_id', 'core/store', 'store_id'
-                ), 'store_id', $installer->getTable('core/store'), 'store_id', Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_CASCADE);
+                    $installer->getFkName(
+                            'evozon_qa/question', 'store_id', 'core/store', 'store_id'
+                    ), 'store_id', $installer->getTable('core/store'), 'store_id', Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_CASCADE);
 
         $installer->getConnection()->createTable($table);
+        
+        Mage::log('Questions table created', null, 'evozon_scripts.log');
     }
 
     /**
@@ -80,27 +82,34 @@ try {
                     'nullable' => false,
                     'unsigned' => true,
                 ))
-                ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array(
-                        ), 'Date created')
-                ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array(
-                        ), 'Date updated')
                 ->addColumn('admin_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
                     'nullable' => false,
                     'unsigned' => true,
                 ))
-                ->addForeignKey($installer->getFkName('evozon_qa/answer', 'question_id', 'evozon_qa/question', 'question_id'), 'question_id', $installer->getTable('evozon_qa/question'), 'question_id', Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_CASCADE
-                )
-                ->addForeignKey($installer->getFkName('evozon_qa/answer', 'admin_id', 'admin/user', 'user_id'), 'admin_id', $installer->getTable('admin/user'), 'user_id', Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_CASCADE
-                )
                 ->addColumn('answer', Varien_Db_Ddl_Table::TYPE_TEXT, 255, array(
-            'nullable' => false
-        ));
+                    'nullable' => false
+                ))
+                ->addColumn('created_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array(
+                        ), 'Date created')
+                ->addColumn('updated_at', Varien_Db_Ddl_Table::TYPE_TIMESTAMP, null, array(
+                        ), 'Date updated')
+                ->addForeignKey(
+                        $installer->getFkName(
+                                'evozon_qa/answer', 'question_id', 'evozon_qa/question', 'question_id'
+                        ), 'question_id', $installer->getTable('evozon_qa/question'), 'question_id', Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_CASCADE
+                )
+                ->addForeignKey($installer->getFkName(
+                        'evozon_qa/answer', 'admin_id', 'admin/user', 'user_id'
+                    ), 'admin_id', $installer->getTable('admin/user'), 'user_id', Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_CASCADE
+        );
 
         $installer->getConnection()->createTable($table);
+        
+        Mage::log('Answers table created', null, 'evozon_scripts.log');
     }
 } catch (Exception $e) {
-    Mage::log($e->getMessage(), null, 'scripts.log');
+    Mage::log($e->getMessage(), null, 'evozon_scripts.log');
 }
 
 $installer->endSetup();
-Mage::log('Ended install-0.1.0', null, 'scripts.log');
+Mage::log('Ended install-0.1.0', null, 'evozon_scripts.log');

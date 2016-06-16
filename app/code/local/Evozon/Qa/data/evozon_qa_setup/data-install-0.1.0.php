@@ -1,38 +1,37 @@
 <?php
+
 /**
- * 
+ *
  * @category   Evozon
  * @package    Evozon_Qa
- * @author     Delia Dumitru <delia.dumitru@evozon.com>
- * @author     Andrei Bodea <andrei.bodea@evozon.com>
+ * @author     Marius Adam <marius.adam@evozon.com>
  */
 
 /**
- * Create guest user account
+ * Add QA manager role
  */
 
-Mage::log('Started data-install-0.1.0', NULL, 'scripts.log');
-
-$installer = $this;
-$installer->startSetup();
+Mage::log('Started data-install-0.1.0', null, 'evozon_scripts.log');
 
 try {
-    $websiteId = Mage::app()->getWebsite()->getId();
-    $store = Mage::app()->getStore();
+    $roleName = 'Qa manager';
+    $resources = array('admin/evozon_qa', 'admin/evozon_qa/questions');
+    $model = Mage::getModel('admin/role')
+        ->setRoleName($roleName)
+        ->setRoleType('G')
+        ->setTreeLevel(1)
+        ->save();
     
-    $customer = Mage::getModel("customer/customer");
-    $id = $customer->setWebsiteId(Mage::app()->getStore()->getWebsiteId())
-                    ->loadByEmail('guest_user@madison_island.com')->getId();
-    if (!$id) {
-        $customer->setWebsiteId($websiteId)
-                ->setStore($store)
-                ->setFirstname('Guest')
-                ->setLastname('User')
-                ->setEmail('guest_user@madison_island.com')
-                ->setPassword('password');
-        $customer->save();
-    }
-} catch (Exception $e) {
-    Mage::log($e->getMessage(), NULL, 'scripts.log');
+    $rules = Mage::getModel('admin/rules')
+        ->setRoleId($model->getRoleId())
+        ->setResources($resources);
+    
+    $rules = Mage::getModel('admin/resource_rules')
+        ->saveRel($rules);
+    
+    Mage::log('Done adding a user role', null, 'evozon_scripts.log');
+} catch (Exception $ex) {
+    Mage::log($ex->getMessage(), null, 'evozon_scripts.log');
 }
-Mage::log('Finished data-install-0.1.0', NULL, 'scripts.log');
+
+Mage::log('Finished data-install-0.1.0', null, 'evozon_scripts.log');
