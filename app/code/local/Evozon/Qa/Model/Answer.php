@@ -23,7 +23,7 @@ class Evozon_Qa_Model_Answer extends Mage_Core_Model_Abstract
         } else {
             $customer = Mage::getModel("customer/customer");
             $id = $customer->setWebsiteId(Mage::app()->getStore()->getWebsiteId())
-                            ->loadByEmail('guestUser@madisonIsland.com')->getId();
+                            ->loadByEmail('guest_user@madison_island.com')->getId();
             $userId = $id;
         }
         return $userId;

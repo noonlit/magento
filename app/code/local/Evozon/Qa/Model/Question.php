@@ -40,7 +40,7 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
                 ->where('product_id = ?', $currentProductId)
                 ->where('status = ?', $status)
                 ->where('main_table.store_id = ?', $currentStore)
-                ->from(null, array('user_name' => new Zend_Db_Expr('GROUP_CONCAT(name.value SEPARATOR \' \')')))
+                ->from(null, array('user_name' => new Zend_Db_Expr('GROUP_CONCAT(name.value ORDER BY name.attribute_id SEPARATOR \' \')')))
                 ->group('main_table.question_id');
         ;
 
@@ -68,7 +68,7 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
         } else {
             $customer = Mage::getModel("customer/customer");
             $id = $customer->setWebsiteId(Mage::app()->getStore()->getWebsiteId())
-                            ->loadByEmail('guestUser@madisonIsland.com')->getId();
+                            ->loadByEmail('guest_user@madison_island.com')->getId();
             $customerId = $id;
         }
 
