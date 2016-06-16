@@ -3,11 +3,17 @@
 /**
  * manage Questions and Answers controller
  *
- * @category   Evozon Qa
- * @package    Evozon Qa Adminhtml 
- * @subpackage controllers
+ * @category   Evozon
+ * @package    Qa 
+ * @subpackage Adminhtml
  * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
  */
+
+/* 
+ * bogdan
+ * TODO SEE IF WE CAN SPLIT THIS CONTROLLER IN SMALLER PIECES
+ */
+
 class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
 {
 
@@ -48,16 +54,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     }
 
     /**
-     * checks if current user has permissions
-     * @return boolean
-     */
-    protected function _isAllowed()
-    {
-        return Mage::getSingleton('admin/session')->isAllowed('admin/evozon_qa');
-    }
-
-    /**
-     * the first actopm will be edit
+     * the first action will be edit
      */
     public function newAction()
     {
@@ -74,7 +71,6 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         if ($id) {
             $this->setIdToFormData($id, $model);
         }
-        //TODO WHAT name to put instead of example_data ??
         Mage::register('example_data', $model);
 
         $this->loadLayout();
@@ -83,7 +79,9 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     }
 
     /**
-     * edit action
+     * edit action 
+     * block - question form
+     * MOMENTARELY NOT USED
      */
     public function editAction()
     {
@@ -92,7 +90,6 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         if ($id) {
             $this->setIdToFormData($id, $model);
         }
-        //TODO WHAT name to put instead of example_data ??
         Mage::register('example_data', $model);
 
         $this->loadLayout();
@@ -100,14 +97,17 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $this->renderLayout();
     }
 
-    public function editanswerAction()
+    /**
+     * edit answer
+     * block - edit answer form
+     */
+    public function editAnswerAction()
     {
         $id = $this->getRequest()->getParam('id', null);
         $model = Mage::getModel('evozon_qa/answer'); //adminhtml questions model
         if ($id) {
             $this->setIdToFormData($id, $model);
         }
-        //TODO WHAT name to put instead of example_data ??
         Mage::register('example_data', $model);
 
         $this->loadLayout();
@@ -115,19 +115,11 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $this->renderLayout();
     }
 
-    public function registerModel($id, $model, $dataName)
-    {
-        if ($id) {
-            $this->setIdToFormData($id, $model);
-        }
-        //TODO WHAT name to put instead of example_data ??
-        Mage::register($dataName, $model);
-    }
-
+    /**
+     * save Answer Question Form
+     */
     public function saveAction()
     {
-        //IT CAN JUST EDIT EXISTING ANSWERS, TODO FOR NEW ANSWERS
-        //SHOULD USE A NEW ADD ANSWER
         $data = $this->getRequest()->getPost();
 
         if ($data) {
@@ -142,18 +134,46 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $this->_redirect('*/*/');
     }
 
+    /**
+     * save Edit Answer Form
+     */
+    public function saveEditAnswerAction()
+    {
+        $data = $this->getRequest()->getPost();
+
+        if ($data) {
+            $id = $this->getRequest()->getParam('id');
+            $this->editAnswerFormData($data, $id);
+
+            return;
+        }
+
+        Mage::getSingleton('adminhtml/session')->addError(Mage::helper('evozon_qa')->__('No data found to save'));
+        $this->_redirect('*/*/answers');
+    }
+
+    /**
+     * saves the status value from the Answer form data
+     * @param type $formData
+     * @param type $questionId
+     */
     public function changeStatus($formData, $questionId = null)
     {
         if ($questionId) {
             $questionModel = Mage::getModel('evozon_qa/question');
             $questionModel->load($questionId);
-            $questionModel->setStatus($formData['status']);
+            $questionModel->setStatus($formData['status']); //TODO check if the answer is pending, and change it to approved
             Mage::getSingleton('adminhtml/session')->setFormData($questionModel->getData());
 
-            $this->trySave($questionModel,'Status');
+            $this->trySave($questionModel, 'answer', 'Status for Question ' . $questionId);
         }
     }
 
+    /**
+     * saves the answer value from the Answer form data
+     * @param type $formData
+     * @param type $questionId
+     */
     public function addAnswer($formData, $questionId = null)
     {
         $answerModel = Mage::getModel('evozon_qa/answer');
@@ -173,32 +193,68 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
 
         Mage::getSingleton('adminhtml/session')->setFormData($answerModel->getData());
 
-        $this->trySave($answerModel);
+        $this->trySave($answerModel, 'answer', 'Answer for Question ' . $questionId);
     }
 
-    private function trySave($model,$itemInfo='Answer')
+    /**
+     * saves the answer value from the Edit Answer form data
+     * @param type $formData
+     * @param type $answerId
+     */
+    public function editAnswerFormData($formData, $answerId = null)
+    {
+        $answerModel = Mage::getModel('evozon_qa/answer');
+
+        if ($answerId) {
+            $answerModel->load($answerId);
+        }
+
+        $answerModel->setAnswer($formData['answer']);
+
+        Mage::getSingleton('adminhtml/session')->setFormData($answerModel->getData());
+
+        $this->trySave($answerModel, 'answers', 'Answer ' . $answerId);
+    }
+
+    /**
+     * final form saving process
+     * 
+     * @param object $model
+     * @param string $backurl // adjust the back button url
+     * @param string $itemInfo // adjust the info message after a succesfully save
+     */
+    
+    private function trySave($model, $backurl, $itemInfo = 'Answer')
     {
         try {
             $model->save();
             if (!$model->getId()) {
-                Mage::throwException(Mage::helper('evozon_qa')->__('Error saving '.lcfirst($itemInfo)));
+                Mage::throwException(Mage::helper('evozon_qa')->__('Error saving ' . lcfirst($itemInfo)));
             }
-            Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa')->__($itemInfo .' was successfully saved.'));
+            Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa')->__($itemInfo . ' was successfully saved.'));
             Mage::getSingleton('adminhtml/session')->setFormData(false);
-            $this->setBackButton($model, 'answer'); //set the back button
+            $this->setBackButton($model, $backurl); //set the back button
         } catch (Exception $e) {
-            $this->SetExceptionError($model, $e);
+            $this->SetExceptionError($model, $e, $backurl);
         }
+        $this->_redirect('*/*/answers');
     }
 
+    /**
+     * common delete action
+     * bogdan : TODO check the element type which is due to be deleted
+     * and adjust the messages and redirect paths accordingly
+     * @return
+     */
     public function deleteAction()
     {
-        if ($id = $this->getRequest()->getParam('id')) {
+        $id = $this->getRequest()->getParam('id');
+        if ($id) {
             try {
                 $model = Mage::getModel('evozon_qa/question');
                 $model->setId($id);
                 $model->delete();
-                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa')->__('The example has been deleted.'));
+                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa')->__('The item has been deleted.'));
                 $this->_redirect('*/*/');
                 return;
             } catch (Exception $e) {
@@ -207,7 +263,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
                 return;
             }
         }
-        Mage::getSingleton('adminhtml/session')->addError(Mage::helper('adminhtml')->__('Unable to find the example to delete.'));
+        Mage::getSingleton('adminhtml/session')->addError(Mage::helper('adminhtml')->__('Unable to find the item to delete.'));
         $this->_redirect('*/*/');
     }
 
@@ -271,6 +327,26 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $this->_redirect('*/*/');
     }
 
+    public function massDeleteAnswersAction()
+    {
+        $answerIds = $this->getRequest()->getParam('evozon_qa_answers_id');
+
+        if (!is_array($answerIds)) {
+            Mage::getSingleton('adminhtml/session')->addError($this->__('Please select Answers.'));
+        } else {
+            try {
+                $model = Mage::getModel('evozon_qa/answer');
+                foreach ($answerIds as $answerId) {
+                    $model->load($answerId)->delete();
+                }
+                Mage::getSingleton('adminhtml/session')->addSuccess($this->__('Total of %d answers(s) were deleted.', count($answerIds)));
+            } catch (Exception $e) {
+                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+            }
+        }
+        $this->_redirect('*/*/answers');
+    }
+
     /**
      * sets the Id for the Answer Form Data
      * 
@@ -322,7 +398,13 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
             $this->_redirect('*/*/');
         }
     }
-
+    
+    /**
+     * returns the current logged in user id
+     * 
+     * @return int
+     */
+    
     public function getUserId()
     {
         $userId = null;
@@ -339,24 +421,29 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         return $userId;
     }
 
-    public function massDeleteAnswersAction()
+    /**
+     * DON'T KNOW IF THIS WORKS
+     */
+    protected function _isAllowed()
     {
-        $answerIds = $this->getRequest()->getParam('evozon_qa_answers_id');
+        return true;
+        //return Mage::getSingleton('admin/session')->isAllowed('admin/evozon_qa');
+    }
 
-        if (!is_array($answerIds)) {
-            Mage::getSingleton('adminhtml/session')->addError($this->__('Please select Answers.'));
-        } else {
-            try {
-                $model = Mage::getModel('evozon_qa/answer');
-                foreach ($answerIds as $answerId) {
-                    $model->load($answerId)->delete();
-                }
-                Mage::getSingleton('adminhtml/session')->addSuccess($this->__('Total of %d answers(s) were deleted.', count($answerIds)));
-            } catch (Exception $e) {
-                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
-            }
+    /**
+     * registers a model
+     * 
+     * @param int $id
+     * @param object $model
+     * @param string $dataName
+     */
+    
+    public function registerModel($id, $model, $dataName)
+    {
+        if ($id) {
+            $this->setIdToFormData($id, $model);
         }
-        $this->_redirect('*/*/answers');
+        Mage::register($dataName, $model);
     }
 
 }

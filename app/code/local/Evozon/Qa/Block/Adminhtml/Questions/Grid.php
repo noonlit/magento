@@ -1,12 +1,13 @@
 <?php
 
 /**
- * questions grid
+ * questions grid widget
  *
- * @category   Evozon Qa
- * @package    Evozon Qa Adminhtml 
- * @subpackage grid block
+ * @category   Evozon
+ * @package    Evozon Qa
+ * @subpackage adminhtml
  * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
+ * @author     Marius Adam
  */
 class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
@@ -30,7 +31,6 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
 //ADDS THE COLUMNS OF THE GRID TABLE
     protected function _prepareColumns()
     {
-
         $this->addColumn('question_id', array(
             'header' => Mage::helper('evozon_qa')->__('ID'),
             'align' => 'right',
@@ -47,21 +47,23 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
         $this->addColumn('status', array(
             'header' => Mage::helper('evozon_qa')->__('Status'),
             'align' => 'left',
+            'width' => '100px',
             'index' => 'status',
         ));
 
         $this->addColumn('product_id', array(
             'header' => Mage::helper('evozon_qa')->__('Product Id'),
-            'align' => 'left',
+            'align' => 'center',
+            'width' => '50px',
             'index' => 'product_id',
         ));
-        
+
         $this->addColumn('store_id', array(
             'header' => Mage::helper('evozon_qa')->__('Store Id'),
-            'align' => 'left',
+            'align' => 'center',
+            'width' => '50px',
             'index' => 'store_id',
         ));
-        
 
         return parent::_prepareColumns();
     }
@@ -78,20 +80,20 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
         //add mass delete action
         $this->getMassactionBlock()->addItem('delete', array(
             'label' => $this->__('Delete'),
-            'url' => $this->getUrl('*/*/massDelete', array('' => '')),
+            'url' => $this->getUrl('*/*/massDeleteQuestions', array('' => '')),
             'confirm' => $this->__('Are you sure you want to delete the selected questions?')
         ));
 
         //add mass approove action
         $this->getMassactionBlock()->addItem('approve', array(
-            'label'=> $this->__('Approve'),
-            'url'  => $this->getUrl('*/*/massApproveQuestions', array('' => '')),
+            'label' => $this->__('Approve'),
+            'url' => $this->getUrl('*/*/massApproveQuestions', array('' => '')),
             'confirm' => $this->__('Are you sure you want to approve the selected questions?')
         ));
-
+        //add mass disabled action
         $this->getMassactionBlock()->addItem('disabled', array(
-            'label'=> $this->__('Disable'),
-            'url'  => $this->getUrl('*/*/massDisableQuestions', array('' => '')),
+            'label' => $this->__('Disable'),
+            'url' => $this->getUrl('*/*/massDisableQuestions', array('' => '')),
             'confirm' => $this->__('Are you sure you want to disable the selected questions?')
         ));
         return $this;

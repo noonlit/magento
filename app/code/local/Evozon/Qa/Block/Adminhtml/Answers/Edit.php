@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Questions and Answers extension for Magento
+ *
+ * answers form container
+ *
+ * @category   Evozon
+ * @package    Evozon Qa
+ * @subpackage adminhtml
+ * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
+ */
 class Evozon_Qa_Block_Adminhtml_Answers_Edit extends Mage_Adminhtml_Block_Widget_Form_Container
 {
 
@@ -37,8 +47,11 @@ class Evozon_Qa_Block_Adminhtml_Answers_Edit extends Mage_Adminhtml_Block_Widget
 
     public function getHeaderText()
     {
+        
         if (Mage::registry('example_data') && Mage::registry('example_data')->getId()) {
-            return Mage::helper('evozon_qa')->__('Edit Answer "%s"', $this->htmlEscape(Mage::registry('example_data')->getId()));
+            $id =  $this->htmlEscape(Mage::registry('example_data')->getId());
+            $questionId =  $this->htmlEscape(Mage::registry('example_data')->getQuestionId());
+            return Mage::helper('evozon_qa')->__('Edit Answer %s', $id . ' for Question '.$questionId);
         } else {
             return Mage::helper('evozon_qa')->__('New Answer');
         }

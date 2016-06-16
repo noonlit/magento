@@ -1,15 +1,14 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of Grid
+ * Questions and Answers extension for Magento
  *
- * @author bogdanhaidu
+ * answer grid widget
+ *
+ * @category   Evozon
+ * @package    Evozon Qa
+ * @subpackage adminhtml
+ * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
  */
 class Evozon_Qa_Block_Adminhtml_Answers_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
