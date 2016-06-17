@@ -27,7 +27,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer extends Mage_Adminhtml_Block_Wi
     /**
      * Gets the header of the form
      * 
-     * @return object
+     * @return helper object
      */
     public function getHeaderText()
     {

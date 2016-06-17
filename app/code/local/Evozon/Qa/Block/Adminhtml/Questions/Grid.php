@@ -134,9 +134,9 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
     }
 
     /**
-     * Sets the row url redirect
+     * Configure row click url
      *
-     * @param object $row
+     * @param Mage_Catalog_Model_Template|Varien_Object $row
      * @return string
      * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
      */
