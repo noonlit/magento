@@ -65,8 +65,10 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $this->loadLayout();
         $this->_setActiveMenu('evozon_qa')
                 ->_title('Q & A Management');
+        
         $block = $this->getLayout()
                 ->createBlock('evozon_qa/adminhtml_questions_answer', 'questions_answer_container');
+        
         $this->_addContent($block);
         $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
         $this->renderLayout();
