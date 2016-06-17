@@ -1,10 +1,10 @@
 <?php
 
 /**
- * answer form container
+ * Answer question form container
  *
  * @category   Evozon
- * @package    Evozon Qa
+ * @package    Qa
  * @subpackage adminhtml
  * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
  */
@@ -15,17 +15,19 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer extends Mage_Adminhtml_Block_Wi
     {
         parent::__construct();
         $this->_objectId = 'id';
-        $this->_blockGroup = 'evozon_qa_adminhtml'; //block_adminhtml tag
+        $this->_blockGroup = 'evozon_qa_adminhtml';
         $this->_controller = 'questions';
         $this->_mode = 'answer';
 
-        $this->addButtons(); //adds new buttons to the container
-        $this->updateButtons(); //updates existing buttons from the container
-        $this->formScripts(); //updated form scripts
+        $this->updateButtons();
+        $this->formScripts();
     }
 
-    //header of the form
-
+    /**
+     * Gets the header of the form
+     * 
+     * @return object//TODO change return type
+     */
     public function getHeaderText()
     {
         if (Mage::registry('example_data') && Mage::registry('example_data')->getId()) {
@@ -33,26 +35,18 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer extends Mage_Adminhtml_Block_Wi
         }
     }
 
-    //adds new buttons to the container
-
-    protected function addButtons()
-    {
-        $this->_addButton('save_and_continue', array(
-            'label' => Mage::helper('adminhtml')->__('Save And Continue Edit'),
-            'onclick' => 'saveAndContinueEdit()',
-            'class' => 'save',
-                ), -100);
-    }
-
-    //updates existing buttons from the container
-
+    /**
+     * Updates existing buttons from the container
+     */
     public function updateButtons()
     {
-        $this->_updateButton('save', 'label', Mage::helper('evozon_qa')->__('Answer Question')); //change the save button label 
+        //change the save button label
+        $this->_updateButton('save', 'label', Mage::helper('evozon_qa')->__('Save Question'));
     }
-    
-    //updated form scripts
 
+    /**
+     * Updated form scripts
+     */
     protected function formScripts()
     {
         $this->_formScripts[] = "
