@@ -81,6 +81,16 @@
                 </evozon_qa>                
             </updates>                
         </layout>
+        <translate>
+            <modules>
+                <evozon_qa>
+                    <files>
+                        <default>translate.csv</default>
+                    </files>
+                </evozon_qa>
+            </modules>
+        </translate>
+
     </frontend>
     <admin>
         <routers>
