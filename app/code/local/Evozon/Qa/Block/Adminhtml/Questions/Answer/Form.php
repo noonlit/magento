@@ -85,18 +85,21 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer_Form extends Mage_Adminhtml_Blo
             'note' => Mage::helper('evozon_qa')->__('Question Content.'),
         ));
 
+        
         /* 
          * question status
          * type = select
          */
         $model = Mage::getModel('evozon_qa/question');
-
+        $statuses = $model::getOptionArray();
+        unset($statuses[$model::STATUS_NEW]);
+        
         $fieldset->addField('status', 'select', array(
             'label' => Mage::helper('evozon_qa')->__('Status'),
             'class' => 'required-entry',
             'required' => true,
             'name' => 'status',
-            'options' => $model::getOptionArray(),
+            'options' => $statuses,
         ));
 
         /* 
