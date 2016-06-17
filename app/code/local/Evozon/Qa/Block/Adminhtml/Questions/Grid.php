@@ -88,7 +88,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
         $this->addColumn('answer', array(
             'header' => Mage::helper('evozon_qa')->__('Answer'),
             'align' => 'left',
-            'width' => '350px',
+            'width' => '450px',
             'index' => 'answers.answer',
         ));
 
