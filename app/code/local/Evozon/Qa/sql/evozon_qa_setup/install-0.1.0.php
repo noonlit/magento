@@ -54,18 +54,26 @@ try {
                                 'evozon_qa/question', 'product_id', 'catalog/product', 'entity_id'
                         ), 'product_id', $installer->getTable('catalog/product'), 'entity_id', Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_CASCADE)
                 ->addForeignKey(
-                    $installer->getFkName(
-                            'evozon_qa/question', 'store_id', 'core/store', 'store_id'
-                    ), 'store_id', $installer->getTable('core/store'), 'store_id', Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_CASCADE);
+                $installer->getFkName(
+                        'evozon_qa/question', 'store_id', 'core/store', 'store_id'
+                ), 'store_id', $installer->getTable('core/store'), 'store_id', Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_CASCADE);
 
         $installer->getConnection()->createTable($table);
-        
+
         Mage::log('Questions table created', null, 'evozon_scripts.log');
     }
+} catch (Exception $e) {
+    if ($installer->getConnection()->isTableExists($tableName) != true) {
+        $installer->getConnection()->dropTable($table);
+    }
+    
+    Mage::log($e->getMessage(), null, 'evozon_scripts.log');
+}
 
-    /**
-     * Create table 'evozon_qa/answer'
-     */
+/**
+ * Create table 'evozon_qa/answer'
+ */
+try {
     $tableName = $installer->getTable('evozon_qa/answer');
 
     if ($installer->getConnection()->isTableExists($tableName) != true) {
@@ -100,14 +108,18 @@ try {
                 )
                 ->addForeignKey($installer->getFkName(
                         'evozon_qa/answer', 'admin_id', 'admin/user', 'user_id'
-                    ), 'admin_id', $installer->getTable('admin/user'), 'user_id', Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_CASCADE
+                ), 'admin_id', $installer->getTable('admin/user'), 'user_id', Varien_Db_Ddl_Table::ACTION_CASCADE, Varien_Db_Ddl_Table::ACTION_CASCADE
         );
 
         $installer->getConnection()->createTable($table);
-        
+
         Mage::log('Answers table created', null, 'evozon_scripts.log');
     }
 } catch (Exception $e) {
+    if ($installer->getConnection()->isTableExists($tableName) != true) {
+        $installer->getConnection()->dropTable($table);
+    }
+
     Mage::log($e->getMessage(), null, 'evozon_scripts.log');
 }
 
