@@ -64,30 +64,31 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
     {
         $this->addColumn('question_id', array(
             'header' => Mage::helper('evozon_qa')->__('ID'),
+            'align' => 'center',
             'type' => 'number',
-            'width' => '25px',
+            'width' => '80px',
             'index' => 'main_table.question_id',
         ));
 
         $this->addColumn('created_at', array(
             'header' => Mage::helper('evozon_qa')->__('Created On'),
-            'align' => 'left',
+            'align' => 'center',
             'type' => 'datetime',
-            'width' => '25px',
+            'width' => '80px',
             'index' => 'main_table.created_at',
         ));
 
         $this->addColumn('question', array(
             'header' => Mage::helper('evozon_qa')->__('Question'),
             'align' => 'left',
-            'width' => '150px',
+            'width' => '550px',
             'index' => 'question',
         ));
 
         $this->addColumn('answer', array(
             'header' => Mage::helper('evozon_qa')->__('Answer'),
             'align' => 'left',
-            'width' => '150px',
+            'width' => '350px',
             'index' => 'answers.answer',
         ));
 
@@ -110,7 +111,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
         $this->addColumn('product_name', array(
             'header' => Mage::helper('evozon_qa')->__('Product name'),
             'align' => 'left',
-            'width' => '50px',
+            'width' => '150px',
             'index' => 'cpev.value',
         ));
 
