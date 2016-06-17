@@ -14,4 +14,5 @@ class Evozon_Qa_Model_Answer extends Mage_Core_Model_Abstract
     {
         $this->_init('evozon_qa/answer');
     }
+
 }

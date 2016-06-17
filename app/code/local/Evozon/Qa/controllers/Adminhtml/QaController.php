@@ -29,6 +29,11 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $this->_setActiveMenu('evozon_qa')
                 ->_title('Q & A Management');
         $this->_addBreadcrumb($this->__('Q A Management'), $this->__('Q A Management'));
+       
+        $block = $this->getLayout()
+                ->createBlock('evozon_qa/adminhtml_questions', 'questions_grid_container');
+
+        $this->_addContent($block);
         $this->renderLayout();
     }
 
@@ -46,23 +51,30 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     public function answerAction()
     {
         $id = $this->getRequest()->getParam('id', null);
+
         if (is_null($id)) {
             $this->_redirect('*/*/');
         }
         $model = Mage::getModel('evozon_qa/question');
-        
+
         if ($id) {
             $this->setIdToFormData($id, $model);
         }
-        Mage::register('example_data', $model);
+        Mage::register('question_data', $model);
 
         $this->loadLayout();
+        $this->_setActiveMenu('evozon_qa')
+                ->_title('Q & A Management');
+        $block = $this->getLayout()
+                ->createBlock('evozon_qa/adminhtml_questions_answer', 'questions_answer_container');
+        $this->_addContent($block);
         $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
         $this->renderLayout();
     }
 
     /**
      * Save Answer Question Form
+     * @author     Marius Adam  <marius.adam@evozon.com>
      */
     public function saveAction()
     {
@@ -76,7 +88,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $questionId = $this->getRequest()->getParam('id');
         $now = strtotime('now');
         try {
-            $questionModel = Mage::getModel('evozon_qa/question')->load($questionId)
+            Mage::getModel('evozon_qa/question')->load($questionId)
                     ->setQuestion($data['question'])
                     ->setStatus($data['status'])
                     ->setUpdatedAt($now)
@@ -106,9 +118,8 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
 
     /**
      * common delete action
-     * bogdan : TODO check the element type which is due to be deleted
      * and adjust the messages and redirect paths accordingly
-     * @return //TODO
+     * @return 
      */
     public function deleteAction()
     {
