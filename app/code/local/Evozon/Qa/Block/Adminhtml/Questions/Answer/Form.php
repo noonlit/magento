@@ -70,7 +70,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer_Form extends Mage_Adminhtml_Blo
     {
         $fieldset = $form->addFieldset('question_form', array( 
             //form tab name
-            'legend' => Mage::helper('evozon_qa')->__('Question Information')
+            'legend' => Mage::helper('evozon_qa')->__('Question Information'),
         ));
 
         /* 
@@ -82,7 +82,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer_Form extends Mage_Adminhtml_Blo
             'class' => 'required-entry',
             'required' => true,
             'name' => 'question',
-            'note' => Mage::helper('evozon_qa')->__('Question Content.'),
+            'note' => Mage::helper('evozon_qa')->__('Maxim Character count 255.'),
         ));
 
         
