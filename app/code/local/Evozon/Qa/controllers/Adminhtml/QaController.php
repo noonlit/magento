@@ -29,6 +29,11 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $this->_setActiveMenu('evozon_qa')
                 ->_title('Q & A Management');
         $this->_addBreadcrumb($this->__('Q A Management'), $this->__('Q A Management'));
+
+        $block = $this->getLayout()
+                ->createBlock('evozon_qa/adminhtml_questions', 'questions_grid_container');
+
+        $this->_addContent($block);
         $this->renderLayout();
     }
 
@@ -46,23 +51,33 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     public function answerAction()
     {
         $id = $this->getRequest()->getParam('id', null);
+
         if (is_null($id)) {
             $this->_redirect('*/*/');
         }
         $model = Mage::getModel('evozon_qa/question');
-        
+
         if ($id) {
             $this->setIdToFormData($id, $model);
         }
-        Mage::register('example_data', $model);
+        Mage::register('question_data', $model);
 
         $this->loadLayout();
+        $this->_setActiveMenu('evozon_qa')
+                ->_title('Q & A Management');
+
+        $block = $this->getLayout()
+                ->createBlock('evozon_qa/adminhtml_questions_answer', 'questions_answer_container');
+
+        $this->_addContent($block);
         $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
         $this->renderLayout();
     }
 
     /**
      * Save Answer Question Form
+     * 
+     * @author     Marius Adam  <marius.adam@evozon.com>
      */
     public function saveAction()
     {
@@ -76,7 +91,9 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $questionId = $this->getRequest()->getParam('id');
         $now = strtotime('now');
         try {
-            $questionModel = Mage::getModel('evozon_qa/question')->load($questionId)
+            Mage::getModel('evozon_qa/question')
+                    ->validate($data)
+                    ->load($questionId)
                     ->setQuestion($data['question'])
                     ->setStatus($data['status'])
                     ->setUpdatedAt($now)
@@ -99,6 +116,8 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
             Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa')->__('Question informations have been saved.'));
         } catch (Exception $ex) {
             Mage::getSingleton('adminhtml/session')->addError(Mage::helper('evozon_qa')->__($ex->getMessage()));
+            $this->_redirect('*/*/answer', array('id' => $questionId));
+            return;
         }
 
         $this->_redirect('*/*/');
@@ -106,9 +125,9 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
 
     /**
      * common delete action
-     * bogdan : TODO check the element type which is due to be deleted
      * and adjust the messages and redirect paths accordingly
-     * @return //TODO
+     * 
+     * @return Evozon_Qa_Adminhtml_QaController
      */
     public function deleteAction()
     {
@@ -120,11 +139,11 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
                         ->delete();
                 Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa')->__('The item has been deleted.'));
                 $this->_redirect('*/*/');
-                return;
+                return $this;
             } catch (Exception $e) {
                 Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
                 $this->_redirect('*/*/answer', array('id' => $this->getRequest()->getParam('id')));
-                return;
+                return $this;
             }
         }
         Mage::getSingleton('adminhtml/session')->addError(Mage::helper('adminhtml')->__('Unable to find the item to delete.'));
@@ -218,7 +237,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
      * Sets the Id for the Answer Form Data
      * 
      * @param int $id
-     * @param object $model //TODO change object type
+     * @param object evozon_qa/question $model 
      */
     public function setIdToFormData($id, $model)
     {
@@ -230,21 +249,6 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
             }
         } else {
             Mage::getSingleton('adminhtml/session')->addError(Mage::helper('evozon_qa')->__('Question does not exist'));
-            $this->_redirect('*/*/');
-        }
-    }
-
-    /**
-     * Set the redirect parameter for the back button
-     * 
-     * @param object $model //TODO change object type
-     * @param string $redirect
-     */
-    public function setBackButton($model, $redirect)
-    {
-        if ($this->getRequest()->getParam('back')) {
-            $this->_redirect('*/*/' . $redirect, array('id' => $model->getId()));
-        } else {
             $this->_redirect('*/*/');
         }
     }

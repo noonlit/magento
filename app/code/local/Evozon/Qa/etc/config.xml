@@ -36,7 +36,7 @@
         </models>
         <helpers>
             <evozon_qa>
-                <class>Evozon_Qa_Helper_Adminhtml</class>
+                <class>Evozon_Qa_Helper</class>
             </evozon_qa>
         </helpers>
         <resources>
@@ -103,13 +103,5 @@
             </adminhtml>
         </routers>
     </admin>
-    <adminhtml>
-        <layout>
-            <updates>
-                <qa_menu>
-                    <file>qa_menu.xml</file>
-                </qa_menu>
-            </updates>
-        </layout>
-    </adminhtml>
+ 
 </config>

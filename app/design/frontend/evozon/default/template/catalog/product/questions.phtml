@@ -12,15 +12,17 @@ endif;
         <div class="row-question">
             <?php
             $userName = $question->getData('customer_name');
+            $date = $question->getData('created_at');
+            $date = date('Y-m-d', strtotime($date));
             $text = $question->getData('question');
             $adminName = $question->getData('firstname') . ' ' . $question->getData('lastname');
             $answer = $question->getData('answer');
             ?>
-            <div id="qa_name"><?php echo $userName ?></div>
+            <div id="qa_name"><?php echo $userName . $this->__(' asked on ') . $date ?></div>     
             <div id="qa_text"><?php echo $text ?></div>
             <?php if ($answer) : ?>
                 <div class="row-answer">
-                    <div id="qa_name"><?php echo $adminName ?></div>
+                    <div id="qa_name"><?php echo $adminName ?></div>                   
                     <div id="qa_text"><?php echo $answer ?></div>
                 </div>
             <?php endif; ?>
