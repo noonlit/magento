@@ -26,7 +26,6 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer_Form extends Mage_Adminhtml_Blo
             'id' => 'edit_form',
             'action' => $this->getUrl('*/*/save', array('id' => $questionId)),
             'method' => 'post',
-            'enctype' => 'multipart/form-data',
         ));
 
         $form->setUseContainer(true);

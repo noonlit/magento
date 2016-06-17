@@ -19,7 +19,6 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer extends Mage_Adminhtml_Block_Wi
         $this->_controller = 'questions';
         $this->_mode = 'answer';
 
-        $this->addButtons(); //adds new buttons to the container
         $this->updateButtons(); //updates existing buttons from the container
         $this->formScripts(); //updated form scripts
     }
@@ -36,22 +35,12 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer extends Mage_Adminhtml_Block_Wi
         }
     }
 
-    //adds new buttons to the container
-
-    protected function addButtons()
-    {
-        $this->_addButton('save_and_continue', array(
-            'label' => Mage::helper('adminhtml')->__('Save And Continue Edit'),
-            'onclick' => 'saveAndContinueEdit()',
-            'class' => 'save',
-                ), -100);
-    }
-
     //updates existing buttons from the container
 
     public function updateButtons()
     {
-        $this->_updateButton('save', 'label', Mage::helper('evozon_qa')->__('Answer Question')); //change the save button label 
+        //change the save button label
+        $this->_updateButton('save', 'label', Mage::helper('evozon_qa')->__('Save Question'));
     }
 
     //updated form scripts
