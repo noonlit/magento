@@ -1,21 +1,52 @@
-<h1>Customer Q&A:</h1>
-<?php $questions = $this->fetchQuestions(); ?>
+<h1><?php echo $this->__('Customer Q&A:') ?></h1>
+<?php
+$questions = $this->getQuestions();
+if (empty($questions->getData())) :
+    echo $this->__('There are no questions for this product.');
+endif;
+?>
 <div class="reviews-container">
-    <?php foreach ($questions as $question): ?>
+    <?php
+    foreach ($questions as $question):
+        ?>
         <div class="row-question">
-            <p><?php
-                $userName = $question->getData('user_name');
-                $text = $question->getData('text');
-                $adminName = $question->getData('firstname') . ' ' . $question->getData('lastname');
-                $answer = $question->getData('answer');
-                ?>
-            <div id="qa_name"><?= $userName?></div>
-            <div id="qa_text"><?= $text ?></div></p>
+            <?php
+            $userName = $question->getData('customer_name');
+            $text = $question->getData('question');
+            $adminName = $question->getData('firstname') . ' ' . $question->getData('lastname');
+            $answer = $question->getData('answer');
+            ?>
+            <div id="qa_name"><?php echo $userName ?></div>
+            <div id="qa_text"><?php echo $text ?></div>
             <?php if ($answer) : ?>
-                <div class="row-answer"><p>
-                    <div id="qa_name"><?= $adminName ?></div>
-                    <div id="qa_text"><?= $answer ?></div></div>
-                <?php endif; ?>
-            </p></div><br>
+                <div class="row-answer">
+                    <div id="qa_name"><?php echo $adminName ?></div>
+                    <div id="qa_text"><?php echo $answer ?></div>
+                </div>
+            <?php endif; ?>
+        </div><br>
     <?php endforeach; ?>
 </div>
+
+<h1><?php echo $this->__('Have a question? Ask away:.') ?></h1>
+<form action="<?php echo $this->getUrl('question/question/add') ?>" id="qa_form" method="post">  
+    <label for="username" class="required"><em>*</em><?php echo $this->__('Username') ?></label>
+    <div class="input-box">
+        <input type="text" class="input-text required-entry" name="qa_username" id="qa_username" value="<?php
+        $loggedUser = Mage::getSingleton('customer/session')->getCustomer();
+        $firstname = $loggedUser->getFirstname();
+        $lastname = $loggedUser->getLastname();
+        if ($firstname && $lastname):
+            echo $this->__($firstname . ' ' . $lastname);
+        endif;
+        ?>" placeholder="<?php echo $this->__("Type your username here...") ?>" />
+    </div>
+
+    <label for="question" class="required"><em>*</em><?php echo $this->__('Question') ?></label>
+    <div class="input-box">
+        <input type="text" class="input-text required-entry"  placeholder="Type your question here..." name="qa_question" id="qa_question" value="<?php echo $this->escapeHtml($this->getEmailValue()) ?>" />
+    </div>
+
+    <input type="hidden" name="qa_current_product" id="qa_current_product" value="<?php echo $this->getCurrentProductId() ?>">
+    <input id="q_submit_button" type="submit" value="SUBMIT">        
+</form>

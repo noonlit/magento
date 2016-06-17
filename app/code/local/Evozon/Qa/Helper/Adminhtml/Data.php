@@ -2,8 +2,6 @@
 /**
  * Questions and Answers extension for Magento
  *
- * adminhtml helper class 
- *
  * @category   Evozon
  * @package    Qa
  * @subpackage adminhtml
