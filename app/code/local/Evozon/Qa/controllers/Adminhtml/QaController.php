@@ -262,7 +262,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     {
         $questionIds = $this->getRequest()->getParam('evozon_qa_questions_id');
 
-        if (!is_array($questionIds)) {
+        if (!is_array($questionIds) || empty($questionIds)) {
             Mage::getSingleton('adminhtml/session')->addError($this->__('Please select Questions.'));
         } else {
             try {
@@ -290,7 +290,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     {
         $questionIds = $this->getRequest()->getParam('evozon_qa_questions_id');
 
-        if (!is_array($questionIds)) {
+        if (!is_array($questionIds) || empty($questionIds)) {
             Mage::getSingleton('adminhtml/session')->addError($this->__('Please select Questions.'));
         } else {
             try {
@@ -318,7 +318,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     {
         $questionIds = $this->getRequest()->getParam('evozon_qa_questions_id');
 
-        if (!is_array($questionIds)) {
+        if (!is_array($questionIds) || empty($questionIds)) {
             Mage::getSingleton('adminhtml/session')->addError($this->__('Please select Questions.'));
         } else {
             try {

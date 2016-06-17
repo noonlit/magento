@@ -61,17 +61,14 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
      */
     public function addQuestion($formData)
     {
-
-        $question = $formData['qa_question'];
-        $productId = $formData['qa_current_product'];
-
+        $productId = Mage::app()->getRequest()->getParam('id');
         $this->setData(array(
-            'question' => $question,
-            'status' => static::STATUS_NEW,
-            'product_id' => $productId,
-            'customer_name' => 'John Doe',
-            'store_id' => Mage::app()->getStore()->getStoreId(),
-            'created_at' => strtotime('now'),
+            'question'      => $formData['qa_question'],
+            'status'        => static::STATUS_NEW,
+            'product_id'    => $formData['qa_current_product'],
+            'customer_name' => $formData['qa_username'],
+            'store_id'      => Mage::app()->getStore()->getStoreId(),
+            'created_at'    => strtotime('now'),
         ));
         $this->save();
 

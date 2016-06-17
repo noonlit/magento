@@ -11,7 +11,7 @@ endif;
         ?>
         <div class="row-question">
             <?php
-            $userName = $question->getData('user_name');
+            $userName = $question->getData('customer_name');
             $text = $question->getData('question');
             $adminName = $question->getData('firstname') . ' ' . $question->getData('lastname');
             $answer = $question->getData('answer');
@@ -32,21 +32,19 @@ endif;
 <form action="<?php echo $this->getUrl('question/question/add') ?>" id="qa_form" method="post">  
     <label for="username" class="required"><em>*</em><?php echo $this->__('Username') ?></label>
     <div class="input-box">
-        <input type="text" class="input-text required-entry" name="qa_username" id="qa_username" value="<?php echo $this->escapeHtml($this->getEmailValue()) ?>" placeholder="<?php
+        <input type="text" class="input-text required-entry" name="qa_username" id="qa_username" value="<?php
         $loggedUser = Mage::getSingleton('customer/session')->getCustomer();
         $firstname = $loggedUser->getFirstname();
         $lastname = $loggedUser->getLastname();
         if ($firstname && $lastname):
             echo $this->__($firstname . ' ' . $lastname);
-        else:
-            echo $this->__("Type your username here...");
         endif;
-        ?>" />
+        ?>" placeholder="<?php echo $this->__("Type your username here...") ?>" />
     </div>
 
     <label for="question" class="required"><em>*</em><?php echo $this->__('Question') ?></label>
     <div class="input-box">
-        <input type="email" class="input-text required-entry"  placeholder="Type your question here..." name="qa_question" id="qa_question" value="<?php echo $this->escapeHtml($this->getEmailValue()) ?>" />
+        <input type="text" class="input-text required-entry"  placeholder="Type your question here..." name="qa_question" id="qa_question" value="<?php echo $this->escapeHtml($this->getEmailValue()) ?>" />
     </div>
 
     <input type="hidden" name="qa_current_product" id="qa_current_product" value="<?php echo $this->getCurrentProductId() ?>">

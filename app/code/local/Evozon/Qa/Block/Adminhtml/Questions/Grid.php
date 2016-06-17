@@ -22,48 +22,66 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
     }
 
     /**
-     * prepares collection for the grid
-     * 
-     * @return object
+     *
+     * @return Evozon_Qa_Block_Adminhtml_Questions_Grid
      */
     protected function _prepareCollection()
     {
-        //questions collection
         $collection = Mage::getModel('evozon_qa/question')->getCollection();
         $this->setCollection($collection);
 
-        $collection->getSelect()
-            ->joinLeft(array('answers' => 'evozon_answers'), 'main_table.question_id = answers.question_id', array('answer'))
-            ->joinLeft(array('product' => 'catalog_product_entity'), 'main_table.product_id = product.entity_id', array('sku'));
-        $petru = $collection->getSelect()->__toString();
+        $entityTypeId = Mage::getModel('eav/entity')
+            ->setType('catalog_product')
+            ->getTypeId();
 
+        $prodNameAttrId = Mage::getModel('eav/entity_attribute')
+            ->loadByCode($entityTypeId, 'name')
+            ->getAttributeId();
+
+        $collection->getSelect()
+            ->columns(array('main_table.store_id' => 'store_id'))
+            ->columns(array('main_table.question_id' => 'question_id'))
+            ->joinLeft(
+                array('answers' => 'evozon_answers'),
+                'main_table.question_id = answers.question_id',
+                array('answers.answer' => 'answer'))
+            ->joinLeft(
+                array('product' => 'catalog_product_entity'),
+                'main_table.product_id = product.entity_id',
+                array('product.sku' => 'sku'))
+            ->joinLeft(
+                array('cpev' => 'catalog_product_entity_varchar'),
+                'cpev.entity_id=product.entity_id AND cpev.attribute_id='.$prodNameAttrId.'',
+                array('cpev.value' => 'value')
+            );
+        $toader = $collection->getSelect()->__toString();
         return parent::_prepareCollection();
     }
 
     /**
-     * preparing columns
-     * 
-     * @return object
+     *
+     * @return Evozon_Qa_Block_Adminhtml_Questions_Grid
      */
     protected function _prepareColumns()
     {
         $this->addColumn('question_id', array(
             'header' => Mage::helper('evozon_qa')->__('ID'),
-            'align' => 'right',
-            'width' => '50px',
-            'index' => 'question_id',
+            'align'  => 'right',
+            'width'  => '50px',
+            'type'   => 'number',
+            'index'  => 'main_table.question_id',
         ));
 
         $this->addColumn('question', array(
             'header' => Mage::helper('evozon_qa')->__('Question'),
-            'align' => 'left',
-            'index' => 'question',
+            'align'  => 'left',
+            'index'  => 'question',
         ));
 
         $this->addColumn('answer', array(
             'header' => Mage::helper('evozon_qa')->__('Answer'),
             'align' => 'left',
-            'index' => 'answer',
+            'index' => 'answers.answer',
         ));
 
         $this->addColumn('status', array(
@@ -82,18 +100,25 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
             'index' => 'customer_name',
         ));
 
-        $this->addColumn('sku', array(
+        $this->addColumn('product_name', array(
+            'header' => Mage::helper('evozon_qa')->__('Product name'),
+            'align' => 'center',
+            'width' => '100px',
+            'index' => 'cpev.value',
+        ));
+
+        $this->addColumn('product.sku', array(
             'header' => Mage::helper('evozon_qa')->__('Product sku'),
             'align' => 'center',
             'width' => '100px',
-            'index' => 'sku',
+            'index' => 'product.sku',
         ));
 
-        $this->addColumn('store_id', array(
+        $this->addColumn('store_name', array(
             'header'    => Mage::helper('evozon_qa')->__('Store'),
             'align'     => 'center',
             'width'     => '100px',
-            'index'     => 'store_id',
+            'index'     => 'main_table.store_id',
             'type'      => 'options',
             'options'   => Mage::getModel('core/store')->getCollection()->toOptionHash(),
         ));
@@ -103,12 +128,14 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
 
     /**
      * sets the row url redirect
+     *
      * @param object $row
      * @return 'string'
      */
     public function getRowUrl($row)
     {
-        return $this->getUrl('*/*/answer', array('id' => $row->getId())); //action controller on row click
+        //action controller on row click
+        return $this->getUrl('*/*/answer', array('id' => $row->getId()));
     }
 
     /**
@@ -121,27 +148,27 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
      */
     protected function _prepareMassaction()
     {
-        $this->setMassactionIdField('evozon_qa_question_id');
+        $this->setMassactionIdField('main_table.question_id');
         $this->getMassactionBlock()->setFormFieldName('evozon_qa_questions_id');
 
         //add mass delete action
         $this->getMassactionBlock()->addItem('delete', array(
             'label' => $this->__('Delete'),
-            'url' => $this->getUrl('*/*/massDeleteQuestions', array('' => '')),
+            'url' => $this->getUrl('*/*/massDeleteQuestions'),
             'confirm' => $this->__('Are you sure you want to delete the selected questions?')
         ));
 
         //add mass approove action
         $this->getMassactionBlock()->addItem('approve', array(
             'label' => $this->__('Approve'),
-            'url' => $this->getUrl('*/*/massApproveQuestions', array('' => '')),
+            'url' => $this->getUrl('*/*/massApproveQuestions'),
             'confirm' => $this->__('Are you sure you want to approve the selected questions?')
         ));
 
         //add mass disabled action
         $this->getMassactionBlock()->addItem('disabled', array(
             'label' => $this->__('Disable'),
-            'url' => $this->getUrl('*/*/massDisableQuestions', array('' => '')),
+            'url' => $this->getUrl('*/*/massDisableQuestions'),
             'confirm' => $this->__('Are you sure you want to disable the selected questions?')
         ));
         return $this;
