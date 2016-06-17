@@ -229,7 +229,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
      * Sets the Id for the Answer Form Data
      * 
      * @param int $id
-     * @param object $model //TODO change object type
+     * @param object evozon_qa/question $model 
      */
     public function setIdToFormData($id, $model)
     {
@@ -241,21 +241,6 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
             }
         } else {
             Mage::getSingleton('adminhtml/session')->addError(Mage::helper('evozon_qa')->__('Question does not exist'));
-            $this->_redirect('*/*/');
-        }
-    }
-
-    /**
-     * Set the redirect parameter for the back button
-     * 
-     * @param object $model //TODO change object type
-     * @param string $redirect
-     */
-    public function setBackButton($model, $redirect)
-    {
-        if ($this->getRequest()->getParam('back')) {
-            $this->_redirect('*/*/' . $redirect, array('id' => $model->getId()));
-        } else {
             $this->_redirect('*/*/');
         }
     }
