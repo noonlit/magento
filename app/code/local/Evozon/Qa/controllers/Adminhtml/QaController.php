@@ -76,6 +76,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
 
     /**
      * Save Answer Question Form
+     * 
      * @author     Marius Adam  <marius.adam@evozon.com>
      */
     public function saveAction()
@@ -121,7 +122,8 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     /**
      * common delete action
      * and adjust the messages and redirect paths accordingly
-     * @return 
+     * 
+     * @return Evozon_Qa_Adminhtml_QaController
      */
     public function deleteAction()
     {
@@ -133,11 +135,11 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
                         ->delete();
                 Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa')->__('The item has been deleted.'));
                 $this->_redirect('*/*/');
-                return;
+                return $this;
             } catch (Exception $e) {
                 Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
                 $this->_redirect('*/*/answer', array('id' => $this->getRequest()->getParam('id')));
-                return;
+                return $this;
             }
         }
         Mage::getSingleton('adminhtml/session')->addError(Mage::helper('adminhtml')->__('Unable to find the item to delete.'));
