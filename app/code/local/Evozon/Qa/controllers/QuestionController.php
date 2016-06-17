@@ -13,7 +13,6 @@ class Evozon_Qa_QuestionController extends Mage_Core_Controller_Front_Action
 
     /**
      * Validates form data and adds it to database
-     * 
      */
     public function addAction()
     {

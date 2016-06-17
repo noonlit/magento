@@ -1,8 +1,8 @@
-<h1>Customer Q&A:</h1>
+<h1><?php echo $this->__('Customer Q&A:') ?></h1>
 <?php
 $questions = $this->fetchQuestions();
 if (empty($questions->getData())) :
-    echo 'There are no questions for this product.';
+    echo $this->__('There are no questions for this product.');
 endif;
 ?>
 <div class="reviews-container">
@@ -28,7 +28,7 @@ endif;
     <?php endforeach; ?>
 </div>
 
-<h1>Have a question? Ask away:</h1>
+<h1><?php echo $this->__('Have a question? Ask away:.') ?></h1>
 <form action="<?php echo $this->getUrl('question/question/add') ?>" id="qa_form" method="post">  
     <label for="username" class="required"><em>*</em><?php echo $this->__('Username') ?></label>
     <div class="input-box">

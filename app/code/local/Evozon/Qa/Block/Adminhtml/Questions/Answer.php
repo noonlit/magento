@@ -1,7 +1,7 @@
 <?php
 
 /**
- * answer question form container
+ * Answer question form container
  *
  * @category   Evozon
  * @package    Qa
@@ -15,18 +15,18 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer extends Mage_Adminhtml_Block_Wi
     {
         parent::__construct();
         $this->_objectId = 'id';
-        $this->_blockGroup = 'evozon_qa_adminhtml'; //block_adminhtml tag
+        $this->_blockGroup = 'evozon_qa_adminhtml';
         $this->_controller = 'questions';
         $this->_mode = 'answer';
 
-        $this->updateButtons(); //updates existing buttons from the container
-        $this->formScripts(); //updated form scripts
+        $this->updateButtons();
+        $this->formScripts();
     }
 
     /**
-     * sets the header of the form
+     * Gets the header of the form
      * 
-     * @return object
+     * @return object//TODO change return type
      */
     public function getHeaderText()
     {
@@ -35,16 +35,18 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer extends Mage_Adminhtml_Block_Wi
         }
     }
 
-    //updates existing buttons from the container
-
+    /**
+     * Updates existing buttons from the container
+     */
     public function updateButtons()
     {
         //change the save button label
         $this->_updateButton('save', 'label', Mage::helper('evozon_qa')->__('Save Question'));
     }
 
-    //updated form scripts
-
+    /**
+     * Updated form scripts
+     */
     protected function formScripts()
     {
         $this->_formScripts[] = "

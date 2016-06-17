@@ -1,7 +1,7 @@
 <?php
 
 /**
- * manage Questions and Answers controller
+ * Manage Questions and Answers controller
  *
  * @category   Evozon
  * @package    Qa 
@@ -13,7 +13,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
 {
 
     /**
-     * shows the questions grid
+     * Shows the questions grid
      */
     public function indexAction()
     {
@@ -21,7 +21,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     }
 
     /**
-     * shows the questions grid
+     * Shows the questions grid
      */
     public function questionsAction()
     {
@@ -33,7 +33,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     }
 
     /**
-     * the first action will be edit
+     * First action will be edit
      */
     public function newAction()
     {
@@ -41,7 +41,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     }
 
     /**
-     * answer action
+     * Answer action
      */
     public function answerAction()
     {
@@ -50,6 +50,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
             $this->_redirect('*/*/');
         }
         $model = Mage::getModel('evozon_qa/question');
+        
         if ($id) {
             $this->setIdToFormData($id, $model);
         }
@@ -61,11 +62,11 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     }
 
     /**
-     * save Answer Question Form
+     * Save Answer Question Form
      */
     public function saveAction()
     {
-        if($this->_validateFormKey() === false) {
+        if ($this->_validateFormKey() === false) {
             Mage::getSingleton('adminhtml/session')->addError(Mage::helper('evozon_qa')->__('Invalid form key! Reload the page...'));
             $this->_redirect('*/*/');
             return;
@@ -76,27 +77,27 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $now = strtotime('now');
         try {
             $questionModel = Mage::getModel('evozon_qa/question')->load($questionId)
-                ->setQuestion($data['question'])
-                ->setStatus($data['status'])
-                ->setUpdatedAt($now)
-                ->save();
+                    ->setQuestion($data['question'])
+                    ->setStatus($data['status'])
+                    ->setUpdatedAt($now)
+                    ->save();
 
             $answerModel = Mage::getModel('evozon_qa/answer')->load($questionId, 'question_id');
-            if(is_null($answerModel->getId())) {
+            if (is_null($answerModel->getId())) {
                 //set created_at and question_id attributes only if the answer does not exists
                 $answerModel
-                    ->setCreatedAt($now)
-                    ->setQuestionId($questionId);
+                        ->setCreatedAt($now)
+                        ->setQuestionId($questionId);
             } else {
                 $answerModel->setUpdatedAt($now);
             }
             $answerModel
-                ->setAnswer($data['answer'])
-                ->setAdminId(Mage::getSingleton('admin/session')->getUser()->getId())
-                ->save();
+                    ->setAnswer($data['answer'])
+                    ->setAdminId(Mage::getSingleton('admin/session')->getUser()->getId())
+                    ->save();
 
             Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa')->__('Question informations have been saved.'));
-        }catch(Exception $ex) {
+        } catch (Exception $ex) {
             Mage::getSingleton('adminhtml/session')->addError(Mage::helper('evozon_qa')->__($ex->getMessage()));
         }
 
@@ -107,7 +108,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
      * common delete action
      * bogdan : TODO check the element type which is due to be deleted
      * and adjust the messages and redirect paths accordingly
-     * @return
+     * @return //TODO
      */
     public function deleteAction()
     {
@@ -115,8 +116,8 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         if ($id) {
             try {
                 $model = Mage::getModel('evozon_qa/question')
-                    ->load($id)
-                    ->delete();
+                        ->load($id)
+                        ->delete();
                 Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa')->__('The item has been deleted.'));
                 $this->_redirect('*/*/');
                 return;
@@ -214,7 +215,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     }
 
     /**
-     * sets the Id for the Answer Form Data
+     * Sets the Id for the Answer Form Data
      * 
      * @param int $id
      * @param object $model
@@ -234,9 +235,9 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
     }
 
     /**
-     * set the redirect parameter for the back button
+     * Set the redirect parameter for the back button
      * 
-     * @param object $model
+     * @param object $model //TODO change object type
      * @param string $redirect
      */
     public function setBackButton($model, $redirect)
@@ -250,8 +251,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
 
     /**
      * Checks if the current logged admin has permissions to access evozon_qa resource
-     *
-     * verify if the Module is allowed on Admin Panel
+     * 
      * @return boolean
      */
     protected function _isAllowed()

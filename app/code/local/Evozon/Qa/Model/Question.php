@@ -19,7 +19,6 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
 
     protected function _construct()
     {
-        //sets the resource model class instance used for this model
         $this->_init('evozon_qa/question');
     }
 
@@ -29,7 +28,7 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
      * @author     Andrei Bodea <andrei.bodea@evozon.com>
      * @return Evozon_Qa_Model_Resource_Question_Collection
      */
-    public function fetchQuestions()
+    public function getQuestions()
     {
 
         $currentProductId = Mage::registry('current_product')->getId();
@@ -61,7 +60,6 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
      */
     public function addQuestion($formData)
     {
-        $productId = Mage::app()->getRequest()->getParam('id');
         $this->setData(array(
             'question'      => $formData['qa_question'],
             'status'        => static::STATUS_NEW,
@@ -79,7 +77,7 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
      * Validation for form inputs: checks if the question field is not empty
      * 
      * @author     Ilinca Dobre <ilinca.dobre@evozon.com>
-     * @return boolean/array
+     * @return boolean|array
      */
     public function validate($formData)
     {

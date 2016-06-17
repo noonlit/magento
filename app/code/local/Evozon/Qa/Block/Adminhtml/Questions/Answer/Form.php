@@ -1,7 +1,7 @@
 <?php
 
 /**
- * answer question form block
+ * Answer question form block
  *
  * @category   Evozon
  * @package    Qa
@@ -12,16 +12,14 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer_Form extends Mage_Adminhtml_Blo
 {
 
     /**
-     * prepare the form
-     *
      * @return Mage_Adminhtml_Block_Widget_Form|void
      */
     protected function _prepareForm()
     {
         $questionId = $this->getRequest()->getParam('id');
-
-        $data = $this->getFormData($questionId); //populate the form with existing data
-        //create a form object
+        //populate the form with existing data
+        $data = $this->getFormData($questionId);
+        
         $form = new Varien_Data_Form(array(
             'id' => 'edit_form',
             'action' => $this->getUrl('*/*/save', array('id' => $questionId)),
@@ -30,14 +28,15 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer_Form extends Mage_Adminhtml_Blo
 
         $form->setUseContainer(true);
         $this->setForm($form);
-        $this->addFieldsToForm($form); //add the form fields
+        $this->addFieldsToForm($form);
         $form->setValues($data);
 
         return parent::_prepareForm();
     }
 
     /**
-     * returns the existing data from the question, and adds the answer value if it exists
+     * Returns the existing data from the question, and adds the answer value if it exists
+     * 
      * @param int $questionId
      * @return array
      */
@@ -48,36 +47,36 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer_Form extends Mage_Adminhtml_Blo
         $questionModel = Mage::getModel('evozon_qa/question')->load($questionId);
 
         $status = $questionModel->getStatus();
-        if($status == $questionModel::STATUS_NEW) {
+        if ($status == $questionModel::STATUS_NEW) {
             $status = $questionModel::STATUS_PENDING;
         }
 
         $data = array(
             'question' => $questionModel->getQuestion(),
-            'answer'   => $answer,
-            'status'   => $status,
+            'answer' => $answer,
+            'status' => $status,
         );
 
         return $data;
     }
-    
+
     /**
-     * adds the input fields for the form object
+     * Adds the input fields for the form object
      * 
-     * @param object $form
+     * @param object $form  //TODO change return type
      * @param array $statusValues
      */
     protected function addFieldsToForm($form)
     {
-        $fieldset = $form->addFieldset('question_form', array(
-            'legend' => Mage::helper('evozon_qa')->__('Question Information') //form tab name
+        $fieldset = $form->addFieldset('question_form', array( 
+            //form tab name
+            'legend' => Mage::helper('evozon_qa')->__('Question Information')
         ));
 
-        /* question text
+        /* 
+         * question text
          * type = textarea
-         * disabled
          */
-
         $fieldset->addField('question', 'textarea', array(
             'label' => Mage::helper('evozon_qa')->__('Question'),
             'class' => 'required-entry',
@@ -86,10 +85,10 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer_Form extends Mage_Adminhtml_Blo
             'note' => Mage::helper('evozon_qa')->__('Question Content.'),
         ));
 
-        /* question status
+        /* 
+         * question status
          * type = select
          */
-
         $model = Mage::getModel('evozon_qa/question');
 
         $fieldset->addField('status', 'select', array(
@@ -100,10 +99,10 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer_Form extends Mage_Adminhtml_Blo
             'options' => $model::getOptionArray(),
         ));
 
-        /* question answer, different table
+        /* 
+         * question answer, different table
          * type = textarea
          */
-
         $fieldset->addField('answer', 'textarea', array(
             'label' => Mage::helper('evozon_qa')->__('Answer'),
             'class' => 'required-entry',

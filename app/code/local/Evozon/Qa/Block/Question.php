@@ -1,10 +1,21 @@
 <?php
 
+/**
+ * Question form block
+ *
+ * @package    Evozon_Qa
+ * @author     Ilinca Dobre <ilinca.dobre@evozon.com>
+ * @author     Andrei Bodea <andrei.bodea@evozon.com>
+ */
 class Evozon_Qa_Block_Question extends Mage_Core_Block_Template
 {
-    public function fetchQuestions()
+    /**
+     * 
+     * @return Evozon_Qa_Model_Resource_Question_Collection
+     */
+    public function getQuestions()
     {
-        return Mage::getModel('evozon_qa/question')->fetchQuestions();
+        return Mage::getModel('evozon_qa/question')->getQuestions();
     }
 
     /**
