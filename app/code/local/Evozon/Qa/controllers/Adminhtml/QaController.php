@@ -218,7 +218,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
      * Sets the Id for the Answer Form Data
      * 
      * @param int $id
-     * @param object $model
+     * @param object $model //TODO change object type
      */
     public function setIdToFormData($id, $model)
     {
@@ -226,7 +226,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         if ($model->getId()) {
             $data = Mage::getSingleton('adminhtml/session')->getFormData(true);
             if ($data) {
-                $model->setData($data)->setId($id); //sets the QuestionId for the formdata
+                $model->setData($data)->setId($id);
             }
         } else {
             Mage::getSingleton('adminhtml/session')->addError(Mage::helper('evozon_qa')->__('Question does not exist'));
