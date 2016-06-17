@@ -63,7 +63,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer_Form extends Mage_Adminhtml_Blo
     /**
      * Adds the input fields for the form object
      * 
-     * @param object $form  //TODO change return type
+     * @param object $form
      * @param array $statusValues
      */
     protected function addFieldsToForm($form)

@@ -15,6 +15,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer extends Mage_Adminhtml_Block_Wi
     {
         parent::__construct();
         $this->_objectId = 'id';
+        //block definition
         $this->_blockGroup = 'evozon_qa_adminhtml';
         $this->_controller = 'questions';
         $this->_mode = 'answer';
@@ -30,8 +31,8 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer extends Mage_Adminhtml_Block_Wi
      */
     public function getHeaderText()
     {
-        if (Mage::registry('example_data') && Mage::registry('example_data')->getId()) {
-            return Mage::helper('evozon_qa')->__('Answer Question "%s"', $this->htmlEscape(Mage::registry('example_data')->getQuestionId()));
+        if (Mage::registry('question_data') && Mage::registry('question_data')->getId()) {
+            return Mage::helper('evozon_qa')->__('Answer Question "%s"', $this->htmlEscape(Mage::registry('question_data')->getQuestionId()));
         }
     }
 

@@ -16,6 +16,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
     {
         parent::__construct();
         $this->setId('questions_grid');
+        //sort by Id
         $this->setDefaultSort('id');
         $this->setDefaultDir('desc');
         $this->setSaveParametersInSession(true);
@@ -137,6 +138,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Grid extends Mage_Adminhtml_Block_Widg
      *
      * @param object $row
      * @return string
+     * @author     Haidu Bogdan <bogdan.haidu@evozon.com>
      */
     public function getRowUrl($row)
     {
