@@ -1,6 +1,6 @@
 <h1><?php echo $this->__('Customer Q&A:') ?></h1>
 <?php
-$questions = $this->fetchQuestions();
+$questions = $this->getQuestions();
 if (empty($questions->getData())) :
     echo $this->__('There are no questions for this product.');
 endif;

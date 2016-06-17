@@ -4,20 +4,20 @@
  * 
  * @category   Evozon
  * @package    Evozon_Qa
- * @author     Andra Barsoianu <andra.barsoianu@evozon.com>
+ * @author     Andrei Bodea <andrei.bodea@evozon.com>
  */
 /**
  * Create new store view
  */
-Mage::log('Started data-upgrade-0.1.0-0.1.1', null, 'evozon_scripts.log');
+Mage::log('Started data-upgrade-0.1.1-0.1.2', null, 'evozon_scripts.log');
 
 try {
-    $store = Mage::getModel('core/store')->load('english_gb');
+    $store = Mage::getModel('core/store')->load('romanian');
     if (!$store->getId()) {
-        $store->setCode('english_gb')
+        $store->setCode('romanian')
                 ->setWebsiteId(1)
                 ->setGroupId(1)
-                ->setName('English [GB]')
+                ->setName('Romanian')
                 ->setIsActive(1)
                 ->save();
         
@@ -28,4 +28,4 @@ try {
 } catch (Exception $ex) {
     Mage::log($ex->getMessage(), null, 'evozon_scripts.log');
 }
-Mage::log('Finished data-upgrade-0.1.0-0.1.1', null, 'evozon_scripts.log');
+Mage::log('Finished data-upgrade-0.1.1-0.1.2', null, 'evozon_scripts.log');
