@@ -90,6 +90,13 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
         foreach ($formData as $field => $input) {
             switch ($field) {
                 case 'question':
+                    if (!Zend_Validate::is($input, 'NotEmpty')) {
+                        $errors .= 'Question can\'t be empty! ';
+                    }           
+                     if(!Zend_Validate::is($input, 'StringLength', array('max' => 255))){
+                        $errors .= "Question is too long (max is 255)!";
+                    }
+                    break;
                 case 'qa_question':
                     if (!Zend_Validate::is($input, 'NotEmpty')) {
                         $errors .= 'Question can\'t be empty! ';
