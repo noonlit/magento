@@ -12,12 +12,12 @@
 Mage::log('Started data-upgrade-0.1.1-0.1.2', null, 'evozon_scripts.log');
 
 try {
-    $store = Mage::getModel('core/store')->load('spanish');
+    $store = Mage::getModel('core/store')->load('romanian');
     if (!$store->getId()) {
-        $store->setCode('spanish')
+        $store->setCode('romanian')
                 ->setWebsiteId(1)
                 ->setGroupId(1)
-                ->setName('Spanish')
+                ->setName('Romanian')
                 ->setIsActive(1)
                 ->save();
         
