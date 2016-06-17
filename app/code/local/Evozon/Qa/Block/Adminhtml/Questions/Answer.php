@@ -32,7 +32,7 @@ class Evozon_Qa_Block_Adminhtml_Questions_Answer extends Mage_Adminhtml_Block_Wi
     public function getHeaderText()
     {
         if (Mage::registry('question_data') && Mage::registry('question_data')->getId()) {
-            return Mage::helper('evozon_qa')->__('Answer Question "%s"', $this->htmlEscape(Mage::registry('question_data')->getQuestionId()));
+            return Mage::helper('evozon_qa')->__('Answer Question');
         }
     }
 
