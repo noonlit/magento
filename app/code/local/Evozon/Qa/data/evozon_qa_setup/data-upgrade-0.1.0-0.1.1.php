@@ -1,37 +1,31 @@
 <?php
 
 /**
- *
+ * 
  * @category   Evozon
  * @package    Evozon_Qa
- * @author     Marius Adam <marius.adam@evozon.com>
+ * @author     Andra Barsoianu <andra.barsoianu@evozon.com>
  */
-
 /**
- * Add QA manager role
+ * Create new store view
  */
-
-Mage::log('Started data-upgrade-0.1.0-0.1.1', null, 'scripts.log');
+Mage::log('Started data-upgrade-0.1.0-0.1.1', null, 'evozon_scripts.log');
 
 try {
-    $roleName = 'Qa manager';
-    $resources = array('admin/evozon_qa', 'admin/evozon_qa/questions', 'admin/evozon_qa/answers');
-    $model = Mage::getModel('admin/role')
-        ->setRoleName($roleName)
-        ->setRoleType('G')
-        ->setTreeLevel(1)
-        ->save();
-    
-    $rules = Mage::getModel('admin/rules')
-        ->setRoleId($model->getRoleId())
-        ->setResources($resources);
-    
-    $rules = Mage::getModel('admin/resource_rules')
-        ->saveRel($rules);
-    
-    Mage::log('Done adding a user role', null, 'scripts.log');
+    $store = Mage::getModel('core/store')->load('english_gb');
+    if (!$store->getId()) {
+        $store->setCode('english_gb')
+                ->setWebsiteId(1)
+                ->setGroupId(1)
+                ->setName('English [GB]')
+                ->setIsActive(1)
+                ->save();
+        
+        Mage::log('Store view added', null, 'evozon_scripts.log');
+    } else {
+        Mage::log('Store view already exists', null, 'evozon_scripts.log');
+    }
 } catch (Exception $ex) {
-    Mage::log($ex->getMessage(), null, 'scripts.log');
+    Mage::log($ex->getMessage(), null, 'evozon_scripts.log');
 }
-
-Mage::log('Finished data-upgrade-0.1.0-0.1.1', null, 'scripts.log');
+Mage::log('Finished data-upgrade-0.1.2-0.1.3', null, 'evozon_scripts.log');
