@@ -12,8 +12,8 @@
 class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
 {
 
-    const STATUS_NEW      = 1;
-    const STATUS_PENDING  = 2;
+    const STATUS_NEW = 1;
+    const STATUS_PENDING = 2;
     const STATUS_APPROVED = 3;
     const STATUS_DISABLED = 4;
 
@@ -61,14 +61,19 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
     public function addQuestion($formData)
     {
         $this->setData(array(
-            'question'      => $formData['qa_question'],
-            'status'        => static::STATUS_NEW,
-            'product_id'    => $formData['qa_current_product'],
+            'question' => $formData['qa_question'],
+            'status' => static::STATUS_NEW,
+            'product_id' => $formData['qa_current_product'],
             'customer_name' => $formData['qa_username'],
-            'store_id'      => Mage::app()->getStore()->getStoreId(),
-            'created_at'    => strtotime('now'),
+            'store_id' => Mage::app()->getStore()->getStoreId(),
+            'created_at' => strtotime('now'),
         ));
-        $this->save();
+        try {
+            $this->save();
+        } catch (Exception $ex) {
+            throw new Exception('Unable to post the question');
+        }
+
 
         return $this;
     }
@@ -81,16 +86,25 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
      */
     public function validate($formData)
     {
-        $errors = array();
-        $questionText = $formData['qa_question'];
-        if (!Zend_Validate::is($questionText, 'NotEmpty')) {
-            $errors[] = Mage::helper('evozon_qa/data')->__('Question can\'t be empty');
+        $errors = '';
+        foreach ($formData as $field => $input) {
+            switch ($field) {
+                case 'qa_question':
+                    if (!Zend_Validate::is($input, 'NotEmpty')) {
+                        $errors .= 'Question can\'t be empty! ';
+                    }
+                    break;
+                case 'qa_username':
+                    if (!Zend_Validate::is($input, 'NotEmpty')) {
+                        $errors .= 'Username can\'t be empty! ';
+                    }
+                    break;
+            }
         }
-
-        if (empty($errors)) {
-            return true;
+        if ($errors) {
+            throw new Exception($errors);
         }
-        return $errors;
+        return $this;
     }
 
     /**
@@ -101,10 +115,10 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
     static public function getOptionArray()
     {
         return array(
-            static::STATUS_NEW        => Mage::helper('evozon_qa')->__('New'),
-            static::STATUS_PENDING    => Mage::helper('evozon_qa')->__('Pending'),
-            static::STATUS_APPROVED   => Mage::helper('evozon_qa')->__('Approved'),
-            static::STATUS_DISABLED   => Mage::helper('evozon_qa')->__('Disabled')
+            static::STATUS_NEW => Mage::helper('evozon_qa')->__('New'),
+            static::STATUS_PENDING => Mage::helper('evozon_qa')->__('Pending'),
+            static::STATUS_APPROVED => Mage::helper('evozon_qa')->__('Approved'),
+            static::STATUS_DISABLED => Mage::helper('evozon_qa')->__('Disabled')
         );
     }
 
