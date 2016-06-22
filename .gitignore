@@ -98,3 +98,5 @@ tmp/
 *.lock
 scheduler/sync-repository/
 /scheduler/bom_offset.file
+
+phpcpd.phar
