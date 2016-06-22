@@ -20,14 +20,4 @@ class Evozon_QA_Block_Form extends Mage_Core_Block_Template
         return $this->getUrl('evozon_qa/question/addquestion');
     }
 
-    /**
-     * Return the current product id
-     * 
-     * @return int
-     */
-    public function getCurrentProductId()
-    {
-        return Mage::registry('current_product')->getId();
-    }
-
 }

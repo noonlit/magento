@@ -60,14 +60,10 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
         $collection = $this->getCollection();
         $collection->getSelect()
             ->joinLeft(
-                array('answers' => 'evozon_answers'),
-                'main_table.question_id = answers.question_id',
-                array('answer', 'admin_id')
+                array('answers' => 'evozon_answers'), 'main_table.question_id = answers.question_id', array('answer', 'admin_id')
             )
             ->joinLeft(
-                array('admin' => 'admin_user'),
-                'answers.admin_id = admin.user_id',
-                array('firstname', 'lastname')
+                array('admin' => 'admin_user'), 'answers.admin_id = admin.user_id', array('firstname', 'lastname')
             )
             ->where('product_id = ?', $currentProductId)
             ->where('status = ?', static::STATUS_APPROVED)
@@ -87,15 +83,22 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
     {
         $this->setData(
             array(
-            'question' => $formData['qa_question'],
-            'status' => static::STATUS_NEW,
-            'product_id' => $formData['qa_current_product'],
-            'customer_name' => $formData['qa_username'],
-            'store_id' => Mage::app()->getStore()->getStoreId(),
-            'created_at' => strtotime('now'))
+                'question' => $formData['qa_question'],
+                'status' => static::STATUS_NEW,
+                'product_id' => $formData['qa_current_product'],
+                'customer_name' => $formData['qa_username'],
+                'store_id' => Mage::app()->getStore()->getStoreId(),
+                'created_at' => strtotime('now')
+            )
         );
-        
+
         $this->save();
+        try {
+            $this->save();
+        } catch (Exception $ex) {
+            throw new Exception('Unable to post the question');
+        }
+
         return $this;
     }
 
@@ -113,12 +116,46 @@ class Evozon_Qa_Model_Question extends Mage_Core_Model_Abstract
         if (!Zend_Validate::is($questionText, 'NotEmpty')) {
             $errors[] = Mage::helper('evozon_qa/data')
                 ->__('Question can\'t be empty');
-        }
 
-        if (empty($errors)) {
-            return true;
+            $errors = '';
+            foreach ($formData as $field => $input) {
+                switch ($field) {
+                    case 'question':
+                        if (!Zend_Validate::is($input, 'NotEmpty')) {
+                            $errors .= 'Question can\'t be empty! ';
+                        }
+                        if (!Zend_Validate::is($input, 'StringLength', array('max' => 255))) {
+                            $errors .= "Question is too long (max is 255)!";
+                        }
+                        break;
+                    case 'qa_question':
+                        if (!Zend_Validate::is($input, 'NotEmpty')) {
+                            $errors .= 'Question can\'t be empty! ';
+                        }
+                        if (!Zend_Validate::is($input, 'StringLength', array('max' => 255))) {
+                            $errors .= "Question is too long (max is 255)!";
+                        }
+                        break;
+                    case 'qa_username':
+                        if (!Zend_Validate::is($input, 'NotEmpty')) {
+                            $errors .= 'Username can\'t be empty! ';
+                        }
+                        break;
+                    case 'answer':
+                        if (!Zend_Validate::is($input, 'NotEmpty')) {
+                            $errors .= 'Answer can\'t be empty! ';
+                        }
+                        if (!Zend_Validate::is($input, 'StringLength', array('max' => 255))) {
+                            $errors .= "Answer is too long (max is 255)!";
+                        }
+                        break;
+                }
+            }
+            if ($errors) {
+                throw new Exception($errors);
+            }
+            return $this;
         }
-        return $errors;
     }
 
     /**
