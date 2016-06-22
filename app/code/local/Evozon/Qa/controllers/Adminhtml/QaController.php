@@ -29,7 +29,7 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $this->_setActiveMenu('evozon_qa')
                 ->_title('Q & A Management');
         $this->_addBreadcrumb($this->__('Q A Management'), $this->__('Q A Management'));
-       
+
         $block = $this->getLayout()
                 ->createBlock('evozon_qa/adminhtml_questions', 'questions_grid_container');
 
@@ -65,10 +65,10 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $this->loadLayout();
         $this->_setActiveMenu('evozon_qa')
                 ->_title('Q & A Management');
-        
+
         $block = $this->getLayout()
                 ->createBlock('evozon_qa/adminhtml_questions_answer', 'questions_answer_container');
-        
+
         $this->_addContent($block);
         $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
         $this->renderLayout();
@@ -91,7 +91,9 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
         $questionId = $this->getRequest()->getParam('id');
         $now = strtotime('now');
         try {
-            Mage::getModel('evozon_qa/question')->load($questionId)
+            Mage::getModel('evozon_qa/question')
+                    ->validate($data)
+                    ->load($questionId)
                     ->setQuestion($data['question'])
                     ->setStatus($data['status'])
                     ->setUpdatedAt($now)
@@ -114,6 +116,8 @@ class Evozon_Qa_Adminhtml_QaController extends Mage_Adminhtml_Controller_Action
             Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('evozon_qa')->__('Question informations have been saved.'));
         } catch (Exception $ex) {
             Mage::getSingleton('adminhtml/session')->addError(Mage::helper('evozon_qa')->__($ex->getMessage()));
+            $this->_redirect('*/*/answer', array('id' => $questionId));
+            return;
         }
 
         $this->_redirect('*/*/');
