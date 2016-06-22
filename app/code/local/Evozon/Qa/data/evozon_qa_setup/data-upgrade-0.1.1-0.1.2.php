@@ -1,11 +1,15 @@
 <?php
 
 /**
- * 
- * @category   Evozon
- * @package    Evozon_Qa
- * @author     Andrei Bodea <andrei.bodea@evozon.com>
+ * PHP version 5.5.9-1
+ *
+ * @category Evozon
+ * @package  Evozon_Qa
+ * @author   Andrei Bodea <andrei.bodea@evozon.com>
+ * @license  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @link     https://github.com/noonlit/magento
  */
+
 /**
  * Create new store view
  */
@@ -15,11 +19,11 @@ try {
     $store = Mage::getModel('core/store')->load('romanian');
     if (!$store->getId()) {
         $store->setCode('romanian')
-                ->setWebsiteId(1)
-                ->setGroupId(1)
-                ->setName('Romanian')
-                ->setIsActive(1)
-                ->save();
+            ->setWebsiteId(1)
+            ->setGroupId(1)
+            ->setName('Romanian')
+            ->setIsActive(1)
+            ->save();
         
         Mage::log('Store view added', null, 'evozon_scripts.log');
     } else {
@@ -28,4 +32,5 @@ try {
 } catch (Exception $ex) {
     Mage::log($ex->getMessage(), null, 'evozon_scripts.log');
 }
+
 Mage::log('Finished data-upgrade-0.1.1-0.1.2', null, 'evozon_scripts.log');
